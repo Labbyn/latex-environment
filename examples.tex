@@ -1,0 +1,27 @@
+\chapter{Przykładowe elementy}
+
+W niniejszym rozdziale pokażę różne ciekawe elementy które można użyć w pracy. Nie są to wszystkie możliwości, ale te, które moim zdaniem najczęściej pojawiają się w pracach inż. Na przykład, jeśli chcemy powołać się na jakieś źródła, robimy to tak~\cite{BEHESHTIROUI2021107419}.
+
+\section{Listingi}
+
+Jak załączać kod źródłowy jest pokazane na listingu~\ref{lst:helloworld}
+
+
+\begin{lstlisting}[language=c,caption={Przykładowy witaj w świecie}, label={lst:helloworld}]
+printf("hello");
+\end{lstlisting}
+
+\section{Obrazki}
+
+Na ilustracji~\ref{img:pjatklogo} widzimy oficjalne logo PJATK.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{images/pjatk}
+    \caption{Logo PJATK załączone jako obrazek}
+    \label{img:pjatklogo}
+\end{figure}
+
+albo dla wygody jako makro tak jak na obrazku~\ref{img:pjatklogo2}
+
+\putimage{Obrazek załączony za pomocą makra}{images/pjatk}{img:pjatklogo2}{0.5\textwidth}

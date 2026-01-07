@@ -5,9 +5,10 @@
 \studfield{Informatyka}
 \studtype{Zaoczne}
 \title{System do zarządzania infrastrukturą sprzętową}
+\engtitle{Hardware infrastructure management system}
 \acronym{Labbyn}
 \titledate{2025-10-26}
-\supervisor{dr Paweł Pisarski}
+\supervisor{mgr inż. Paweł Pisarski}
 \reviewer{BRAK}
 \author{Adrian Kopczyński}{s26990}{Cyberbezpieczeństwo}{Niestacjonarny}
 \author{Patryk Kośmider}{s26985}{Sztuczna Inteligencja}{Niestacjonarny}
@@ -15,8 +16,8 @@
 \author{Aleksander Stankowski}{s27549}{Cyberbezpieczeństwo}{Niestacjonarny}
 \consultant{--- brak ---} % Koniecznie trzeba podać brak, albo wpisać konsultantów tak jak przy autorach
 \projectgoals{Stworzenie systemu zarządzania infrastrukturą sprzętową który umożliwia łatwy  dostęp do statystyk, lokalizacji i właściwości sprzętu}
-\productsandservices{W pełni funkcjonalny system gotowy do wdrożenia}
-\mainfunctionalities{Mapa przestrzenna laboratorium, Panel urządzenia, Wyszukiwarka sprzętu, Magazyn materiałów eksploatacyjnych}
+\productsandservices{W pełni funkcjonalny system zarządzania infrastrukturą sprzętową w laboratorium sprzętowym lub serwerowni}
+\mainfunctionalities{}
 \successmeasure{Systematyczność pracy zespołu: Regularne cotygodniowe przeglądy postępów prac na spotkaniach zespołu,
 Implementacja wszystkich wymagań oznaczonych jako “must”,
 }
@@ -26,12 +27,9 @@ Ograniczenia finansowe; Brak dostępu do płatnych/bardziej zaawansowanych narz�
 }
 \date{Lipiec, 2026}
 \finishdate{\today}
-\nabstract{Projekt ma na celu zwiększenie wydajności i efektywności pracy inżynierów w laboratoriach sprzętowych poprzez zapewnienie systemu do zarządzania, kontrolowania oraz sprawdzania właściwości sprzętu komputerowego oraz elementów eksploatacyjnych.}
-\keyword{laboratoria sprzętowe}
-\keyword{system}
-\keyword{sprzęt komputerowy}
-\keyword{elementy eksploatacyjne}
+\nabstract{To jest streszczenie niezwykle innowacyjnej pracy inżynierskiej w której przeplatają się elementy paplaniny z wygenerowanym tekstem pseudonaukowym rozpoznawanym jako dezinformacja.}
 
+\keyword{komputer}
 
 
 \begin{document}
@@ -42,132 +40,16 @@ Ograniczenia finansowe; Brak dostępu do płatnych/bardziej zaawansowanych narz�
 
 \tableofcontents
 
-\chapter{Informacje wstępne}
+\include{introduction}
 
+\include{examples}
 
+\include{shareholders}
 
-\section{O projekcie}\label{ch:wstep}
-
-To jest przykładowy szablon pracy inżynierskiej na PJATK.
-
-\chapter{Przykładowe elementy}
-
-W niniejszym rozdziale pokażę różne ciekawe elementy które można użyć w pracy. Nie są to wszystkie możliwości, ale te, które moim zdaniem najczęściej pojawiają się w pracach inż. Na przykład, jeśli chcemy powołać się na jakieś źródła, robimy to tak~\cite{BEHESHTIROUI2021107419}.
-
-\section{Listingi}
-
-Jak załączać kod źródłowy jest pokazane na listingu~\ref{lst:helloworld}
-
-
-\begin{lstlisting}[language=c,caption={Przykładowy witaj w świecie}, label={lst:helloworld}]
-printf("hello");
-\end{lstlisting}
-
-\section{Obrazki}
-
-Na ilustracji~\ref{img:pjatklogo} widzimy oficjalne logo PJATK.
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.5\textwidth]{sprz/pjatk}
-    \caption{Logo PJATK załączone jako obrazek}
-    \label{img:pjatklogo}
-\end{figure}
-
-albo dla wygody jako makro tak jak na obrazku~\ref{img:pjatklogo2}
-
-\putimage{Obrazek załączony za pomocą makra}{sprz/pjatk}{img:pjatklogo2}{0.5\textwidth}
-
-\chapter{Karty udziałowca}
-
-
-\begin{stakeholder}[label={tab:stakeholder:someholder},caption={Przykładowy opis udzialowca}]
-    \id{jednoznaczny symbol np. UOB 01, UOB 02 ... dla udziałowców ożywionych bezpośrednich, UNP 01... dla nieożywionych pośrednich itd.}
-    \name{nazwa udziałowca}
-    \descr{opis udziałowca}
-    \type{ożywiony/nieożywiony, bezpośredni/pośredni}
-    \viewpoint{z jakiej perspektywy patrzy udziałowiec np. technicznej, ekonomicznej, operatora systemu itp.}
-    \limitations{ograniczenia udziałowca np. administrator nie powinien specyfikować wymagań finansowych}
-    \requ{tu tylko symbole wymagań wyspecyfikowanych w rozdziale 3}
-\end{stakeholder}
-
-\chapter{Wymagania wszelakie}
-
-Na tabeli \ref{tab:requirements:general} pokazano jak można definiować wymagania ogólne lub dziedzinowe.
-
-\begin{requirementstab}[label={tab:requirements:general},caption={Przykładowe wymaganie ogólne lub dziedzinowe}]
-    \id{np. WO1, WO2 .. }
-    \priority{Ważność}
-    \name{krótki opis}
-    \descr{opis szczegółowy, należy dążyć do tego, żeby wszystkie znane na ten moment szczegóły wymagania zostały wydobyte i wyspecyfikowane}
-    \sholder{nazwa udziałowca, który podał wymaganie}
-    \reqrelated{wymagania zależne i uszczegóławiające – odesłanie poprzez identyfikator}
-\end{requirementstab}
-
-Teraz czas na wymagania funkcjonalne, na przykład \ref{tab:requirements:func1}
-
-\begin{requirementstab}[label={tab:requirements:func1},caption={Pryzkładowa tabela z wymaganiami na interfejs z otoczeniem}]
-    \id{jednoznaczny symbol np. FO1, FO2 .. }
-    \priority{Ważność}
-    \name{krótki opis}
-    \descr{opis szczegółowy, należy dążyć do tego, żeby wszystkie znane na ten moment szczegóły wymagania zostały wydobyte i wyspecyfikowane
-
-    Można zastosować opis jak w User Story
-    \begin{itemize}
-        \item Jako.. (konkretny użytkownik systemu)
-        \item chcę... (pożądana cecha lub problem, który trzeba rozwiązać)
-        \item bo wtedy/ponieważ… (korzyść płynąca z ukończenia story)
-    \end{itemize}
-    }
-    \acceptcrit{Warunki Satysfakcji (Szczegóły dodane na potrzeby  testów akceptacyjnych)}
-    \inputdata{uzupełniane w trakcie sprintu – dane wejściowe, związane z wymaganiem}
-    \preconditions{ uzupełniane w trakcie sprintu – warunki, które muszą być prawdziwe przed wywołaniem operacji}
-    \postconditions{ uzupełniane w trakcie sprintu – warunki, które muszą być prawdziwe po wywołaniu operacji}
-    \exceptions{ uzupełniane w trakcie sprintu – niepożądane sytuacje i sposoby ich obsługi}
-    \implementation{ uzupełniane w trakcie sprintu – opis sposobu realizacji}
-    \sholder{nazwa udziałowca, który podał wymaganie}
-    \reqrelated{wymagania zależne i uszczegóławiające – odesłanie poprzez identyfikator}
-\end{requirementstab}
-
-
-Natomiast tabela \ref{tab:requirements:env1} pokazuje wymagania na interfejs z otoczeniem.
-
-\begin{requirementstab}[label={tab:requirements:env1},caption={Pryzkładowa tabela z wymaganiami na interfejs z otoczeniem}]
-    \id{jednoznaczny symbol np. IO1, IO2 .. }
-    \priority{Ważność}
-    \name{krótki opis}
-    \descr{opis szczegółowy, należy dążyć do tego, żeby wszystkie znane na ten moment szczegóły wymagania zostały wydobyte i wyspecyfikowane}
-    \acceptcrit{Warunki Satysfakcji (Szczegóły dodane na potrzeby  testów akceptacyjnych)}
-    \inputdata{uzupełniane w trakcie sprintu – dane wejściowe, związane z wymaganiem}
-    \preconditions{ uzupełniane w trakcie sprintu – warunki, które muszą być prawdziwe przed wywołaniem operacji}
-    \postconditions{ uzupełniane w trakcie sprintu – warunki, które muszą być prawdziwe po wywołaniu operacji}
-    \exceptions{ uzupełniane w trakcie sprintu – niepożądane sytuacje i sposoby ich obsługi}
-    \implementation{ uzupełniane w trakcie sprintu – opis sposobu realizacji}
-    \sholder{nazwa udziałowca, który podał wymaganie}
-    \reqrelated{wymagania zależne i uszczegóławiające – odesłanie poprzez identyfikator}
-\end{requirementstab}
-
-Tabela dotycząca wymagań pozafunkcjonalnych \ref{tab:requirements:nonfunc1} jest także widoczne.
-
-\begin{requirementstab}[label={tab:requirements:nonfunc1},caption={Pryzkładowa tabela z wymaganiami pozafunkcjonalnymi}]
-    \id{jednoznaczny symbol np. NFO1, NFO2 .. }
-    \priority{Ważność}
-    \name{krótki opis}
-    \descr{opis szczegółowy, należy dążyć do tego, żeby wszystkie znane na ten moment szczegóły wymagania zostały wydobyte i wyspecyfikowane}
-    \acceptcrit{Warunki Satysfakcji (Szczegóły dodane na potrzeby  testów akceptacyjnych)}
-    \sholder{nazwa udziałowca, który podał wymaganie}
-    \reqrelated{wymagania zależne i uszczegóławiające – odesłanie poprzez identyfikator}
-\end{requirementstab}
-
+\include{requirements}
 
 \printbibliography[title={Bibliografia}, heading=bibintoc]
 
 \makethesisattachments
-
-
-
-
-
-
 
 \end{document}
