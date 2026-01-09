@@ -1,0 +1,632 @@
+\chapter{Wymagania na system}
+
+%----------------------------------------------------------------------------------------------------
+%---------------------------------------OGÓLNE-I-DZIEDZINOWE-----------------------------------------
+%----------------------------------------------------------------------------------------------------
+
+\section{Wymagania ogólne i dziedzinowe}
+% LAB-D-01
+\begin{requirementstab}
+    \id{LAB-D-01}
+    \priority{M}
+    \name{Kontrola dostępu}
+    \descr{System musi być dostępny tylko dla użytkowników posiadających konto w systemie}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+% LAB-D-02
+\begin{requirementstab}
+    \id{LAB-D-02}
+    \priority{M}
+    \name{Zarządzanie Laboratorium}
+    \descr{System musi wspierać zarządzanie laboratorium IT}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+% LAB-D-03
+\begin{requirementstab}
+    \id{LAB-D-03}
+    \priority{M}
+    \name{Inwentarz Techniczny}
+    \descr{System musi wspierać zarządzanie inwentarzem technicznym}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+% LAB-D-04
+\begin{requirementstab}
+    \id{LAB-D-04}
+    \priority{M}
+    \name{Monitorowanie stanu}
+    \descr{System musi wspierać monitorowanie stanu urządzeń}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+% LAB-D-05
+\begin{requirementstab}
+    \id{LAB-D-05}
+    \priority{M}
+    \name{Mapa przestrzenna laboratorium}
+    \descr{System musi umożliwiać odwzorowanie fizycznego układu laboratorium}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+% LAB-D-06
+\begin{requirementstab}
+    \id{LAB-D-06}
+    \priority{M}
+    \name{Ochrona danych}
+    \descr{System musi spełniać podstawowe wymogi ochrony danych}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+%----------------------------------------------------------------------------------------------------
+%----------------------------------------FUNKCJONALNE------------------------------------------------
+%----------------------------------------------------------------------------------------------------
+
+\section{Wymagania Funkcjonalne}
+
+\subsection{Zakładka "Labs"}
+
+% LAB-F-01
+\begin{requirementstab}
+    \id{LAB-F-01}
+    \priority{M}
+    \name{System musi posiadać widok całego laboratorium}
+    \descr{Jako pracownik związany ze sprzętem w laboratorium/serwerowni chcę mieć możliwość
+sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bieżących zadań}
+    \acceptcrit{System posiada w pełni funkcjonalną zakładkę „Map” dla każdego laboratorium}
+    \inputdata{Lab z mapą przestrzenną, użytkownik systemu z dowolną przypisaną rolą}
+    \preconditions{Użytkownik jest zalogowany do systemu i widzi zakładkę „Labs”, a wewnątrz niej przynajmniej 1 Lab}
+    \postconditions{Mapa przestrzenna laboratorium jest widoczna i w pełni funkcjonalna}
+    \exceptions{Lab nie posiada mapy laboratorium}
+    \implementation{Dodanie przycisku „Show Map” do każdego obiektu laboratorium.}
+    \sholder{Zespół projektowy}
+    \reqrelated{LAB-F-14}
+\end{requirementstab}
+
+% LAB-F-14
+\begin{requirementstab}
+    \id{LAB-F-14}
+    \priority{M}
+    \name{System musi posiadać system Drag n' Drop elementów laboratorium}
+    \descr{Jako użytkownik systemu, chcę móc ustawić elementy interaktywne na mapie przestrzennej laboratorium, żeby odwzorować stan faktyczny pomieszczenia.}
+    \acceptcrit{Mapa przestrzenna laboratorium posiada w pełni funkcjonalny system Drag n’ Drop z możliwością aranżacji elementów na dostępnej powierzchni.}
+    \inputdata{Lab z mapą przestrzenną, użytkownik systemu z dowolną przypisaną rolą z uprawnieniami do wybranego laboratorium}
+    \preconditions{Użytkownik jest zalogowany do systemu, w zakładce „Labs” widzi przynajmniej 1 lab do którego ma uprawnienia edycji z przyciskiem „Show Map”, po kliknięciu na ten przycisk przeniesiony jest do widoku przestrzennego laboratorium.}
+    \postconditions{Użytkownik jest w stanie rozmieszczać elementy laboratorium w dowolny sposób z możliwością zapisu zmian.}
+    \exceptions{Użytkownik nie posiada praw edycji laboratorium na mapie przestrzennej.}
+    \implementation{Dodanie przycisku „Edit” możliwego do kliknięcia w momencie gdy zalogowany użytkownik jest przypisany do danego laboratorium.}
+    \sholder{Zespół projektowy}
+    \reqrelated{LAB-F-01}
+\end{requirementstab}
+
+\subsection{Panel Urządzenia}
+
+% LAB-F-02
+\begin{requirementstab}
+    \id{LAB-F-02}
+    \priority{M}
+    \name{System musi pokazywać statystyki urządzeń}
+    \descr{Jako użytkownik systemu, chcę mieć możliwość odczytania statystyk każdego urządzenia w jego unikalnej zakładce z informacjami}
+    \acceptcrit{Każde urządzenie posiada widok ze szczegółowymi statystykami}
+    \inputdata{System z przynajmniej 1 dostępnym urządzeniem, użytkownik systemu z dowolną przypisaną rolą}
+    \preconditions{Użytkownik jest zalogowany do systemu, w zakładce „Labs” widzi przynajmniej 1 laboratorium z przypisanym przynajmniej 1 urządzeniem, który może kliknąć}
+    \postconditions{Użytkownik jest w stanie przenieść się na widok ze szczegółami urządzenia po kliknięciu kafelka z nazwą urządzenia}
+    \exceptions{Brak dostępnych urządzeń w systemie}
+    \implementation{Po kliknięciu na obiekt maszyny, aktywowanie okna urządzenia ze statystykami}
+    \sholder{Zespół projektowy}
+    \reqrelated{LAB-F-03, LAB-F-05, LAB-F-10, LAB-F-11, LAB-F-15}
+\end{requirementstab}
+
+% LAB-F-03
+\begin{requirementstab}
+    \id{LAB-F-03}
+    \priority{C}
+    \name{System powinien pozwolić na wykonywanie zdalnych akcji np. Reboot, ping}
+    \descr{Jak użytkownik systemu chcę mieć dostęp do wykonywania zdalnych komend na maszynie z poziomu widoku maszyny}
+    \acceptcrit{System posiada możliwość wykonania zdalnej komendy z poziomu interfejsu użytkownika}
+    \inputdata{System z przynajmniej 1 dostępnym urządzeniem, użytkownik systemu z dowolną przypisaną rolą}
+    \preconditions{Użytkownik jest zalogowany do systemu, na ekranie szczegółów urządzenia widoczny jest panel do wpisania zdalnej komendy}
+    \postconditions{Użytkownik jest w stanie wysłać komendę zdalnie na urządzenie z poziomu systemu}
+    \exceptions{Wybrane urządzenie nie jest podłączone do sieci}
+    \implementation{Na ekranie szczegółów urządzenia dodanie sekcji do wysyłania zdalnego polecenia.}
+    \sholder{Zespół projektowy}
+    \reqrelated{LAB-F-02, LAB-F-05, LAB-F-10, LAB-F-11, LAB-F-15}
+\end{requirementstab}
+
+% LAB-F-05
+\begin{requirementstab}
+    \id{LAB-F-05}
+    \priority{M}
+    \name{System musi zezwolić na przypisywanie platform do konkretnych racków i półek}
+    \descr{Jako użytkownik chcę mieć możliwość przypisania platformy do wybranej przeze mnie półki w celu skutecznego wyszukiwania urządzeń znajdujących się na tej samej półce lub racku.}
+    \acceptcrit{System posiada możliwość przypisania platformy do jednego z racków lub półek.}
+    \inputdata{System z przynajmniej 1 dostępnym urządzeniem, labem oraz półką lub rackiem, użytkownik systemu z dowolną przypisaną rolą z przynajmniej 1 przypisaną do niego lub jego grupy maszyną}
+    \preconditions{Użytkownik jest zalogowany do systemu, na ekranie szczegółów urządzenia widoczny jest aktualnie przypisany Rack lub półka}
+    \postconditions{Użytkownik jest w stanie zmienić przypisanie urządzenia do innego recku lub półki}
+    \exceptions{Brak innych racków lub półek w systemie}
+    \implementation{Na ekranie szczegółów urządzenia dodanie sekcji z przypisanym rackiem lub półką}
+    \sholder{Zespół projektowy}
+    \reqrelated{LAB-F-02, LAB-F-03, LAB-F-10, LAB-F-11, LAB-F-15}
+\end{requirementstab}
+
+% LAB-F-10
+\begin{requirementstab}
+    \id{LAB-F-10}
+    \priority{W}
+    \name{System powinien posiadać odnośnik do informacji o danym sprzęcie/ layout'u PCB}
+    \descr{Jako użytkownik chcę mieć możliwość przejść do karty produktu ze szczegółami technicznymi lub dotyczącymi PCB z poziomu systemu}
+    \acceptcrit{System posiada odnośnik do strony z dokumentacją techniczną sprzętu}
+    \inputdata{System z przynajmniej 1 dostępnym urządzeniem, użytkownik systemu z dowolną przypisaną rolą}
+    \preconditions{Brak, wymaganie odrzucone}
+    \postconditions{Brak, wymaganie odrzucone}
+    \exceptions{Brak, wymaganie odrzucone}
+    \implementation{Brak, wymaganie odrzucone}
+    \sholder{Zespół projektowy}
+    \reqrelated{LAB-F-02, LAB-F-03, LAB-F-05, LAB-F-11, LAB-F-15}
+\end{requirementstab}
+
+% LAB-F-11
+\begin{requirementstab}
+    \id{LAB-F-11}
+    \priority{M}
+    \name{Dane w widoku urządzenia}
+    \descr{Jako użytkownik systemu, chcę mieć dostęp do następujących danych na poziomie widoku urządzenia: Lokalizacja, Nazwa Hosta, Adres IP oraz MAC, Status w sieci, Port w PDU, Tag (przypisany zespół / przeznaczony zespół), System Operacyjny, Informacje o sprzęcie (CPU, Dysk, RAM), Numer Seryjny}
+    \acceptcrit{Wszystkie pola zawarte w wymaganiu są dostępne w systemie w widoku urządzenia}
+    \inputdata{System z przynajmniej 1 dostępnym urządzeniem, użytkownik systemu z dowolną przypisaną rolą z przynajmniej 1 przypisaną do niego lub jego grupy maszyną}
+    \preconditions{Użytkownik jest zalogowany do systemu, na ekranie szczegółów urządzenia}
+    \postconditions{Użytkownik jest w stanie zobaczyć wszystkie dane lub miejsce na ich umieszczenie w systemie na poziomie widoku urządzenia}
+    \exceptions{Brak dostępnych lub przypisanych do użytkownika urządzeń w systemie}
+    \implementation{Na ekranie szczegółów urządzenia dodać pola wypisane w wymaganiu.}
+    \sholder{Zespół projektowy}
+    \reqrelated{LAB-F-02, LAB-F-03, LAB-F-05, LAB-F-10, LAB-F-15}
+\end{requirementstab}
+
+% LAB-F-15
+\begin{requirementstab}
+    \id{LAB-F-15}
+    \priority{M}
+    \name{System musi posiadać widok urządzenia}
+    \descr{Jako użytkownik systemu chcę mieć dostęp do szczegółów urządzenia z poziomu systemu}
+    \acceptcrit{Zaimplementowany panel szczegółów urządzenia}
+    \inputdata{System z przynajmniej 1 dostępnym urządzeniem, użytkownik systemu z dowolną przypisaną rolą z przynajmniej 1 przypisaną do niego lub jego grupy maszyną}
+    \preconditions{Użytkownik jest zalogowany do systemu}
+    \postconditions{Użytkownik jest w stanie przejść do widoku ze szczegółami urządzenia z poziomu systemu}
+    \exceptions{Brak dostępnych urządzeń w systemie}
+    \implementation{Dodanie widoku urządzenia po kliknięciu w kafelek z nazwą urządzenia z poziomu mapy przestrzennej lub paska wyszukiwania}
+    \sholder{Zespół projektowy}
+    \reqrelated{LAB-F-02, LAB-F-03, LAB-F-05, LAB-F-10, LAB-F-11}
+\end{requirementstab}
+
+\subsection{Zakładka "Inventory"}
+
+% LAB-F-04
+\begin{requirementstab}
+    \id{LAB-F-04}
+    \priority{S}
+    \name{System powinien posiadać inwentarz materiałów eksploatacyjnych}
+    \descr{Jako użytkownik systemu chcę mieć dostęp do inwentarza materiałów eksploatacyjnych aby szybko i efektywnie wyszukiwać niezbędne do mojej pracy narzędzia i kontrolować ich ilość}
+    \acceptcrit{Zakładka „Inventory” zaimplementowana w systemie}
+    \inputdata{Użytkownik systemu z dowolną przypisaną rolą}
+    \preconditions{Użytkownik jest zalogowany do systemu}
+    \postconditions{Użytkownik widzi w pasku bocznym zakładkę „Inventory”, po której kliknięciu przenoszony jest na ekran inwentarza}
+    \exceptions{Brak paska bocznego}
+    \implementation{Dodanie zakładki „Inventory” w paski bocznym}
+    \sholder{Zespół projektowy}
+    \reqrelated{LAB-F-12}
+\end{requirementstab}
+
+% LAB-F-12
+\begin{requirementstab}
+    \id{LAB-F-12}
+    \priority{M}
+    \name{Informacje w inwentarzu technicznym}
+    \descr{Jako użytkownik systemu, chcę mieć dostęp do następujących danych na poziomie inwentarza technicznego: Nazwa i nr seryjny, Dostępność, przypisanie do konkretnych maszyn, przypisanie do konkretnych zespołów, typ urządzenia/kategorie, Historia wypożyczeń, lokalizacja}
+    \acceptcrit{Wszystkie pola zawarte w wymaganiu są dostępne w systemie w inwentarzu technicznym}
+    \inputdata{Użytkownik systemu z dowolną przypisaną rolą, przynajmniej 1 element w inwentarzu przypisany do użytkownika lub jego grupy}
+    \preconditions{Użytkownik zalogowany do systemu na zakładce „Inventory”}
+    \postconditions{Użytkownik jest w stanie zobaczyć wszystkie dane lub miejsce na ich umieszczenie w systemie na poziomie inwentarzu}
+    \exceptions{Brak przypisanych elementów do użytkownika w inwentarzu}
+    \implementation{Do każdego elementu inwentarzu dodać pola wypisane w wymaganiu.}
+    \sholder{Zespół projektowy}
+    \reqrelated{LAB-F-04}
+\end{requirementstab}
+
+\subsection{Zakładka "Dashboard"}
+
+% LAB-F-06
+\begin{requirementstab}
+    \id{LAB-F-06}
+    \priority{S}
+    \name{System powinien posiadać panel z podsumowaniem informacji o sprzęcie przypisanym do użytkownika}
+    \descr{Jako użytkownik systemu chcę mieć dostęp do panelu z podsumowaniem elementów przypisanych do mnie, co pozwoli skrócić czas wyszukiwania go}
+    \acceptcrit{Zakładka „Dashboard” widoczna z poziomu systemu na pasku bocznym}
+    \inputdata{Użytkownik systemu z dowolną przypisaną rolą}
+    \preconditions{Użytkownik zalogowany do systemu}
+    \postconditions{Użytkownik widzi zakładkę „Dashboard” na pasku bocznym, po której kliknięciu przenoszony jest na ekran z podsumowaniem}
+    \exceptions{Użytkownik nie ma przypisanego żadnego elementu}
+    \implementation{Dodanie zakładki „Dashboard” na pasku bocznym}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+\subsection{Search Bar (Pasek wyszukiwania)}
+
+% LAB-F-07
+\begin{requirementstab}
+    \id{LAB-F-07}
+    \priority{M}
+    \name{System musi posiadać wyszukiwarkę sprzętu}
+    \descr{Jak użytkownik systemu chcę mieć dostęp do paska wyszukiwania by przyśpieszyć identyfikowanie sprzętu}
+    \acceptcrit{Pasek wyszukiwania zaimplementowany w systemie i dodany do paska bocznego}
+    \inputdata{Użytkownik systemu z dowolną przypisaną rolą}
+    \preconditions{Użytkownik zalogowany do systemu}
+    \postconditions{Użytkownik widzi pasek wyszukiwania na pasku bocznym, w którym jest w stanie wpisać wyszukiwaną frazę}
+    \exceptions{Brak}
+    \implementation{Dodanie paska wyszukiwania na pasku bocznym}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+\subsection{Zakładka "History"}
+
+% LAB-F-08
+\begin{requirementstab}
+    \id{LAB-F-08}
+    \priority{M}
+    \name{System musi posiadać historię zmian sprzętu}
+    \descr{Jako użytkownik chcę śledzić zmiany sprzętu by efektywnie identyfikować modyfikacje w jego konfiguracji}
+    \acceptcrit{Mechanizm zapisywania historii akcji zaimplementowany w systemie}
+    \inputdata{Użytkownik systemu z dowolną przypisaną rolą i przynajmniej 1 przypisanym elementem do niego lub jego grupy}
+    \preconditions{Użytkownik zalogowany do systemu na ekranie wybranego elementu}
+    \postconditions{Użytkownik wykonuje zmianę, która jest wykryta przez system}
+    \exceptions{Brak}
+    \implementation{Dodanie mechanizmu zapisywania wykonywanych akcji w systemie}
+    \sholder{Zespół projektowy}
+    \reqrelated{LAB-F-16, LAB-F-21}
+\end{requirementstab}
+
+% LAB-F-16
+\begin{requirementstab}
+    \id{LAB-F-16}
+    \priority{C}
+    \name{System powinien rejestrować działania użytkowników i zapisywać je do pliku}
+    \descr{Jako użytkownik systemu chcę by zmiany wykonywane w systemie zapisywane były w pliku by zapewnić trwałość danych w kopiach zapasowych systemu}
+    \acceptcrit{Zmiany logowane przez system zapisywane są do pliku}
+    \inputdata{Użytkownik systemu z dowolną przypisaną rolą i przynajmniej 1 przypisanym elementem do niego lub jego grupy}
+    \preconditions{Użytkownik zalogowany do systemu na ekranie wybranego elementu jest w stanie wykonać modyfikację}
+    \postconditions{Zmiana wykryta przez system, zapisana do pliku}
+    \exceptions{Brak miejsca na przestrzeni dyskowej, na której system domyślnie operuje}
+    \implementation{Dodanie funkcjonalności zapisu historii do pliku}
+    \sholder{Zespół projektowy}
+    \reqrelated{LAB-F-08, LAB-F-21}
+\end{requirementstab}
+
+% LAB-F-21
+\begin{requirementstab}
+    \id{LAB-F-21}
+    \priority{C}
+    \name{Wersjonowanie historii}
+    \descr{Jako użytkownik systemu chcę mieć możliwość wersjonowania historii zmian żeby w prosty sposób sprawdzić stan przed modyfikacją}
+    \acceptcrit{Funkcjonalność wersjonowania historii zaimplementowana w systemie z możliwością wyboru wersji}
+    \inputdata{Użytkownik systemu z dowolną przypisaną rolą i przynajmniej 1 przypisanym elementem do niego lub jego grupy, na którym wykonane zostały modyfikacje}
+    \preconditions{Użytkownik z poziomu widoku wybranego elementu widzi pasek wyboru z opisem wersji}
+    \postconditions{Użytkownik jest w stanie wybrać wcześniejszą wersję widoku z przed zmian}
+    \exceptions{Brak zapisanych zmian w elemencie}
+    \implementation{Dodanie funkcjonalności wersjonowania historii }
+    \sholder{Zespół projektowy}
+    \reqrelated{LAB-F-08, LAB-F-16}
+\end{requirementstab}
+
+\subsection{Zakładka "Users"}
+
+% LAB-F-09
+\begin{requirementstab}
+    \id{LAB-F-09}
+    \priority{M}
+    \name{System musi posiadać panel zarządzania użytkownikami}
+    \descr{Jako użytkownik z uprawnieniami administratora systemu chcę mieć dostęp do panelu, z poziomu którego będę w stanie zarządzać użytkownikami systemu}
+    \acceptcrit{Zakładka „Users” zaimplementowana w systemie}
+    \inputdata{Użytkownik systemu z przypisaną rolą administratora, dodatkowy użytkownik w systemie z dowolną rolą}
+    \preconditions{Użytkownik z rolą administratora zalogowany do systemu}
+    \postconditions{Użytkownik z rolą administratora widzi zakładkę „Users” na pasku bocznym systemu}
+    \exceptions{Brak}
+    \implementation{Dodanie i implementacja zakładki „Users” w systemie}
+    \sholder{Zespół projektowy}
+    \reqrelated{LAB-F-17}
+\end{requirementstab}
+
+% LAB-F-17
+\begin{requirementstab}
+    \id{LAB-F-17}
+    \priority{M}
+    \name{System powinien rozróżniać 2 role użytkowników: administrator, użytkownik}
+    \descr{Jako użytkownik systemu chcę aby posiadał on kontrolę dostępu w postaci ról użytkowników: administrator oraz użytkownik}
+    \acceptcrit{System posiadający role użytkowników opisane w wymaganiu}
+    \inputdata{Brak}
+    \preconditions{System posiadający funkcjonalność autoryzacji użytkowników}
+    \postconditions{Możliwość wyboru roli pomiędzy: administrator i użytkownik}
+    \exceptions{Brak}
+    \implementation{Dodanie pola „role” w bazie danych użytkowników}
+    \sholder{Zespół projektowy}
+    \reqrelated{LAB-F-09}
+\end{requirementstab}
+
+\subsection{Zakładka "Groups"}
+
+% LAB-F-18
+\begin{requirementstab}
+    \id{LAB-F-18}
+    \priority{M}
+    \name{System musi zezwalać na przypisywanie użytkowników do istniejących grup}
+    \descr{Jako użytkownik systemu z uprawnieniami administratora chcę mieć możliwość przypisania użytkowników do grup co pozwoli efektywniej zarządzać zespołami w organizacji}
+    \acceptcrit{Funkcjonalność przypisywania użytkownika zaimplementowana w systemie}
+    \inputdata{System z funkcjonalną bazą danych}
+    \preconditions{System z przynajmniej 1 użytkownikiem w systemie}
+    \postconditions{Możliwość przypisania użytkownika do grupy}
+    \exceptions{Brak}
+    \implementation{Dodanie pola „group” w bazie danych użytkowników}
+    \sholder{Zespół projektowy}
+    \reqrelated{LAB-F-19}
+\end{requirementstab}
+
+% LAB-F-19
+\begin{requirementstab}
+    \id{LAB-F-19}
+    \priority{M}
+    \name{System musi zezwalać na tworzenie grup użytkowników}
+    \descr{Jako użytkownik z uprawnieniami administratora chcę mieć możliwość tworzenia grup użytkowników z poziomu systemu}
+    \acceptcrit{Zakładka „Groups” zaimplementowana w systemie}
+    \inputdata{Użytkownik systemu z przypisaną rolą administratora}
+    \preconditions{Użytkownik zalogowany do systemu}
+    \postconditions{Użytkownik widzi zakładkę „Groups” na pasku bocznym, po której kliknięciu przeniesiony zostaje na widok grup użytkowników, widoczny jest przycisk „Add Group”, po kliknięciu w który wyświetla się formularz tworzenia grupy}
+    \exceptions{Brak}
+    \implementation{Dodanie zakładki „Groups” na pasku bocznym, implementacja formularza dodania grupy}
+    \sholder{Zespół projektowy}
+    \reqrelated{LAB-F-18}
+\end{requirementstab}
+
+\subsection{Zakładka "Admin"}
+
+% LAB-F-20
+\begin{requirementstab}
+    \id{LAB-F-20}
+    \priority{M}
+    \name{System musi zezwalać na tworzenie nowych użytkowników}
+    \descr{Jako użytkownik systemu z rolą administratora chcę mieć możliwość tworzenia nowych użytkowników}
+    \acceptcrit{Funkcjonalność tworzenia użytkowników i zakładka „Admin” dostępna w systemie}
+    \inputdata{Użytkownik z rolą administratora}
+    \preconditions{Użytkownik zalogowany do systemu widzi zakładkę „Admin” na pasku bocznym}
+    \postconditions{Po kliknięciu w zakładkę „Admin” użytkownik przeniesiony jest do panelu, w którym ma możliwość utworzenia nowego użytkownika}
+    \exceptions{Brak}
+    \implementation{Dodanie zakładki „Admin” i implementacja logiki tworzenia nowego użytkownika}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+\subsection{Imort \& Export}
+
+% LAB-F-13
+\begin{requirementstab}
+    \id{LAB-F-13}
+    \priority{C}
+    \name{System powinien pozwalać użytkownikom na wybór między zastąpieniem i utworzeniem kopii danych importowanych z zewnętrznych źródeł}
+    \descr{Jak użytkownik systemu chcę mieć możliwość importu i eksportu danych z systemu do/z pliku}
+    \acceptcrit{System posiada funkcjonalny mechanizm importu i eksportu danych}
+    \inputdata{Użytkownik systemu z rolą administratora}
+    \preconditions{Użytkownik zalogowany do systemu, widzi zakładkę „Import \& Export” na pasku bocznym}
+    \postconditions{Po kliknięciu w zakładkę „Import \& Export” użytkownik przenoszony jest do formularza z możliwością importu i exportu danych}
+    \exceptions{Brak miejsca na dysku, plik w niewłaściwym formacie}
+    \implementation{Dodanie zakładki „Import \& Export” do paska bocznego, implementacja logiki exportu i importu danych}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+%----------------------------------------------------------------------------------------------------
+%----------------------------------------INTERFESJ-Z-OTOCZENIEM--------------------------------------
+%----------------------------------------------------------------------------------------------------
+
+\section{Interfejs z otoczeniem}
+
+% LAB-I-01
+\begin{requirementstab}
+    \id{LAB-I-01}
+    \priority{M}
+    \name{System musi zezwalać na import i eksport danych z arkuszy kalkulacyjnych}
+    \descr{Jako użytkownik systemu chcę mieć możliwość importu i eksportu danych do/z plików arkuszy kalkulacyjnych}
+    \acceptcrit{Zaimplementowana logika importu z arkuszy kalkulacyjnych}
+    \inputdata{Użytkownik systemu z rolą administratora, zaimplementowana zakładka „Import \& Export”}
+    \preconditions{Użytkownik zalogowany do systemu na ekranie formularza służącego do importu i exportu danych}
+    \postconditions{Użytkownik jest w stanie importować oraz eksportować dane do arkusza kalkulacyjnego}
+    \exceptions{Brak}
+    \implementation{Implementacja logiki importu i eksportu do arkuszy kalkulacyjnych}
+    \sholder{Zespół projektowy}
+    \reqrelated{LAB-F-13}
+\end{requirementstab}
+
+% LAB-I-02
+\begin{requirementstab}
+    \id{LAB-I-02}
+    \priority{C}
+    \name{System powinien zezwalać na integrację z systemami PDU}
+    \descr{Jako użytkownik systemu chcę mieć dostęp do systemów PDU z poziomu systemu }
+    \acceptcrit{Zaimplementowana obsługa systemów PDU}
+    \inputdata{Użytkownik systemu z dowolną rolą, przynajmniej 1 urządzenie w systemie fizycznie podłączone do PDU}
+    \preconditions{Użytkownik zalogowany do systemu, na ekranie szczegółów urządzenia widzi panel związany z systemem PDU}
+    \postconditions{Użytkownik jest w stanie wykonywać akcję na systemie PDU korzystając z widoku szczegółów urządzenia}
+    \exceptions{Brak}
+    \implementation{Implementacja integracji z systemami PDU na poziomie szczegółów urządzenia}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+% LAB-I-03
+\begin{requirementstab}
+    \id{LAB-I-03}
+    \priority{M}
+    \name{System musi zezwalać na import danych z agentów systemu Prometheus}
+    \descr{Jako użytkownik systemu chcę widzieć dane z agentów systemu Prometheus na ekranie szczegółów urządzenia}
+    \acceptcrit{Zaimplementowana obsługa importu danych z agentów systemu Prometheus}
+    \inputdata{Użytkownik systemu z dowolną rolą, przynajmniej 1 urządzenie posiadające zainstalowany system Prometheus}
+    \preconditions{Użytkownik zalogowany do systemu, na poziomie widoku szczegółów urządzenia }
+    \postconditions{Użytkownik widzi dane zaimportowane z systemu Prometheus}
+    \exceptions{Brak}
+    \implementation{Implementacja importu danych do systemu z agentów systemu Prometheus}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+% LAB-I-04
+\begin{requirementstab}
+    \id{LAB-I-04}
+    \priority{M}
+    \name{System musi zezwalać na import danych z Ansible}
+    \descr{Jako użytkownik chcę mieć dostęp do danych z Ansible}
+    \acceptcrit{Zaimplementowana logika importu danych z Ansible}
+    \inputdata{Przynajmniej 1 urządzenie dostępne w sieci lokalnej i w systemie Labbyn}
+    \preconditions{Wysłanie żądania używając API Ansible}
+    \postconditions{Żądanie przetworzone poprawnie, akcje zapisane w playbook’u Ansible wykonane pomyślnie, dane zaimportowane do systemu}
+    \exceptions{Zerwanie połączenia sieci lokalnej}
+    \implementation{Zaimplementowanie obsługi przetwarzania żądań Ansible i importu danych do systemu}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+%----------------------------------------------------------------------------------------------------
+%----------------------------------------NIEFUNKCJONALNE---------------------------------------------
+%----------------------------------------------------------------------------------------------------
+
+\section{Wymagania pozafunkcjonalne}
+
+% LAB-NF-01
+\begin{requirementstab}
+    \id{LAB-NF-01}
+    \priority{S}
+    \name{Przetwarzanie danych systemu}
+    \descr{System powinien umożliwiać sprawne wprowadzanie dużych ilości masowych danych}
+    \acceptcrit{Odpowiednio zoptymalizowany system obsługi danych}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+% LAB-NF-02
+\begin{requirementstab}
+    \id{LAB-NF-02}
+    \priority{S}
+    \name{Jednoczesne połączenia}
+    \descr{System powinien umożliwiać jednoczesne połączenie wielu użytkowników. Wartość maksymalna opisana jest w pliku konfiguracyjnym jako parametr "maxClientsNumber"}
+    \acceptcrit{Implementacja systemu wielu połączeń do systemu jednocześnie}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+% LAB-NF-03
+\begin{requirementstab}
+    \id{LAB-NF-03}
+    \priority{M}
+    \name{Autoryzacja użytkowników}
+    \descr{System musi autoryzować wykonywane w nim akcje na podstawie roli/uprawnień użytkownika}
+    \acceptcrit{Zaimplementowany mechanizm autoryzacji użytkowników}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+% LAB-NF-04
+\begin{requirementstab}
+    \id{LAB-NF-04}
+    \priority{S}
+    \name{Przenaszalność systemu}
+    \descr{System powinien pozwolić na przenoszenie go między różnymi środowiskami}
+    \acceptcrit{Implementacja systemu w formie łatwej do przeniesienia}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+% LAB-NF-05
+\begin{requirementstab}
+    \id{LAB-NF-05}
+    \priority{S}
+    \name{Utrzymanie i aktualizacja}
+    \descr{System powinien być łatwy w utrzymaniu oraz aktualizacji}
+    \acceptcrit{Implementacja mechanizmu aktualizacji, uproszczenie i minimalizacja zależności systemu}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+% LAB-NF-06
+\begin{requirementstab}
+    \id{LAB-NF-06}
+    \priority{S}
+    \name{Doświadczenia użytkownika}
+    \descr{System powinien zapewnić standardy i dobre praktyki UX}
+    \acceptcrit{Implementacja systemu zgodnie z przyjętymi standardami UX}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+% LAB-NF-07
+\begin{requirementstab}
+    \id{LAB-NF-07}
+    \priority{M}
+    \name{Domyślny użytkownik}
+    \descr{System musi posiadać wbudowanego użytkownika serwis}
+    \acceptcrit{Implementacja autoryzacji pierwszego uruchomienia}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+% LAB-NF-08
+\begin{requirementstab}
+    \id{LAB-NF-08}
+    \priority{M}
+    \name{Przechowywanie haseł użytkowników}
+    \descr{System musi przechowywać hasła użytkowników w formie zaszyfrowanej żeby zapewnić bezpieczeństwo danych}
+    \acceptcrit{Zaimplementowany mechanizm szyfrowania haseł po stronie systemu}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+%----------------------------------------------------------------------------------------------------
+%----------------------------------------ŚRODOWISKO DOCELOWE-----------------------------------------
+%----------------------------------------------------------------------------------------------------
+
+\section{Wymagania na środowisko docelowe}
+
+% LAB-E-01
+\begin{requirementstab}
+    \id{LAB-E-01}
+    \priority{M}
+    \name{Wspierane przeglądarki}
+    \descr{System musi być kompatybilny z przeglądarkami na silniku Chromium}
+    \acceptcrit{W pełni działający system dostępny w przeglądarkach na silniku Chromium}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+% LAB-E-02
+\begin{requirementstab}
+    \id{LAB-E-02}
+    \priority{S}
+    \name{System operacyjny}
+    \descr{System powinien działać i być kompatybilny z systemami Linux}
+    \acceptcrit{W pełni działający system Labbyn na systemach Linux}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}
+
+% LAB-E-03
+\begin{requirementstab}
+    \id{LAB-E-03}
+    \priority{M}
+    \name{Środowisko domyślne}
+    \descr{System musi działać w środowisku kontenerowym}
+    \acceptcrit{Implementacja systemu wspierającego środowisko kontenerowe}
+    \sholder{Zespół projektowy}
+    \reqrelated{Brak}
+\end{requirementstab}

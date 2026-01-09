@@ -139,8 +139,6 @@
 		\hline
 		}{%
 	\end{tabular}
-	\caption{\tabcaption}
-	\label{\tablabel}
 	\endtable
 }
 
@@ -160,17 +158,16 @@
 \newcommand{\implementation}[1]{Szczegóły implementacji: & \multicolumn{3}{|p{0.6\linewidth}|}{##1}  \\ \hline}
 \newcommand{\sholder}[1]{Udziałowiec: & \multicolumn{3}{|p{0.6\linewidth}|}{##1}  \\ \hline}
 \newcommand{\reqrelated}[1]{Wymagania powiązane: & \multicolumn{3}{|p{0.6\linewidth}|}{##1}  \\ \hline}
-\table[h!]
+
+\par\medskip
 \centering
 \begin{tabular}{|>{\columncolor{lightgray}}l|l|>{\columncolor{lightgray}}l|p{0.1\linewidth}|}
-	\hline
-	\rowcolor{lightgray}\multicolumn{4}{|c|}{\textbf{KARTA WYMAGANIA}} \\
-	\hline
-	}{%
+\hline
+\rowcolor{lightgray}\multicolumn{4}{|c|}{\textbf{KARTA WYMAGANIA}} \\
+\hline
+}{%
 \end{tabular}
-\caption{\tabcaption}
-\label{\tablabel}
-\endtable
+\par\medskip
 }
 
 
@@ -218,7 +215,7 @@
     \renewcommand{\baselinestretch}{1.0}
 	\begin{titlepage}
 		
-			\includegraphics[width=1.0\textwidth]{sprz/pjatk} \\
+			\includegraphics[width=1.0\textwidth]{images/pjatk} \\
 			~ \\
 			%\large
 			\textbf{Kierunek studiów: Informatyka}
@@ -258,7 +255,7 @@
 }
 \newcommand{\makeprojectcard}{%
 	\begin{center}
-		\includegraphics[width=0.8\textwidth]{sprz/pjatk} \\
+		\includegraphics[width=0.8\textwidth]{images/pjatk} \\
 		{
 		\large
 		\textbf{Karta projektu}
@@ -350,6 +347,7 @@ Płyta CD z następującą zawartością:
 	\begin{itemize}
 		\item repozytorium kodu źródłowego wraz z instrukcją zbudowania i uruchomienia projektu
 		\item źródło pracy inżynierskiej.
+        \item dokumenty projektowe powstałe podczas prac
 	\end{itemize}
     \item {\em{\@authorattachment%
 praca pisemna}} -- katalog zawierający plik PDF z pracą inżynierską.
