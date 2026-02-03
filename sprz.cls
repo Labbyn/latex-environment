@@ -21,6 +21,8 @@
 \RequirePackage{multirow}
 \RequirePackage{graphicx}
 \RequirePackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\RequirePackage{glossaries}
+\makeglossaries
 
 \DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,
    unpublished,techreport,misc,book]{title}{,,#1''}

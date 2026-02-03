@@ -10,7 +10,7 @@
     \id{LAB-D-01}
     \priority{M}
     \name{Kontrola dostępu}
-    \descr{System musi być dostępny tylko dla użytkowników posiadających konto w systemie}
+    \descr{System musi być dostępny tylko dla \gls{użytkownik}ów posiadających konto w systemie}
     \sholder{Zespół projektowy}
     \reqrelated{Brak}
 \end{requirementstab}
@@ -19,8 +19,8 @@
 \begin{requirementstab}
     \id{LAB-D-02}
     \priority{M}
-    \name{Zarządzanie Laboratorium}
-    \descr{System musi wspierać zarządzanie laboratorium IT}
+    \name{Zarządzanie \gls{laboratorium}}
+    \descr{System musi wspierać zarządzanie \gls{laboratorium} IT}
     \sholder{Zespół projektowy}
     \reqrelated{Brak}
 \end{requirementstab}
@@ -49,8 +49,8 @@
 \begin{requirementstab}
     \id{LAB-D-05}
     \priority{M}
-    \name{Mapa przestrzenna laboratorium}
-    \descr{System musi umożliwiać odwzorowanie fizycznego układu laboratorium}
+    \name{Mapa przestrzenna \gls{laboratorium}}
+    \descr{System musi umożliwiać odwzorowanie fizycznego układu \gls{laboratorium}}
     \sholder{Zespół projektowy}
     \reqrelated{Brak}
 \end{requirementstab}
@@ -77,15 +77,15 @@
 \begin{requirementstab}
     \id{LAB-F-01}
     \priority{M}
-    \name{System musi posiadać widok całego laboratorium}
-    \descr{Jako pracownik związany ze sprzętem w laboratorium/serwerowni chcę mieć możliwość
+    \name{System musi posiadać widok całego \gls{laboratorium}}
+    \descr{Jako pracownik związany ze sprzętem w \gls{laboratorium}/serwerowni chcę mieć możliwość
 sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bieżących zadań}
-    \acceptcrit{System posiada w pełni funkcjonalną zakładkę „Map” dla każdego laboratorium}
-    \inputdata{Lab z mapą przestrzenną, użytkownik systemu z dowolną przypisaną rolą}
-    \preconditions{Użytkownik jest zalogowany do systemu i widzi zakładkę „Labs”, a wewnątrz niej przynajmniej 1 Lab}
-    \postconditions{Mapa przestrzenna laboratorium jest widoczna i w pełni funkcjonalna}
-    \exceptions{Lab nie posiada mapy laboratorium}
-    \implementation{Dodanie przycisku „Show Map” do każdego obiektu laboratorium.}
+    \acceptcrit{System posiada w pełni funkcjonalną zakładkę „Map” dla każdego \gls{laboratorium}}
+    \inputdata{Lab z mapą przestrzenną, \gls{użytkownik} systemu z dowolną przypisaną rolą}
+    \preconditions{\gls{użytkownik} jest zalogowany do systemu i widzi zakładkę „Labs”, a wewnątrz niej przynajmniej 1 Lab}
+    \postconditions{Mapa przestrzenna \gls{laboratorium} jest widoczna i w pełni funkcjonalna}
+    \exceptions{Lab nie posiada mapy \gls{laboratorium}}
+    \implementation{Dodanie przycisku „Show Map” do każdego obiektu \gls{laboratorium}.}
     \sholder{Zespół projektowy}
     \reqrelated{LAB-F-14}
 \end{requirementstab}
@@ -94,14 +94,14 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-F-14}
     \priority{M}
-    \name{System musi posiadać system Drag n' Drop elementów laboratorium}
-    \descr{Jako użytkownik systemu, chcę móc ustawić elementy interaktywne na mapie przestrzennej laboratorium, żeby odwzorować stan faktyczny pomieszczenia.}
-    \acceptcrit{Mapa przestrzenna laboratorium posiada w pełni funkcjonalny system Drag n’ Drop z możliwością aranżacji elementów na dostępnej powierzchni.}
-    \inputdata{Lab z mapą przestrzenną, użytkownik systemu z dowolną przypisaną rolą z uprawnieniami do wybranego laboratorium}
-    \preconditions{Użytkownik jest zalogowany do systemu, w zakładce „Labs” widzi przynajmniej 1 lab do którego ma uprawnienia edycji z przyciskiem „Show Map”, po kliknięciu na ten przycisk przeniesiony jest do widoku przestrzennego laboratorium.}
-    \postconditions{Użytkownik jest w stanie rozmieszczać elementy laboratorium w dowolny sposób z możliwością zapisu zmian.}
-    \exceptions{Użytkownik nie posiada praw edycji laboratorium na mapie przestrzennej.}
-    \implementation{Dodanie przycisku „Edit” możliwego do kliknięcia w momencie gdy zalogowany użytkownik jest przypisany do danego laboratorium.}
+    \name{System musi posiadać system Drag n' Drop elementów \gls{laboratorium}}
+    \descr{Jako \gls{użytkownik} systemu, chcę móc ustawić elementy interaktywne na mapie przestrzennej \gls{laboratorium}, żeby odwzorować stan faktyczny pomieszczenia.}
+    \acceptcrit{Mapa przestrzenna \gls{laboratorium} posiada w pełni funkcjonalny system Drag n’ Drop z możliwością aranżacji elementów na dostępnej powierzchni.}
+    \inputdata{Lab z mapą przestrzenną, \gls{użytkownik} systemu z dowolną przypisaną rolą z uprawnieniami do wybranego \gls{laboratorium}}
+    \preconditions{\gls{użytkownik} jest zalogowany do systemu, w zakładce „Labs” widzi przynajmniej 1 lab do którego ma uprawnienia edycji z przyciskiem „Show Map”, po kliknięciu na ten przycisk przeniesiony jest do widoku przestrzennego \gls{laboratorium}.}
+    \postconditions{\gls{użytkownik} jest w stanie rozmieszczać elementy \gls{laboratorium} w dowolny sposób z możliwością zapisu zmian.}
+    \exceptions{\gls{użytkownik} nie posiada praw edycji \gls{laboratorium} na mapie przestrzennej.}
+    \implementation{Dodanie przycisku „Edit” możliwego do kliknięcia w momencie gdy zalogowany \gls{użytkownik} jest przypisany do danego \gls{laboratorium}.}
     \sholder{Zespół projektowy}
     \reqrelated{LAB-F-01}
 \end{requirementstab}
@@ -113,11 +113,11 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
     \id{LAB-F-02}
     \priority{M}
     \name{System musi pokazywać statystyki urządzeń}
-    \descr{Jako użytkownik systemu, chcę mieć możliwość odczytania statystyk każdego urządzenia w jego unikalnej zakładce z informacjami}
+    \descr{Jako \gls{użytkownik} systemu, chcę mieć możliwość odczytania statystyk każdego urządzenia w jego unikalnej zakładce z informacjami}
     \acceptcrit{Każde urządzenie posiada widok ze szczegółowymi statystykami}
-    \inputdata{System z przynajmniej 1 dostępnym urządzeniem, użytkownik systemu z dowolną przypisaną rolą}
-    \preconditions{Użytkownik jest zalogowany do systemu, w zakładce „Labs” widzi przynajmniej 1 laboratorium z przypisanym przynajmniej 1 urządzeniem, który może kliknąć}
-    \postconditions{Użytkownik jest w stanie przenieść się na widok ze szczegółami urządzenia po kliknięciu kafelka z nazwą urządzenia}
+    \inputdata{System z przynajmniej 1 dostępnym urządzeniem, \gls{użytkownik} systemu z dowolną przypisaną rolą}
+    \preconditions{\gls{użytkownik} jest zalogowany do systemu, w zakładce „Labs” widzi przynajmniej 1 \gls{laboratorium} z przypisanym przynajmniej 1 urządzeniem, który może kliknąć}
+    \postconditions{\gls{użytkownik} jest w stanie przenieść się na widok ze szczegółami urządzenia po kliknięciu kafelka z nazwą urządzenia}
     \exceptions{Brak dostępnych urządzeń w systemie}
     \implementation{Po kliknięciu na obiekt maszyny, aktywowanie okna urządzenia ze statystykami}
     \sholder{Zespół projektowy}
@@ -129,11 +129,11 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
     \id{LAB-F-03}
     \priority{C}
     \name{System powinien pozwolić na wykonywanie zdalnych akcji np. Reboot, ping}
-    \descr{Jak użytkownik systemu chcę mieć dostęp do wykonywania zdalnych komend na maszynie z poziomu widoku maszyny}
-    \acceptcrit{System posiada możliwość wykonania zdalnej komendy z poziomu interfejsu użytkownika}
-    \inputdata{System z przynajmniej 1 dostępnym urządzeniem, użytkownik systemu z dowolną przypisaną rolą}
-    \preconditions{Użytkownik jest zalogowany do systemu, na ekranie szczegółów urządzenia widoczny jest panel do wpisania zdalnej komendy}
-    \postconditions{Użytkownik jest w stanie wysłać komendę zdalnie na urządzenie z poziomu systemu}
+    \descr{Jak \gls{użytkownik} systemu chcę mieć dostęp do wykonywania zdalnych komend na maszynie z poziomu widoku maszyny}
+    \acceptcrit{System posiada możliwość wykonania zdalnej komendy z poziomu interfejsu \gls{użytkownik}a}
+    \inputdata{System z przynajmniej 1 dostępnym urządzeniem, \gls{użytkownik} systemu z dowolną przypisaną rolą}
+    \preconditions{\gls{użytkownik} jest zalogowany do systemu, na ekranie szczegółów urządzenia widoczny jest panel do wpisania zdalnej komendy}
+    \postconditions{\gls{użytkownik} jest w stanie wysłać komendę zdalnie na urządzenie z poziomu systemu}
     \exceptions{Wybrane urządzenie nie jest podłączone do sieci}
     \implementation{Na ekranie szczegółów urządzenia dodanie sekcji do wysyłania zdalnego polecenia.}
     \sholder{Zespół projektowy}
@@ -144,14 +144,14 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-F-05}
     \priority{M}
-    \name{System musi zezwolić na przypisywanie platform do konkretnych racków i półek}
-    \descr{Jako użytkownik chcę mieć możliwość przypisania platformy do wybranej przeze mnie półki w celu skutecznego wyszukiwania urządzeń znajdujących się na tej samej półce lub racku.}
-    \acceptcrit{System posiada możliwość przypisania platformy do jednego z racków lub półek.}
-    \inputdata{System z przynajmniej 1 dostępnym urządzeniem, labem oraz półką lub rackiem, użytkownik systemu z dowolną przypisaną rolą z przynajmniej 1 przypisaną do niego lub jego grupy maszyną}
-    \preconditions{Użytkownik jest zalogowany do systemu, na ekranie szczegółów urządzenia widoczny jest aktualnie przypisany Rack lub półka}
-    \postconditions{Użytkownik jest w stanie zmienić przypisanie urządzenia do innego recku lub półki}
-    \exceptions{Brak innych racków lub półek w systemie}
-    \implementation{Na ekranie szczegółów urządzenia dodanie sekcji z przypisanym rackiem lub półką}
+    \name{System musi zezwolić na przypisywanie platform do konkretnych \gls{rack}ów i półek}
+    \descr{Jako \gls{użytkownik} chcę mieć możliwość przypisania platformy do wybranej przeze mnie półki w celu skutecznego wyszukiwania urządzeń znajdujących się na tej samej półce lub \gls{rack}u.}
+    \acceptcrit{System posiada możliwość przypisania platformy do jednego z \gls{rack}ów lub półek.}
+    \inputdata{System z przynajmniej 1 dostępnym urządzeniem, labem oraz półką lub \gls{rack}iem, \gls{użytkownik} systemu z dowolną przypisaną rolą z przynajmniej 1 przypisaną do niego lub jego grupy maszyną}
+    \preconditions{\gls{użytkownik} jest zalogowany do systemu, na ekranie szczegółów urządzenia widoczny jest aktualnie przypisany \gls{rack} lub półka}
+    \postconditions{\gls{użytkownik} jest w stanie zmienić przypisanie urządzenia do innego recku lub półki}
+    \exceptions{Brak innych \gls{rack}ów lub półek w systemie}
+    \implementation{Na ekranie szczegółów urządzenia dodanie sekcji z przypisanym \gls{rack}iem lub półką}
     \sholder{Zespół projektowy}
     \reqrelated{LAB-F-02, LAB-F-03, LAB-F-10, LAB-F-11, LAB-F-15}
 \end{requirementstab}
@@ -161,9 +161,9 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
     \id{LAB-F-10}
     \priority{W}
     \name{System powinien posiadać odnośnik do informacji o danym sprzęcie/ layout'u PCB}
-    \descr{Jako użytkownik chcę mieć możliwość przejść do karty produktu ze szczegółami technicznymi lub dotyczącymi PCB z poziomu systemu}
+    \descr{Jako \gls{użytkownik} chcę mieć możliwość przejść do karty produktu ze szczegółami technicznymi lub dotyczącymi PCB z poziomu systemu}
     \acceptcrit{System posiada odnośnik do strony z dokumentacją techniczną sprzętu}
-    \inputdata{System z przynajmniej 1 dostępnym urządzeniem, użytkownik systemu z dowolną przypisaną rolą}
+    \inputdata{System z przynajmniej 1 dostępnym urządzeniem, \gls{użytkownik} systemu z dowolną przypisaną rolą}
     \preconditions{Brak, wymaganie odrzucone}
     \postconditions{Brak, wymaganie odrzucone}
     \exceptions{Brak, wymaganie odrzucone}
@@ -177,12 +177,12 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
     \id{LAB-F-11}
     \priority{M}
     \name{Dane w widoku urządzenia}
-    \descr{Jako użytkownik systemu, chcę mieć dostęp do następujących danych na poziomie widoku urządzenia: Lokalizacja, Nazwa Hosta, Adres IP oraz MAC, Status w sieci, Port w PDU, Tag (przypisany zespół / przeznaczony zespół), System Operacyjny, Informacje o sprzęcie (CPU, Dysk, RAM), Numer Seryjny}
+    \descr{Jako \gls{użytkownik} systemu, chcę mieć dostęp do następujących danych na poziomie widoku urządzenia: Lokalizacja, Nazwa Hosta, Adres IP oraz MAC, Status w sieci, Port w \gls{PDU}, Tag (przypisany zespół / przeznaczony zespół), System Operacyjny, Informacje o sprzęcie (CPU, Dysk, RAM), Numer Seryjny}
     \acceptcrit{Wszystkie pola zawarte w wymaganiu są dostępne w systemie w widoku urządzenia}
-    \inputdata{System z przynajmniej 1 dostępnym urządzeniem, użytkownik systemu z dowolną przypisaną rolą z przynajmniej 1 przypisaną do niego lub jego grupy maszyną}
-    \preconditions{Użytkownik jest zalogowany do systemu, na ekranie szczegółów urządzenia}
-    \postconditions{Użytkownik jest w stanie zobaczyć wszystkie dane lub miejsce na ich umieszczenie w systemie na poziomie widoku urządzenia}
-    \exceptions{Brak dostępnych lub przypisanych do użytkownika urządzeń w systemie}
+    \inputdata{System z przynajmniej 1 dostępnym urządzeniem, \gls{użytkownik} systemu z dowolną przypisaną rolą z przynajmniej 1 przypisaną do niego lub jego grupy maszyną}
+    \preconditions{\gls{użytkownik} jest zalogowany do systemu, na ekranie szczegółów urządzenia}
+    \postconditions{\gls{użytkownik} jest w stanie zobaczyć wszystkie dane lub miejsce na ich umieszczenie w systemie na poziomie widoku urządzenia}
+    \exceptions{Brak dostępnych lub przypisanych do \gls{użytkownik}a urządzeń w systemie}
     \implementation{Na ekranie szczegółów urządzenia dodać pola wypisane w wymaganiu.}
     \sholder{Zespół projektowy}
     \reqrelated{LAB-F-02, LAB-F-03, LAB-F-05, LAB-F-10, LAB-F-15}
@@ -193,11 +193,11 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
     \id{LAB-F-15}
     \priority{M}
     \name{System musi posiadać widok urządzenia}
-    \descr{Jako użytkownik systemu chcę mieć dostęp do szczegółów urządzenia z poziomu systemu}
+    \descr{Jako \gls{użytkownik} systemu chcę mieć dostęp do szczegółów urządzenia z poziomu systemu}
     \acceptcrit{Zaimplementowany panel szczegółów urządzenia}
-    \inputdata{System z przynajmniej 1 dostępnym urządzeniem, użytkownik systemu z dowolną przypisaną rolą z przynajmniej 1 przypisaną do niego lub jego grupy maszyną}
-    \preconditions{Użytkownik jest zalogowany do systemu}
-    \postconditions{Użytkownik jest w stanie przejść do widoku ze szczegółami urządzenia z poziomu systemu}
+    \inputdata{System z przynajmniej 1 dostępnym urządzeniem, \gls{użytkownik} systemu z dowolną przypisaną rolą z przynajmniej 1 przypisaną do niego lub jego grupy maszyną}
+    \preconditions{\gls{użytkownik} jest zalogowany do systemu}
+    \postconditions{\gls{użytkownik} jest w stanie przejść do widoku ze szczegółami urządzenia z poziomu systemu}
     \exceptions{Brak dostępnych urządzeń w systemie}
     \implementation{Dodanie widoku urządzenia po kliknięciu w kafelek z nazwą urządzenia z poziomu mapy przestrzennej lub paska wyszukiwania}
     \sholder{Zespół projektowy}
@@ -211,11 +211,11 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
     \id{LAB-F-04}
     \priority{S}
     \name{System powinien posiadać inwentarz materiałów eksploatacyjnych}
-    \descr{Jako użytkownik systemu chcę mieć dostęp do inwentarza materiałów eksploatacyjnych aby szybko i efektywnie wyszukiwać niezbędne do mojej pracy narzędzia i kontrolować ich ilość}
+    \descr{Jako \gls{użytkownik} systemu chcę mieć dostęp do inwentarza materiałów eksploatacyjnych aby szybko i efektywnie wyszukiwać niezbędne do mojej pracy narzędzia i kontrolować ich ilość}
     \acceptcrit{Zakładka „Inventory” zaimplementowana w systemie}
-    \inputdata{Użytkownik systemu z dowolną przypisaną rolą}
-    \preconditions{Użytkownik jest zalogowany do systemu}
-    \postconditions{Użytkownik widzi w pasku bocznym zakładkę „Inventory”, po której kliknięciu przenoszony jest na ekran inwentarza}
+    \inputdata{\gls{użytkownik} systemu z dowolną przypisaną rolą}
+    \preconditions{\gls{użytkownik} jest zalogowany do systemu}
+    \postconditions{\gls{użytkownik} widzi w pasku bocznym zakładkę „Inventory”, po której kliknięciu przenoszony jest na ekran inwentarza}
     \exceptions{Brak paska bocznego}
     \implementation{Dodanie zakładki „Inventory” w paski bocznym}
     \sholder{Zespół projektowy}
@@ -227,12 +227,12 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
     \id{LAB-F-12}
     \priority{M}
     \name{Informacje w inwentarzu technicznym}
-    \descr{Jako użytkownik systemu, chcę mieć dostęp do następujących danych na poziomie inwentarza technicznego: Nazwa i nr seryjny, Dostępność, przypisanie do konkretnych maszyn, przypisanie do konkretnych zespołów, typ urządzenia/kategorie, Historia wypożyczeń, lokalizacja}
+    \descr{Jako \gls{użytkownik} systemu, chcę mieć dostęp do następujących danych na poziomie inwentarza technicznego: Nazwa i nr seryjny, Dostępność, przypisanie do konkretnych maszyn, przypisanie do konkretnych zespołów, typ urządzenia/kategorie, Historia wypożyczeń, lokalizacja}
     \acceptcrit{Wszystkie pola zawarte w wymaganiu są dostępne w systemie w inwentarzu technicznym}
-    \inputdata{Użytkownik systemu z dowolną przypisaną rolą, przynajmniej 1 element w inwentarzu przypisany do użytkownika lub jego grupy}
-    \preconditions{Użytkownik zalogowany do systemu na zakładce „Inventory”}
-    \postconditions{Użytkownik jest w stanie zobaczyć wszystkie dane lub miejsce na ich umieszczenie w systemie na poziomie inwentarzu}
-    \exceptions{Brak przypisanych elementów do użytkownika w inwentarzu}
+    \inputdata{\gls{użytkownik} systemu z dowolną przypisaną rolą, przynajmniej 1 element w inwentarzu przypisany do \gls{użytkownik}a lub jego grupy}
+    \preconditions{\gls{użytkownik} zalogowany do systemu na zakładce „Inventory”}
+    \postconditions{\gls{użytkownik} jest w stanie zobaczyć wszystkie dane lub miejsce na ich umieszczenie w systemie na poziomie inwentarzu}
+    \exceptions{Brak przypisanych elementów do \gls{użytkownik}a w inwentarzu}
     \implementation{Do każdego elementu inwentarzu dodać pola wypisane w wymaganiu.}
     \sholder{Zespół projektowy}
     \reqrelated{LAB-F-04}
@@ -244,13 +244,13 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-F-06}
     \priority{S}
-    \name{System powinien posiadać panel z podsumowaniem informacji o sprzęcie przypisanym do użytkownika}
-    \descr{Jako użytkownik systemu chcę mieć dostęp do panelu z podsumowaniem elementów przypisanych do mnie, co pozwoli skrócić czas wyszukiwania go}
+    \name{System powinien posiadać panel z podsumowaniem informacji o sprzęcie przypisanym do \gls{użytkownik}a}
+    \descr{Jako \gls{użytkownik} systemu chcę mieć dostęp do panelu z podsumowaniem elementów przypisanych do mnie, co pozwoli skrócić czas wyszukiwania go}
     \acceptcrit{Zakładka „Dashboard” widoczna z poziomu systemu na pasku bocznym}
-    \inputdata{Użytkownik systemu z dowolną przypisaną rolą}
-    \preconditions{Użytkownik zalogowany do systemu}
-    \postconditions{Użytkownik widzi zakładkę „Dashboard” na pasku bocznym, po której kliknięciu przenoszony jest na ekran z podsumowaniem}
-    \exceptions{Użytkownik nie ma przypisanego żadnego elementu}
+    \inputdata{\gls{użytkownik} systemu z dowolną przypisaną rolą}
+    \preconditions{\gls{użytkownik} zalogowany do systemu}
+    \postconditions{\gls{użytkownik} widzi zakładkę „Dashboard” na pasku bocznym, po której kliknięciu przenoszony jest na ekran z podsumowaniem}
+    \exceptions{\gls{użytkownik} nie ma przypisanego żadnego elementu}
     \implementation{Dodanie zakładki „Dashboard” na pasku bocznym}
     \sholder{Zespół projektowy}
     \reqrelated{Brak}
@@ -263,11 +263,11 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
     \id{LAB-F-07}
     \priority{M}
     \name{System musi posiadać wyszukiwarkę sprzętu}
-    \descr{Jak użytkownik systemu chcę mieć dostęp do paska wyszukiwania by przyśpieszyć identyfikowanie sprzętu}
+    \descr{Jak \gls{użytkownik} systemu chcę mieć dostęp do paska wyszukiwania by przyśpieszyć identyfikowanie sprzętu}
     \acceptcrit{Pasek wyszukiwania zaimplementowany w systemie i dodany do paska bocznego}
-    \inputdata{Użytkownik systemu z dowolną przypisaną rolą}
-    \preconditions{Użytkownik zalogowany do systemu}
-    \postconditions{Użytkownik widzi pasek wyszukiwania na pasku bocznym, w którym jest w stanie wpisać wyszukiwaną frazę}
+    \inputdata{\gls{użytkownik} systemu z dowolną przypisaną rolą}
+    \preconditions{\gls{użytkownik} zalogowany do systemu}
+    \postconditions{\gls{użytkownik} widzi pasek wyszukiwania na pasku bocznym, w którym jest w stanie wpisać wyszukiwaną frazę}
     \exceptions{Brak}
     \implementation{Dodanie paska wyszukiwania na pasku bocznym}
     \sholder{Zespół projektowy}
@@ -281,11 +281,11 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
     \id{LAB-F-08}
     \priority{M}
     \name{System musi posiadać historię zmian sprzętu}
-    \descr{Jako użytkownik chcę śledzić zmiany sprzętu by efektywnie identyfikować modyfikacje w jego konfiguracji}
+    \descr{Jako \gls{użytkownik} chcę śledzić zmiany sprzętu by efektywnie identyfikować modyfikacje w jego konfiguracji}
     \acceptcrit{Mechanizm zapisywania historii akcji zaimplementowany w systemie}
-    \inputdata{Użytkownik systemu z dowolną przypisaną rolą i przynajmniej 1 przypisanym elementem do niego lub jego grupy}
-    \preconditions{Użytkownik zalogowany do systemu na ekranie wybranego elementu}
-    \postconditions{Użytkownik wykonuje zmianę, która jest wykryta przez system}
+    \inputdata{\gls{użytkownik} systemu z dowolną przypisaną rolą i przynajmniej 1 przypisanym elementem do niego lub jego grupy}
+    \preconditions{\gls{użytkownik} zalogowany do systemu na ekranie wybranego elementu}
+    \postconditions{\gls{użytkownik} wykonuje zmianę, która jest wykryta przez system}
     \exceptions{Brak}
     \implementation{Dodanie mechanizmu zapisywania wykonywanych akcji w systemie}
     \sholder{Zespół projektowy}
@@ -296,11 +296,11 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-F-16}
     \priority{C}
-    \name{System powinien rejestrować działania użytkowników i zapisywać je do pliku}
-    \descr{Jako użytkownik systemu chcę by zmiany wykonywane w systemie zapisywane były w pliku by zapewnić trwałość danych w kopiach zapasowych systemu}
+    \name{System powinien rejestrować działania \gls{użytkownik}ów i zapisywać je do pliku}
+    \descr{Jako \gls{użytkownik} systemu chcę by zmiany wykonywane w systemie zapisywane były w pliku by zapewnić trwałość danych w kopiach zapasowych systemu}
     \acceptcrit{Zmiany logowane przez system zapisywane są do pliku}
-    \inputdata{Użytkownik systemu z dowolną przypisaną rolą i przynajmniej 1 przypisanym elementem do niego lub jego grupy}
-    \preconditions{Użytkownik zalogowany do systemu na ekranie wybranego elementu jest w stanie wykonać modyfikację}
+    \inputdata{\gls{użytkownik} systemu z dowolną przypisaną rolą i przynajmniej 1 przypisanym elementem do niego lub jego grupy}
+    \preconditions{\gls{użytkownik} zalogowany do systemu na ekranie wybranego elementu jest w stanie wykonać modyfikację}
     \postconditions{Zmiana wykryta przez system, zapisana do pliku}
     \exceptions{Brak miejsca na przestrzeni dyskowej, na której system domyślnie operuje}
     \implementation{Dodanie funkcjonalności zapisu historii do pliku}
@@ -313,11 +313,11 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
     \id{LAB-F-21}
     \priority{C}
     \name{Wersjonowanie historii}
-    \descr{Jako użytkownik systemu chcę mieć możliwość wersjonowania historii zmian żeby w prosty sposób sprawdzić stan przed modyfikacją}
+    \descr{Jako \gls{użytkownik} systemu chcę mieć możliwość wersjonowania historii zmian żeby w prosty sposób sprawdzić stan przed modyfikacją}
     \acceptcrit{Funkcjonalność wersjonowania historii zaimplementowana w systemie z możliwością wyboru wersji}
-    \inputdata{Użytkownik systemu z dowolną przypisaną rolą i przynajmniej 1 przypisanym elementem do niego lub jego grupy, na którym wykonane zostały modyfikacje}
-    \preconditions{Użytkownik z poziomu widoku wybranego elementu widzi pasek wyboru z opisem wersji}
-    \postconditions{Użytkownik jest w stanie wybrać wcześniejszą wersję widoku z przed zmian}
+    \inputdata{\gls{użytkownik} systemu z dowolną przypisaną rolą i przynajmniej 1 przypisanym elementem do niego lub jego grupy, na którym wykonane zostały modyfikacje}
+    \preconditions{\gls{użytkownik} z poziomu widoku wybranego elementu widzi pasek wyboru z opisem wersji}
+    \postconditions{\gls{użytkownik} jest w stanie wybrać wcześniejszą wersję widoku z przed zmian}
     \exceptions{Brak zapisanych zmian w elemencie}
     \implementation{Dodanie funkcjonalności wersjonowania historii }
     \sholder{Zespół projektowy}
@@ -330,12 +330,12 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-F-09}
     \priority{M}
-    \name{System musi posiadać panel zarządzania użytkownikami}
-    \descr{Jako użytkownik z uprawnieniami administratora systemu chcę mieć dostęp do panelu, z poziomu którego będę w stanie zarządzać użytkownikami systemu}
+    \name{System musi posiadać panel zarządzania \gls{użytkownik}ami}
+    \descr{Jako \gls{użytkownik} z uprawnieniami administratora systemu chcę mieć dostęp do panelu, z poziomu którego będę w stanie zarządzać \gls{użytkownik}ami systemu}
     \acceptcrit{Zakładka „Users” zaimplementowana w systemie}
-    \inputdata{Użytkownik systemu z przypisaną rolą administratora, dodatkowy użytkownik w systemie z dowolną rolą}
-    \preconditions{Użytkownik z rolą administratora zalogowany do systemu}
-    \postconditions{Użytkownik z rolą administratora widzi zakładkę „Users” na pasku bocznym systemu}
+    \inputdata{\gls{użytkownik} systemu z przypisaną rolą administratora, dodatkowy \gls{użytkownik} w systemie z dowolną rolą}
+    \preconditions{\gls{użytkownik} z rolą administratora zalogowany do systemu}
+    \postconditions{\gls{użytkownik} z rolą administratora widzi zakładkę „Users” na pasku bocznym systemu}
     \exceptions{Brak}
     \implementation{Dodanie i implementacja zakładki „Users” w systemie}
     \sholder{Zespół projektowy}
@@ -346,14 +346,14 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-F-17}
     \priority{M}
-    \name{System powinien rozróżniać 2 role użytkowników: administrator, użytkownik}
-    \descr{Jako użytkownik systemu chcę aby posiadał on kontrolę dostępu w postaci ról użytkowników: administrator oraz użytkownik}
-    \acceptcrit{System posiadający role użytkowników opisane w wymaganiu}
+    \name{System powinien rozróżniać 2 role \gls{użytkownik}ów: administrator, \gls{użytkownik}}
+    \descr{Jako \gls{użytkownik} systemu chcę aby posiadał on kontrolę dostępu w postaci ról \gls{użytkownik}ów: administrator oraz \gls{użytkownik}}
+    \acceptcrit{System posiadający role \gls{użytkownik}ów opisane w wymaganiu}
     \inputdata{Brak}
-    \preconditions{System posiadający funkcjonalność autoryzacji użytkowników}
-    \postconditions{Możliwość wyboru roli pomiędzy: administrator i użytkownik}
+    \preconditions{System posiadający funkcjonalność autoryzacji \gls{użytkownik}ów}
+    \postconditions{Możliwość wyboru roli pomiędzy: administrator i \gls{użytkownik}}
     \exceptions{Brak}
-    \implementation{Dodanie pola „role” w bazie danych użytkowników}
+    \implementation{Dodanie pola „role” w bazie danych \gls{użytkownik}ów}
     \sholder{Zespół projektowy}
     \reqrelated{LAB-F-09}
 \end{requirementstab}
@@ -364,14 +364,14 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-F-18}
     \priority{M}
-    \name{System musi zezwalać na przypisywanie użytkowników do istniejących grup}
-    \descr{Jako użytkownik systemu z uprawnieniami administratora chcę mieć możliwość przypisania użytkowników do grup co pozwoli efektywniej zarządzać zespołami w organizacji}
-    \acceptcrit{Funkcjonalność przypisywania użytkownika zaimplementowana w systemie}
+    \name{System musi zezwalać na przypisywanie \gls{użytkownik}ów do istniejących grup}
+    \descr{Jako \gls{użytkownik} systemu z uprawnieniami administratora chcę mieć możliwość przypisania \gls{użytkownik}ów do grup co pozwoli efektywniej zarządzać zespołami w organizacji}
+    \acceptcrit{Funkcjonalność przypisywania \gls{użytkownik}a zaimplementowana w systemie}
     \inputdata{System z funkcjonalną bazą danych}
-    \preconditions{System z przynajmniej 1 użytkownikiem w systemie}
-    \postconditions{Możliwość przypisania użytkownika do grupy}
+    \preconditions{System z przynajmniej 1 \gls{użytkownik}iem w systemie}
+    \postconditions{Możliwość przypisania \gls{użytkownik}a do grupy}
     \exceptions{Brak}
-    \implementation{Dodanie pola „group” w bazie danych użytkowników}
+    \implementation{Dodanie pola „group” w bazie danych \gls{użytkownik}ów}
     \sholder{Zespół projektowy}
     \reqrelated{LAB-F-19}
 \end{requirementstab}
@@ -380,12 +380,12 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-F-19}
     \priority{M}
-    \name{System musi zezwalać na tworzenie grup użytkowników}
-    \descr{Jako użytkownik z uprawnieniami administratora chcę mieć możliwość tworzenia grup użytkowników z poziomu systemu}
+    \name{System musi zezwalać na tworzenie grup \gls{użytkownik}ów}
+    \descr{Jako \gls{użytkownik} z uprawnieniami administratora chcę mieć możliwość tworzenia grup \gls{użytkownik}ów z poziomu systemu}
     \acceptcrit{Zakładka „Groups” zaimplementowana w systemie}
-    \inputdata{Użytkownik systemu z przypisaną rolą administratora}
-    \preconditions{Użytkownik zalogowany do systemu}
-    \postconditions{Użytkownik widzi zakładkę „Groups” na pasku bocznym, po której kliknięciu przeniesiony zostaje na widok grup użytkowników, widoczny jest przycisk „Add Group”, po kliknięciu w który wyświetla się formularz tworzenia grupy}
+    \inputdata{\gls{użytkownik} systemu z przypisaną rolą administratora}
+    \preconditions{\gls{użytkownik} zalogowany do systemu}
+    \postconditions{\gls{użytkownik} widzi zakładkę „Groups” na pasku bocznym, po której kliknięciu przeniesiony zostaje na widok grup \gls{użytkownik}ów, widoczny jest przycisk „Add Group”, po kliknięciu w który wyświetla się formularz tworzenia grupy}
     \exceptions{Brak}
     \implementation{Dodanie zakładki „Groups” na pasku bocznym, implementacja formularza dodania grupy}
     \sholder{Zespół projektowy}
@@ -398,14 +398,14 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-F-20}
     \priority{M}
-    \name{System musi zezwalać na tworzenie nowych użytkowników}
-    \descr{Jako użytkownik systemu z rolą administratora chcę mieć możliwość tworzenia nowych użytkowników}
-    \acceptcrit{Funkcjonalność tworzenia użytkowników i zakładka „Admin” dostępna w systemie}
-    \inputdata{Użytkownik z rolą administratora}
-    \preconditions{Użytkownik zalogowany do systemu widzi zakładkę „Admin” na pasku bocznym}
-    \postconditions{Po kliknięciu w zakładkę „Admin” użytkownik przeniesiony jest do panelu, w którym ma możliwość utworzenia nowego użytkownika}
+    \name{System musi zezwalać na tworzenie nowych \gls{użytkownik}ów}
+    \descr{Jako \gls{użytkownik} systemu z rolą administratora chcę mieć możliwość tworzenia nowych \gls{użytkownik}ów}
+    \acceptcrit{Funkcjonalność tworzenia \gls{użytkownik}ów i zakładka „Admin” dostępna w systemie}
+    \inputdata{\gls{użytkownik} z rolą administratora}
+    \preconditions{\gls{użytkownik} zalogowany do systemu widzi zakładkę „Admin” na pasku bocznym}
+    \postconditions{Po kliknięciu w zakładkę „Admin” \gls{użytkownik} przeniesiony jest do panelu, w którym ma możliwość utworzenia nowego \gls{użytkownik}a}
     \exceptions{Brak}
-    \implementation{Dodanie zakładki „Admin” i implementacja logiki tworzenia nowego użytkownika}
+    \implementation{Dodanie zakładki „Admin” i implementacja logiki tworzenia nowego \gls{użytkownik}a}
     \sholder{Zespół projektowy}
     \reqrelated{Brak}
 \end{requirementstab}
@@ -416,12 +416,12 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-F-13}
     \priority{C}
-    \name{System powinien pozwalać użytkownikom na wybór między zastąpieniem i utworzeniem kopii danych importowanych z zewnętrznych źródeł}
-    \descr{Jak użytkownik systemu chcę mieć możliwość importu i eksportu danych z systemu do/z pliku}
+    \name{System powinien pozwalać \gls{użytkownik}om na wybór między zastąpieniem i utworzeniem kopii danych importowanych z zewnętrznych źródeł}
+    \descr{Jak \gls{użytkownik} systemu chcę mieć możliwość importu i eksportu danych z systemu do/z pliku}
     \acceptcrit{System posiada funkcjonalny mechanizm importu i eksportu danych}
-    \inputdata{Użytkownik systemu z rolą administratora}
-    \preconditions{Użytkownik zalogowany do systemu, widzi zakładkę „Import \& Export” na pasku bocznym}
-    \postconditions{Po kliknięciu w zakładkę „Import \& Export” użytkownik przenoszony jest do formularza z możliwością importu i exportu danych}
+    \inputdata{\gls{użytkownik} systemu z rolą administratora}
+    \preconditions{\gls{użytkownik} zalogowany do systemu, widzi zakładkę „Import \& Export” na pasku bocznym}
+    \postconditions{Po kliknięciu w zakładkę „Import \& Export” \gls{użytkownik} przenoszony jest do formularza z możliwością importu i exportu danych}
     \exceptions{Brak miejsca na dysku, plik w niewłaściwym formacie}
     \implementation{Dodanie zakładki „Import \& Export” do paska bocznego, implementacja logiki exportu i importu danych}
     \sholder{Zespół projektowy}
@@ -439,11 +439,11 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
     \id{LAB-I-01}
     \priority{M}
     \name{System musi zezwalać na import i eksport danych z arkuszy kalkulacyjnych}
-    \descr{Jako użytkownik systemu chcę mieć możliwość importu i eksportu danych do/z plików arkuszy kalkulacyjnych}
+    \descr{Jako \gls{użytkownik} systemu chcę mieć możliwość importu i eksportu danych do/z plików arkuszy kalkulacyjnych}
     \acceptcrit{Zaimplementowana logika importu z arkuszy kalkulacyjnych}
-    \inputdata{Użytkownik systemu z rolą administratora, zaimplementowana zakładka „Import \& Export”}
-    \preconditions{Użytkownik zalogowany do systemu na ekranie formularza służącego do importu i exportu danych}
-    \postconditions{Użytkownik jest w stanie importować oraz eksportować dane do arkusza kalkulacyjnego}
+    \inputdata{\gls{użytkownik} systemu z rolą administratora, zaimplementowana zakładka „Import \& Export”}
+    \preconditions{\gls{użytkownik} zalogowany do systemu na ekranie formularza służącego do importu i exportu danych}
+    \postconditions{\gls{użytkownik} jest w stanie importować oraz eksportować dane do arkusza kalkulacyjnego}
     \exceptions{Brak}
     \implementation{Implementacja logiki importu i eksportu do arkuszy kalkulacyjnych}
     \sholder{Zespół projektowy}
@@ -454,14 +454,14 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-I-02}
     \priority{C}
-    \name{System powinien zezwalać na integrację z systemami PDU}
-    \descr{Jako użytkownik systemu chcę mieć dostęp do systemów PDU z poziomu systemu }
-    \acceptcrit{Zaimplementowana obsługa systemów PDU}
-    \inputdata{Użytkownik systemu z dowolną rolą, przynajmniej 1 urządzenie w systemie fizycznie podłączone do PDU}
-    \preconditions{Użytkownik zalogowany do systemu, na ekranie szczegółów urządzenia widzi panel związany z systemem PDU}
-    \postconditions{Użytkownik jest w stanie wykonywać akcję na systemie PDU korzystając z widoku szczegółów urządzenia}
+    \name{System powinien zezwalać na integrację z systemami \gls{PDU}}
+    \descr{Jako \gls{użytkownik} systemu chcę mieć dostęp do systemów \gls{PDU} z poziomu systemu }
+    \acceptcrit{Zaimplementowana obsługa systemów \gls{PDU}}
+    \inputdata{\gls{użytkownik} systemu z dowolną rolą, przynajmniej 1 urządzenie w systemie fizycznie podłączone do \gls{PDU}}
+    \preconditions{\gls{użytkownik} zalogowany do systemu, na ekranie szczegółów urządzenia widzi panel związany z systemem \gls{PDU}}
+    \postconditions{\gls{użytkownik} jest w stanie wykonywać akcję na systemie \gls{PDU} korzystając z widoku szczegółów urządzenia}
     \exceptions{Brak}
-    \implementation{Implementacja integracji z systemami PDU na poziomie szczegółów urządzenia}
+    \implementation{Implementacja integracji z systemami \gls{PDU} na poziomie szczegółów urządzenia}
     \sholder{Zespół projektowy}
     \reqrelated{Brak}
 \end{requirementstab}
@@ -470,14 +470,14 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-I-03}
     \priority{M}
-    \name{System musi zezwalać na import danych z agentów systemu Prometheus}
-    \descr{Jako użytkownik systemu chcę widzieć dane z agentów systemu Prometheus na ekranie szczegółów urządzenia}
-    \acceptcrit{Zaimplementowana obsługa importu danych z agentów systemu Prometheus}
-    \inputdata{Użytkownik systemu z dowolną rolą, przynajmniej 1 urządzenie posiadające zainstalowany system Prometheus}
-    \preconditions{Użytkownik zalogowany do systemu, na poziomie widoku szczegółów urządzenia }
-    \postconditions{Użytkownik widzi dane zaimportowane z systemu Prometheus}
+    \name{System musi zezwalać na import danych z agentów systemu \gls{Prometheus}}
+    \descr{Jako \gls{użytkownik} systemu chcę widzieć dane z agentów systemu \gls{Prometheus} na ekranie szczegółów urządzenia}
+    \acceptcrit{Zaimplementowana obsługa importu danych z agentów systemu \gls{Prometheus}}
+    \inputdata{\gls{użytkownik} systemu z dowolną rolą, przynajmniej 1 urządzenie posiadające zainstalowany system \gls{Prometheus}}
+    \preconditions{\gls{użytkownik} zalogowany do systemu, na poziomie widoku szczegółów urządzenia }
+    \postconditions{\gls{użytkownik} widzi dane zaimportowane z systemu \gls{Prometheus}}
     \exceptions{Brak}
-    \implementation{Implementacja importu danych do systemu z agentów systemu Prometheus}
+    \implementation{Implementacja importu danych do systemu z agentów systemu \gls{Prometheus}}
     \sholder{Zespół projektowy}
     \reqrelated{Brak}
 \end{requirementstab}
@@ -486,14 +486,14 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-I-04}
     \priority{M}
-    \name{System musi zezwalać na import danych z Ansible}
-    \descr{Jako użytkownik chcę mieć dostęp do danych z Ansible}
-    \acceptcrit{Zaimplementowana logika importu danych z Ansible}
-    \inputdata{Przynajmniej 1 urządzenie dostępne w sieci lokalnej i w systemie Labbyn}
-    \preconditions{Wysłanie żądania używając API Ansible}
-    \postconditions{Żądanie przetworzone poprawnie, akcje zapisane w playbook’u Ansible wykonane pomyślnie, dane zaimportowane do systemu}
+    \name{System musi zezwalać na import danych z \gls{Ansible}}
+    \descr{Jako \gls{użytkownik} chcę mieć dostęp do danych z \gls{Ansible}}
+    \acceptcrit{Zaimplementowana logika importu danych z \gls{Ansible}}
+    \inputdata{Przynajmniej 1 urządzenie dostępne w sieci lokalnej i w systemie \gls{Labbyn}}
+    \preconditions{Wysłanie żądania używając API \gls{Ansible}}
+    \postconditions{Żądanie przetworzone poprawnie, akcje zapisane w \gls{Playbook}’u \gls{Ansible} wykonane pomyślnie, dane zaimportowane do systemu}
     \exceptions{Zerwanie połączenia sieci lokalnej}
-    \implementation{Zaimplementowanie obsługi przetwarzania żądań Ansible i importu danych do systemu}
+    \implementation{Zaimplementowanie obsługi przetwarzania żądań \gls{Ansible} i importu danych do systemu}
     \sholder{Zespół projektowy}
     \reqrelated{Brak}
 \end{requirementstab}
@@ -520,7 +520,7 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
     \id{LAB-NF-02}
     \priority{S}
     \name{Jednoczesne połączenia}
-    \descr{System powinien umożliwiać jednoczesne połączenie wielu użytkowników. Wartość maksymalna opisana jest w pliku konfiguracyjnym jako parametr "maxClientsNumber"}
+    \descr{System powinien umożliwiać jednoczesne połączenie wielu \gls{użytkownik}ów. Wartość maksymalna opisana jest w pliku konfiguracyjnym jako parametr "maxClientsNumber"}
     \acceptcrit{Implementacja systemu wielu połączeń do systemu jednocześnie}
     \sholder{Zespół projektowy}
     \reqrelated{Brak}
@@ -530,9 +530,9 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-NF-03}
     \priority{M}
-    \name{Autoryzacja użytkowników}
-    \descr{System musi autoryzować wykonywane w nim akcje na podstawie roli/uprawnień użytkownika}
-    \acceptcrit{Zaimplementowany mechanizm autoryzacji użytkowników}
+    \name{Autoryzacja \gls{użytkownik}ów}
+    \descr{System musi autoryzować wykonywane w nim akcje na podstawie roli/uprawnień \gls{użytkownik}a}
+    \acceptcrit{Zaimplementowany mechanizm autoryzacji \gls{użytkownik}ów}
     \sholder{Zespół projektowy}
     \reqrelated{Brak}
 \end{requirementstab}
@@ -563,7 +563,7 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-NF-06}
     \priority{S}
-    \name{Doświadczenia użytkownika}
+    \name{Doświadczenia \gls{użytkownik}a}
     \descr{System powinien zapewnić standardy i dobre praktyki UX}
     \acceptcrit{Implementacja systemu zgodnie z przyjętymi standardami UX}
     \sholder{Zespół projektowy}
@@ -574,8 +574,8 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-NF-07}
     \priority{M}
-    \name{Domyślny użytkownik}
-    \descr{System musi posiadać wbudowanego użytkownika serwis}
+    \name{Domyślny \gls{użytkownik}}
+    \descr{System musi posiadać wbudowanego \gls{użytkownik}a serwis}
     \acceptcrit{Implementacja autoryzacji pierwszego uruchomienia}
     \sholder{Zespół projektowy}
     \reqrelated{Brak}
@@ -585,8 +585,8 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-NF-08}
     \priority{M}
-    \name{Przechowywanie haseł użytkowników}
-    \descr{System musi przechowywać hasła użytkowników w formie zaszyfrowanej żeby zapewnić bezpieczeństwo danych}
+    \name{Przechowywanie haseł \gls{użytkownik}ów}
+    \descr{System musi przechowywać hasła \gls{użytkownik}ów w formie zaszyfrowanej żeby zapewnić bezpieczeństwo danych}
     \acceptcrit{Zaimplementowany mechanizm szyfrowania haseł po stronie systemu}
     \sholder{Zespół projektowy}
     \reqrelated{Brak}
@@ -615,7 +615,7 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
     \priority{S}
     \name{System operacyjny}
     \descr{System powinien działać i być kompatybilny z systemami Linux}
-    \acceptcrit{W pełni działający system Labbyn na systemach Linux}
+    \acceptcrit{W pełni działający system \gls{Labbyn} na systemach Linux}
     \sholder{Zespół projektowy}
     \reqrelated{Brak}
 \end{requirementstab}
