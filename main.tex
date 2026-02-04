@@ -1,22 +1,22 @@
 \documentclass{sprz}
 
+\input{glossary}
 \addbibresource{bibliography.bib}
-
 \studfield{Informatyka}
 \studtype{Zaoczne}
 \title{System do zarządzania infrastrukturą sprzętową}
 \engtitle{Hardware infrastructure management system}
-\acronym{Labbyn}
+\acronym{\gls{Labbyn}}
 \titledate{2025-10-26}
 \supervisor{mgr inż. Paweł Pisarski}
 \reviewer{BRAK}
 \author{Adrian Kopczyński}{s26990}{Cyberbezpieczeństwo}{Niestacjonarny}
+\author{Aleksander Stankowski}{s27549}{Cyberbezpieczeństwo}{Niestacjonarny}
 \author{Patryk Kośmider}{s26985}{Sztuczna Inteligencja}{Niestacjonarny}
 \author{Ziemowit Orlikowski}{s27081}{Sztuczna Inteligencja}{Niestacjonarny}
-\author{Aleksander Stankowski}{s27549}{Cyberbezpieczeństwo}{Niestacjonarny}
 \consultant{--- brak ---} % Koniecznie trzeba podać brak, albo wpisać konsultantów tak jak przy autorach
 \projectgoals{Stworzenie systemu zarządzania infrastrukturą sprzętową który umożliwia łatwy  dostęp do statystyk, lokalizacji i właściwości sprzętu}
-\productsandservices{W pełni funkcjonalny system zarządzania infrastrukturą sprzętową w laboratorium sprzętowym lub serwerowni}
+\productsandservices{W pełni funkcjonalny system zarządzania infrastrukturą sprzętową w \gls{laboratorium} sprzętowym lub serwerowni}
 \mainfunctionalities{}
 \successmeasure{Systematyczność pracy zespołu: Regularne cotygodniowe przeglądy postępów prac na spotkaniach zespołu,
 Implementacja wszystkich wymagań oznaczonych jako “must”,
@@ -27,10 +27,9 @@ Ograniczenia finansowe; Brak dostępu do płatnych/bardziej zaawansowanych narz�
 }
 \date{Lipiec, 2026}
 \finishdate{\today}
-\nabstract{To jest streszczenie niezwykle innowacyjnej pracy inżynierskiej w której przeplatają się elementy paplaniny z wygenerowanym tekstem pseudonaukowym rozpoznawanym jako dezinformacja.}
+\nabstract{Praca dotyczy systemu zarządzania infrastrukturą sprzętową przeznaczonego do zastosowania w serwerowniach oraz laboratoriach sprzętowych. W odpowiedzi na rosnącą złożoność środowisk sprzętowych przeprowadzono analizę dostępnych rozwiązań rynkowych oraz badanie ankietowe wśród potencjalnych \gls{użytkownik}ów systemu \par Celem pracy było zaprojektowanie i implementacja systemu wspomagającego zarządzanie zasobami sprzętowymi oraz przestrzenią, z uwzględnieniem integracji z narzędziami monitorującymi. Praca obejmuje wszystkie etapy cyklu życia oprogramowania - od fazy koncepcyjnej, poprzez analizę wymagań, projekt i implementację, aż po przygotowanie produktu końcowego. \par Rezultatem pracy jest funkcjonalny system umożliwiający ewidencję sprzętu, zarządzanie jego lokalizacją oraz integrację z systemem \gls{Prometheus}, który może stanowić podstawę do dalszego rozwoju i wdrożenia w środowisku produkcyjnym.\par}
 
-\keyword{komputer}
-
+\keyword{infrastruktura sprzętowa, \gls{laboratorium} sprzętowe, serwerownia, zasoby sprzętowe, narzędzia monitorujące, cykl życia oprogramowania, ewidencja sprzętu, integracja, środowisko produkcyjne}
 
 \begin{document}
 
@@ -51,5 +50,7 @@ Ograniczenia finansowe; Brak dostępu do płatnych/bardziej zaawansowanych narz�
 \printbibliography[title={Bibliografia}, heading=bibintoc]
 
 \makethesisattachments
+
+\printglossary[title=Słownik pojęć]
 
 \end{document}
