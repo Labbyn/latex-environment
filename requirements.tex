@@ -1,4 +1,5 @@
-\chapter{Wymagania na system}
+\chapter{Inżynieria wymagań}
+
 
 %----------------------------------------------------------------------------------------------------
 %---------------------------------------OGÓLNE-I-DZIEDZINOWE-----------------------------------------
@@ -346,12 +347,12 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-F-17}
     \priority{M}
-    \name{System powinien rozróżniać 2 role \gls{użytkownik}ów: administrator, \gls{użytkownik}}
-    \descr{Jako \gls{użytkownik} systemu chcę aby posiadał on kontrolę dostępu w postaci ról \gls{użytkownik}ów: administrator oraz \gls{użytkownik}}
+    \name{System powinien rozróżniać 3 role \gls{użytkownik}ów: administrator, administrator grupy, użytkownik}
+    \descr{Jako \gls{użytkownik} systemu chcę aby posiadał on kontrolę dostępu w postaci ról \gls{użytkownik}ów: administrator oraz użytkownik}
     \acceptcrit{System posiadający role \gls{użytkownik}ów opisane w wymaganiu}
     \inputdata{Brak}
     \preconditions{System posiadający funkcjonalność autoryzacji \gls{użytkownik}ów}
-    \postconditions{Możliwość wyboru roli pomiędzy: administrator i \gls{użytkownik}}
+    \postconditions{Możliwość wyboru roli pomiędzy: administrator, administrator grupy i użytkownik}
     \exceptions{Brak}
     \implementation{Dodanie pola „role” w bazie danych \gls{użytkownik}ów}
     \sholder{Zespół projektowy}

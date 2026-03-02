@@ -353,6 +353,7 @@ Płyta CD z następującą zawartością:
 	\end{itemize}
     \item {\em{\@authorattachment%
 praca pisemna}} -- katalog zawierający plik PDF z pracą inżynierską.
+    \item {Sprawozdanie z ankiety.docx} -- plik zawierający sprawozdanie z przeprowadzonego badania ankietowego.
 \end{itemize}
 
 \newpage

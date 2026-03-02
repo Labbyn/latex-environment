@@ -1,4 +1,4 @@
-FNAME = engineer
+FNAME = main
 TARGETS = $(FNAME).pdf
 
 all: $(TARGETS)
