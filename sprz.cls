@@ -236,9 +236,10 @@
                     \hline
                     \textbf{Nazwisko, imię} & \textbf{Nr albumu} \\ \hline
                     Adrian Kopczyński & s26990 \\ \hline
-                    Ziemowit Orlikowski & s27081 \\ \hline
-                    Patryk Kośmider & s26985 \\ \hline
                     Aleksander Stankowski & s27549 \\ \hline
+                    Patryk Kośmider & s26985 \\ \hline
+                    Ziemowit Orlikowski & s27081 \\ \hline
+                    
                 \end{tabular} \\\\
             \end{center}
 		\textbf{\\Streszczenie:}
