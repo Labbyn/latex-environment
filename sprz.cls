@@ -235,10 +235,10 @@
                 \begin{tabular}{|l|l|}
                     \hline
                     \textbf{Nazwisko, imię} & \textbf{Nr albumu} \\ \hline
-                    Adrian Kopczyński & s26990 \\ \hline
-                    Aleksander Stankowski & s27549 \\ \hline
-                    Patryk Kośmider & s26985 \\ \hline
-                    Ziemowit Orlikowski & s27081 \\ \hline
+                    Kopczyński, Adrian & s26990 \\ \hline
+                    Kośmider, Patryk & s26985 \\ \hline
+                    Orlikowski, Ziemowit & s27081 \\ \hline
+                    Stankowski, Aleksander & s27549 \\ \hline
                     
                 \end{tabular} \\\\
             \end{center}
