@@ -1,0 +1,205 @@
+\chapter{Analiza i planowanie}
+
+\section{Identyfikacja i eksploracja pomysłów}
+\par Celem etapu było wygenerowanie możliwie szerokiego zbioru pomysłów dotyczących funkcjonalności i architektury projektowanego systemu, bazując na doświadczeniu członków zespołu oraz wstępnych obserwacjach problemu. Zastosowano klasyczną technikę burzy mózgów gdzie każdy z członków zespołu projektowego był zarówno pomysłodawcą jak i oceniającym. Pełniła ona nie tylko funkcję generowania pomysłów, lecz także miała istotny wymiar integracyjny, zadziałała jako mechanizm inicjujący proces formowania zespołu: stworzyła bezpieczną przestrzeń wymiany opinii, zredukowała bariery komunikacyjne oraz umożliwiła członkom zespołu na wypracowanie wspólnego sposobu dyskusji nad rozwiązaniami. Pomysły rejestrowano w ustrukturyzowanej formie (lista funkcjonalności, możliwe komponenty systemu, scenariusze użycia). W wyniku sesji uzyskano wstępną koncepcję systemu, która była podstawą do dalszych działań.
+
+\section{Badanie ankietowe}
+\par W ramach udoskonalania konceptów oraz poszukiwania obszarów, które nie zostały w pełni pokryte przez dotychczasową analizę, przeprowadzone zostało badanie ankietowe. Grupą docelową ankiety były osoby mające styczność z laboratoriami sprzętowymi w swojej pracy. 
+
+\section{Sprawozdanie z ankiety}
+\subsection{Cel ankiety}
+\par Ankieta miała na celu rozpoznanie oraz doprecyzowanie wymagań dla systemu \gls{Labbyn}, służącego do zarządzania platformami w serwerowni oraz laboratorium. Celem badania było zebranie opinii wśród użytkowników końcowych oraz administratorów, aby jak najlepiej dostosować funkcjonalności systemu do rzeczywistych potrzeb.Ankieta została przeprowadzona przez zespół pracujący nad projektem \gls{Labbyn} w składzie: Patryk Kośmider,  Ziemowit Orlikowski,  Adrian Kopczyński,  Aleksander Stankowski.
+\par \textbf{Czas trwania ankiety: 23.10.2025 - 29.10.2025}
+\par \textbf{Łącznie odpowiedziało 14 osób}
+
+\subsection{Metodologia ankiety}
+Ankieta została przeprowadzona w formie online, za pomocą formularza Google. Badanie było anonimowe, by pozwolić użytkownikom na swobodę w wyrażaniu swoich opinii.
+Zaproszone do ankiety zostały osoby pracujące w środowisku IT - szczególnie technicy oraz użytkownicy laboratoriów sprzętowych.
+
+\subsection{Charakterystyka grupy badawczej}
+W ankiecie wzięli udział pracownicy działów technicznych, którzy posiadają styczność ze sprzętem oraz zajmują się jego zarządzaniem. Wśród badanych znalazło się:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{images/ankieta1.png}
+    \caption{Wykres kołowy uzyskanych odpowiedzi na pytanie 1.}
+    \label{img:ankieta1}
+\end{figure}
+\begin{itemize}
+    \item 11 osób na pozycji Technik Labowy (78,6\%)
+    \item 1 osoba na pozycji Operator IT (7,1\%)
+    \item 1 osoba na pozycji Test and Analysis Engineer (7,1\%)
+    \item 1 osoba na pozycji Cloud Devops Engineer (7,1\%)
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{images/ankieta2.png}
+    \caption{Wykres kołowy uzyskanych odpowiedzi na pytanie 2.}
+    \label{img:ankieta2}
+\end{figure}
+Ponad 85\% ankietowanych osób, ma styczność z infrastrukturą sprzętową codziennie.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{images/ankieta3.png}
+    \caption{Wykres kołowy uzyskanych odpowiedzi na pytanie 3.}
+    \label{img:ankieta3}
+\end{figure}
+Liczba maszyn, znajdujących w laboratoriach / serwerowniach wśród osób pracujących, w ponad 90\% wynosi więcej niż 100. Świadczy to o złożoności i dużej skali infrastruktury, która wymaga centralnego zarządzania.
+
+\subsection{Zakres i struktura ankiety}
+Ankieta składała się z 11 pytań, podzielonych na dwie części.
+\begin{itemize}
+    \item Część I - charakterystyka respondentów (rola w zespole, kontakt z infrastrukturą, liczba maszyn w laboratoriach)
+    \item Część II - potrzeby, obecne w pracy frustracje, wymagania wobec systemu.
+\end{itemize}
+Większość pytań miała charakter zamknięty (jednokrotny lub wielokrotny wybór). Ostatnie pytanie było w formie otwartej, pozwalając użytkownikowi na pozostawienie dłuższych, opisowych uwag oraz sugestii. Pytania wyglądały następująco:
+\begin{enumerate}
+    \item Jaką pełnisz rolę w zespole?
+    \item Jak często masz kontakt z infrastrukturą sprzętową?
+    \item Jak dużo maszyn znajduje się w twoim labie?
+    \item Z jakich narzędzi korzystasz w celu zarządzania sprzętem?
+    \item Co frustruje cię w codziennej pracy ze sprzętem i jego zarządzaniem?
+    \item Jakie funkcje byłyby dla ciebie najbardziej przydatne w takim systemie?
+    \item Jakie dane o konkretnym hoście chciałbyś/abyś widzieć w interfejsie?
+    \item Jaki informacje o sprzęcie w inwentarzu technicznym byłyby dla ciebie najbardziej pomocne?
+    \item W jakiej formie najchętniej korzystałbyś/abyś z takiego systemu?
+    \item Czy byłbyś/abyś zainteresowany przetestowaniem wersji demo systemu?
+    \item Czy masz jakieś dodatkowe uwagi dot. systemu?
+\end{enumerate}
+
+\subsection{Analiza wyników ankiety}
+Analiza dot. pytań 1-3 (kierowanych na rozpoznanie respondentów, znajduje się w podrozdziale 3.3.3 Charakterystyka grupy badawczej).
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{images/ankieta4.png}
+    \caption{Wykres uzyskanych odpowiedzi na pytanie 4.}
+    \label{img:ankieta4}
+\end{figure}
+Najczęściej wykorzystywane narzędzia do zarządzania laboratorium, to Excel (78,6\%) oraz Autorskie rozwiązania (71,4\%). Bardzo mało, ponieważ zaledwie 14,3\% respondentów określiło, że korzysta z gotowych, dedykowanych do tego narzędzi, zwanych systemami DCIM. Brak jednego zunifikowanego systemu prowadzi do dużego rozproszenia danych i utrudnionej pracy zespołowej.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{images/ankieta5.png}
+    \caption{Wykres uzyskanych odpowiedzi na pytanie 5.}
+    \label{img:ankieta5}
+\end{figure}
+Respondenci spójnie wskazali kluczowe frustracje:
+\begin{itemize}
+    \item Rozproszenie informacji na temat sprzętu w wielu źródłach (71,4\%)
+    \item Brak historii zmian (57,1\%)
+    \item Brak automatycznego pobierania danych o sprzęcie (57,1\%)
+    \item Brak inwentarza materiałów eksploatacyjnych (35,7\%)
+    \item Brak łatwego sposobu na wykonywanie akcji zdalnych (reboot, ping) (42,9\%)
+    \item Wydłużony czas wyszukiwania danych (35,7\%)
+\end{itemize}
+Wielu techników podkreślało, że obecne metody (Excel, notatki, skrypty) nie skalują się przy dużej liczbie maszyn i powodują chaos informacyjny.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{images/ankieta6.png}
+    \caption{Wykres uzyskanych odpowiedzi na pytanie 6.}
+    \label{img:ankieta6}
+\end{figure}
+Respondenci ponownie jednomyślnie, określili jakich funkcjonalności najbardziej oczekiwali by od takowego systemu. Z odpowiedzi, wynika największe zapotrzebowanie jest na:
+\begin{itemize}
+    \item Wizualne odwzorowanie laboratorium (71,4\%)
+    \item Statystyki i telemetria urządzeń (71,4\%)
+    \item Możliwość wykonywania zdalnych akcji (np. reboot, ping) (42,9\%)
+    \item Inwentarz materiałów eksploatacyjnych (57,1\%)
+    \item Możliwość przypisywania platform do konkretnych racków i półek (71,4\%)
+    \item Panel z podsumowaniem informacji o sprzęcie przypisanym do użytkownika (42,9\%)
+    \item Historia akcji i zmian sprzętu (78,6\%)
+    \item Panel zarządzania użytkownikami (role, uprawnienia) (42,9\%)
+    \item Wyszukiwarka sprzętu (78,6\%)
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{images/ankieta7.png}
+    \caption{Wykres uzyskanych odpowiedzi na pytanie 7.}
+    \label{img:ankieta7}
+\end{figure}
+W informacjach o hoście, dostępnych pod “ręką”, użytkownicy jako najważniejsze dane wymienili:
+\begin{itemize}
+    \item Lokalizacja (85,7\%)
+    \item Nazwa Hosta (71,4\%)
+    \item Adres IP oraz MAC (78,6\%)
+    \item Status w sieci (71,4\%)
+    \item Port w \gls{PDU} (78,6\%)
+    \item Tag (przypisany zespół / przeznaczony zespół) (85,7\%)
+    \item System Operacyjny (64,3\%)
+    \item Informacje o sprzęcie (CPU, Dysk, RAM) (78,6\%)
+    \item Numer Seryjny (57,1\%)
+    \item Notatka/Komentarz (85,7\%)
+    \item Data dodania (50\%)
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{images/ankieta8.png}
+    \caption{Wykres uzyskanych odpowiedzi na pytanie 8.}
+    \label{img:ankieta8}
+\end{figure}
+W odpowiedzi na to jakie informacje o sprzęcie potencjalni użytkownicy oczekują w funkcjonalności “inwentarz techniczny”, odpowiedzi były jednoznaczne. Wszystkie z wymienionych informacji zostały uznane za bardzo pomocne.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{images/ankieta9.png}
+    \caption{Wykres uzyskanych odpowiedzi na pytanie 9.}
+    \label{img:ankieta9}
+\end{figure}
+W odpowiedzi na to, w jakiej formie najchętniej korzystaliby z takiego systemu, najwięcej odpowiedzi uzyskała opcja Aplikacja webowa (przeglądarkowa), dobijając 64,3\% głosów. Pozostała część respondentów wypowiedziała się za aplikacją desktopową. Zespół projektowy rozważa, utworzenie formy hybrydowej, jednak większy nacisk zostanie położony na rozwiązanie w formie webowej.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{images/ankieta10.png}
+    \caption{Wykres uzyskanych odpowiedzi na pytanie 10.}
+    \label{img:ankieta10}
+\end{figure}
+Wszyscy respondenci wyrazili chęć przetestowania wersji demo systemu, z czego aż 64,3\% zadeklarowało się w sposób pewny.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{images/ankieta11.png}
+    \caption{Uzyskane odpowiedzi na pytanie 11.}
+    \label{img:ankieta11}
+\end{figure}
+Spośród czterech udzielonych odpowiedzi na pytanie otwarte dotyczące dodatkowych uwag do systemu (pytanie nieobowiązkowe), jedna (o treści "nie") nie zawiera informacji merytorycznych możliwych do analizy i została pominięta. \\
+
+\par\textbf{'Warto zwócić uwagę żeby synchronizacja danych z innych źródłem nie nadpisywała dancyh automatycznie, a wyświetlała wskazówkę dla użytkoiwnika że takie dane się zmieniły i czy chce je zaakceptować'}\\
+Odpowiedź ta wskazuje na potrzebę kontroli nad aktualizacją danych i mechanizmów jej walidacji. Zespół projektowy zwróci na to uwagę przy implementacji synchronizacji z innymi źródłami danych (np. pliki Excel), tworząc mechanizm, dzięki któremu nowe dane, będa musiały zostać zaakceptowane przez osobę z odpowiednią rolą.\\
+\par\textbf{'Jak to ADSPSi jest'}\\
+Jeden z respondentów odniósł się do wewnętrznego narzędzia ADSPSi, wykorzystywanego do zarządzania sprzętem. System ten umożliwia jedynie podstawowe śledzenie lokalizacji hosta lub urządzenia (zapis jego położenia w formie tekstowej), jego parametrów technicznych oraz przypisania do zespołu lub właściciela. W opinii użytkowników ADSPSi nie zapewnia jednak wystarczającej funkcjonalności w zakresie zarządzania infrastrukturą laboratoryjną. Brakuje w nim m.in. możliwości wykonywania zdalnych akcji na urządzeniach, monitorowania ich dostępności w sieci czy automatycznego pobierania informacji o stanie sprzętu. Dane techniczne są często zapisywane w formie komentarzy, co utrudnia ich przetwarzanie i aktualizację. Dodatkowo, system jest postrzegany jako mało intuicyjny, z nieefektywnym interfejsem oraz długim czasem wyszukiwania informacji, co zniechęca użytkowników do regularnego aktualizowania danych.\\
+\par\textbf{'Wg mnie powinna być sekcja z informacjami o danych urządzeniach na półce rack, oraz po wybraniu danej maszyny - powinna być swego rodzaju wizualizacja na mapce labu - podświetlony rack / jakaś ścieżka do niego'}\\
+Respondent wskazał na potrzebę dodatkowej rozbudowy interfejsu wizualizującego / mapującego wygląd laboratorium (zrzut z góry). Oprócz możliwości zwizualizowania go poprzez wykorzystanie systemu drag’n’drop elementów (szafy rackowe, bench, alejki) i ich uporządkowanie, warto wprowadzić swego rodzaju ścieźkę prowadząca do obecnie przeglądanej maszyny. Zespół projektowy również się z tym zgadza, że jest to dobry pomysł i postara się na wprowadzenie funkcjonalności “pokaż ścieżkę” - po wyborze tej opcji z menu danej maszyny, na mapie labu pojawiłaby się droga prowadząca od wejścia do labu - do racka w której znajduje się maszyna, w postaci żółtej linii.
+\subsection{Wnioski końcowe}
+Analiza odpowiedzi wskazuje na silną potrzebę stworzenie scentralizowanego systemu zarządzania laboratoriami / serwerowniami. Najważniejsze wymagania to:
+\begin{itemize}
+    \item Wizualne odwzorowanie laboratorium (71,4\%)
+    \item Statystyki i telemetria urządzeń (71,4\%)
+    \item Możliwość wykonywania zdalnych akcji (np. reboot, ping) (42,9\%)
+    \item Inwentarz materiałów eksploatacyjnych (57,1\%)
+    \item Możliwość przypisywania platform do konkretnych racków i półek (71,4\%)
+    \item Panel z podsumowaniem informacji o sprzęcie przypisanym do użytkownika (42,9\%)
+    \item Historia akcji i zmian sprzętu (78,6\%)
+    \item Panel zarządzania użytkownikami (role, uprawnienia) (42,9\%)
+    \item Wyszukiwarka sprzętu (78,6\%)
+\end{itemize}
+System \gls{Labbyn} powinien zostać zaprojektowany jako zintegrowane narzędzie, łączące ze soba funkcję monitoringu maszyn, zarządzania maszynami / sprzętem, raportowania oraz inwentaryzacji w jednym, spójnym interfejsie.
+
+\section{Planowanie pracy zespołu i środki komunikacji}
+\par Na etapie planowania przyjęto iteracyjny model realizacji prac oparty na podejściu Agile, uzupełniony wybranymi praktykami SCRUM. Prace podzielono na krótkie iteracje o stałej długości: 2-tygodniowe \gls{sprint}y (z kilkoma wyjątkami). Ustalono także cykliczne, cotygodniowe spotkania, w ramach których definiowano zakres zadań, monitorowano postęp, konsultowano nowe pomysły albo napotkane problemy oraz dokonywano przegląd rezultatów. Każde spotkanie wspierane było agendą spotkania oraz \gls{meeting minutes} w celu efektywnego przebiegu obecnych jak i przyszłych spotkań. 
+
+\section{Narzędzia wspomagające}
+\par Zespół projektowy komunikował się głównie przy użyciu komunikatora Discord na wydzielonym do tego serwerze. Do przechowywania oraz kontroli wersji kodu źródłowego systemu użyty został serwis GitHub z wydzielonym repozytroium dostępnym pod adresem url: \\ https://github.com/Labbyn/labbyn . W celu przechowywania wszelkich wyprodukowanych podczas prac dokumentów, użyty został współdzielony Dysk Google. Do rejestrowania czasu pracy oraz zarządzaniu przydzielonymi zadaniami użyto serwisu Jira.
+
+\section{Harmonogram Prac}
+\par Ze względu na ograniczony czas na wyprodukowanie systemu, prace zostały podzielone na 5 etapów z umownymi datami rozpoczęcia i ukończenia etapu:
+\begin{enumerate}
+    \item Koncept (1. Września 2025 - 1. Listopada 2025)
+    \item Rozpoczęcie prac (1. Listopada 2025 - 30. Listopada 2025)
+    \item MVP (1. Grudnia 2025 - 11. Stycznia 2026)
+    \item Wersja 1.0 (12. Stycznia 2026 - 1. Maja 2026)
+    \item Testy i poprawki (1. Maja 2026 - 20. Czerwca 2026)
+\end{enumerate}
+\par W celu najbardziej efektywnego postępu prac, zespół zdecydował się na poniższy proces tworzenia zadań oraz przyrostów:
+\begin{itemize}
+    \item Przyrosty będą opierały się na stworzonych i zaplanowanych zadaniach.
+    \item Każde zadanie musi mieć przypisany \gls{Epik}.
+    \item \gls{Epik}i będą tworzone na podstawie wymagań gdzie: 1 wymaganie = \gls{Epik}.
+    \item \gls{Epik}i zostaną przypisane do konkretnego etapu w celu zaplanowania przyszłych prac.
+\end{itemize}

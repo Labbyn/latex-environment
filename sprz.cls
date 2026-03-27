@@ -1,28 +1,36 @@
-%
-% This is the class for PJATK thesis
-%
-% Tadeusz Puźniakowski 2023
-% Ian Canals-Wąsik (title page draft)
-%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{sprz}[2023/10/27 SPRZ]
 \LoadClass[12pt,a4paper]{report}
 \renewcommand{\baselinestretch}{1.3} 
 \RequirePackage[a4paper]{geometry}
-\RequirePackage{listings} %Aby dało się umieszczać kody źródłowe programów
+\RequirePackage{listings}
 \RequirePackage[table]{xcolor}
-\RequirePackage{algorithmic} %Aby dało się umieszczać algorytmy
+\RequirePackage{algorithmic}
 \RequirePackage[utf8]{inputenc}
-\RequirePackage{polski} % Włączenie obsługi polskich liter
+\RequirePackage{polski}
 \RequirePackage{tabularx}
 \RequirePackage{url}
 \RequirePackage{graphicx}
-\RequirePackage[pscoord]{eso-pic}% The zero point of the coordinate systemis the lower left corner of the page (the default).
+\RequirePackage[pscoord]{eso-pic}
 \RequirePackage{multirow}
 \RequirePackage{graphicx}
 \RequirePackage[backend=biber,style=numeric,sorting=none]{biblatex}
 \RequirePackage{glossaries}
 \makeglossaries
+
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage{times}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{titlesec}
+\geometry{top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm}
+\onehalfspacing
+\titleformat{\chapter}[block]{\normalfont\bfseries\fontsize{14}{17}\selectfont}{\thechapter}{1em}{} 
+\titleformat{\section}[block]{\normalfont\bfseries\fontsize{12}{15}\selectfont}{\thesection}{1em}{}
+\titleformat{\subsection}[block]{\normalfont\bfseries\fontsize{12}{15}\selectfont}{\thesubsection}{1em}{}
 
 \DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,
    unpublished,techreport,misc,book]{title}{,,#1''}
@@ -151,7 +159,7 @@
 \newcommand{\id}[1]{Identyfikator: & ##1 & }
 \newcommand{\priority}[1]{Priorytet: & ##1 \\ \hline}
 \newcommand{\name}[1]{Nazwa: & \multicolumn{3}{|p{0.6\linewidth}|}{##1}  \\ \hline}
-\newcommand{\descr}[1]{Opis: & \multicolumn{3}{|p{0.6\linewidth}|}{\parbox{0.99\linewidth}{##1}}  \\ \hline}
+\newcommand{\descr}[1]{Opis: & \multicolumn{3}{|p{0.6\linewidth}|}{##1}  \\ \hline}
 \newcommand{\acceptcrit}[1]{Kryteria akceptacji: & \multicolumn{3}{|p{0.6\linewidth}|}{##1}  \\ \hline}
 \newcommand{\inputdata}[1]{Dane wejściowe: & \multicolumn{3}{|p{0.6\linewidth}|}{##1}  \\ \hline}
 \newcommand{\preconditions}[1]{Warunki początkowe: & \multicolumn{3}{|p{0.6\linewidth}|}{##1}  \\ \hline}
@@ -235,10 +243,11 @@
                 \begin{tabular}{|l|l|}
                     \hline
                     \textbf{Nazwisko, imię} & \textbf{Nr albumu} \\ \hline
-                    Adrian Kopczyński & s26990 \\ \hline
-                    Ziemowit Orlikowski & s27081 \\ \hline
-                    Patryk Kośmider & s26985 \\ \hline
-                    Aleksander Stankowski & s27549 \\ \hline
+                    Kopczyński, Adrian & s26990 \\ \hline
+                    Kośmider, Patryk & s26985 \\ \hline
+                    Orlikowski, Ziemowit & s27081 \\ \hline
+                    Stankowski, Aleksander & s27549 \\ \hline
+                    
                 \end{tabular} \\\\
             \end{center}
 		\textbf{\\Streszczenie:}
@@ -341,7 +350,7 @@
 
 
 \newcommand{\makethesisattachments}{%
-\chapter*{Załączniki}
+\chapter{Załączniki}
 
 Płyta CD z następującą zawartością:
 \begin{itemize}
@@ -353,6 +362,7 @@ Płyta CD z następującą zawartością:
 	\end{itemize}
     \item {\em{\@authorattachment%
 praca pisemna}} -- katalog zawierający plik PDF z pracą inżynierską.
+    \item {Sprawozdanie z ankiety.docx} -- plik zawierający sprawozdanie z przeprowadzonego badania ankietowego.
 \end{itemize}
 
 \newpage
