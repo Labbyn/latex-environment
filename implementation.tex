@@ -1,0 +1,111 @@
+\chapter{Przebieg \gls{sprint}ów}
+\section{\Gls{sprint} 0}
+\textbf{Czas trwania sprintu: 29.10.2025 - 12.11.2025 (2 tygodnie)}
+\par
+Sprint ten był inicjalizacją prac nad projektem. Pierwszym zadaniem było  zrobienie listy kluczowych funkcjonalności jakie system powinien posiadać. Aby uzuepłnić potencjalne braki zespół stworzył ankietę, która została przekazana potencjalnym uzytkownikom systemu. Po upływie 1 tygodnia od rozesłania ankiety, zbieranie odpowiedzi zostało zakończone. W tym czasie zespół stworzył \gls{POC} systemu do monitorowania statystyk urządzeń tworząc pliki konfiguracyjne kompatybilne z systemem monitorowania Prometheus.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{images/monitoring_poc.png}
+    \caption{Zdjęcie przedstawiające panel monitorowania urządzeń systemu Prometheus}
+    \label{img:monitoring_poc}
+\end{figure}
+repozytoria dla kodu źródłowego: aplikacji oraz tego dokumentu. Repozytoria te zostały skonfigurowane w odpowiedni sposób, by zapobiec wprowadzaniu zmian bezpośrednio do głównej gałęzi, a każda zmiana musiała być poprzedzona \gls{Pull Request}'em, którego zaakceptować musi:
+\begin{itemize}
+    \item w przypadku kodu źródłowego aplikacji - przynajmniej 1 członek zespołu projektowego,
+    \item w przypadku kodu źródłowego dokumentu - cały zespół projektowy.
+\end{itemize}
+Repozytorium zostało połączone z serwisem Jira w celu sprawniejszego wyszukiwania zmian w kodzie na podstawie zgłoszeń.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{images/jira_github_connection.png}
+    \caption{Zdjęcie przedstawiające integrację seriwsów GitHub oraz Jira}
+    \label{img:jira_github_connection}
+\end{figure}
+Po uzyskaniu odpowiedzi w wyznaczonym czasie, utworzone zostało sprawozdanie z ankiety opisane szczegółowo w punkcie 3.3 . Na jego podstawie wyspecyfikowane zostały wymagania na system, które zostały sklasyfikowane według dwóch wymiarów:
+\begin{itemize}
+    \item typu wymagania (m.in. dziedzinowe, funkcjonalne, niefunkcjonalne),
+    \item przynależności do poszczególnych modułów/obszarów funkcjonalnych (np. Panel Urządzenia, Search Bar).
+\end{itemize}
+Dzięki temu wytworzone zostały dokumenty takie jak: Karta Projektu, Dokument Założeń Wstępnych czy Specyfikacja Wymagań Systemowych.
+
+
+\section{\Gls{sprint} 1}
+\textbf{Czas trwania \Gls{sprint}u: 12.11.2025 - 26.11.2025 (2 tygodnie)}
+\par
+Początkiem \gls{sprint}u utworzony został wstępny model fizyczny bazy danych aplikacji, który wygląda następująco:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{images/model_fizyczny_labbyn.png}
+    \caption{Wstępny projekt modelu fizycznego bazy danych}
+    \label{img:model_fizyczny}
+\end{figure}
+Model ten posłużył do wstępnej konfiguracji środowiska produkcyjnego oraz umożliwił rozpoczęcie prac nad logiką aplikacji. Stworzony został \gls{POC} architektury systemu telemetrii urządzeń w postaci grafu:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{images/telemetry_poc.png}
+    \caption{POC systemu telemetrii urządzeń}
+    \label{img:telemetry_poc}
+\end{figure}
+Powstała również wersja demonstracyjna aplikacji w celu przedstawienia zespołowi propnowanej wizji artystycznej projektu:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{images/labbyn_demo_ui.png}
+    \caption{Wstępna wersja interfejsu użytkownika}
+    \label{img:demo_ui}
+\end{figure}
+Utworzono podstawowy proces CI/CD wspierający budowanie i testowanie aplikacji, w ramach którego dodano linter jako element workflow CI w GitHubie. Przygotowane zostało również środowisko dewepolerskie umożliwiające obserwowanie zmian w oprogramowaniu w czasie rzeczywistym co zmniejszyło ryzyko powstawania błędów i pozwoliło drastycznie zmniejszyć czas sprawdzania kompatybilności zmian - programista nie był zmuszony budować aplikacji od nowa co było czasochłonne. 
+
+\section{\Gls{sprint} 2}
+\textbf{Czas trwania \Gls{sprint}u: 26.11.2025 - 10.12.2025 (2 tygodnie)}
+\par
+Podczas tego \gls{sprint}u powstał pierwszy prototyp mapy przestrzennej:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{images/map_prototype.png}
+    \caption{Prototyp mapy przestrzennej laboratorium}
+    \label{img:map_prototype}
+\end{figure}
+Ze względu na brak jednoznacznie zdefiniowanego konceptu wizualnego systemu, przygotowano mockupy w celu ujednolicenia kierunku projeku.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{images/labbyn_mockups.png}
+    \caption{Zdjęcie przedstawiające część mockupów stworzonych dla systemu Labbyn}
+    \label{img:labbyn_mockups}
+\end{figure}
+Zaimplementowano warstwę dostępu do bazy danych z wykrozystaniem \gls{SQL Alchemy}.
+
+\section{\Gls{sprint} 3}
+\textbf{Czas trwania \Gls{sprint}u: 10.12.2025 - 07.01.2026 (4 tygodnie)}
+\par
+
+\section{\Gls{sprint} 4}
+\textbf{Czas trwania \Gls{sprint}u: 07.01.2026 - 28.01.2026 (3 tygodnie)}
+\par
+
+\section{\Gls{sprint} 5}
+\textbf{Czas trwania \Gls{sprint}u: 28.01.2026 - 11.02.2026 (2 tygodnie)}
+\par
+
+\section{\Gls{sprint} 6}
+\textbf{Czas trwania \Gls{sprint}u: 11.02.2026 - 25.02.2026 (2 tygodnie)}
+\par
+
+\section{\Gls{sprint} 7}
+\textbf{Czas trwania \Gls{sprint}u: 25.02.2026 - 04.03.2026 (1 tygodnie)}
+\par
+
+\section{\Gls{sprint} 8}
+\textbf{Czas trwania \Gls{sprint}u: 04.03.2026 - 18.03.2026 (2 tydzień)}
+\par
+
+\section{\Gls{sprint} 9}
+\textbf{Czas trwania \Gls{sprint}u: 18.03.2026 - 01.04.2026 (2 tygodnie)}
+\par
+
+\section{\Gls{sprint} 10}
+\textbf{Czas trwania \Gls{sprint}u: 01.04.2026 - 15.04.2026 (2 tygodnie)}
+\par
+
+\section{\Gls{sprint} 11}
+\textbf{Czas trwania \Gls{sprint}u: 15.04.2026 - 29.04.2026 (2 tygodnie)}
+\par
