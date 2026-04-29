@@ -227,35 +227,76 @@
 			\includegraphics[width=1.0\textwidth]{images/pjatk} \\
 			~ \\
 			%\large
-			\textbf{Kierunek studiów: Informatyka}
-            ~ ~ ~ ~ ~ &\textbf{Rodzaj studiów: Zaoczne}\\
-            \begin{center}
-            \huge
-			\textbf{Praca dyplomowa} \\
-            \end{center}
-			~ \\
-            \textbf{Temat pracy: \@title} \\
-            \textbf{Temat w języku angielskim: \@engtitle} \\
-            \textbf{Promotor pracy: \@supervisor} \\
-            \textbf{Wykonawcy:} 
-            \begin{center}
-                \begin{tabular}{|l|l|}
-                    \hline
-                    \textbf{Nazwisko, imię} & \textbf{Nr albumu} \\ \hline
-                    Kopczyński, Adrian & s26990 \\ \hline
-                    Kośmider, Patryk & s26985 \\ \hline
-                    Orlikowski, Ziemowit & s27081 \\ \hline
-                    Stankowski, Aleksander & s27549 \\ \hline
+		% 	\begin{tabular}{l r}
+		% 		\textbf{Kierunek studiów: Informatyka} & \textbf{Rodzaj studiów: Zaoczne}
+		% 	\end{tabular}
+        %     \begin{center}
+        %     \huge
+		% 	\textbf{Praca dyplomowa} \\
+        %     \end{center}
+		% 	~ \\
+        %     \textbf{Temat pracy: \@title} \\
+        %     \textbf{Temat w języku angielskim: \@engtitle} \\
+        %     \textbf{Promotor pracy: \@supervisor} \\
+        %     \textbf{Wykonawcy:} 
+        %     \begin{center}
+        %         \begin{tabular}{|l|l|}
+        %             \hline
+        %             \textbf{Nazwisko, imię} & \textbf{Nr albumu} \\ \hline
+        %             Kopczyński, Adrian & s26990 \\ \hline
+        %             Kośmider, Patryk & s26985 \\ \hline
+        %             Orlikowski, Ziemowit & s27081 \\ \hline
+        %             Stankowski, Aleksander & s27549 \\ \hline
                     
-                \end{tabular} \\\\
-            \end{center}
-		\textbf{\\Streszczenie:}
-		\@nabstract
-		\textbf{\\Słowa kluczowe:}
-		\@nkeywords
-        \begin{center}
-			\vfill{\textbf{Gdańsk, \@date}}
-            \end{center}
+        %         \end{tabular} \\\\
+        %     \end{center}
+		% \textbf{\\Streszczenie:}
+		% \@nabstract
+		% \textbf{\\Słowa kluczowe:}
+		% \@nkeywords
+        % \begin{center}
+		% 	\vfill{\textbf{Gdańsk, \@date}}
+        %     \end{center}
+
+		\textbf{Kierunek studiów: Informatyka} \hfill \textbf{Rodzaj studiów: Zaoczne}
+
+		\begin{center}
+		\huge
+		\textbf{Praca dyplomowa}
+		\end{center}
+
+		\textbf{Temat pracy: \@title}
+
+		\textbf{Temat w języku angielskim: \@engtitle}
+
+		\textbf{Promotor pracy: \@supervisor}
+
+		\textbf{Wykonawcy:}
+
+		\begin{center}
+		\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Nazwisko, imię} & \textbf{Nr albumu} \\ \hline
+		Kopczyński, Adrian & s26990 \\ \hline
+		Kośmider, Patryk & s26985 \\ \hline
+		Orlikowski, Ziemowit & s27081 \\ \hline
+		Stankowski, Aleksander & s27549 \\ \hline
+		\end{tabular}
+		\end{center}
+
+		\textbf{Streszczenie: } \@nabstract
+
+		
+		\vspace{1cm}
+
+		\textbf{Słowa kluczowe: }\@nkeywords
+
+		
+
+		\vfill
+		\begin{center}
+		\textbf{Gdańsk, \@date}
+		\end{center}
 		\newpage
 	\end{titlepage}
 	\renewcommand{\baselinestretch}{1.0}
