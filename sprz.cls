@@ -22,7 +22,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[polish]{babel}
-\usepackage{times}
 \usepackage{setspace}
 \usepackage{geometry}
 \usepackage{titlesec}
