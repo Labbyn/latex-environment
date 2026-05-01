@@ -5,3 +5,11 @@
 *.gls
 *.ist
 *.gz
+*.lof
+*.log
+*.fls
+*.fdb_latexmk
+*.bcf
+*.blg
+*.toc
+*.xml
