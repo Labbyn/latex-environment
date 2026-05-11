@@ -25,6 +25,9 @@
 \usepackage{setspace}
 \usepackage{geometry}
 \usepackage{titlesec}
+\usepackage{mathptmx}
+\usepackage{hyperref}
+\usepackage{xurl}
 \geometry{top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm}
 \onehalfspacing
 \titleformat{\chapter}[block]{\normalfont\bfseries\fontsize{14}{17}\selectfont}{\thechapter}{1em}{} 

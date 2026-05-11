@@ -13,3 +13,5 @@
 *.blg
 *.toc
 *.xml
+*.lot
+*.out
