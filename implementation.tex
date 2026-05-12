@@ -8,7 +8,7 @@ Sprint ten był inicjalizacją prac nad projektem. Pierwszym zadaniem było  zro
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{images/sprint_summary/monitoring_poc.png}
-    \caption{Zdjęcie przedstawiające panel monitorowania urządzeń systemu Prometheus}
+    \caption{Zdjęcie przedstawiające panel monitorowania urządzeń systemu Prometheus (opracowanie własne)}
     \label{img:monitoring_poc}
 \end{figure}
 repozytoria dla kodu źródłowego: aplikacji oraz tego dokumentu. Repozytoria te zostały skonfigurowane w odpowiedni sposób, by zapobiec wprowadzaniu zmian bezpośrednio do głównej gałęzi, a każda zmiana musiała być poprzedzona \gls{Pull Request}'em, którego zaakceptować musi:
@@ -20,7 +20,7 @@ Repozytorium zostało połączone z serwisem Jira w celu sprawniejszego wyszukiw
 \begin{figure}[H]
     \centering
     \includegraphics{images/sprint_summary/jira_github_connection.png}
-    \caption{Zdjęcie przedstawiające integrację seriwsów GitHub oraz Jira}
+    \caption{Zdjęcie przedstawiające integrację seriwsów GitHub oraz Jira (zrzut erkanu z serwisu Jira, opracowanie własne)}
     \label{img:jira_github_connection}
 \end{figure}
 Po uzyskaniu odpowiedzi w wyznaczonym czasie, utworzone zostało sprawozdanie z ankiety opisane szczegółowo w punkcie 3.3 . Na jego podstawie wyspecyfikowane zostały wymagania na system, które zostały sklasyfikowane według dwóch wymiarów:
@@ -38,7 +38,7 @@ Początkiem \gls{sprint}u utworzony został wstępny model fizyczny bazy danych 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{images/sprint_summary/model_fizyczny_labbyn.png}
-    \caption{Wstępny projekt modelu fizycznego bazy danych}
+    \caption{Wstępny projekt modelu fizycznego bazy danych (opracowanie własne)}
     \label{img:model_fizyczny}
 \end{figure}
 Model ten posłużył do wstępnej konfiguracji środowiska produkcyjnego oraz umożliwił rozpoczęcie prac nad logiką aplikacji, w ramach której powstało wstępne \gls{API} dla systemu \gls{Prometheus}. Równolegle z jej powstaniem zaimplementowano testy dymne, umożliwiające bieżącą kontrolę poprawności podstawowych funkcjonalności. Ich zastosowanie pozwoliło na szybkie wykrywanie krytycznych błędów po wprowadzanych zmianach.
@@ -47,14 +47,14 @@ Stworzony został \gls{POC} architektury systemu telemetrii urządzeń w postaci
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{images/sprint_summary/telemetry_poc.png}
-    \caption{POC systemu telemetrii urządzeń}
+    \caption{POC systemu telemetrii urządzeń (opracowanie własne)}
     \label{img:telemetry_poc}
 \end{figure}
 Powstała również wersja demonstracyjna aplikacji w celu przedstawienia zespołowi propnowanej wizji artystycznej projektu:
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{images/sprint_summary/labbyn_demo_ui.png}
-    \caption{Wstępna wersja interfejsu użytkownika}
+    \caption{Wstępna wersja interfejsu użytkownika (opracowanie własne)}
     \label{img:demo_ui}
 \end{figure}
 Utworzono podstawowy proces CI/CD wspierający budowanie i testowanie aplikacji, w ramach którego dodano linter jako element workflow CI w GitHubie. Przygotowane zostało również środowisko dewepolerskie umożliwiające obserwowanie zmian w oprogramowaniu w czasie rzeczywistym co zmniejszyło ryzyko powstawania błędów i pozwoliło drastycznie zmniejszyć czas sprawdzania kompatybilności zmian - programista nie był zmuszony budować aplikacji od nowa co było czasochłonne. 
@@ -66,14 +66,14 @@ Podczas tego \gls{sprint}u powstał pierwszy prototyp mapy przestrzennej:
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{images/sprint_summary/map_prototype.png}
-    \caption{Prototyp mapy przestrzennej laboratorium}
+    \caption{Prototyp mapy przestrzennej laboratorium (opracowanie własne)}
     \label{img:map_prototype}
 \end{figure}
 Ze względu na brak jednoznacznie zdefiniowanego konceptu wizualnego systemu, przygotowano mockupy w celu ujednolicenia kierunku projeku.
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{images/sprint_summary/labbyn_mockups.png}
-    \caption{Zdjęcie przedstawiające część mockupów stworzonych dla systemu Labbyn}
+    \caption{Zdjęcie przedstawiające część mockupów stworzonych dla systemu Labbyn (opracowanie własne)}
     \label{img:labbyn_mockups}
 \end{figure}
 W ramach implementacji logiki systemu od strony \gls{Backend}u dodano warstwę dostępu do bazy danych z wykrozystaniem \gls{SQL Alchemy} oraz mechanizmy przetwarzania danych jak i obsługi logiki aplikacji.
