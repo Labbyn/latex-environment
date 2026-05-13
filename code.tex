@@ -8,7 +8,7 @@
 \par Kolejnym istotnym czynnikiem była łatwość integracji z zewnętrznymi narzędziami i bibliotekami. Wykorzystany stack technologiczny pozwolił na sprawną implementację komunikacji z systemami monitoringu (\gls{Prometheus}, \gls{Grafana}) oraz narzędziami do automatyzacji konfiguracji (\gls{Ansible}) służącymi do orkiestracji zasobów.
 \par Architekturę \gls{Backend}u wzbogacono o mechanizm \gls{Redis} służący do zarządzania rozproszonymi blokadami zasobów, co jest kluczowe w przypadku środowisk wielodostępnych, gdzie jednoczesna modyfikacja zasobów przez wiele użytkowników może prowadzić do niespójności lub błędów \gls{race condition}.
 
-\section{Architektura i wzorce projektowe}
+\section{Architektura}
 \par Warstwa backendowa została oparta na architekturze wielowarstwowej, której celem jest odseparowanie odpowiedzialności pomiędzy osobnymi komponentami. Takie rodzaj architektury ułatwia potencjalnie skalowanie systemu w przyszłości.
 
 \subsection{Warstwa interfejsu}
