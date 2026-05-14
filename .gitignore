@@ -15,3 +15,5 @@
 *.xml
 *.lot
 *.out
+*.bbl-SAVE-ERROR
+*.bcf-SAVE-ERROR

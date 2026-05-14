@@ -1,17 +1,243 @@
-\chapter{Testowanie Aplikacji}
-\par
+\chapter{Zapewnienie jakości oprogramowania i proces testowania}
+Jak możemy przeczytać w sylabusie "\textregistered{ISTBQ} Certyfikowany Tester - Poziom Podstawowy w.4.0":
 \begin{quote}
-\"Testowanie jest naturalnym procesem i czy nazwiemy je uczeniem się, czy też eksperymentowaniem, nie ma to większego znaczenia dla samej czynności poznawania i podejmowania decyzji o testowanym obiekcie.\" ~\cite{smilgin2018tester}
+    "Testowanie jest często utożsamiane z zapewnieniem jakości, ale w rzeczywistości są to dwa oddzielne procesy" ~\cite{istqb_ctfl_4}
+\end{quote}
+W związku z tym w niniejszym rozdziale, osobno zostaną opisane obydwa zagadnienia jak i ich wpływ na system \gls{Labbyn}.
+\section{Zapewnienie jakości}
+\par
+Jak możemy przeczytać w sylabusie "Z kolei zapewnienie jakości to podejście ukierunkowane na procesy i mające charakter preqencyjny, które skupia się na wdrażaniu i udoskonalaniu procesów. Bazuje ono na założeniu, że poprawne wykonanie dobrze zaprojektowanego procesu przekłada się na wytworzenie dobrego produktu" ~\cite{istqb_ctfl_4} w myśl tej zasady wdrożone zostały działania mające na calu zwiększenie poprawności tworzonego systemu już od najwcześniejszych etapów jego rozwoju.
+\subsection{Techniki Statyczne}
+\par
+Istotnym elementem zapewnienia jakości są techniki statyczne, niewymagające wykonywania kodu źródłowego aplikacji. Do technik tych zaliczają się między innymi przeglądy wymagań, analiza dokumentacji projektowej, przeglądy kodu źródłowego czy też analiza statyczna.
+Pozwalają one na identyfikację potencjalnych problemów związanych z architekturą systemu, logiką implementacji, bezpieczeństwem aplikacji oraz zgodnością projektu z przyjętymi ząłożeniami.
+\par
+Wykorzystanie tych technik miało swoje odzwierciedlenie chociażby w zmianach w wymaganiach systemowych opisanych w rozdziale \ref{sec:req_specification}
+\subsection{Przeglądy}
+\par
+W trakcie realizacji projektu szczególną uwagę poświęcono regularnym przeglądom implementowanych funkcjonalności jak i bieżącej analizie jakości kodu źródłowego.
+Weryfikacja zmian prowadzona była na każdym etapie rzowju aplikacji, co umożliwiło wcześniejsze wykrywanie błędów logicznych i ograniczenia liczby problemów ujawniających się podczas samego testowania.
+\subsection{Czytelność i przejrzystość}
+\par
+Dodatkowo zespół stosował praktyki związane z analizą poprawności działania poszczególnych modułów systemu, oceną czytelności implementacji oraz kontrolą zgodności tworzonych funkcjonalności z wymaganiami projektowymi.
+Takie podejście pozwoliło ograniczyć ryzyko powstania trudnych do wykrycia błędów i upsrawniło dalszy proces rozwoju i utrzymania aplikacji.
+\par
+W ramach ujednolicenia czytelności kodu, przygotowany został dokument \gls{Coding Guidelines} dla języka Python określający podstawowe zasady stylizacji kodu źródłowego:
+\begin{enumerate}
+    \item Formatowanie kodu 
+    \begin{itemize}
+        \item Wcięcia: tabulator lub 4 spacje
+        \item Maksymalna długośc linii: 120 znaków
+        \item Jedna pusta linia między blokami logicznymi, dwie linie między definicjami klas i funkcji
+    \end{itemize}
+    \item Nazewnictwo 
+    \begin{itemize}
+        \item Zmienne i funkcje: snake\_case
+        \item Klasy: CamelCase
+        \item Stałe: UPEER\_CASE
+    \end{itemize}
+    \item Importy
+    \begin{itemize}
+        \item Importy na początku pliku
+        \item Kolejność: 
+        \begin{enumerate}
+            \item biblioteki standardowe
+            \item biblioteki zewnętrzne
+            \item moduły lokalne
+        \end{enumerate}
+        \item Jeden import na linię
+        \item Unikać "from module import *"
+    \end{itemize}
+    \item Spacje i czytelność
+    \begin{itemize}
+        \item Spacje wokół operatorów (=, +, ==, itp.)
+        \item Jedna spacja po przecinku
+    \end{itemize}
+    \item Komentarze i \gls{docstring}i
+    \begin{itemize}
+        \item Komentarze pełnymi zdaniami, aktualne zwięzłe
+        \item \Gls{docstring}i dla modułów, klas i funkcji
+        \item Używać potrójnych cudzysłowów (""" """)
+    \end{itemize}
+    \item Struktura kodu
+    \begin{itemize}
+        \item Funkcje krótkie, realizujące jedno zadanie
+        \item Preferować czytelność nad sprytne kontrukcje
+    \end{itemize}
+    \item Styl logiczny
+    \begin{itemize}
+        \item Używać "is" do porównań z None
+        \item Obsługiwać wyjątki precyzyjnie (nie używać samego "except:")
+    \end{itemize}
+    \item Inne
+    \begin{itemize}
+        \item W przypadka nieopisanych w niniejszym dokumencie, należy stosować się do obowiązujących zasad \gls{PEP 8}
+    \end{itemize}
+\end{enumerate}
+\section{Testowanie}
+\begin{quote}
+"Testowanie jest naturalnym procesem i czy nazwiemy je uczeniem się, czy też eksperymentowaniem, nie ma to większego znaczenia dla samej czynności poznawania i podejmowania decyzji o testowanym obiekcie." ~\cite{smilgin2018tester}
 \end{quote}
 \par
 Proces testowania oprogramowania stanowi istotny elemnt cyklu życia aplikacji i pozwala na ocenę poprawności działania system, wykrycie potencjalnych defektów oraz weryfikację zgodności implementacji z założeniami projektowymi.
 Testowanie umożliwia również analizę zachowania aplikacji w różnych scenariuszach użytkowania oraz ocenę stabilności i bezpieczeństwa systemu.
 \par
-W ramach niniejszego rozdziało przeprowadzono analizę działania systemu \gls{Labbyn}.
-Proces testowania obejmował weryfikację kluczowych funkcjonalności systemu, poprawności komunikacji z bazą danych, walidacji danych wejściowych, obsługi wyjątków oraz odporności aplikacji na wybranie nieprawdiłowe scenariusze użycia.
-Przedstawiono również sodowisko testowe, przykładowe scenariusze testowe, wykryte defekty oraz sposób ich rozwiązania.
+W ramach niniejszego rozdziału przeprowadzono analizę działania systemu \gls{Labbyn}.
+Przedstawiono również środowisko testowe, przykładowe scenariusze testowe, wykryte defekty oraz sposób ich rozwiązania.
+
 \section{Cel i zakres testów}
+\par
+Celem procesu testowania było zweryfikowanie kluczowych funkcjonalności systemu, poprawności komunikacji z bazą danych, walidacji danych wejściowych, obsługi wyjątków oraz odporności aplikacji na wybrane nieprawdiłowe scenariusze użycia.
+\par
+Zakres obejmował zarówno podstawowe funkcjonalności systemu, jak i mechanizmy odpowiedzialne za bezpieczeństwo oraz obsługę wyjątków.
+Szczególną uwagę poświęcono poprawności działania autoryzacji, filtracji zespołowej, walidacji danych wejściowych oraz doświadczeniach i interfejsie użytkownika.
+\par
+W ramach procesu testowania przeprowadzono testy funkcjonalne, których celem była weryfikacja poprawności działania poszczególnych modułów aplikacji.
+Testy obejmowały między innymi:
+\begin{itemize}
+    \item logowanie użytkownika,
+    \item komunikację aplikacji z bazą danych,
+    \item operacje dodwania, edycji oraz usuwania danych,
+    \item walidację danych w formularzach,
+    \item obsługę błędów i wyjątków aplikacji,
+    \item poprawność generowanych odpowiedzi systemu,
+    \item autoryzację dostępu do zasobów,
+\end{itemize}
+\par
+W celu zwiększenia niezawodności systemu opracowano testy jednostkowe sprawdzające poprawność działania poszczególnych modułów oraz testy dymne weryfikujące podstawową funkcjonalność aplikacji po dokonanych zmianach.
+Zostały one zintegrowane z procesem \gls{CI/CD} i skonfigurowane jako warunek wprowadzenia zmian w kodzie źródłowym.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/testing/example_unit_test_code.png}
+    \caption{Fragment kodu testów jednostkowych (opracowanie własne)}
+    \label{img:example_unit_test_code}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/testing/example_smoke_test_log.png}
+    \caption{Przykładowe logi z uruchomionego zadania wykonania testów dymnych (opracowanie własne)}
+    \label{img:example_smoke_test_log}
+\end{figure}
 \section{Środowisko testowe}
+\par
+W procesie testowym użyte zostały 2 konfiguracje sprzętowe:
+\begin{enumerate}
+    \item Urządzenie przeznaczone do testów E2E (Komputer Stacjonarny)
+    \begin{itemize}
+        \item System Operacyjny: Windows 11 Home 25H2 (kompilacja systemu operacyjnego: 26200.8457),
+        \item Procesor: Intel(R) Core(TM) i5-10600KF 4.10GHz,
+        \item Karta Graficzna: NVIDIA GeForce RTX 3070 Ti,
+        \item Pamięć RAM: 32GB DDR4,
+        \item Dysk Twardy: 500GB SSD,
+        \item Wyświetlacz: Monitor o przekątnej ekranu 24", o rozdzielczość 1920x1080px.
+    \end{itemize}
+    \item Urzadzenie przeznaczone do testów wydajnościowych (Komputer przenośny)
+    \begin{itemize}
+        \item System Operacyjny: Mac OS
+        \item Procesor: Apple M1 3.2GHz
+        \item Karta Graficzna:
+        \item Pamięć RAM: 8GB DDR4,
+        \item Dysk Twardy: 256GB SSD,
+        \item Wyświetlacz: Wbudowany o przekątnej 13.3", rozdzielczość 20560x1600px.
+    \end{itemize}
+\end{enumerate}
+
 \section{Scenariusze testowe}
+\par
+Opracowanie przypadków testowych odbyło się w oparciu o specyfikację wymagań funkcjonalnych, co umożliwiło zachowanie zgodności pomiędzy oczekiwanym a testowanym zachowaniem systemu.
+Poniżej znajduje się uproszczona tabela z przykładowymi scenariuszami testowymi:
+\begin{table}[h]
+    \centering
+    \begin{tabularx}{\textwidth}{|c|p{2cm}|X|X|p{2cm}|}
+        \hline
+        Nr. & Tytuł & Kroki & Oczekiwany rezultat & Powiązane wymagania \\ \hline
+        1. & Pomyślne logowanie & \begin{enumerate}[nosep,topsep=0pt,leftmargin=*]
+            \item Uruchom aplikację \gls{Labbyn}
+            \item Wpisz dane logowania w formularzu
+            \item Kliknij przycisk "Login"
+        \end{enumerate}
+        & Po kliknięciu przycisku "Login" użytkownik zostaje przeniesiony na stronę główną aplikacji & LAB-D-01 \\ \hline
+        2. & Dodawanie laboratorium & \begin{enumerate}[nosep,topsep=0pt,leftmargin=*]
+            \item Kliknij w zakładkę "Labs" w panelu bocznym
+            \item Kliknij "Create Lab"
+            \item Wypełnij formularz używając danych testowych
+            \item Kliknij "Create"
+        \end{enumerate}
+        & Po kliknięciu przycisku "Labs" użytkownik zostaje przenoszony do zakładki z dostępnymi laboratoriami. Po kliknięciu "Create Lab" Użytkownik widzi formularz tworzenia nowego laboratorium. Po wypełnieniu formularza i kliknięciu "Create" użytkownik widzi komunikat o powodzeniu opracji a na liście dostępnych laboratoriów pojawia się nowo utworzone & LAB-F-22 \\ \hline
+    \end{tabularx}
+    \caption{Przykładowe scenariusze testowe systemu \gls{Labbyn} (opracowanie własne)}
+\end{table}
+
 \section{Cykl życia defektów i proces ich eliminacji}
+
+\section{Automatyzacja testów}
+Na wczesnym etapie prac nad aplikacją podjęto próbę wdrożenia testów automatycznych w celu usprawnienia procesu weryfikacji działania systemu oraz ograniczenia nakładu pracy związanego z ręcznym wykonywaniem powtarzalnych scenariuszy testowych.
+W tym celu rozważono wykorzystanie narzędzi takich jak \gls{Pytest} do testów jednostkowych i integracyjnych oraz \gls{Selenium} do testów interfejsu użytkownika i \gls{E2E}.
+\subsection{Wykorzystanie narzędzia}
+\par
+\gls{Pytest} został wybrany ze względu na jego popularność w ekosystemach języka Python, czytelną składnię oraz możliwość łatwego definiowania testów.
+Umożliwia on również rozszerzenie funkcjonalności poprzez dodatkowe wtyczki, w tym generowanie raportów z wykonanych testów.
+\par
+Do testów interfejsu użytkownika oraz \gls{E2E} rozważono wykorzystanie narzędzia \gls{Selenium}, które pozwala na automatyzację interakcji z aplikacją działającą w przeglądarce internetowej.
+Dzięki temu możliwe było symulowanie zachowań użytkownika, takich jak:
+\begin{itemize}
+    \item wypełnianie formularzy,
+    \item nawigacja pomiędzy widokami,
+    \item weryfikacja poprawności działania elementów interfejsu.
+\end{itemize}
+\par
+W celu analizy wyników testów zastosowano również wtyczkę \gls{pytest-html}, umożliwiającą generowanie raportów w formacie HTML.
+Raporty te zawierały szczegółowe informacje dotyczące przebiegu testów i co najważniejsze zrzuty ekranu aplikacji.
+\subsection{POC testów automatycznych}
+\par
+W ramach prac nad auomatyzacją testów przygotowano prototypowe rozwiązanie \gls{POC} wykorzystujące framework \gls{Pytest} oraz bibliotekę \gls{Selenium WebDriver}.
+Celem implementacji było sprawdzenie możliwości automatycznej weryfikacji podstawowych funkcjonalności interfejsu użytkownika oraz ocena opłacalności wdrożenia pełnej automatyzacji procesu testowego.
+\par
+Przygotowany scenariusz testowy koncentrował się na automatycznej nawigacji po elementach menu bocznego aplikacji.
+Proces testowy obejmował uruchomienie przeglądarki internetowej, wykonanie procesu logowania do systemu, a następnie iteracyjne przechodzenie pomiędzy kolejnymi widokami aplikacji dostępnymi z poziomu panelu nawigacyjnego.
+\par
+W celu zwięszkenia czytelności oraz możliwości późniejszej analizy wyników zaimplementowano mechanizm automatycznego wykonywania zrzutów ekranu podczas przebiegu testów.
+Wykorzystano do tego rozszerzenie \gls{pytest-html}, umożliwiające generowanie raportów w formacie HTML zawierających informacje o przebiegu testów oraz zapisane zrzuty ekranu przedstawiające stan aplikacji w momencie wykonywania poszczególnych kroków scenariusza testowego.
+\par
+W ramach implementacji zastosowano również mechanizmy oczekiwania na dostępność elementów interfejsu użytkownika przy użyciu klasy \gls{WebDriverWait}, co pozwoliło ograniczyć ryzyko występowania błędów wynikających z asynchronicznego ładowania komponentów aplikacji.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/testing/e2e_test_init_fragment.png}
+    \caption{Fragment kodu implementacji scenariusza automatycznej nawigacji po elementach interfejsu użytkownika z wykorzystaniem \gls{Selenium WebDriver} (opracowanie własne)}
+    \label{img:e2e_test_init_fragment}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/testing/conftest_e2e.png}
+    \caption{Konfiguracja rozszerzenie \gls{pytest-html} odopwiedzialnego za generowanie raportów testowych oraz dołączanie zrzutów ekranu (opracowanie własne)}
+    \label{img:conftest_e2e}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/testing/poc_automatyzacji_testow.png}
+    \caption{\gls{POC} raportu z testów automatycznych (opracowanie własne)}
+    \label{img:poc_automatyzacji_testow}
+\end{figure}
+\subsection{Problemy związane z automatyzacją testów}
+\label{sec:auotmation_problems}
+\par
+Przygotowane rozwiązanie pozwoliło zweryfikować możliwość automatyzacji wybranych scenariuszy testowych oraz ocenić potencjalne korzyści wynikające z integracji trestów automatycznych z porcesem rozwoju aplikacji.
+Jednocześniej analiza przygotowanego rozwiązania jak i próba implementacji go do standardowego przepływu pracy w ramach obecnych rozwiązań \gls{CI/CD} wykazała, że wdrożenie jak i utrzymanie stabilności testów automatycznych w dynamicznie rozwijanej aplikacji wymagałoby znacznych zasobów czasowych i organizacyjnych w stosunku do możliwości zespołu projektowego.
+Główne trudności dotyczyły:
+\begin{itemize}
+    \item wysokiego nakładu pracy wymaganego do przygotowania stabilnych testów automatycznych,
+    \item wrażliwości testów \gls{Selenium} na zmiany w interfejsie użytkownika,
+    \item konieczności częstej aktualizacji testów w przypadku modyfikacji aplikacji,
+    \item dłuższego czasu przygotowania i debugowania testów w porównaniu do testów manualnych.
+\end{itemize}
+\subsection{Decyzja o rezygnacji z automatyzacji testów}
+Ze względu na ograniczenia przedstawione w rozdziale \ref{sec:auotmation_problems}, zespół podjął decyzję o rezygnacji z szerokiego wykorzystania testów automatycznych na rzecz testów manualnych.
+Testy manualne okazały się bardziej elastyczne i mniej kosztowne w utrzymaniu w kontekście dynamicznie rozwijającej się aplikacji.
+\par
+Podejście manualne umożliwiło na szybkie reagowanie na zmiany w ystemie oraz bardziej intuicyjną weryfikację nowych funkcjonalności bez konieczności każdorazowej aktualizacji zestawu testów.
+W rezultacie pozwoliło to na efektywniejsze wykorzystanie czasu w procesie testowania oraz zwiększenie tempa iteracyjnego rzowju aplikacji.
+Jednocześnie testy jednostkowe oraz testy dymne pozostały w formie niezmienionej.
+\par
+Pomimo rezygnacji z pełnej automatyzacji, wykorzystane narzędzia pozostają potencjlanym kierunkiem dalszego rozwoju projektu, szczególnie w przypadku ustabilizowania się architektury systemu oraz ograniczenia częstotliwościa zmian lub w przypadku poszerzenia zespołu o dodatkowych członków.
+
 \section{Wyniki Testów}
