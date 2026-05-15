@@ -1,10 +1,11 @@
 \chapter{Przebieg Sprintów}
 \par
 W niniejszym rozdziale opisane zostały kluczowe funkcjonalności/akcje wykonane w każdym sprincie. Należy mieć na uwadze, że na każdy sprint przypadały też przynajmniej 2 spotkania zespołu będące jednocześnie przeglądem postępów prac jak i planowaniem kolejnych. Szczegółowy proces opisany został w rozdziale "Zarządzanie projektem".
+Na każdy \gls{sprint} przypada także aktualizacja lub poprawki do niniejszego dokumentu, które nie będą opisywane w każdym podrozdziale by nie powielać tych samych informacji. 
 \section{Sprint 0}
 \textbf{Czas trwania \gls{sprint}u: 29.10.2025 - 12.11.2025 (2 tygodnie)}
 \par
-Sprint ten był inicjalizacją prac nad projektem. Pierwszym zadaniem było  zrobienie listy kluczowych funkcjonalności jakie system powinien posiadać. Aby uzuepłnić potencjalne braki zespół stworzył ankietę, która została przekazana potencjalnym uzytkownikom systemu. Po upływie 1 tygodnia od rozesłania ankiety, zbieranie odpowiedzi zostało zakończone. W tym czasie zespół stworzył \gls{POC} systemu do monitorowania statystyk urządzeń tworząc pliki konfiguracyjne kompatybilne z systemem monitorowania Prometheus.
+Gls{sprint} ten był inicjalizacją prac nad projektem. Pierwszym zadaniem było  zrobienie listy kluczowych funkcjonalności jakie system powinien posiadać. Aby uzuepłnić potencjalne braki zespół stworzył ankietę, która została przekazana potencjalnym uzytkownikom systemu. Po upływie 1 tygodnia od rozesłania ankiety, zbieranie odpowiedzi zostało zakończone. W tym czasie zespół stworzył \gls{POC} systemu do monitorowania statystyk urządzeń tworząc pliki konfiguracyjne kompatybilne z systemem monitorowania Prometheus.
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{images/sprint_summary/monitoring_poc.png}
@@ -81,16 +82,17 @@ W ramach implementacji logiki systemu od strony \gls{Backend}u dodano warstwę d
 \section{Sprint 3}
 \textbf{Czas trwania \Gls{sprint}u: 10.12.2025 - 07.01.2026 (4 tygodnie)}
 \par
-Sprint został wydłużony o dwa tygodnie ze względu na okres świąteczny, który ograniczył dostępność zespołu. Podczas tego czasu zaimplementowana została strona logowania użytkownika (bez autoryzacji po stornie \gls{Backend}u), a postronie interfejsu użytkownika, zakładki w systemie na podstawie mockupów wytworzonych w poprzednim sprincie: Labs oraz Documentation.
+\Gls{sprint} został wydłużony o dwa tygodnie ze względu na okres świąteczny, który ograniczył dostępność zespołu. Podczas tego czasu zaimplementowana została strona logowania użytkownika (bez autoryzacji po stornie \gls{Backend}u), a postronie interfejsu użytkownika, zakładki w systemie na podstawie mockupów wytworzonych w poprzednim sprincie: Labs oraz Documentation.
 Implementacja makiet interfejsu użytkownika umożliwiła przeprowadzenie wstępnych testów manualnych, w szczególności w zakresie nawigacji oraz interakcji użytkownika z systemem. Wczesna walidacja systemu pozwoliła na wykrycie błędów w początkowej fazie implementacji, co znacząco uprościło ich eliminację oraz ograniczyło ryzyko propagacji defektów w kolejnych etapach rozwoju.
 Zaimplementowane zostało \gls{API} do obsługi \gls{Ansible} wraz z \gls{Playbook}'ami, w ramach którego powstał skrypt, który automatycznie wdraża agenta w celu pobrania konfiguracji sprzętowej. Aby wspomóc testy manualne tej funkcjonalności utworzony został skrypt do tworzenia wirtualnych hostów.
 Przygotowana została kontrola dostępu do bazy danych oraz wstępna logika logowania i resetowania hasła użytkownika.
 Kluczowym z perspektywy biznesowej było również zaimplementowanie auto-inicjalizacji użytkownika serwisowego w momencie pierwszego zbudowania aplikacji, który umożliwi inicjalny dostęp do aplikacji oraz przeprowadzenie podstawowej konfiguracji, w tym tworzenie kolejnych kont użytkowników.
+Z racji na zdefiniowanie procesów zapewnienia jakości od początku procesu implementacji, udało się zidentyfikować pierwszy defekt w systemie.
 
 \section{Sprint 4}
 \textbf{Czas trwania \Gls{sprint}u: 07.01.2026 - 28.01.2026 (3 tygodnie)}
 \par
-Sprint został ponownie wydłużony, tym razem o 1 tydzień, aby jego zakończenie było zbieżne z planowanym zakończeniem etapu 3. co umożliwiło spójne podsumowanie postępów prac.
+Gls{sprint} został ponownie wydłużony, tym razem o 1 tydzień, aby jego zakończenie było zbieżne z planowanym zakończeniem etapu 3. co umożliwiło spójne podsumowanie postępów prac.
 Zaimplementowano zapis pobranych przez \gls{Ansible} komponentów do bazy danych oraz kolejne zakładki w interfejsie użytkownika: Inventory, Import\&Export, Admin Panel, User, Groups oraz nakładki z funkcją wyszukiwania danych w systemie.
 Zdefiniowano plan testów obejmujący scenariusze testowe, środowisko testowe oraz kryteria akceptacji poszczególnych funkcjonalności systemu.
 Na potrzeby \gls{MVP} dokonano integracji poszczególnych zakładek interfejsu z \gls{Backend}em, umożliwiając dynamiczne pobieranie i prezentowanie danych z \gls{API}.
@@ -99,24 +101,55 @@ Na potrzeby \gls{MVP} dokonano integracji poszczególnych zakładek interfejsu z
 \textbf{Czas trwania \Gls{sprint}u: 28.01.2026 - 11.02.2026 (2 tygodnie)}
 \par
 W trakcie realizacji projektu zidentyfikowano niejednoznaczności oraz braki w wymaganiach dotyczących wybranych funkcjonalności (np. proces dodawania nowej maszyny), co utrudniało ich bezpośrednią implementację. Ze względu na ryzyko opóźnienia prac zdecydowano się na opracowanie opisowej logiki biznesowej, która doprecyzowała sposób działania systemu, umożliwiła kontynuację implementacji oraz stanowiła tymczasową specyfikację zachowania systemu. Równocześnie rozpoczęto proces specyfikacji brakujących wymagań w celu zwiększenia kompletności i pokrycia funkcjonalnego systemu.
-Podjęto próbę implementacji frameworka do testów end-to-end. Po przeprowadzeniu analizy wartości dodanej, kosztów utrzymania oraz nakładu pracy związanego z integracją z istniejącym procesem CI/CD, zespół zdecydował o rezygnacji z tego rozwiązania.
+Podjęto próbę implementacji frameworka do testów \gls{E2E}. Po przeprowadzeniu analizy wartości dodanej, kosztów utrzymania oraz nakładu pracy związanego z integracją z istniejącym procesem CI/CD, zespół zdecydował o rezygnacji z tego rozwiązania.
 
 
 \section{Sprint 6}
 \textbf{Czas trwania \Gls{sprint}u: 11.02.2026 - 25.02.2026 (2 tygodnie)}
 \par
+Zaimplementowano kolejne zakładki z dostępnych mockupów w sekcji User i User Groups.
+W ramach integracji, połączone z \gls{Backend}em zostały poniższe komponenty:
+\begin{itemize}
+    \item Zakładka "History"
+    \item Zakładka "Teams"
+\end{itemize}
+Dodano także kolejne \gls{Endpoint}y do pobierania danych dla obiektów:
+\begin{itemize}
+    \item Historia,
+    \item Rack,
+    \item Dokumentacja,
+    \item Maszyna
+\end{itemize}
+Zaimplementowano obsługę tagów w celu łatwiejszej identyfikacji kategorii wybranego sprzętu.
+Z racji potrzeb biznesowych powstały również Diagramy Przypadków Użycia dostępny na rysunkach \ref{img:ucd_user}, \ref{img:ucd_group_admin} oraz \ref{img:ucd_sys_admin}.
+W związku z liczbą zależności zostały one podzielone ze względu na rolę w systemie.
+\par
+Z racji na stworzoną w poprzednim \glslink{sprint}{sprincie} Opisową Logikę Biznesową, rozpoczęto proces konwersji opisu na wymagania.
 
 \section{Sprint 7}
-\textbf{Czas trwania \Gls{sprint}u: 25.02.2026 - 04.03.2026 (1 tygodnie)}
+\textbf{Czas trwania \Gls{sprint}u: 25.02.2026 - 04.03.2026 (1 tydzień)}
 \par
+Z racji na poprzednie wydłużenia \gls{sprint}ów oraz rozpoczęcie ostatniego semestru, zespół zadecydował o skróceniu tej iteracji do 1 tygodnia, w celu efektywniejszego zaplanowania kolejnych iteracji względem planu zajęć akademickich.
+\par
+Zakończono proces przełożenia opsiowej logiki biznesowej na wymagania.
+Po stronie interfejsu użytkownika zaszły zmiany na poziomie mapy przestrzennej w postaci usprawnień w interfejsie nawigacji.
+Powstał \gls{Endpoint} służacy do edycji tagów w zasobie (wcześniejsza implementacja nie umożliwiała zmian).
+Rozpoczęto proces dostosowywania istniejących już zakładek do nowo powstałych wymagań oraz \gls{Endpoint}ów.
+Testy jednostkowe poszerzone zostały o \gls{RBAC}.
 
 \section{Sprint 8}
-\textbf{Czas trwania \Gls{sprint}u: 04.03.2026 - 18.03.2026 (2 tydzień)}
+\textbf{Czas trwania \Gls{sprint}u: 04.03.2026 - 18.03.2026 (2 tygodnie)}
 \par
+Podczas tego \gls{sprint}u wykonano szereg prac związanych zarówno z rozwojem funkcjonalnym aplikacji, jak i poprawą jakości kodu. 
+Zaimplementowano mechanizmy umożliwiające masowy import danych z plików \gls{CSV}.
+Rozbudowano system obsługi błędów poprzez wprowadzenie globalnego mechanizmu obsługi wyjątków oraz przeprowadzono standaryzację wybranych \gls{Endpoint}ów aplikacji, w tym migrację operacji do architektury asynchronicznej.
+Wprowadzono również \gls{Endpoint} do obsługi wyszukiwania danych.
+Rozwinięto funkcjonalności interfejsu użytkownika poprzez dodanie panelu "szybkich akcji" takich jak dodanie maszyny czy stworzenie nowego obiektu w inwentarzu technicznym.
 
 \section{Sprint 9}
 \textbf{Czas trwania \Gls{sprint}u: 18.03.2026 - 01.04.2026 (2 tygodnie)}
 \par
+
 
 \section{Sprint 10}
 \textbf{Czas trwania \Gls{sprint}u: 01.04.2026 - 15.04.2026 (2 tygodnie)}

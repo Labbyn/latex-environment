@@ -4,9 +4,10 @@ Jak możemy przeczytać w sylabusie "\textregistered{ISTBQ} Certyfikowany Tester
     "Testowanie jest często utożsamiane z zapewnieniem jakości, ale w rzeczywistości są to dwa oddzielne procesy" ~\cite{istqb_ctfl_4}
 \end{quote}
 W związku z tym w niniejszym rozdziale, osobno zostaną opisane obydwa zagadnienia jak i ich wpływ na system \gls{Labbyn}.
+
 \section{Zapewnienie jakości}
 \par
-Jak możemy przeczytać w sylabusie "Z kolei zapewnienie jakości to podejście ukierunkowane na procesy i mające charakter preqencyjny, które skupia się na wdrażaniu i udoskonalaniu procesów. Bazuje ono na założeniu, że poprawne wykonanie dobrze zaprojektowanego procesu przekłada się na wytworzenie dobrego produktu" ~\cite{istqb_ctfl_4} w myśl tej zasady wdrożone zostały działania mające na calu zwiększenie poprawności tworzonego systemu już od najwcześniejszych etapów jego rozwoju.
+Jak możemy przeczytać w sylabusie "Z kolei zapewnienie jakości to podejście ukierunkowane na procesy i mające charakter prewencyjny, które skupia się na wdrażaniu i udoskonalaniu procesów. Bazuje ono na założeniu, że poprawne wykonanie dobrze zaprojektowanego procesu przekłada się na wytworzenie dobrego produktu" ~\cite{istqb_ctfl_4} w myśl tej zasady wdrożone zostały działania mające na calu zwiększenie poprawności tworzonego systemu już od najwcześniejszych etapów jego rozwoju.
 \subsection{Techniki Statyczne}
 \par
 Istotnym elementem zapewnienia jakości są techniki statyczne, niewymagające wykonywania kodu źródłowego aplikacji. Do technik tych zaliczają się między innymi przeglądy wymagań, analiza dokumentacji projektowej, przeglądy kodu źródłowego czy też analiza statyczna.
@@ -74,6 +75,7 @@ W ramach ujednolicenia czytelności kodu, przygotowany został dokument \gls{Cod
         \item W przypadka nieopisanych w niniejszym dokumencie, należy stosować się do obowiązujących zasad \gls{PEP 8}
     \end{itemize}
 \end{enumerate}
+
 \section{Testowanie}
 \begin{quote}
 "Testowanie jest naturalnym procesem i czy nazwiemy je uczeniem się, czy też eksperymentowaniem, nie ma to większego znaczenia dla samej czynności poznawania i podejmowania decyzji o testowanym obiekcie." ~\cite{smilgin2018tester}
@@ -82,8 +84,8 @@ W ramach ujednolicenia czytelności kodu, przygotowany został dokument \gls{Cod
 Proces testowania oprogramowania stanowi istotny elemnt cyklu życia aplikacji i pozwala na ocenę poprawności działania system, wykrycie potencjalnych defektów oraz weryfikację zgodności implementacji z założeniami projektowymi.
 Testowanie umożliwia również analizę zachowania aplikacji w różnych scenariuszach użytkowania oraz ocenę stabilności i bezpieczeństwa systemu.
 \par
-W ramach niniejszego rozdziału przeprowadzono analizę działania systemu \gls{Labbyn}.
-Przedstawiono również środowisko testowe, przykładowe scenariusze testowe, wykryte defekty oraz sposób ich rozwiązania.
+Jedna z zasad testowania mówi o tym, że testować powinno się jak najszybciej, co zespół wdrożył podczas procesu tworzenia aplikacji.
+Dzięki temu pierwszy defekt udało się zidentyfikować i wyeliminować już w \glslink{sprint}{sprincie} 3.
 
 \section{Cel i zakres testów}
 \par
@@ -118,6 +120,7 @@ Zostały one zintegrowane z procesem \gls{CI/CD} i skonfigurowane jako warunek w
     \caption{Przykładowe logi z uruchomionego zadania wykonania testów dymnych (opracowanie własne)}
     \label{img:example_smoke_test_log}
 \end{figure}
+
 \section{Środowisko testowe}
 \par
 W procesie testowym użyte zostały 2 konfiguracje sprzętowe:
@@ -141,6 +144,14 @@ W procesie testowym użyte zostały 2 konfiguracje sprzętowe:
         \item Wyświetlacz: Wbudowany o przekątnej 13.3", rozdzielczość 20560x1600px.
     \end{itemize}
 \end{enumerate}
+
+\section{Testy Eksploracyjne}
+\par
+Z racji, że system tworzony był na podstawie m.in. doświadczeń zespołu, była to idealna okazja by zdefiniować sesje testów eksploracyjnych.
+Sesja taka trwała między 1 a 2 godzinami, podczas której osoba przeprowadzająca test, korzystała z niego jak domyślny użytkownik próbując zidentyfikować obszary wymagające poprawy lub defekty.
+Artefaktem takiej sesji mogły być raporty błędu lub powiadomienie zespołu o niedogodnościach napotkanych podczas eksploracji aplikacji używając przeznaczonego komunikatora lub kolejnego spotkania.
+Dzięki tym sesjom, udało się zidentyfikować niedoskonałości systemu \gls{Labbyn}, które z pewnością nie zostałyby zauważone podczas wykonywania standardowych scenariuszy testowych.
+Przykładem tego stanu rzeczy jest chociażby defekt związany z aktywnym sterowaniem mapą przestrzenną podczas wypełniania formularza dodawania nowego elementu w systemie, co nie było częścią zdefiniowanego procesu testowego.
 
 \section{Scenariusze testowe}
 \par
@@ -169,9 +180,35 @@ Poniżej znajduje się uproszczona tabela z przykładowymi scenariuszami testowy
 \end{table}
 
 \section{Cykl życia defektów i proces ich eliminacji}
+\par
+W celu eliminacji defektów stworzony został proces ich obsługi obejmujący zarówno zgłaszanie jak i obsługę nieporządanych zachowań systemu.
+W jego ramach zespół ustandaryzował tworzenie raportów o błędach, który powinien wyglądać następująco:
+\begin{enumerate}
+    \item Tytuł: Jasno wyjaśniający temat zgłoszenia
+    \item Opis: W opisie znaleźć powinny się następujące elementy:
+    \begin{enumerate}
+        \item Kroki reprodukcji
+        \item Dotknięte elementy
+        \item Środowisko
+        \item Oczekiwane zachowanie
+        \item Zaobserwowane zachowanie
+        \item Powtarzalność
+    \end{enumerate}
+    \item Załączniki: W miarę możlwiości, zrzuty ekranu przedstawiające zaobserwowany defekt
+\end{enumerate}
+Dzięki takiemu podejściu zespół był w stanie łatwiej określić zaafektowane obszary systemu oraz bardziej efektywnie planować ich naprawę.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/testing/bug_report_example.png}
+    \caption{Przykładowy raportu zgłoszonego defektu (opracowanie własne)}
+    \label{img:bug_report_example}
+\end{figure}
+\par
+Defekty zebrane w procesie testowania, omawiane były na cotygodniowych spotkaniach na forum zespołu oraz przypisywane do odpowiedniego członka zespołu odpowiedzialnego za zaafektowany element.
+Rozwiązane problemy walidowane były poprzez testy manualne (zazwyczaj przez osobę zgłaszającą).
 
 \section{Automatyzacja testów}
-Na wczesnym etapie prac nad aplikacją podjęto próbę wdrożenia testów automatycznych w celu usprawnienia procesu weryfikacji działania systemu oraz ograniczenia nakładu pracy związanego z ręcznym wykonywaniem powtarzalnych scenariuszy testowych.
+Na wczesnym etapie prac nad aplikacją, mimo że zespół zidentyfikował ryzyko niedotrzymania założonego zakresu prac wynikające z ograniczeń czasowych oraz dostępnych zasobów projektowych, podjęto próbę wdrożenia testów automatycznych w celu usprawnienia procesu weryfikacji działania systemu oraz ograniczenia nakładu pracy związanego z ręcznym wykonywaniem powtarzalnych scenariuszy testowych.
 W tym celu rozważono wykorzystanie narzędzi takich jak \gls{Pytest} do testów jednostkowych i integracyjnych oraz \gls{Selenium} do testów interfejsu użytkownika i \gls{E2E}.
 \subsection{Wykorzystanie narzędzia}
 \par
@@ -239,5 +276,3 @@ W rezultacie pozwoliło to na efektywniejsze wykorzystanie czasu w procesie test
 Jednocześnie testy jednostkowe oraz testy dymne pozostały w formie niezmienionej.
 \par
 Pomimo rezygnacji z pełnej automatyzacji, wykorzystane narzędzia pozostają potencjlanym kierunkiem dalszego rozwoju projektu, szczególnie w przypadku ustabilizowania się architektury systemu oraz ograniczenia częstotliwościa zmian lub w przypadku poszerzenia zespołu o dodatkowych członków.
-
-\section{Wyniki Testów}
