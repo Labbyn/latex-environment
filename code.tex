@@ -1,2 +1,701 @@
-\chapter{Szczegóły implementacyjne}
+\chapter{Architektura systemu (Backend)}
 
+\section{Stack technologiczny}
+\par Warstwa \gls{Backend}owa systemu, została zaimplementowana w języku Python w połączeniu z frameworkiem \gls{FastAPI}. 
+\par Wybór takiego rozwiązania został podyktowany przede wszystkim: wysoką wydajnością oraz natywnym wsparciem dla operacji asynchronicznych, co jest kluczowe w systemach zarządzania dużymi zasobami. 
+\par Framework \gls{FastAPI} zapewnia również automatyczną walidację danych wejściowych we współpracy z biblioteką \gls{Pydantic}, co pozwala na minimalizację błędów w czasie działania aplikacji oraz na automatyczną generację dokumentacji \gls{API} w standardzie \gls{OpenAPI}.
+\par Istotnym aspektem wyboru była także łatwa integracja z systemami bazodanowymi poprzez użycie systemu mapowania obiektowo-relacyjnego (\gls{ORM}), dostarczonego przez bibliotekę \gls{SQL Alchemy} 2.0. W połączeniu z bazą \gls{PostgreSQL} co umożliwiło bezpieczne i transakcyjne zarządzanie zasobami zapewniając integralność danych.
+\par Kolejnym istotnym czynnikiem była łatwość integracji z zewnętrznymi narzędziami i bibliotekami. Wykorzystany stack technologiczny pozwolił na sprawną implementację komunikacji z systemami monitoringu (\gls{Prometheus}, \gls{Grafana}) oraz narzędziami do automatyzacji konfiguracji (\gls{Ansible}) służącymi do orkiestracji zasobów.
+\par Architekturę \gls{Backend}u wzbogacono o mechanizm \gls{Redis} służący do zarządzania rozproszonymi blokadami zasobów, co jest kluczowe w przypadku środowisk wielodostępnych, gdzie jednoczesna modyfikacja zasobów przez wiele użytkowników może prowadzić do niespójności lub błędów \gls{race condition}.
+
+\section{Architektura}
+\par Warstwa backendowa została oparta na architekturze wielowarstwowej, której celem jest odseparowanie odpowiedzialności pomiędzy osobnymi komponentami. Takie rodzaj architektury ułatwia potencjalnie skalowanie systemu w przyszłości.
+
+\subsection{Warstwa interfejsu}
+\par Warstwa odpowiedzialna za obsługę protokołu HTTP, routing, walidację schematów, wstrzykiwanie zależności odpowiedzialnych za autoryzacją i inicjalizację kontekstu użytkownika. 
+\par Zaprojektowana w architekturze REST, mapując następujące operacje odpowiednio:
+\begin{itemize}
+    \item GET - pobieranie informacji o zasobach z bazy danych
+    \item POST - wprowadzenie nowych obiektów do bazy danych
+    \item PATCH/PUT - aktualizacja istniejących już obiektów w bazie danych
+    \item DELETE - usuwanie istniejących obiektów w bazie danych
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_obsluga_http.png}
+    \caption{Obsługa zapytań HTTP w module machines, odpowiadająca za stworzenie nowego obiektu (opracowanie własne)}
+    \label{img:backend_obsluga_http}
+\end{figure}
+
+\subsection{Warstwa serwisowa}
+\label{sec:serwis_layer}
+\par Warstwa odpowiedzialna za przetwarzanie żądań dostarczonych przez użytkowników aplikacji, zgodnie z regułami biznesowymi które zostały w niej zdefiniowane. Łączy w sobie funkcjonalności wielu modułów, odpowiada za integralność i walidację biznesową, zarządza stanem i synchronizacją. Jest odizolowana od bazy danych, a także protokołu HTTP.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_room_service.png}
+    \caption{Logika biznesowa klasy RoomService, odpowiadająca za aktualizację wartości obiektu Room (opracowanie własne)}
+    \label{img:backend_room_service}
+\end{figure}
+
+\subsection{Warstwa egzekutorów}
+\label{sec:egzecutors_layer}
+\par Specjalna warstwa abstrakcji, dedykowana do współpracy z zewnętrznymi rozwiązaniami(\gls{Ansible}, \gls{Prometheus}). Pełni rolę interfejsu pomiędzy logiką biznesową a infrastukturą zewnętrzna. W odróżnieniu od poprzednich warstw, egzekutorzy zarządzają pełnym cyklem życia wyżej wymienionych narzędzi. Dodatkowo są odpowiedzialni za hermetyzację logiki komunikacyjnej, zarządzanie stanem konfiguracyjnym, i prowadzenie autonomicznych procesów w tle.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_prometheus_egzecutor.png}
+    \caption{Początek klasy PrometheusExecutor, zarządzajacej komunikacją z Prometheus (opracowanie własne)}
+    \label{img:backend_prometheus_egzecutor}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_ansible_egzecutor.png}
+    \caption{Początek klasy AnsibleExecutor, zarządzającej komunikacją i egzekucją funkcjonalności Ansible (opracowanie własne)}
+    \label{img:backend_ansible_egzecutor}
+\end{figure}
+
+\subsection{Warstwa dostępu do danych}
+\par Warstwa działająca jako pomost pomiędzy modelem obiektowym, a relacyjną bazą danych. Zawiera ona wyłącznie surowe zapytania SQL, zbudowane za pomocą \gls{ORM}. Operuje bezpośrednio na sesji bazy danych, a jej jedynym zadaniem jest wysłanie zapytania i odesłanie odpowiedzi do wyższych warstw.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_category_repository.png}
+    \caption{Repozytorium CategoryRepository, którego jedynym zadaniem jest komunikacja z bazą danych (opracowanie własne)}
+    \label{img:backend_category_repository}
+\end{figure}
+
+\section{Wzorce projektowe}
+\par W procesie tworzenia wykorzystano następujące wzorce projektowe, by zapewnić przejrzystość i modularność kodu.
+\subsection{Wstrzykiwanie zależności}
+Wzorzec ten wywodzi się z fundamentalnego działania frameworka \gls{FastAPI}. Polega na przekazywaniu wymaganych komponentów do funkcji lub klas z zewnątrz zamiast tworzenia ich wewnątrz struktur. W systemie \gls{Labbyn} wzorzec ten został wykorzystany do zarządzania sesjami połączeń do bazy danych oraz mechanizmem RequestContext (Szczegółowa implementacja mechanizmu kontekstu została opisana w rozdziale \ref{sec:kontekst}), zawierającym tożsamość użytkownika oraz jego uprawnienia i role. Wzorzec jest stosowano w każdym istniejącym endpoincie aplikacji. Dzięki takiemu rozwiązaniu każdy z nich otrzymuje gotowy obiekt, unikając tworzenia połączeń wewnątrz swojego ciała, co jeszcze bardziej zwiększa jego niezależność od pozostałych modułów systemu.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_inventory_injection.png}
+    \caption{Endpoint służący do tworzenia nowego przedmiotu w inwentarzu ze wstrzyknięciem mechanizmu kontekstu (opracowanie własne)}
+    \label{img:backend_inventory_injection}
+\end{figure}
+
+\subsection{Singleton}
+\par Wzorzec gwarantujący, że dana klasa posiada tylko jedną instancję przez cały cykl życia aplikacji oraz globalny punkt dostępu. W systemie \gls{Labbyn} wzorzec ten jest wykorzystywany do tworzenia silnika bazodanowego poprzez mechanizm cachowania modułów. Obiekt silnika jest globalny wewnątrz modułu bazy danych, przy pierwszym wywołaniu silnik bazodanowy jest inicjalizowany raz, a każda próba dostępu do niego, zawsze zwraca tą samą instancję.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_singleton.png}
+    \caption{Funkcja create\_async\_engine z pliku database.py, tworzy globalnie dostępny silnik bazodanowy (opracowanie własne)}
+    \label{img:backend_singleton}
+\end{figure}
+\par Kolejnym przykładem zastosowanego wzorca jest menadżer pamięci podręcznej \gls{Redis}. Klasa RedisClientManager przechowuje instancję klienta w atrybucie, a każda próba dosięgnięcia go sprawdza najpierw czy instancja już istnieje oraz czy jest powiązana z aktualnie działająca pętla zdarzeń zanim zostanie utworzona nowa.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_redis_client_manager.png}
+    \caption{Klasa RedisClientManager, tworzy globalnie dostępna pojedynczą instancję do komunikacji z pamięcią podręczna. (opracowanie własne)}
+    \label{img:backend_redis_client_manager}
+\end{figure}
+\subsection{Data Transfer Object}
+\par Wzorzec służący do przesyłania danych między poszczególnymi elementami aplikacji, w sposób który nie ujawnia szczegółów implementacji modeli bazodanowych. W systemie \gls{Labbyn} wzorzec ten jest wprowadzony dzięki wykorzystaniu biblioteki \gls{Pydantic}. Schematy DTO definiują to, co dokładnie widzi użytkownik pozwalając wykluczać poszczególne wrażliwe elementy bazy danych, takich jak np. hasła lub ograniczać potrzebne pola, jeśli operacja nie wymaga ich wszystkich.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_user_model.png}
+    \caption{Klasa modelująca tabele User z bazy danych do kodu (opracowanie własne)}
+    \label{img:backend_user_model}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_user_dto.png}
+    \caption{Schemat DTO, służący jako podstawowy schemat dla operacji związanych z użytkownikiem, powstały poprzez wykluczenie niepotrzebnych pól (opracowanie własne)}
+    \label{img:backend_user_dto}
+\end{figure}
+
+\subsection{Observator}
+\par Wzorzec który służy do informowania obiektów o różnych, dowolnych zdarzeniach zachodzących w obiektach, które są przez niego obserwowane. W systemie \gls{Labbyn} wzorzec ten został wykorzystany w systemie audytu. Obiektem obserwowanym jest sesja bazy danych, podczas której “obserwatorzy” rejestrują zmiany wprowadzone do określonych tabel (Machines, Inventory, Rooms, Users, Categories), i zapisują je automatycznie w tabeli History, przeznaczonej na składowanie logów (Szczegółowa implementacja mechanizmu logowania została opisana w rozdziale \ref{sec:autentykacja}). Dzięki takiemu zastosowaniu system \gls{Labbyn} posiada automatyczny system logowania z możliwościa łatwej manipulacji, np. poszerzeniu tabel które nas interesują.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_observator.png}
+    \caption{Obserwator rejestrujący zmiany dotyczące tworzenia nowych obiektów (opracowanie własne)}
+    \label{img:backend_observator}
+\end{figure}
+
+\section{Konfiguracja i środowisko}
+\par Konfiguracja systemu \gls{Labbyn} jest podzielona na statyczne zarządzanie zmiennymi środowiskowymi obsłużonych za pomocą plików rozszerzeniem .env. Klucze dostępowe, hasła do bazy danych lub porty i adresy usług są przechowywane w plikach środowiskowych, np. api.env. Pozwala to na scentralizowane konfigurowanie środowiska, jeśli aplikacja ma zostać uruchomiona na innych portach niż domyślne, wystarczy nadpisać konkretną wartość.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_api_env.png}
+    \caption{Przykładowy plik api.env, konfigurujący parametry startowe aplikacji i zmienne globalne (opracowanie własne)}
+    \label{img:backend_api_env}
+\end{figure}
+\par W aplikacji również znajduję się mechanizm zarządzania cyklem życia, który również odpowiada za przygotowanie jej infrastruktury do pracy oraz zarządza zasobami, uruchamiany na samym starcie.
+\par Podczas startu, system automatycznie tworzy potrzebną podstawową strukturę, auto inicjalizacja domyślnego admina i auto inicjalizacja pierwszego laboratorium. Serwer weryfikuje również istnienie katalogów na zasoby statyczne takie jak folder z avatarem użytkownika. Mechanizm również inicjuje procesy działające w tle służącę do monitorowania infrastruktury poprzez moduł \gls{Prometheus}, a jego prostota pozwala na rozbudowę o kolejne dodatkowe procesy.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_app_lifecycle.png}
+    \caption{Menedżer kontekstu inicjalizujący życie aplikacji (opracowanie własne)}
+    \label{img:backend_app_lifecycle}
+\end{figure}
+\par Kolejnym etapem środowiska jest konfiguracja \gls{CORS}, aby ograniczyć dostęp do \gls{API} wyłącznie do zaufanych źródeł, by zapobiec nieautoryzowanym żądaniom, oraz klasa StaticFiles, służąca do wystawienia katalogu pod konkretnym adresem (/static/avatars), pod którym przechowywane będą grafiki służące jako awatary użytkowników.
+\begin{figure}[H]
+    \centering
+    \includegraphics{images/backend/backend_cors.png}
+    \caption{Kod inicjalizujący CORS oraz montowanie folderu dla plików statycznych (opracowanie własne)}
+    \label{img:backend_cors}
+\end{figure}
+\par Ostatnim etapem jest podłączenie routerów. Wszystkie logiczne moduły takie jak machine, rack lub tags, posiadają własne instancje klasy \gls{Router}. Wszystkie wymienione zostają podłączone do głównego cyklu życia aplikacji, co pozwala też na bardzo proste podłączenie nowych endpointów lub rezygnację z konkretnych funkcjonalności.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_routers.png}
+    \caption{Kod podłączający poszczególne mniejsze routery, by stworzyć pełen interfejs API (opracowanie własne)}
+    \label{img:backend_routers}
+\end{figure}
+\par Całość znajduję się w pliku głównym main.py, co pozwala również na szybkie i proste dostosowanie aplikacji pod konkretne działanie, przez wprowadzenie minimalnych zmian.
+
+\section{Modele danych}
+\par W systemie \gls{Labbyn} warstwa danych została zrealizowana za pomocą mapowania obiektowo-relacyjnego, z wykorzystaniem biblioteki \gls{SQL Alchemy}. Pozwala to na definiowanie encji jako klas, zarządzanie typami oraz relacjami pomiędzy tabelami.
+\par Wszystkie klasy modeli dziedziczą po wspólnej klasie bazowej, dzięki temu system automatycznie rejestruje tabele i ich powiązania. Każda kolumna w tabelach jest ściśle opisana poprzez parametry określające typ, relacje, i dodatkowe punkty takie jak np. możliwość pozostania pustą lub reguły usunięcia.
+\par Do określenia relacji zastosowany został mechanizm relationship, który pozwala na dociąganie powiązanych ze sobą obiektów w całości, np. wyciągnięcie maszyn przypisanych do konkretnej szafy rackowej, bez potrzeby budowania skomplikowanych zapytań.
+\par Dodatkowo część modeli jest wyposażona w \gls{atrybuty obliczalne}, za pomocą dekoratora @property, który pozwala na tworzenie wirtualnych pól. Oznacza to że model nie musi posiadać konkretnego pola w swojej definicji, a my możemy je dynamicznie wyciągnąć jeśli wynika ono z jego relacji z innym modelem.
+\par Podstawowe encje, takie jak Machines, Rack lub Inventory, tworzące największą podstawę systemu, zostały wzbogacone o pole version\_id, służące do wprowadzenia blokady optymistycznej.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_machine.png}
+    \caption{Model bazodanowy reprezentujący obiekt Machine wraz z użyciem blokady optymistycznej i atrybutów obliczalnych (opracowanie własne)}
+    \label{img:backend_machine}
+\end{figure}
+\par W celu wprowadzania zmian w strukturze bazy danych, zastosowano narzędzie Alembic. Każda zmiana w modelach jest rejestrowana jako osobny skrypt migracyjny. Dzięki takiemu rozwiązaniu jesteśmy w stanie odtworzyć strukturę bazy danych na dowolnym etapie. 
+\par Narzędzie Alembic potrafi również automatycznie wykrywać różnice pomiędzy modelami w kodzie a bazą danych, generując gotowe skrypty SQL i wprowadzać je na bieżąco, by stan modeli zgadzał się z faktycznym stanem znajdującym się w bazie danych.
+\par Dostarczany przez nie mechanizm migracji, pozwala na łatwe cofnięcie zmian w przypadku wykrycia błędów, by nie powodować przestojów w działaniu systemu. Każda zmiana struktury modeli, jest automatycznie rejestrowana jako rewizja, nowsza od poprzedniej, tworząc również łańcuch historii zmian.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_migration_script.png}
+    \caption{Przykładowy wygenerowany automatycznie w przypadku wprowadzenia zmian do modeli, skrypt migracyjny (opracowanie własne)}
+    \label{img:backend_migration_script}
+\end{figure}
+
+\section{Autentykacja}
+\label{sec:autentykacja}
+\par W warstwie autentykacji, skorzystano z rozwiązania dostarczonego przez bibliotekę \gls{FastAPI} Users, która została zintegrowana ze strategią bazodanową.
+\par Zastosowano mechanizm BearerTransport, po poprawnym zalogowaniu się użytkownik otrzymuje unikatowy token przesyłany w nagłówku HTTP.
+Token ten zostaje zapisany do rekordu w dedykowanej tabeli access\_tokens.
+W przeciwieństwie do standardowego rozwiązania za pomocą tokenów JWT, ta strategia pozwala na natychmiastowe przerwanie sesji w przypadku wykrycia nieprawidłowości lub usunięcia konta użytkownika, co pozwala na jeszcze większe podniesienie standardów bezpieczeństwa.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_auth_strategy.png}
+    \caption{Konfiguracja autentykacji i strategii przechowywania tokenów (opracowanie własne)}
+    \label{img:backend_auth_strategy}
+\end{figure}
+\par By zarządzać procesem logowania, skorzystano z gotowego mechanizmu dostarczonego przez \gls{FastAPI} Users, który został poszerzony ręcznie, specjalnie w celu dostosowania go do systemu \gls{Labbyn}. 
+\par Standardowe mechanizmy logowanie zostały nadpisane by umożliwić identyfikację użytkowników poprzez unikalny login, co jest bardziej praktyczne w rozwiązaniach wewnętrznych. Dzięki temu system w pierwszej kolejności weryfikuję tożsamość na podstawie loginu, następnie korzysta z wbudowanej funkcji do procesu weryfikacji hasła, które jest zabezpieczone za pomocą BCrypt. Każde hasło przed zapisem do bazy jest poddawane procesowi hashowania.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_user_manager.png}
+    \caption{Klasa UserManager, poszerzona o możliwość logowania się za pomocą loginu (opracowanie własne)}
+    \label{img:backend_user_manager}
+\end{figure}
+\par W celu zapewnienia maksymalnej kontroli nad dostępem do infrastruktury, wdrożono własny system zarządzania hasłami. W przypadku inicjalizacji konta, system generuje jednorazowe hasło startowe, który jest przekazywane przez administratora użytkownikowi. Przy pierwszym logowaniu system zmusza użytkownika do zdefiniowania własnego hasła. W przypadku resetu hasła, administrator ustawia hasło tymczasowe i aktywuję flagę resetu. Następnie analogicznie przekazuje nowo wygenerowane jednorazowe hasło użytkownikowi, który jest zmuszony po zalogowaniu zmienić je na własne.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_auth_service.png}
+    \caption{Klasa AuthService, serwis posiadający metody do resetowania hasła i obsługi pierwszego zalogowania (opracowanie własne)}
+    \label{img:backend_auth_service}
+\end{figure}
+
+\section{Autoryzacja i mechanizm kontekstu}
+\label{sec:kontekst}
+\par
+W systemie \gls{Labbyn} za proces autoryzacji odpowiada autorski mechanizm \textbf{RequestContext}.
+Jest to klasa pełniąca rolę kontenera danych i narzędzi kontroli dostępu, inicjowana na początku każdego otrzymanego żądania HTTP.
+Odpowiada za gromadzenie danych rozprszonych takich jak ID, rola, przynależność do zespołu oraz określa dostęp do zasobów na ich podstawie.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_request_context.png}
+    \caption{Inicjalizacja klasy RequestContext oraz metody budowania (opracowanie własne)}
+    \label{img:backend_request_context}
+\end{figure}
+\par
+W fazie inicjalizacji konteskst wykonuje zapytania do bazy danych aby ustalić, do których zespołów należy użytkownik oraz jaką posiada rolę.
+Informacje te są \glslink{Cachowanie}{cachowane} wewnątrz obiektu RequestContext na czas trwania żądania.
+\par
+Dzięki wykorzystaniu \textbf{mechanizmu wstrzykiwania zależności}, dostarczonego przez framework \gls{FastAPI}, obiekt kontekstu jest automatycznie tworzony oraz wstrzykiwany do \gls{Endpoint}ów.
+Każda fukncja obsługująca żądanie operuje na spójnym obiekcie sesji oraz danych użytkownika.
+\par
+System implementuje model kontroli dostępu \gls{RBAC}. Klasa definiuje trzy poziomy uprawnień:
+\begin{enumerate}
+    \item Administrator (Admin) - Posiada dostęp do wszystkich zasobów oraz możliwości systemu
+    \item Administrator Grupy (Group Admin) - Posiada dostęp do wszystkich zasobów w obrębie zespołów, w których wyróżniony jest taką rangą
+    \item Użytkownik (User) - Posiada podstawowy dostęp do zasobów swojego zespołu
+\end{enumerate}
+\par
+Klasa kontekstu posiada gotowe metody do ustawienia wymaganych uprawnień do konkretnego zasoby dzięki czemu w sposób deklaratywny wymuszamy odpowiedni poziom uprawnień.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_roles.png}
+    \caption{Zestaw metod do deklaratywnego ustawiania wymaganej roli do zasobu (opracowanie własne)}
+    \label{img:backend_roles}
+\end{figure}
+\par
+Klasa kontekstowa posiada również mechanizm automatycznego filtrowania zespołowego.
+W \glslink{Architektura wielotenantowa}{systemie wielotenantowym} jest wręcz wymagane by zapewnić izolację danych.
+Metoda team\_filter jest filtrem przyjmującym zapytanie SQL i automatycznie modyfikując je, dodając warunki ograniczające widoczność wyników tylko i wyłącznie do zespołów powiązanych z użytkownikiem.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_team_filter.png}
+    \caption{Funkcja team\_filter, filtr zespołowy automatycznie modyfikujący zapytania SQL (opracowanie własne)}
+    \label{img:backend_team_filter}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_team_filter_egzecution.png}
+    \caption{Przykładowe wywołanie team\_filter, w repozytorium Machine (opracowanie własne)}
+    \label{img:backend_team_filter_egzecution}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_require_user.png}
+    \caption{Przykładowe wywołanie require\_user, w serwisie Machine, określając poziom uprawnień na minimalny (opracowanie własne)}
+    \label{img:backend_require_user}
+\end{figure}
+
+\section{Zarządzanie współbieżnymi zasobami}
+\par
+W systemach takich jak \gls{Labbyn} bardzo czułym punktem jest uniknięcie zjawiska \gls{race condition}.
+W implementacji wielu użytkowników posiada uprawnienia do edycji tych samych zasobów, co może prowadzić do problemów.
+W ramach tego zastosowano mechanizm blokad rozproszonych na najbardziej czułych punktach aplikacji (np. edycji maszyn lub laboratoriów), przy użyciu bazy \gls{Redis}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_redis_client_manager_init.png}
+    \caption{Inicjalizacja menadżera RedisClientManager odpowiedzialnego za zarządzanie mechanizmem blokad Redis (opracowanie własne)}
+    \label{img:backend_redis_client_manager_init}
+\end{figure}
+\par
+Dzięki takiemu zastosowaniu, \gls{Redis} pozwala na synchronizację procesów w środowisku asynchronicznym.
+Przed rozpoczęciem operacji zapisu na zasobie, system tworzy unikalny klucz blokady w pamięci \gls{Redis}.
+Operuje on na pojedynczym wątku, gwarantując, że tylko jedno żądanie otrzyma dostęp do modyfikacji zasobu w danym czasie.
+Każda blokada posiada swój czas życia, by nie zablokować na trwałe konkretnego zasobu.
+\par
+Mechanizm ten został zaimplementowany jako menedżer kontekstu, by odseparować logikę bezpieczeństwa od biznesowej.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_aquire_lock.png}
+    \caption{Menedżer kontekstu acquire\_lock odpowiadający za nałożenie blokady (opracowanie własne)}
+    \label{img:backend_aquire_lock}
+\end{figure}
+\par
+Menedżer jest wywoływany w określonych, czułych punktach aplikacji głównie na operacjach dotyczących edycji lub usunięcie zasobów w następujący sposób:
+\begin{itemize}
+    \item Jeśli zasób jest wolny - proces przechodzi do edycji
+    \item Jeśli inny użytkownik aktualnie modyfikuje dany zasób - system zwraca błąd informując o blokadzie
+    \item Po zakończeniu operacji i zapisie w bazie danych - blokada jest natychmiastowo usuwana.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_delete_machine.png}
+    \caption{Funkcja delete\_machine, odpowiadająca za usunięcie konkretnej maszyny z bazy, wraz z użyciem blokady (opracowanie własne)}
+    \label{img:backend_delete_machine}
+\end{figure}
+
+\section{Obsługa Wyjątków}
+\par
+W systemie \gls{Labbyn} zastosowano scentralizowany mechanizm obsługi wyjątków.
+Końcowe komunikaty błędów w przypadku asynchronicznego \gls{API} mogą nie być zrozumiałe dla użytkownika końcowego.
+W ramach tego powstała potrzeba by zastąpić je czymś, co w prosty sposób przekaże jaki błąd został popełniony.
+\par
+Obsługa tych sytuacji prezentuje się w następujący sposób:
+\begin{enumerate}
+    \item Wewnątrz klas serwisowych bloki łapania wyjątków otaczają operacje bazodanowe, by w przypadku niepowodzenia przechwycić błąd i przekazać czytelny komunikat użytkownikowi. Dzięki temu uzyskujemy atomowość operacji oraz nie dopuszczamy do pozostawienia sesji w stanie błędu.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{images/backend/backend_exception.png}
+        \caption{Rzucanie własnego wyjątku zamiast generycznego, aby przekazać prosty komunikat zaistniałej sytuacji (opracowanie własne)}
+        \label{img:backend_exception}
+    \end{figure}
+    \item Rzucony przez warstwę serwisową wyjątek jest automatycznie przechwycony przez globalny mechanizm, który przyznaje odpowiedni kod statusu HTTP i całość zwraca jako czytelny komunikat \gls{JSON} łatwy do rozpakowania oraz wyświetlenia.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{images/backend/backend_exception_handler.png}
+        \caption{Mechanizm globalny app\_exception\_handler łapiący powstałe wyjątki (opracowanie własne)}
+        \label{img:backend_exception_handler}
+    \end{figure}
+\end{enumerate}
+\par
+W ramach mechanizmu zdefiniowano następujące klasy wyjątków:
+\begin{table}[h]
+    \centering
+    \begin{tabularx}{\textwidth}{|c|c|X|}
+        \hline
+        Klasa wyjątku & Kod HTTP & Zastosowanie \\ \hline
+        ObjectNotFoundError & 404 & Próba dostępu do nieistniejącego zasobu \\ \hline
+        AccessDeniedError & 403 & Próba wykonania akcji na zasobie bez wymaganych uprawnień \\ \hline
+        ConflictError & 409 & Naruszenie wymagań unikalności danych \\ \hline
+        ValidationError & 400 & Błędy logiczne lub niepoprawne dane wejściowe \\ \hline
+        ExternalServiceError & 502 & Błędy komunikacji z zewnętrznymi usługami \\ \hline
+        TargetSaveError & 400 & Błędy zapisu do plików lokalnych \\ \hline
+        InsufficientAmountError & 409 & Błędy wypożyczania sprzętu \\ \hline
+    \end{tabularx}
+    \caption{Klasy wyjątków w systemie \gls{Labbyn} (opracowanie własne)}
+\end{table}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_excepction_py.png}
+    \caption{Definicja niestandardowych wyjątków w pliku exceptions.py (opracowanie własne)}
+    \label{img:backend_excepction_py}
+\end{figure}
+\par
+Poza wspomnianymi wyjątkami system posiada dwa dodatkowe zabezpieczenia przechwytujące błędy niskopoziomowe.
+W przypadku błędu spójności z bazy danych, standardowy błąd rzucany przez bibliotekę SQLAlchemy zawiera surowe zapytania SQL i nazwy kluczy obcych, co stanowi potencjalne ryzyko ujawnienia wewnętrznej struktury zapytań i ułatwia ataki typu \gls{SQL Injection}.
+W ramach tego wszystkie błędy klasy IntegrityError przechodzą również przez bezpiecznik, które przechwytują je i przekazują jasną informację zamiast kodu SQL.
+Jest to również kolejne zabezpieczenie, na wypadek gdyby w warstwie serwisowej błąd ten nie został przewidziany - użytkownik nie otrzyma informacji ujawniających szczegóły implementacyjne systemu.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_integrity_handler.png}
+    \caption{Funkcja integrity\_handler automatycznie mapuje IntegrityError na komunikat o błędzie bazy danych (opracowanie własne)}
+    \label{img:backend_integrity_handler}
+\end{figure}
+\par
+Ostatnią warstwą ochrony jest globalny bezpiecznik, który obsługuje wszystkie błędy nie złapane lub nieprzewidziane przez funkcje w systemie.
+Zamiast rzucać cały stos kodu do analizy gdzie wystąpił błąd, użytkownik dostaje informację z prośbą o kontakt z administratorem, który ma dostęp do logów aplikacji.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_unhandled_exception_handler.png}
+    \caption{Funkcja unhandled\_exception\_handler przejmująca każdy nieprzewidziany wyjątek (opracowanie własne)}
+    \label{img:backend_unhandled_exception_handler}
+\end{figure}
+
+\section{Implementacja kluczowych funkcjonalności}
+\subsection{Architektura przepływu danych}
+\par
+Każda operacja na bazie danych w systemie \gls{Labbyn} przechodzi przez ustandaryzowany cykl życia przedstawiony na rysunku \ref{img:seq_diagram_data_handling}.
+Diagram sekwencji odzwierciedla sposób przepływu danych dla podstawowych operacji CRUD dostępnych w systemie.
+Ma on charakter ogólny - w około 90\% przypadków pozostaje niezmienny, natomist w pozostałych sytuacjach występują jedynie niewielkie modyfikacje (np. brak blokady \gls{Redis})
+\subsubsection{Inicjalizacja kontekstu}
+\par
+Proces przepływu danych rozpoczyna się od odebrania żądania i inicjalizacji RequestContext.
+System weryfikuje ważność tokena sesji, następnie na podstawie danych użytkownika tworzony jest kontekst zawierający potrzebne o nim informacje.
+Identyfikator użytkownika zostaje również zapisany w sesji bazy danych, gdyż jest potrzebny do późniejszego automatycznego audytu.
+\subsubsection{Kontrola dostępu i współbieżności}
+\par
+Na początku, serwis komunikuje się z bazą Redis, aby założyć blokadę na danym identyfikatorze, po tym następuje wstępna walidacja uprawnień, weryfikująca czy użytkownik ma dostęp do danego endpointu.
+W przypadku niepowodzenia tej operacji automatycznie rzucany jest wyjątek sygnalizujące niedostateczny poziom uprawnień, a blokada jest natychmiastowo ściągana.
+\subsubsection{Przetwarzanie danych}
+\par
+Po ustaleniu uprawnień oraz założeniu blokady, system weryfikuje czy zespół do którego należy zasób, jest powiązany z użytkownikiem.
+W przypadku próby wyjścia poza swoje zespołu, analogicznie jak w punkcie wyżej, proces zostaje przerwany.
+\par
+Gdy powyższe weryfikację będą zgodne, system przystępuje do realizacji zapytania SQL oraz obsługi potencjalnych błędów oraz wyjątków jakie może napotkać.
+\subsubsection{Automatyczny audyt}
+\par
+Tuż przed wysłaniem danych do bazy, system wyzwala nasłuchiwacz, który analizuje obiekt sesji i wyciąga różnicę pomiędzy starym, a nowym stanem obiektu oraz informację o użytkowniku które je dokonał.
+Całość jest zapisywana w dedykowanej tabeli w bazie danych w formacie \gls{JSONB}, dzięki temu każda różnica jest widoczna w logach systemu.
+\subsubsection{Finalizacja transakcji}
+\par
+Po pomyślnym zakończeniu operacji na bazie danych następuje zwolnienie blokady w \gls{Redis}, sformatowanie odpowiedzi, zamknięcie kontekstu i na samym końcu sesji.
+\subsection{Orkiestracja infrastruktury (Ansible)}
+W systemie \gls{Labbyn} zaimplementowano moduł orkiestracji oparty o zewnętrzne rozwiązanie zwane \gls{Ansible} umożliwiające wykonywanie zdalnej konfiguracji na maszynach bez konieczności manualnej ingerencji.
+\subsubsection{Architektura integracji}
+\label{sec:ansible_integration}
+\par
+Do komunikacji z serwisem \gls{Ansible}, zastosowano bibliotekę ansible\_runner.
+Główną częścią modułu jest klasa AnsibleExecutor, należąca do warstwy egzekutorów wspomnianych w rozdziale \ref{sec:egzecutors_layer}.
+Klasa ta pełni rolę pośrednika pomiędzy asynchronicznym \gls{API}, a synchronicznym procesem \gls{Ansible}.
+\par
+Dodatkowa warstwa była wymagana ze względu na sposób i logikę działania \gls{Ansible}.
+Potrzebne jest odpowiednio przygotowane środowisko do zarządzania współbieżnością oraz połączenia asynchronicznych operacji \gls{API} z synchronicznymi procesami \gls{Ansible}.
+\par
+Egzekutor stworzony na potrzeby integracji z \gls{Ansible} jest odpowiedzialny za dynamiczne generowania inwentarza maszyn, mapowanie i uruchamianie \gls{Playbook}ów oraz przygotowywanie raportów.
+Początek klasy AnsibleExecutor przedstawiony został na rysunku \ref{img:backend_ansible_egzecutor}
+\par
+Architektura modułu integracji z \gls{Ansible} opiera się tak na tym samym co każdy wcześniejszy moduł, jednakże przepływ danych w niej jest poszerzony o wyżej wspomnianą warstwę co prezentuje się następująco:
+\begin{enumerate}
+    \item Warstwa Serwisowa - Serwis działa w sposób standardowy, opisany w rozdziale \ref{sec:serwis_layer}.
+    \item Warstwa Egzekutora - Nowa warstwa pośrednicząca opisana w rozdiale \ref{sec:egzecutors_layer}. Serwis oddelegowuje dalszą pracę do egzekucji, która zajmuje się uruchomieniem poprawnego \gls{Playbook}a, przygotowaniem raportu oraz innymi operacjami.
+    \item Warstwa repozytorium - Wykorzystywana tylko w przypadku operacji \gls{Ansible} związanych z zapisem do bazy danych, np. Host Discovery (szczególy w rozdziale \ref{sec:key_module_functionality}), więc w porównaniu do klasycznych jej przedstawicieli jest dosyć ograniczona.
+\end{enumerate}
+\subsubsection{Wykorzystanie scenariuszy}
+\label{sec:scenarios}
+\par
+Zamiast ręcznej konfiguracji, system wykorzystuje gotowe scenariusze tzw. \gls{Playbook}i, które są wywoływane przez egzekutora w zależności od potrzeb.
+Są to pliki konfiguracyjne napisane w formacie YAML, które posiadają w sobie polecenia wykonywane przez \gls{Ansible} skonfigurowanego na maszynie, do której zostają one wysłane.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_playbook_scan_platform.png}
+    \caption{Przykładowy playbook scan\_platform.yaml, służący do przygotowania raportu na temat informacji o danej maszynie (opracowanie własne)}
+    \label{img:backend_playbook_scan_platform}
+\end{figure}
+\par
+Przygotowane scenariusze dostępne w systemie:
+\begin{enumerate}
+    \item \textbf{create\_ansible\_user.yaml} - Przygotowanie nowej maszyny, tworzenie użytkownika i wdrażanie kluczy SSH
+    \item \textbf{scan\_platform.yaml} - Wyciągnięcie informacji szczegółowych o maszynie
+    \item \textbf{deploy\_agent.yaml} - Automatyczna instalacja i konfiguracja agenta monitoringu
+    \item \textbf{delete\_ansible.yaml} - Usunięcie \gls{Ansible} oraz jego pozostałości z maszyny
+    \item \textbf{delete\_agent.yaml} - Usunięcie agenta monitoringu z maszyny
+\end{enumerate}
+\subsubsection{Kluczowe funkcjonalności modułu}
+\label{sec:key_module_functionality}
+\par
+Dzięki wykorzystaniu powyższych narzędzi, system \gls{Labbyn} jest rozszerzony o dodatkowe funkcjonalności wspomagające pracę nad infrastrukturą.
+\par
+\textbf{Automatyczne wykrywanie zasobów (Host Discovery)} - proces który pozwala na masowanie dodawanie maszyn do bazy danych bez ręcznego wpisywania ich specyfikacji.
+Po przekazaniu listy adresów IP, moduł Ansible uruchamia \gls{Playbook} odpowiedzialny za skanowanie platform, parsuje wyniki, a warstwa serwisu wprowadza je do bazy danych.
+Dzięki temu mamy ogromną możliwość automatyzacji żmudnego wprowadzania danych dla tysięcy maszyn.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_discovery_host.png}
+    \caption{Początek funkcji discover\_hosts\_workflow, po otrzymaniu raportu bezpośrednio od egzekutora, na jego podstawie wprowadza maszynę do bazy danych (opracowanie własne)}
+    \label{img:backend_discovery_host}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_discovery_endpoint.png}
+    \caption{Endpoint \/discovery uruchamiający proces automatycznego dodawania maszyn (opracowanie własne)}
+    \label{img:backend_discovery_endpoint}
+\end{figure}
+\par
+\textbf{Odświeżanie konfiguracji sprzętowej (Refresh Hardware)} - proces służący od odświeżenia informacji o maszynie znajdującej się w bazie danych.
+W przypadku rozbudowy lub wymiany części użytkownik nie musi ręcznie wypełniać tego w bazie.
+Specjalnie dedykowany \gls{Endpoint} automatycznie zweryfikuje stan faktyczny ze stanem w bazie danych po czym je zsynchronizuje.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_refresh_machine.png}
+    \caption{Początek funkcji refresh\_machine, porównuje stan maszyny w bazie z najnowszym raportem od \gls{Ansible} (opracowanie własne)}
+    \label{img:backend_refresh_machine}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_refresh_endpoint.png}
+    \caption{Endpoint \/refresh uruchamiający proces automatycznej akutalizacji specyfikacji platformy (opracowanie własne)}
+    \label{img:backend_refresh_endpoint}
+\end{figure}
+\par
+\textbf{Automatyczna instalcja agenta monitoringu (Setup agent)} - proces będący podstawą monitoringu wyjdanościowego (szczegóły w rozdziale \ref{sec:prometheus_monitoring}), zajmuje się instalacją potrzebnego agenta na wybranych maszynach.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_setup_agent_workflow.png}
+    \caption{Początek funkcji setup\_agent\_workflow, tworzy użytkownika \gls{Ansible} oraz instaluje agenta monitoringu (opracowanie własne)}
+    \label{img:backend_setup_agent_workflow}
+\end{figure}
+\subsection{Monitoring wydajnościowy (Prometheus)}
+\label{sec:prometheus_monitoring}
+\par
+Moduł monitoringu odpowiada za gromadzenie, przetwarzanie i prezentację metryk wydajnościowych, zebranych z zarządzanych przez system maszyn.
+W tym celu system integruje się bezpośrednio z serwerem \gls{Prometheus}.
+\subsubsection{Architektura integracji}
+\par
+Podobnie jak w module integracji z \gls{Ansible} (szczegóły w rozdziale \ref{sec:ansible_integration}), wprowadzona została dodatkowa warstwa Egzekutora stanowiąca pomost służący do komunikacji z \gls{Prometheus}em.
+Warstwa ta odpowiada za wysyłanie zapytań do serwera \gls{Prometheus}, przechowywanie zmiennych środowiskowych oraz posiada wszelkie potrzebne metody.
+Serwer \gls{Prometheus} jest odpowiedzialny za uzyskanie z maszyn statusu połączenia z siecią i wykonywania zapytań \gls{PromQL}.
+Sam przepływ danych jest zachowany w podobny sposób jak w integracji z \gls{Ansible} (szczegóły w rozdziale \ref{sec:ansible_integration}).
+Fragment klasy PrometheusExecutor widoczny jest na rysunku \ref{img:backend_prometheus_egzecutor}
+\subsubsection{Architektura zbierania danych}
+\par
+W celu zbierania statystyk z maszyn w czasie rzeczywistym, zastosowano mechanizm asynchronicznych procesów, które działają w tle uruchamiając się wraz ze startem aplikacji.
+W regularnych odstępach czasu metryki są pobierane przez procesy w tle (status maszyny, zużycie CPU, RAM oraz dysku).
+Następnie nie trafiają one do bazy danych, lecz są formatowane do \gls{JSON} i \glslink{Cachowanie}{cachowane} w pamięci \gls{Redis}.
+Pozwala to na ograniczenie ilości zapytań wysyłanych do \gls{API} \gls{Prometheus}a.
+\par
+Do zbierania metryk potrzebne są zapytania w formacie \gls{PromQL}.
+Jest to składnia zapytań wymagana do komunikacji z serwerem \gls{Prometheus}.
+Klasa PrometheusExecutor oferuje 4 gotowe zapytania, które służą jako reguły obliczeniowe dla metryk oraz do pobrania statusu maszyny.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_prometheus_egzecutor_queries.png}
+    \caption{Gotowe zapytania w klasie PrometheusExecutor (opracowanie własne)}
+    \label{img:backend_prometheus_egzecutor_queries}
+\end{figure}
+\par
+System \gls{Labbyn} obecnie wspiera 4 podstawowe metryki:
+\begin{itemize}
+    \item \textbf{Status} - stan maszyny (czy jest połączone do sieci)
+    \item \textbf{Zużycie procesora (cpu\_usage)} - Wyliczane jako odwrócony czas bezczynności z uśrednieniem ostatnich 5 minut
+    \item \textbf{Zużycie pamięci RAM (memory\_usage)} - Wyliczane na podstawie dostępnej i całkowitej pamięci RAM
+    \item \textbf{Zużycie dysku (disk\_usage)} - Wyliczane na podstawie procentu wolnego miejsca, z pominięciem plików tymczasowych i rozruchowych
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_multiple_functions.png}
+    \caption{Funkcje status\_worker, metrics\_worker - procesy zbierające w tle informacji o statusie maszyny i jej metrykach (opracowanie własne)}
+    \label{img:backend_multiple_functions}
+\end{figure}
+\subsubsection{Zarządzanie konfiguracją celów}
+\par
+Aby zebrać metryki z maszyn, muszą zostać one zarejestrowane w systemie monitoringu.
+System \gls{Labbyn} wykonuje to przez umieszczanie wpisów w dedykowanym pliku \textbf{targets.json}.
+Owy plik jest bazą danych dla serwera \gls{Prometheus}.
+Na jego podstawie inicjowane jest połączenie do maszyn zapisanych w pliku przez serwer \gls{Prometheus} (na porcie 9100), który następnie pobiera z nich dane.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_example_machine_in_target_json.png}
+    \caption{Przykładowy wpis maszyny w pliku targets.json (opracowanie własne)}
+    \label{img:backend_example_machine_in_target_json}
+\end{figure}
+\subsubsection{Interfejs graficzny}
+\par
+Serwer \gls{Prometheus} posiada również interfejs graficzny (dostępny na porcie 9090), który pozwala na ręcznie sprawdzenie, czy wybrane maszyny mają dostęp do połączenia sieciowego, jednak możliwości ograniczają się tylko do tego.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_machine_object_in_prometheus_ui.png}
+    \caption{Przykładowy wpis maszyny odzwierciedlony w serwerze \gls{Prometheus} na podstawie pliku targets.json (opracowanie własne)}
+    \label{img:backend_machine_object_in_prometheus_ui}
+\end{figure}
+\subsubsection{Strumieniowanie metryk}
+\par
+Główną funkcjonalnością stworzoną na podstawie wszystkich powyżej opisanych narzędzi jest \gls{Endpoint} \/ws\/metrics, który pozwala na transmisję danych w czasie rzeczywistym przy wykorzystaniu \gls{Websocket}.
+Dzięki metodzie stream\_metrics, przeglądarka ma otwarte połączenie z backendem, które w określonych interwałach ciągle transmituje na bieżąco statusy oraz metryki wszystkich maszyn śledzonych przez serwer \gls{Prometheus}.
+Dzięki temu użytkownik widzi zmiany bez konieczności odświeżenia strony, będąc w stanie ciągle śledzić zużycie maszyny lub to czy odzyskała połączenie sieciowe.
+Oczywiście system dba o to, aby użytkownik miał dostęp tylko do metryk maszyn, które należą do jego zespołów, by być utrzymać spójność z przyjętą polityką filtracji zespołowej.
+Metoda jest przygotowana na uzyskanie metryk z jednej konkretnej maszyny lub wielu jednocześnie, przygotowująć odpowiedni zestaw dancyh w zależności od sytuacji.
+Kolejnym z jej zadań jest \gls{Cachowanie} informacji w pamięci \gls{Redis} w celu ograniczenia liczby zapytań na minutę wysyłanych do serwera.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_ws_metrics_websocket.png}
+    \caption{\gls{Websocket} \/ws\/metrics wysyłający w czasie rzeczywistym metryki i statusy maszyn (opracowanie własne)}
+    \label{img:backend_ws_metrics_websocket}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_stream_metrics.png}
+    \caption{Funkcja stream\_metrics zbierająca statusy i metryki, \glslink{Cachowanie}{cachująca} informacje i wysyłająca odpowiedzi zwrotne do przeglądarki (opracowanie własne)}
+    \label{img:backend_stream_metrics}
+\end{figure}
+
+\subsection{System wymiany i migracji danych}
+Moduł służący do zasilania bazy danych oraz generowania raportów.
+Zaprojektowany z myślą o administratorach - na potrzeby migracji lub przygotowywania danych na temat inwentarza lub stanu posiadanych maszyn.
+\subsubsection{Import danych}
+Moduł pozwala na import danych dotyczących maszyn, szaf rackowych oraz inwentarza.
+Są to sprzęty które zawsze wędrują wraz z zespołem w przypadku przenosin do innego budynku, a moduł został stworzony by wspomóc potencjalną przeprowadzkę i przenosiny na nową instancję aplikacji.
+Dane obsługiwane są w formacie \gls{CSV}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_import_endpoint.png}
+    \caption{\gls{Endpoint} \/import odpowiadający za uruchomienie procesu importu danych (opracowanie własne)}
+    \label{img:backend_import_endpoint}
+\end{figure}
+\par
+Proces importu jest wykonywany poprzez procesowanie wiersz po wierszu. 
+\par
+Ważnym punktem jest to, że zasoby nadrzędne takie jak zespoły, pokoje lub kategorie, muszą już istnieć w bazie danych lub zostać ręcznie stworzone.
+Minimalizuje to straty które mogą wystąpić, np. w przypadku popełnienia literówki.
+Dodatkowo z limitów technologicznych - nie jest możliwe importowanie np. zespołów, gdyż system musi wiedzieć kto jest jego zarządca lub użytkowników, gdyż nie możemy jawnie importować ich haseł z bazy danych.
+\par
+Natomiast zasoby wymienione jako obsługiwane przez dany \gls{Endpoint} (machine, racks, inventory) są automatycznie tworzone “w locie”.
+Oznacza to, że wszystkie zależności oraz obiekty powiązane (takie jak metadata maszyn, komponenty sprzętowe magazynowe w osobny tabelach i połączone relacjami) są generowane automatycznie na podstawie dostarczonych danych.
+\par
+Jeśli w trakcie importu wystąpi błąd w konkretnym rekordzie, system wycofa tylko ten konkretny wiersz, zapisze informacje o błędzie i kontynuuje import pozostałych danych.
+Na końcu użytkownik dostaje informację o powodzeniu importu oraz jeśli doszło do błędów, w których konkretnych wierszach się on znajduje.
+\par
+Moduł importu jest również zabezpieczony - dostęp do niego mają tylko użytkownicy z rolą administratora systemu lub grupy.
+Nie jest możliwe również wgranie zasobów do zespołu, w którym użytkownik nie posiada rangi administratora (administrator grupy może importować dane jedynie do zespołów, w których posiada rolę administracyjną).
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_run_import.png}
+    \caption{Początek funkcji run\_import z warstwy serwisowej importu (opracowanie własne)}
+    \label{img:backend_run_import}
+\end{figure}
+\par
+Każda z trzech obsługiwanych tabel posiada swoją własną funkcję odpowiadająca za import, gdyż każda z nich posiada swoje własne zależności (np. szafa rackowa jest zależna od półek rackowych)
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_process_rack.png}
+    \caption{Funkcja process\_rack odpowiadająca za procesowanie danych importowanych związanych z zasobem Racks (opracowanie własne)}
+    \label{img:backend_process_rack}
+\end{figure}
+\subsubsection{Export danych}
+Moduł pozwala na eksport danych wszelkich tabel wraz z zachowaniem odpowiedniego poziomu dostępu.
+Tabele dotycząca zespołów, użytkowników oraz historii systemu są dostępne tylko dla administratora.
+Jest to przydatne rozwiązanie w przypadku prowadzenia inwentaryzacji, aby szybko uzyskać dostęp do poszczególnych zasobów zespołu w przystępnej i małej formie.
+Moduł pozwala na export wszystkich informacji do jednego pliku lub na export konkretnie wybranych tabel.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_export_all_bulk_endpoint.png}
+    \caption{\gls{Endpoint} \/export\/all\/bulk pozwalający na export wszystkich informacji w jednym pliku \gls{JSON} (opracowanie własne)}
+    \label{img:backend_export_all_bulk_endpoint}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_export_endpoint.png}
+    \caption{\gls{Endpoint} \/export\/ pozwalający na export informacji z konkretnej tabeli do formatu \gls{JSON} lub \gls{CSV} (opracowanie własne)}
+    \label{img:backend_export_endpoint}
+\end{figure}
+\par
+Tak jak zostało wspomniane wyżej, export posiada również mechanizmy bezpieczeństwa.
+Użytkownicy nie mogą eksportować informacji o zasobach nie należących do ich zespołów.
+Oprócz tego nie mogą przeprowadzić eksportu tabel takich jak - zespoły, użytkownicy, historia.
+Dodatkowo każda tabela jest mapowana, dzięki czemu jesteśmy w stanie wyrzucić z eksportu wrażliwe pola takie jak hasła lub przygotować go w ustalonym formacie.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_map_rental.png}
+    \caption{Przykładowa funkcja map\_rental mapująca informacje o wypożyczeniach sprzętu (opracowanie własne)}
+    \label{img:backend_map_rental}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_generic_mapper.png}
+    \caption{Funkcja generyczna generic\_mapper, wyciąga do odpowiedniego formatu wszystkie dane z tabeli, która nie posiada dodatkowego mapowania (opracowanie własne)}
+    \label{img:backend_generic_mapper}
+\end{figure}
+\subsection{System audytu}
+\par
+Moduł audytu służący do prowadzenia historii zmian w systemie został zaprojektowany jako komponent wpięty bezpośrednio w cykl życia warstw dostępu do danych.
+Posłużyły do tego mechanizmy nasłuchiwania zdarzeń dostarczone przez bibliotekę \gls{SQL Alchemy}.
+System rejestruje zmiany bez konieczności manualnego wywoływania logowania w logice biznesowej serwisu.
+\subsubsection{Autonomiczne logowanie}
+\par
+System posiada dwa procesy nasłuchujące, które w czasie rzeczywistym monitorują sesję bazy danych.
+\par
+Pierwszy z nich: before\_flush, służy do detekcji zmian obiektów w sesji tuż przed ich zapisem.
+Wykorzystuje mechanizm inspekcji, aby porównać aktualne wartości pól z ich poprzednim stanem.
+W przypadku operacji aktualizacji rekordu, system wylicza różnicę zapisując tylko pola które uległy zmianie.
+W przypadku usunięcia rekordu, system wykonuje jego pełny zapisany stan co pozwala na jego późniejsze przywrócenie.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_receive_before_flush.png}
+    \caption{Początek funkcji receive\_before\_flush ,nasłuchiwacza dla operacji usunięcia lub aktualizacji (opracowanie własne)}
+    \label{img:backend_receive_before_flush}
+\end{figure}
+\par
+Drugi nasłuchiwacz: after\_flush, jest wykorzystywany dla operacji tworzenia nowych rekordów.
+Ponieważ ID obiektu jest nadawane automatycznie przez bazę danych, powstała potrzeba na utworzenie nowego nasłuchiwacza, gdyż musi zostać on uruchomiony dopiero po zapisie danych do bazy.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_receive_after_flush.png}
+    \caption{Funkcja receive\_after\_flush ,nasłuchiwacz dla operacji tworzenia (opracowanie własne)}
+    \label{img:backend_receive_after_flush}
+\end{figure}
+\subsubsection{Blackbox}
+\par
+W serwisie odpowiadającym za logowanie (HistoryService), zaimplementowano mechanizm filtrowania danych wrażliwych.
+W zależności od rangi użytkownika oraz jego przynależności zespołowej, będzie mógł zobaczyć historię systemu jednak w okrojonej formie.
+Użytkownik nie jest w stanie zobaczyć logów dotyczących dodawania nowych członków, ani tych dotyczących zasobów poza jego zespołami.
+Dodatkowo nazwy logów są tłumaczone na nazwy obiektów, by były one zrozumiałe dla zwykłego użytkownika.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_history_service.png}
+    \caption{Klasa HistoryService, lista słów \"zakazanych\", wykluczonych z pojawienia się w historii (opracowanie własne)}
+    \label{img:backend_history_service}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_apply_user_visibility.png}
+    \caption{Funkcja apply\_user\_visiblity ustawiająca zakres widoczności w zależności od roli (opracowanie własne)}
+    \label{img:backend_apply_user_visibility}
+\end{figure}
+\subsubsection{Odwracanie zmian}
+System \gls{Labbyn} dodatkowo w module historii oferuję funkcjonalnośc odwracania zmian przez administratora.
+Każdy typ logu posiada swoja przypisaną logikę odwrotną:
+\begin{itemize}
+    \item \textbf{CREATE} - Usunięcie nowo utworzonego obiektu
+    \item \textbf{DELETE} - Ponowne utworzenie obiektu na podstawie zapisu w logu
+    \item \textbf{UPDATE} - Przywrócenie poprzednich wartości zmodyfikowanych pól w rekordzie na podstawie zapisu w logu
+\end{itemize}
+\par
+Każda operacja jest wykonywana w ramach transakcji, co oznacza że musi przejść przez standardowe procedury, a co za tym idzie, naruszenie jakiejkolwiek integralności danych spowoduje że system przerwie proces odwracania zmian z odpowiednim komunikatem.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_rollback_update.png}
+    \caption{Funkcja rollback\_update przywracająca usunięty obiekt (opracowanie własne)}
+    \label{img:backend_rollback_update}
+\end{figure}
+\par
+Operacje które można cofnąć są oznaczone\/oflagowane.
+Jest to mechanizm blokujący np. cofnięcie zmiany hasła przez użytkownika (nawet dla administratora).
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/backend/backend_get_blackboxed_item.png}
+    \caption{Funkcja get\_blackboxed\_item zwracająca konkretny log i blokująca możliwość cofnięcia zmian, jeśli w zmodyfikowanych polach znajduje się hasło (opracowanie własne)}
+    \label{img:backend_get_blackboxed_item}
+\end{figure}

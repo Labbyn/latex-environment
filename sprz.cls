@@ -22,10 +22,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[polish]{babel}
-\usepackage{times}
 \usepackage{setspace}
 \usepackage{geometry}
 \usepackage{titlesec}
+\usepackage{mathptmx}
+\usepackage{hyperref}
+\usepackage{xurl}
 \geometry{top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm}
 \onehalfspacing
 \titleformat{\chapter}[block]{\normalfont\bfseries\fontsize{14}{17}\selectfont}{\thechapter}{1em}{} 
@@ -133,23 +135,23 @@
 
 % Define the new environment 'stakeholder' and custom commands for stakeholders' information
 \newenvironment{stakeholder}[1][]{%
-	\setkeys{pjatk}{#1}% Setting default key values
+	\setkeys{pjatk}{#1}%
 	\newcommand{\id}[1]{Identyfikator: & ##1 \\ \hline}
-	\newcommand{\name}[1]{Nazwa:: & ##1 \\ \hline}
-	\newcommand{\descr}[1]{Opis:: & ##1 \\ \hline}
-	\newcommand{\type}[1]{Typ udziałowca:: & ##1 \\ \hline}
-	\newcommand{\viewpoint}[1]{Punkt widzenia:: & ##1 \\ \hline}
-	\newcommand{\limitations}[1]{Ograniczenia:: & ##1 \\ \hline}
-	\newcommand{\requ}[1]{Wymagania:: & ##1 \\ \hline}
-	\table[h!]
-	\centering
+	\newcommand{\name}[1]{Nazwa: & ##1 \\ \hline}
+	\newcommand{\descr}[1]{Opis: & ##1 \\ \hline}
+	\newcommand{\type}[1]{Typ udziałowca: & ##1 \\ \hline}
+	\newcommand{\viewpoint}[1]{Punkt widzenia: & ##1 \\ \hline}
+	\newcommand{\limitations}[1]{Ograniczenia: & ##1 \\ \hline}
+	\newcommand{\requ}[1]{Wymagania: & ##1 \\ \hline}
+
+	\begin{center}
 	\begin{tabular}{|>{\columncolor{lightgray}}c|p{0.6\linewidth}|}
 		\hline
 		\rowcolor{lightgray}\multicolumn{2}{|c|}{\textbf{KARTA UDZIAŁOWCA}} \\
 		\hline
-		}{%
+}{%
 	\end{tabular}
-	\endtable
+	\end{center}
 }
 
 
@@ -228,35 +230,76 @@
 			\includegraphics[width=1.0\textwidth]{images/pjatk} \\
 			~ \\
 			%\large
-			\textbf{Kierunek studiów: Informatyka}
-            ~ ~ ~ ~ ~ &\textbf{Rodzaj studiów: Zaoczne}\\
-            \begin{center}
-            \huge
-			\textbf{Praca dyplomowa} \\
-            \end{center}
-			~ \\
-            \textbf{Temat pracy: \@title} \\
-            \textbf{Temat w języku angielskim: \@engtitle} \\
-            \textbf{Promotor pracy: \@supervisor} \\
-            \textbf{Wykonawcy:} 
-            \begin{center}
-                \begin{tabular}{|l|l|}
-                    \hline
-                    \textbf{Nazwisko, imię} & \textbf{Nr albumu} \\ \hline
-                    Kopczyński, Adrian & s26990 \\ \hline
-                    Kośmider, Patryk & s26985 \\ \hline
-                    Orlikowski, Ziemowit & s27081 \\ \hline
-                    Stankowski, Aleksander & s27549 \\ \hline
+		% 	\begin{tabular}{l r}
+		% 		\textbf{Kierunek studiów: Informatyka} & \textbf{Rodzaj studiów: Zaoczne}
+		% 	\end{tabular}
+        %     \begin{center}
+        %     \huge
+		% 	\textbf{Praca dyplomowa} \\
+        %     \end{center}
+		% 	~ \\
+        %     \textbf{Temat pracy: \@title} \\
+        %     \textbf{Temat w języku angielskim: \@engtitle} \\
+        %     \textbf{Promotor pracy: \@supervisor} \\
+        %     \textbf{Wykonawcy:} 
+        %     \begin{center}
+        %         \begin{tabular}{|l|l|}
+        %             \hline
+        %             \textbf{Nazwisko, imię} & \textbf{Nr albumu} \\ \hline
+        %             Kopczyński, Adrian & s26990 \\ \hline
+        %             Kośmider, Patryk & s26985 \\ \hline
+        %             Orlikowski, Ziemowit & s27081 \\ \hline
+        %             Stankowski, Aleksander & s27549 \\ \hline
                     
-                \end{tabular} \\\\
-            \end{center}
-		\textbf{\\Streszczenie:}
-		\@nabstract
-		\textbf{\\Słowa kluczowe:}
-		\@nkeywords
-        \begin{center}
-			\vfill{\textbf{Gdańsk, \@date}}
-            \end{center}
+        %         \end{tabular} \\\\
+        %     \end{center}
+		% \textbf{\\Streszczenie:}
+		% \@nabstract
+		% \textbf{\\Słowa kluczowe:}
+		% \@nkeywords
+        % \begin{center}
+		% 	\vfill{\textbf{Gdańsk, \@date}}
+        %     \end{center}
+
+		\textbf{Kierunek studiów: Informatyka} \hfill \textbf{Rodzaj studiów: Zaoczne}
+
+		\begin{center}
+		\huge
+		\textbf{Praca dyplomowa}
+		\end{center}
+
+		\textbf{Temat pracy: \@title}
+
+		\textbf{Temat w języku angielskim: \@engtitle}
+
+		\textbf{Promotor pracy: \@supervisor}
+
+		\textbf{Wykonawcy:}
+
+		\begin{center}
+		\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Nazwisko, imię} & \textbf{Nr albumu} \\ \hline
+		Kopczyński, Adrian & s26990 \\ \hline
+		Kośmider, Patryk & s26985 \\ \hline
+		Orlikowski, Ziemowit & s27081 \\ \hline
+		Stankowski, Aleksander & s27549 \\ \hline
+		\end{tabular}
+		\end{center}
+
+		\textbf{Streszczenie: } \@nabstract
+
+		
+		\vspace{1cm}
+
+		\textbf{Słowa kluczowe: }\@nkeywords
+
+		
+
+		\vfill
+		\begin{center}
+		\textbf{Gdańsk, \@date}
+		\end{center}
 		\newpage
 	\end{titlepage}
 	\renewcommand{\baselinestretch}{1.0}

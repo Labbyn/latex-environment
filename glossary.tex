@@ -2,17 +2,13 @@
     name=Labbyn,
     description={System do zarządzania infrastrukturą sprzętową}
 }
-\newglossaryentry{użytkownik}{
-    name=Użytkownik,
-    description={Każda osoba korzystająca z systemu Labbyn (np. Pracownik laboratorium, administrator)}
-}
 \newglossaryentry{Prometheus}{
     name=Prometheus,
     description={System telemetrii i monitorowania urządzeń}
 }
 \newglossaryentry{laboratorium}{
     name=laboratorium,
-    description={Pomieszczenie przeznaczone do przechowywania sprzętu komputerowego.}
+    description={Pomieszczenie przeznaczone do przechowywania sprzętu komputerowego}
 }
 \newglossaryentry{rack}{
     name=rack,
@@ -20,15 +16,15 @@
 }
 \newglossaryentry{platforma}{
     name=platforma,
-    description={sprzęt komputerowy, jednostka centralna.}
+    description={sprzęt komputerowy, jednostka centralna}
 }
 \newglossaryentry{PDU}{
     name=PDU,
-    description={Power Distribution Unit, urządzenie wyposażone w wiele gniazd elektrycznych.}
+    description={Power Distribution Unit, urządzenie wyposażone w wiele gniazd elektrycznych}
 }
 \newglossaryentry{Ansible}{
     name=Ansible,
-    description={Narzędzie do automatyzacji zadań IT}
+    description={narzędzie służące do automatycznego konfigurowania systemów}
 }
 \newglossaryentry{Playbook}{
     name=Playbook,
@@ -36,17 +32,150 @@
 }
 \newglossaryentry{open-source}{
     name=open-source,
-    description={Rodzaj oprogramowania komputerowego, którego kod źródłowy jest publicznie dostępny.}
+    description={Rodzaj oprogramowania komputerowego, którego kod źródłowy jest publicznie dostępny}
 }
 \newglossaryentry{meeting minutes}{
     name=meeting minutes,
-    description={Zwięzła notatka służbowa, która dokumentuje najważniejsze ustalenia, decyzje oraz przypisane zadania z przeprowadzonych rozmów.}
+    description={Zwięzła notatka służbowa, która dokumentuje najważniejsze ustalenia, decyzje oraz przypisane zadania z przeprowadzonych rozmów}
 }
 \newglossaryentry{sprint}{
     name=sprint,
-    description={Krótka, ograniczona czasowo iteracja, podczas której zespół pracuje nad stworzeniem gotowego, działającego przyrostu produktu.}
+    description={Krótka, ograniczona czasowo iteracja, podczas której zespół pracuje nad stworzeniem gotowego, działającego przyrostu produktu}
 }
 \newglossaryentry{Epik}{
     name=Epik,
-    description={Duży zbiór zadań lub funkcja systemu, która jest zbyt obszerna, aby zrealizować ją w jednym sprincie.}
+    description={Duży zbiór zadań lub funkcja systemu, która jest zbyt obszerna, aby zrealizować ją w jednym sprincie}
 }
+\newglossaryentry{onboarding}{
+    name=onboarding,
+    description={Ustrukturyzowany proces wdrażania nowego pracownika do firmy}
+}
+\newglossaryentry{POC}{
+    name=POC,
+    description={(ang. Proof of Concept) prototyp potwierdzający, że dany pomysł jest możliwy do wykonania i sensowny z biznesowego punktu widzenia}
+}
+\newglossaryentry{Pull Request}{
+    name=Pull Request,
+    description={Mechanizm który powiadamia o zakończeniu prac nad funkcją i prosi o przejrzenie oraz scalenie zmian do docelowej gałęzi repozytorium}
+}
+\newglossaryentry{SQL Alchemy}{
+    name=SQL Alchemy,
+    description={Biblioteka języka Python umożliwiająca komunikację z bazami danych oraz mapowanie obiektowo-relacyjne}
+}
+\newglossaryentry{Backend}{
+    name=Backend,
+    description={“Serce” systemu odpowiedzialne za logikę, obliczenia, bezpieczeństwo i dostarczanie danych które mają zostać odebrane oraz przekazane użytkownikowi}
+}
+\newglossaryentry{API}{
+    name=API,
+    description={Zestaw reguł pozwalający na komunikację pomiędzy poszczególnymi częściami aplikacji}
+}
+\newglossaryentry{FastAPI}{
+    name=FastAPI,
+    description={Framework języka Python, służący do budowania zaawansowanych interfejsów API}
+}
+\newglossaryentry{Pydantic}{
+    name=Pydantic,
+    description={biblioteka Python, odpowiedzialna za walidację danych wejściowych do backendu}
+}
+\newglossaryentry{OpenAPI}{
+    name=OpenAPI,
+    description={ujednolicony standard interfejsów REST API}
+}
+\newglossaryentry{ORM}{
+    name=ORM,
+    description={(ang. Object-Relational Mapping) technika mapowania obiektów w kodzie na tabele w bazie}
+}
+\newglossaryentry{PostgreSQL}{
+    name=PostgreSQL,
+    description={obiektowo-relacyjny system zarządzania bazą danych}
+}
+\newglossaryentry{Redis}{
+    name=Redis,
+    description={baza danych przechowująca dane w pamięci RAM}
+}
+\newglossaryentry{race condition}{
+    name=race condition,
+    description={błąd logiczny, w którym wynik operacji zależy od nieprzewidywalnej kolejności wykonania współbieżnych procesów}
+}
+\newglossaryentry{CORS}{
+    name=CORS,
+    description={(z ang. Cross-Origin Resource Sharing), mechanizm bezpieczeństwa przeglądarek, który pozwala na określenie konkretnych reguł na podstawie których można odbierać żądania użytkownika}
+}
+\newglossaryentry{Router}{
+    name=Router,
+    description={Komponent FastAPI, który pozwala na tworzenie interfejsów API z mniejszych, niezależnych modułów}
+}
+\newglossaryentry{Pliki statyczne}{
+    name=Pliki statyczne,
+    description={pliki które nie ulegają zmianom w trakcie działania aplikacji}
+}
+\newglossaryentry{Zmienne środowiskowe}{
+    name=Zmienne środowiskowe,
+    description={globalne wartości konfiguracyjne, które pozwalają na zmianę działania systemu}
+}
+\newglossaryentry{atrybuty obliczalne}{
+    name=atrybuty obliczalne,
+    description={metoda klasy, która może być wywoływana jako zwykła zmienna}
+}
+\newglossaryentry{Blokada optymistyczna}{
+    name=Blokada optymistyczna,
+    description={Strategia kontroli, która sprawdza numer wersji przy próbie zapisu, by upewnić się nie dane nie zostały zmodyfikowane w międzyczasie}
+}
+\newglossaryentry{Grafana}{
+    name=Grafana,
+    description={platforma służaca do wizualizacji, monitorowania i analizy danych w czasie rzeczywistym}
+}
+\newglossaryentry{MVP}{
+    name=MVP,
+    description={(z ang. Minimum Viable Product) najprostsza wersja nowego produktu lub usługi, posiadająca tylko niezbędne funkcje}
+}
+\newglossaryentry{RBAC}{
+    name=RBAC,
+    description={(z ang. Role-Based Access Control) model zarządzania uprawnieniami, które są przyznawane na podstawie ról}
+}
+\newglossaryentry{Architektura wielotenantowa}{
+    name=Architektura wielotenantowa,
+    description={architektura, w której różne grupy użytkowników działają w ramach jednej bazy i instancji aplikacji}
+}
+\newglossaryentry{Alembic}{
+    name=Alembic,
+    description={narzędzie do migracji bazy danych dla \gls{SQL Alchemy}. Pozwala na wersjonowanie struktur tabel}
+}
+\newglossaryentry{PromQL}{
+    name=PromQL,
+    description={(z ang. Prometheus Quesry Language) język zapytań wykorzystywany przez serwer \gls{Prometheus}}
+}
+\newglossaryentry{Cachowanie}{
+    name=Cachowanie,
+    description={technika tymaczasowego przechowywania danych często używanych}
+}
+\newglossaryentry{JSON}{
+    name=JSON,
+    description={(z ang. JavaScript Object Notation) format danych używany jako standard komunikacji w \gls{API}}
+}
+\newglossaryentry{JSONB}{
+    name=JSONB,
+    description={(z ang. \gls{JSON} Binary) typ danych w bazie \gls{PostgreSQL}, który przechowuje format \gls{JSON} w formie binarnej}
+}
+\newglossaryentry{Websocket}{
+    name=Websocket,
+    description={protokół komunikacyjny, zapweniający dwukierunkowy transfer danych, przez pojedyncze połączenie w czasie rzeczywistym}
+}
+\newglossaryentry{CSV}{
+    name=CSV,
+    description={(z ang. Comma Separated Values) format pliku tekstowego do przechowywania danych, w których wartości są kolejno rozdzielone separatorem}
+}
+\newglossaryentry{URL}{
+    name=URL,
+    description={(z ang. Uniform Resource Locator) ujednolicony format adresowania w Internecie, wskazujący dokładną lokalizację zasobu}
+}
+\newglossaryentry{Endpoint}{
+    name=Endpoint,
+    description={adres \gls{URL} w \gls{API}, pod którym serwer wykonuje okreśnole funkcje}
+}
+\newglossaryentry{SQL Injection}{
+    name=SQL Injection,
+    description={technika ataku polegająca na wstrzykiwaniu złośliwego kodu SQL}
+}
+
