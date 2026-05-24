@@ -1,10 +1,24 @@
 \chapter{Zarządzanie projektem}
 
-\section{Planowanie pracy zespołu i środki komunikacji}
-\par Na etapie planowania przyjęto iteracyjny model realizacji prac oparty na podejściu Agile, uzupełniony wybranymi praktykami SCRUM. Prace podzielono na krótkie iteracje o stałej długości: 2-tygodniowe \gls{sprint}y (z kilkoma wyjątkami). Ustalono także cykliczne, cotygodniowe spotkania, w ramach których definiowano zakres zadań, monitorowano postęp, konsultowano nowe pomysły albo napotkane problemy oraz dokonywano przegląd rezultatów. Każde spotkanie wspierane było agendą spotkania oraz \gls{meeting minutes} w celu efektywnego przebiegu obecnych jak i przyszłych spotkań. 
+\section{Metodyka pracy}
+\par Na etapie planowania przyjęto iteracyjny model realizacji prac oparty na podejściu Agile, uzupełniony wybranymi praktykami SCRUM.
+Prace podzielono na krótkie iteracje o stałej długości: 2-tygodniowe \gls{sprint}y (z kilkoma wyjątkami).
+
+\section{Środki komunikacji}
+Ustalono cykliczne, cotygodniowe spotkania, w ramach których definiowano zakres zadań, monitorowano postęp, konsultowano nowe pomysły albo napotkane problemy oraz dokonywano przegląd rezultatów.
+W ramach prezerwacji wiedzy w projekcie oraz przedstawienie kierunku/przygotowanie merytoryczne zespołu, każde spotkanie wspierane było agendą spotkania oraz \gls{meeting minutes} w celu efektywnego przebiegu obecnych jak i przyszłych spotkań. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/meeting_minutes_example.png}
+    \caption{Przykładowa agenda i notatki ze spotkania zespołu (opracowanie własne)}
+    \label{img:meeting_minutes_example}
+\end{figure}
 
 \section{Narzędzia wspomagające}
-\par Zespół projektowy komunikował się głównie przy użyciu komunikatora Discord na wydzielonym do tego serwerze. Do przechowywania oraz kontroli wersji kodu źródłowego systemu użyty został serwis GitHub z wydzielonym repozytroium dostępnym pod adresem url: \\ https://github.com/Labbyn/labbyn . W celu przechowywania wszelkich wyprodukowanych podczas prac dokumentów, użyty został współdzielony Dysk Google. Do rejestrowania czasu pracy oraz zarządzaniu przydzielonymi zadaniami użyto serwisu Jira.
+\par Zespół projektowy komunikował się głównie przy użyciu komunikatora Discord na wydzielonym do tego serwerze.
+Do przechowywania oraz kontroli wersji kodu źródłowego systemu użyty został serwis GitHub z wydzielonym repozytroium dostępnym pod adresem url: \url{https://github.com/Labbyn/labbyn}.
+W celu przechowywania wszelkich wyprodukowanych podczas prac dokumentów, użyty został współdzielony Dysk Google.
+Do rejestrowania czasu pracy oraz zarządzaniu przydzielonymi zadaniami użyto serwisu Jira.
 
 \section{Harmonogram Prac}
 \par Ze względu na ograniczony czas na wyprodukowanie systemu, prace zostały podzielone na 5 etapów z umownymi datami rozpoczęcia i ukończenia etapu:
@@ -19,6 +33,22 @@
 \begin{itemize}
     \item Przyrosty będą opierały się na stworzonych i zaplanowanych zadaniach.
     \item Każde zadanie musi mieć przypisany \gls{Epik}.
-    \item \gls{Epik}i będą tworzone na podstawie wymagań gdzie: 1 wymaganie = \gls{Epik}.
+    \item \gls{Epik}i będą tworzone na podstawie wymagań gdzie: 1 wymaganie = 1 \gls{Epik}.
     \item \gls{Epik}i zostaną przypisane do konkretnego etapu w celu zaplanowania przyszłych prac.
 \end{itemize}
+
+\section{Zarządzanie ryzykiem}
+\par W ramach wstępnej analizy projektu, zespół zidentyfikował potencjalne ryzyka oraz przygotował scieżki mitygacji każdego z nich.
+Zostały one przedstawiona w poniższej tabeli:
+\begin{table}[h]
+    \centering
+    \begin{tabularx}{\textwidth}{|p{4cm}|p{4cm}|p{1,5cm}|X|}
+        \hline
+        Ryzyko & Prawdopodobnieństwo & Wpływ & Mitygacja \\ \hline
+        Opóźnienie implementacji & Średnie & Wysoki & Rezygnacja z dodatkowych funkcjonalności, cykliczne kontrolowanie postępów prac w odniesieniu do harmonogramu \\ \hline
+        Zmiana wymagań & Wysokie & Wysoki & Stworzenie opisowej logiki biznesowej przed specyfikacją i zatwierdzeniem wymagań na system \\ \hline
+        Ograniczenia technologiczne & Średnie & Średni & Szybkie Prototypowanie (\gls{POC}) \\ \hline
+        Brak możlwiości testów w warunkach produkcyjnych & Wysokie & Wysoki & Testowanie przy użyciu maszyn wirtualnych \\ \hline
+    \end{tabularx}
+    \caption{Tabela przedstawiająca ryzyka projektowe (opracowanie własne)}
+\end{table}

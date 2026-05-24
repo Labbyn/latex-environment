@@ -156,28 +156,18 @@ Przykładem tego stanu rzeczy jest chociażby defekt związany z aktywnym sterow
 \section{Scenariusze testowe}
 \par
 Opracowanie przypadków testowych odbyło się w oparciu o specyfikację wymagań funkcjonalnych, co umożliwiło zachowanie zgodności pomiędzy oczekiwanym a testowanym zachowaniem systemu.
-Poniżej znajduje się uproszczona tabela z przykładowymi scenariuszami testowymi:
-\begin{table}[h]
-    \centering
-    \begin{tabularx}{\textwidth}{|c|p{2cm}|X|X|p{2cm}|}
-        \hline
-        Nr. & Tytuł & Kroki & Oczekiwany rezultat & Powiązane wymagania \\ \hline
-        1. & Pomyślne logowanie & \begin{enumerate}[nosep,topsep=0pt,leftmargin=*]
-            \item Uruchom aplikację \gls{Labbyn}
-            \item Wpisz dane logowania w formularzu
-            \item Kliknij przycisk "Login"
-        \end{enumerate}
-        & Po kliknięciu przycisku "Login" użytkownik zostaje przeniesiony na stronę główną aplikacji & LAB-D-01 \\ \hline
-        2. & Dodawanie laboratorium & \begin{enumerate}[nosep,topsep=0pt,leftmargin=*]
-            \item Kliknij w zakładkę "Labs" w panelu bocznym
-            \item Kliknij "Create Lab"
-            \item Wypełnij formularz używając danych testowych
-            \item Kliknij "Create"
-        \end{enumerate}
-        & Po kliknięciu przycisku "Labs" użytkownik zostaje przenoszony do zakładki z dostępnymi laboratoriami. Po kliknięciu "Create Lab" Użytkownik widzi formularz tworzenia nowego laboratorium. Po wypełnieniu formularza i kliknięciu "Create" użytkownik widzi komunikat o powodzeniu opracji a na liście dostępnych laboratoriów pojawia się nowo utworzone & LAB-F-22 \\ \hline
-    \end{tabularx}
-    \caption{Przykładowe scenariusze testowe systemu \gls{Labbyn} (opracowanie własne)}
-\end{table}
+Przykładowy scenariusz testowy:
+\begin{itemize}
+    \item \textbf{Tytuł:} Pomyślne logowanie do systemu
+    \item \textbf{Watunki początkowe:} Uruchomiona aplikacja Labbyn na stronie logowania, Dane testowe dostępne
+    \item \textbf{Kroki:} 
+    \begin{enumerate}
+        \item Wpisz dane testowe w formularzu logowania
+        \item Kliknij przycisk "Login"
+    \end{enumerate}
+    \item \textbf{Oczekiwany rezultat:} Po naciśnięciu przycisku, użytkownik przenesiony jest do ekranu startowego aplikacji
+\end{itemize}
+
 
 \section{Cykl życia defektów i proces ich eliminacji}
 \par
@@ -267,12 +257,12 @@ Główne trudności dotyczyły:
     \item konieczności częstej aktualizacji testów w przypadku modyfikacji aplikacji,
     \item dłuższego czasu przygotowania i debugowania testów w porównaniu do testów manualnych.
 \end{itemize}
-\subsection{Decyzja o rezygnacji z automatyzacji testów}
+\subsection{Decyzja o rezygnacji z automatyzacji testów E2E}
 Ze względu na ograniczenia przedstawione w rozdziale \ref{sec:auotmation_problems}, zespół podjął decyzję o rezygnacji z szerokiego wykorzystania testów automatycznych na rzecz testów manualnych.
 Testy manualne okazały się bardziej elastyczne i mniej kosztowne w utrzymaniu w kontekście dynamicznie rozwijającej się aplikacji.
 \par
-Podejście manualne umożliwiło na szybkie reagowanie na zmiany w ystemie oraz bardziej intuicyjną weryfikację nowych funkcjonalności bez konieczności każdorazowej aktualizacji zestawu testów.
-W rezultacie pozwoliło to na efektywniejsze wykorzystanie czasu w procesie testowania oraz zwiększenie tempa iteracyjnego rzowju aplikacji.
+Podejście manualne umożliwiło na szybkie reagowanie na zmiany w systemie oraz bardziej intuicyjną weryfikację nowych funkcjonalności bez konieczności każdorazowej aktualizacji zestawu testów.
+W rezultacie pozwoliło to na efektywniejsze wykorzystanie czasu w procesie testowania oraz zwiększenie tempa iteracyjnego rozwoju aplikacji.
 Jednocześnie testy jednostkowe oraz testy dymne pozostały w formie niezmienionej.
 \par
 Pomimo rezygnacji z pełnej automatyzacji, wykorzystane narzędzia pozostają potencjlanym kierunkiem dalszego rozwoju projektu, szczególnie w przypadku ustabilizowania się architektury systemu oraz ograniczenia częstotliwościa zmian lub w przypadku poszerzenia zespołu o dodatkowych członków.
