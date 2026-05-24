@@ -82,7 +82,7 @@ W ramach implementacji logiki systemu od strony \gls{Backend}u dodano warstwę d
 \section{Sprint 3}
 \textbf{Czas trwania \Gls{sprint}u: 10.12.2025 - 07.01.2026 (4 tygodnie)}
 \par
-\Gls{sprint} został wydłużony o dwa tygodnie ze względu na okres świąteczny, który ograniczył dostępność zespołu. Podczas tego czasu zaimplementowana została strona logowania użytkownika (bez autoryzacji po stornie \gls{Backend}u), a postronie interfejsu użytkownika, zakładki w systemie na podstawie mockupów wytworzonych w poprzednim sprincie: Labs oraz Documentation.
+\Gls{sprint} został wydłużony o dwa tygodnie ze względu na okres świąteczny, który ograniczył dostępność zespołu. Podczas tego czasu zaimplementowana została strona logowania użytkownika (bez autoryzacji po stronie \gls{Backend}u), a po stronie interfejsu użytkownika, zakładki w systemie na podstawie mockupów wytworzonych w poprzednim \glslink{sprint}{sprincie}: Labs oraz Documentation.
 Implementacja makiet interfejsu użytkownika umożliwiła przeprowadzenie wstępnych testów manualnych, w szczególności w zakresie nawigacji oraz interakcji użytkownika z systemem. Wczesna walidacja systemu pozwoliła na wykrycie błędów w początkowej fazie implementacji, co znacząco uprościło ich eliminację oraz ograniczyło ryzyko propagacji defektów w kolejnych etapach rozwoju.
 Zaimplementowane zostało \gls{API} do obsługi \gls{Ansible} wraz z \gls{Playbook}'ami, w ramach którego powstał skrypt, który automatycznie wdraża agenta w celu pobrania konfiguracji sprzętowej. Aby wspomóc testy manualne tej funkcjonalności utworzony został skrypt do tworzenia wirtualnych hostów.
 Przygotowana została kontrola dostępu do bazy danych oraz wstępna logika logowania i resetowania hasła użytkownika.
@@ -92,7 +92,7 @@ Z racji na zdefiniowanie procesów zapewnienia jakości od początku procesu imp
 \section{Sprint 4}
 \textbf{Czas trwania \Gls{sprint}u: 07.01.2026 - 28.01.2026 (3 tygodnie)}
 \par
-Gls{sprint} został ponownie wydłużony, tym razem o 1 tydzień, aby jego zakończenie było zbieżne z planowanym zakończeniem etapu 3. co umożliwiło spójne podsumowanie postępów prac.
+\Gls{sprint} został ponownie wydłużony, tym razem o 1 tydzień, aby jego zakończenie było zbieżne z planowanym zakończeniem etapu 3. co umożliwiło spójne podsumowanie postępów prac.
 Zaimplementowano zapis pobranych przez \gls{Ansible} komponentów do bazy danych oraz kolejne zakładki w interfejsie użytkownika: Inventory, Import\&Export, Admin Panel, User, Groups oraz nakładki z funkcją wyszukiwania danych w systemie.
 Zdefiniowano plan testów obejmujący scenariusze testowe, środowisko testowe oraz kryteria akceptacji poszczególnych funkcjonalności systemu.
 Na potrzeby \gls{MVP} dokonano integracji poszczególnych zakładek interfejsu z \gls{Backend}em, umożliwiając dynamiczne pobieranie i prezentowanie danych z \gls{API}.
@@ -142,7 +142,7 @@ Testy jednostkowe poszerzone zostały o \gls{RBAC}.
 \par
 Podczas tego \gls{sprint}u wykonano szereg prac związanych zarówno z rozwojem funkcjonalnym aplikacji, jak i poprawą jakości kodu. 
 Zaimplementowano mechanizmy umożliwiające masowy import danych z plików \gls{CSV}.
-Rozbudowano system obsługi błędów poprzez wprowadzenie globalnego mechanizmu obsługi wyjątków oraz przeprowadzono standaryzację wybranych \gls{Endpoint}ów aplikacji, w tym migrację operacji do architektury asynchronicznej.
+Rozbudowano system obsługi błędów poprzez wprowadzenie globalnego mechanizmu obsługi wyjątków oraz przeprowadzono standaryzację wybranych \gls{Endpoint}ów aplikacji, w tym standaryzację warstwową operacji do architektury asynchronicznej.
 Wprowadzono również \gls{Endpoint} do obsługi wyszukiwania danych.
 Rozwinięto funkcjonalności interfejsu użytkownika poprzez dodanie panelu "szybkich akcji" takich jak dodanie maszyny czy stworzenie nowego obiektu w inwentarzu technicznym.
 
