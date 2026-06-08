@@ -29,6 +29,7 @@ W ramach wytwarzania systemu \gls{Labbyn}, każdy z członków zespołu poświę
 \par
 Porjekt zrealizowano w 4 osobowym zespole, w którym każdy z członków miał przypisaną umowną rolę z jasnym zakresem obowiązków.
 Takie rozwiązanie pozwoliło na wykorzystanie w pełni umiejętności wszystkich twórców oraz gwarancję ukończenia systemu w zaplanowanych ramach czasowych oraz na wysokim poziomie jakości.
+
 \subsection{Adrian Kopczyński}
 \par
 W zespole pełniłem funkcje związane z zarządzaniem zespołem, projektem, procesami czy zapewnieniem jakości i testowaniem.
@@ -52,6 +53,45 @@ Tworzyłem także \gls{mockup}'y dla interfejsu użytkownika.
 Przez cały czas trwania projektu byłem osobą dbającą o zapewnienie jakości wytwarzanego oprogramowania stosując dobre praktyki branżowe.
 W fazie testowania byłem odpowiedzialny za przeprowadzanie testów \gls{E2E}, raportowaniu wyników, zgłaszaniu defektów oraz zarządzania ich cyklem życia.
 W czasie trwania projektu byłem także odpowiedzialny za tworzenie niniejszego dokumentu oraz redakcję i kontrolę treści dotyczącej architektury systemu.
+
 \subsection{Aleksander Stankowski}
+\par W zespole pełniłem rolę architekta oraz programisty, odpowiadając za część frontendową projektu.
+\par Pracę rozpocząłem od analizy i wyboru optymalnego stosu technologicznego.
+Zdecydowałem się na oparcie aplikacji na ekosystemie React połączonym z Vite oraz TypeScript, co zapewniło bezpieczeństwo typowania i stabilność kodu. Zaprojektowałem skalowalną architekturę po stronie klienta, wdrażając narzędzia głównie z ekosystemu TanStack.
+Pozwoliło to na wydajne zarządzanie routingiem, stanem asynchronicznym oraz optymalizację komunikacji z backendowym API.
+\par Moim zadaniem było również kompleksowe podejście do zagadnień UI/UX oraz stworzenie spójnej szaty graficznej.
+Zbudowałem bibliotekę reużywalnych, modularnych komponentów na bazie shadcn/ui, co znacząco przyspieszyło rozwój interfejsu i zapewniło pełną spójność wizualną całego systemu.
+\par Zająłem się również implementacją najbardziej złożonych funkcjonalności aplikacji.
+Odpowiadałem między innymi za stworzenie interaktywnej mapy pomieszczeń laboratoryjnych opartej na renderowaniu 3D, wdrożenie obsługi wyszukiwania, filtrowania w widokach tabelarycznych, a także wyszukiwarkę typu "command search", pozwalającą na szybką nawigację i przeszukiwanie całej bazy zasobów.
+Dodatkowo stworzyłem system zarządzania dokumentacją wspierający renderowanie formatu Markdown. Przez cały cykl życia projektu dbałem o to, aby interfejs był nie tylko estetyczny, ale przede wszystkim wysoce ergonomiczny i responsywny.
+
+
 \subsection{Patryk Kośmider}
+\par W zespole, byłem odpowiedzialny w całości za architekturę, stworzenie, rozbudowanie oraz utrzymanie warstwy back endowej.
+Dodatkowo również stworzyłem pełen zestaw testów dymnych oraz jednostkowych, wymaganych do uzyskania stuprocentowego powodzenia, by móc wprowadzić jakąkolwiek zmianę do backendu.
+Z racji wcześniej posiadanego doświadczenia, pracując jako technik laboratoryjny, aktywnie uczestniczyłem we wszelkich dyskusjach, dotyczących nie tylko mojej działki, ale również warstwy wizualnej, UX, ogólnej architektury aplikacji by jak najbardziej wspomóc zespół w tym, na co osoba na takim stanowisku może zwracać uwagę.
+\par Na początku wytworzyłem w pełni początkową strukturę backendu, tworząc pierwszy projekt bazy, mapując obiekty w bazie, integrując z narzędziami migracji.
+Następnie wraz z wymaganiami, oraz ustaleniami, na bieżąco dodawałem nowe endpointy oraz ich logikę.
+Na tym samym etapie równoległe pisałem testy jednostkowe oraz dymne, które wraz z nowymi zmianami zawsze pojawiały się w repozytorium. Przez cały okres powstania aplikacji, było to zadania zawsze występujące, gdyż wszystkie funkcjonalności oraz ich logika musi mieć swoje korzenie w backendzie.
+Dodatkowo zaimplementowałem mechanizm autoryzacji oraz autentykacji użytkownika, integrację z narzędziami zewnętrznymi takimi jak Ansible oraz Prometheus, mechanizm blokady krytycznych zasobów.
+Zajmowałem się również pełną refaktoryzacją backendu w celu ujednolicenia struktury, naprawą bugów oraz optymalizacją.
+
+
 \subsection{Ziemowit Orlikowski}
+\par Zajmowałem się sprawami związanymi z metodologią DevOps oraz tworzeniem frontendu i backendu.
+Odpowiadałem za strukturę naszego projektu, zarządzanie repozytoriami, rozwiązywałem problemy związane z budowaniem aplikacji i starałem się zawsze aktywnie podchodzić do dyskusji na temat kształtu naszej aplikacji.
+\par Byłem osobą odpowiedzialną za założenie repozytoriów, ustalenie uprawnień, integrację narzędzi - takich jak Jira oraz przygotowanie workflow'ów. 
+\par Na początku skonteneryzowałem całą naszą aplikację co wiązało się ze stworzeniem dedykowanych obrazów dockerowych.
+Połączyłem kontenery tak aby aplikacja działała jak najefektywniej do naszych potrzeb.
+Wymagało to konfiguracji tak aby dział hot-reaload oraz stworzyłem skrypty ułatwiający budowanie i testowanie aplikacji.
+Pomagałem zrozumieć członkom zespołu jak działa Docker i w jaki sposób mają z nim pracować.
+\par Przez dużą część pracy nad projektem współtworzyłem frontend w Reacie.
+Integorwałem go z backendem aby wyświetlać dane z bazy.
+Tworzyłem komponenty aby unikać powtarzających się struktur w kodzie.
+Budowałem podstrony dla obiektów tak aby były czytelne.
+Zbudowałem logikę edycji i aktualizacji poszczególnych danych.
+Przygotowałem dialogi do tworzenia obiektów.
+\par Pomagałem tworzyć brakujące endpointy i logikę na backedzie.
+Dodatkowo stworzyłem templatki w Jinja2 oraz część playbooków Ansible do wyciągania informacji o hoście i instalowaniu agenta na platformach. 
+\par Skonfigurowałem i stworzyłem cały system monitoringu oparty na promethesuie i Grafanie.
+Stworzyłem dedykowany dashboard w grafanie do monitorowania hostów z wyszczególnionymi metrykami oraz wykresami 
