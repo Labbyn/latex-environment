@@ -1,1 +1,363 @@
 \chapter{Architektura systemu (Frontend)}
+
+\section{Stack Technologiczny}
+\par
+Warstwa wizualna aplikacji Labbyn została zrealizowana jako aplikacja typu SPA przy użyciu biblioteki React oraz języka TypeScript.
+Głównym założeniem architektury było stworzenie wysoce interaktywnego u modularnego interfejsu użytkownika, zdolnego do płynnej obsługi złożonych struktur danych takich jak inwentarz, topologia laboratoriów czy mapa przestrzenna.
+\par
+Wybór biblioteki React był dla zespołu optymalny z dwóch głównych powodów: obszernego doświadczenia programistów w pracy z tym narzędziem oraz jego ugruntowanej, dominującej pozycji na rynku frameworków webowych (co potwierdzają m.in. globalne badania społeczności, np. ankieta Stack Overflow z 2025 roku).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 1.}
+    \label{img:wip_1}
+\end{figure}
+
+\subsection{Wybór stosu: TanStack vs Next.js}
+\par
+Drugą poważnie rozważaną opcją technologiczną był framework Next.js.
+W procesie projektowania zrezygnowano z popularnego frameworka Next.js na rzecz dedykowanego stosu opierającego się na ekosystemie TanStack.
+Decyzja ta podyktowana była charakterystyką aplikacji Labbyn:
+\begin{enumerate}
+    \item Brak wymogu SEO: Labbyn to aplikacja wewnętrzna/narzędziowa , gdzie indeksowanie przez wyszukiwarki nie jest potrzebne.
+    \item Stan aplikacji i interaktywność: Aplikacja mocno polega na złożonym stanie klienckim. Modele SSR i RSC oferowane przez Next.js wprowadzają narzut architektoniczny, który w przypadku "ciężkich" klientów bywa zbędny.
+    \item Szybkość przejść: Pełne SPA obsługiwane przez TanStack Router pozwala na błyskawiczne przejścia między widokami bez konieczności odpytywania serwera o strukturę strony.
+    \item Niezależność infrastrukturalna (Self-hosting): Next.js posiada wiele wbudowanych integracji z platformą Vercel, co jest użyteczne przy komercyjnych wdrożeniach. Jednakże, ze względu nanaturę open-source projektu Labbyn oraz zamysł samodzielnego hostowania aplikacji, większość z tych funkcji pozostałaby niewykorzystana. Co więcej, mogłoby to narzucić potencjalnym odbiorcom korzystanie z płatnych narzędzi ekosystemu Vercel (zjawisko tzw. vendor lock-in).
+\end{enumerate}
+
+\section{Architektura (trzeba rozpisać)}
+\par
+Architektura warstwy frontendowej została oparta na wzorcu programowania zorientowanego na komponenty, z wyraźnym podziałem odpowiedzialności między routing, pobieranie danych i warstwę prezentacji.
+Takie podejście gwarantuje skalowalność kodu oraz ułatwia testowanie i rozbudowę systemu o nowe moduły.
+
+\subsection{Mechanizm Autoryzacji Użytkownika}
+\par
+Proces uwierzytelniania i autoryzacji został zintegrowany bezpośrednio z systemem routingu.
+\par
+Główny układ aplikacji dla zalogowanych użytkowników zdefiniowano w pliku src/routes/\_auth.tsx.
+Plik ten pełni rolę strażnika (ang. Route Guard).
+Jeśli użytkownik nie posiada ważnej sesji, następuje przekierowanie do ścieżek publicznych: src/routes/login.tsx (obsługiwanej przez login-form.tsx) lub src/routes/setup-password.tsx. 
+\par
+W przypadku przekierowania na ekran logowania, w parametrach adresu URL przekazywana jest aktualna lokalizacja, do której próbował dostać się nieautoryzowany użytkownik.
+Dzięki temu mechanizmowi, po pomyślnym zalogowaniu, użytkownik jest płynnie kierowany na docelową podstronę, co znacząco poprawia ergonomię pracy.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 2.}
+    \label{img:wip_2}
+\end{figure}
+
+\par
+Zagnieżdżenie struktury katalogów (wszystkie widoki panelu znajdują się w src/routes/\_auth/) daje architektoniczną gwarancję, że żadna podstrona z danymi wrażliwymi nie zostanie wyrenderowana przed poprawną weryfikacją tożsamości.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 3.}
+    \label{img:wip_3}
+\end{figure}
+
+\subsection{Warstwa komunikacji frontend - backend}
+\par
+Aby zachować czystość kodu i separację obaw, komunikacja z warstwą backendową (REST API) opiera się na połączonym działaniu biblioteki Axios oraz TanStack Query, zlokalizowanych we wzorcu w katalogu src/integrations/.
+\par
+Axios odpowiada za niskopoziomową budowę żądań HTTP.
+Wykorzystano mechanizm interceptorów do automatycznego wstrzykiwania nagłówków autoryzacyjnych oraz globalnej obsługi błędów.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 4.}
+    \label{img:wip_4}
+\end{figure}
+
+\par
+TanStack Query zarządza cyklem życia samych danych (odpowiedzi z API) i stanem asynchronicznym.
+Odpowiada za budowanie treści żądań, pozwala na zaawansowane techniki buforowania/cacheowania przy użyciu unikalnych kluczy, a także dostarcza zintegrowane stany ładowania.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 5.}
+    \label{img:wip_5}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 6.}
+    \label{img:wip_6}
+\end{figure}
+
+\par
+Każda domena biznesowa (np. inventory, machines, user) posiada własny podkatalog zawierający:
+\begin{itemize}
+    \item [domena].query.ts: Definicje hooków do pobierania danych z wykorzystaniem useQuery.
+    Zapewniają one mechanizmy cachowania, deduplikacji żądań oraz automatycznego odświeżania w tle.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{images/WIP.png}
+        \caption{Obraz 7.}
+        \label{img:wip_7}
+    \end{figure}
+    \item [domena].mutation.ts: Definicje hooków do modyfikacji danych (useMutation), obsługujące m.in. optymistyczne aktualizacje interfejsu.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{images/WIP.png}
+        \caption{Obraz 8.}
+        \label{img:wip_8}
+    \end{figure}
+    \item [domena].types.ts: Interfejsy TypeScript ściśle odzwierciedlające struktury danych z API.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{images/WIP.png}
+        \caption{Obraz 9.}
+        \label{img:wip_9}
+    \end{figure}
+\end{itemize}
+
+\section{Struktura interfejsu i główne komponenty}
+\par
+Architektura warstwy wizualnej opiera się na podejściu modułowym, inspirowanym metodologią Atomic Design.
+Podzielono ją na trzy główne kategorie:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 10.}
+    \label{img:wip_10}
+\end{figure}
+\begin{enumerate}
+    \item Komponenty bazowe (UI): Zlokalizowane w src/components/ui/ (np. button.tsx, dialog.tsx, data-table.tsx). Stanowią one niezależne, generyczne klocki budulcowe,oparte o wzorzec biblioteki shadcn/ui. Zapewniają one spójność zachowań (np. dostępność a11y) w całej aplikacji. \url{https://ui.shadcn.com/docs/components}
+    \item Komponenty układu (Layout): Obejmują m.in. app-sidebar.tsx (główna nawigacja), page-header.tsx oraz szablony takie jak subpage-template.tsx, które gwarantują ujednoliconą strukturę wizualną podstron. Na przyklad:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{images/WIP.png}
+        \caption{Obraz 11.}
+        \label{img:wip_11}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{images/WIP.png}
+        \caption{Obraz 12.}
+        \label{img:wip_12}
+    \end{figure}
+    \item Komponenty domenowe: Dedykowane konkretnym funkcjom, np. add-inventory-dialog.tsx, manage-rental-dialog.tsx, czy moduł importu/eksportu (src/components/import-export/).
+\end{enumerate}
+
+\section{Mapa przestrzenna}
+\par
+Jednym z najbardziej złożonych modułów aplikacji jest interaktywna mapa przestrzenna środowiska laboratoryjnego.
+Została ona zaprojektowana w celu wizualizacji oraz topologicznego zarządzania rozmieszczeniem sprzętu.
+
+\subsection{Implementacja}
+
+\subsection{Elementy interfejsu mapy}
+\par
+Przestrzeń ekranu nakładana na główny Canvas grupuje dedykowane narzędzia nawigacyjne i analityczne.
+\par
+Canvas
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 13.}
+    \label{img:wip_13}
+\end{figure}
+
+Selection menu
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 14.}
+    \label{img:wip_14}
+\end{figure}
+
+Narzędzia globalne: Komponent map-toolbar.tsx agregujący funkcje takie jak zmiana trybów pracy. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 15.}
+    \label{img:wip_15}
+\end{figure}
+
+Controls overlay
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 16.}
+    \label{img:wip_16}
+\end{figure}
+
+Room/lab dropdown
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 17.}
+    \label{img:wip_17}
+\end{figure}
+
+Gizmo oraz aktualna pozycja kursora
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 18.}
+    \label{img:wip_18}
+\end{figure}
+
+Historia oraz save
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 19.}
+    \label{img:wip_19}
+\end{figure}
+
+Konfiguracja widoku: Narzędzia view-settings.tsx umożliwiające przełączanie między rzutem ortograficznym i perspektywicznym, a także renderowaniem płaskim (2D) i przestrzennym (3D).
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 20.}
+    \label{img:wip_20}
+\end{figure}
+
+Transform controls
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 21.}
+    \label{img:wip_21}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 22.}
+    \label{img:wip_22}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 23.}
+    \label{img:wip_23}
+\end{figure}
+
+Color picker
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 24.}
+    \label{img:wip_24}
+\end{figure}
+
+Menu wyboru racka do postawienia
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 25.}
+    \label{img:wip_25}
+\end{figure}
+
+Dodawanie etykiety
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 26.}
+    \label{img:wip_26}
+\end{figure}
+
+\par
+Interakcje kontekstowe: Wskazanie kursorem lub kliknięcie na konkretną szafę na mapie wywołuje komponent rack-info-panel.tsx, który bez opuszczania widoku przestrzennego dostarcza pełnych danych telemetrycznych i sprzętowych wybranego węzła.
+\par
+Integracja z tabelami: Wprowadzono komponent show-on-map-button.tsx, który pozwala użytkownikom z poziomu zwykłej tabeli danych błyskawicznie przenieść pozycję kamery na mapie do fizycznej lokalizacji szukanego przedmiotu.
+
+Grid
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 27.}
+    \label{img:wip_27}
+\end{figure}
+
+Rack
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 28.}
+    \label{img:wip_28}
+\end{figure}
+
+Ściany
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 29.}
+    \label{img:wip_29}
+\end{figure}
+
+\subsection{Optymalizacja i performance}
+\par
+Ze względu na środowisko uruchomieniowe przeglądarki internetowej, głównym ograniczeniem przy renderowaniu scen o dużej gęstości jest liczba zapytań renderowania.
+Silniki JavaScript w przeglądarkach posiadają jednowątkową pętlę zdarzeń.
+Posiadanie tysięcy pojedynczych obiektów i wysyłanie poleceń rysowania dla każdego z nich osobno drastycznie obciąża i blokuje główny wątek, prowadząc do zacinania się interfejsu.
+
+\par
+W celu optymalizacji tego procesu zastosowano technikę grupowania siatek geometrycznych.
+Obiekty o takiej samej geometrii i materiale są grupowane w pojedyncze zbiory danych, co pozwala na ograniczenie liczby żądań kierowanych do procesora graficznego do niezbędnego minimum.
+
+\par
+Tylko w momencie zarządzania tylko niektórymi elemenatami grupy np. przeniesienie dwóch szaf rackowych w inne miejsce następuje fragmentacja na pomniejsze grupy(do opisania technikalia na podstawie kodu)
+
+\subsection{Inspiracja UX}
+\par
+Nawigacja na mapach 3D w aplikacjach przeglądarkowych posiada wiele unikalnych wyzwań.
+W celu dostarczenia najlepszego ux nawigacji wewnątrz przestrzennie 3D, przed przystąpieniem do implementacji wykonano analizę popularnych gier komputerowych z gatunku City Builder oraz strategii czasu rzeczywistego, a także wiodących aplikacji użytkowych (np. Adobe Photoshop, eksploratory plików).
+Rozwiązania z gier, które zakładają spędzanie setek godzin na poruszaniu się po przestrzeniach izometrycznych i 3D, pozwoliły na wyeliminowanie powszechnych problemów nawigacyjnych.
+
+\par
+W rezultacie zaimplementowano hybrydowy system sterowania:
+\begin{itemize}
+    \item Klawiatura: Klasyczne sterowanie kierunkowe za pomocą klawiszy WSAD oraz strzałek. Klawisze Q i E wykorzystano do operacji w osi pionowej (wysokość/rotacja).
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{images/WIP.png}
+        \caption{Obraz 30.}
+        \label{img:wip_30}
+    \end{figure}
+    \item Mysz: Nawigacja przestrzenna poprzez przesuwanie (drag) i skalowanie (scroll).
+    \item Zaznaczanie obszarowe (Marquee select): Możliwość obrysowania grupy elementów ramką zaznaczenia, znaną z systemowych eksploratorów plików.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{images/WIP.png}
+        \caption{Obraz 31.}
+        \label{img:wip_31}
+    \end{figure}
+    \item Modyfikatory: Rozszerzanie i redukowanie grup zaznaczonych obiektów przy pomocy klawiszy modyfikatorów Ctrl oraz Shift.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{images/WIP.png}
+        \caption{Obraz 32.}
+        \label{img:wip_32}
+    \end{figure}
+\end{itemize}
+
+\section{Tożsamość graficzna}
+\par
+opis kolorów oraz prototypu logotypu
+ze wzgłędu na style zbudowane na zmiennych eksperymentowanie było możliwe. Biały i czarny motyw dla preferencji.
+Różowy ze względu na unikalność. Aplikacje zbudowane za pomocy biblotek komponentów  często wyglądają podobnie. Dlatego ciężko jest uzyskać uniikalny look
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/WIP.png}
+    \caption{Obraz 33.}
+    \label{img:wip_33}
+\end{figure}
+
+\section{Główne elementy budujące UI}
+\par
+sidebar - omówienie
+\par
+command search  - omówienie
+\par
+każda zakładka - omówienie
+

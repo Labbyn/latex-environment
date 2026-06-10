@@ -29,6 +29,7 @@
 \usepackage{hyperref}
 \usepackage{xurl}
 \usepackage{enumitem}
+\usepackage{pdfpages}
 \geometry{top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm}
 \onehalfspacing
 \titleformat{\chapter}[block]{\normalfont\bfseries\fontsize{14}{17}\selectfont}{\thechapter}{1em}{} 
