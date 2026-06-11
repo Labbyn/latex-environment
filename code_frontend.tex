@@ -35,7 +35,7 @@ Takie podejście gwarantuje skalowalność kodu oraz ułatwia testowanie i rozbu
 \par
 Proces uwierzytelniania i autoryzacji został zintegrowany bezpośrednio z systemem routingu.
 \par
-Główny układ aplikacji dla zalogowanych użytkowników zdefiniowano w pliku src/routes/\_auth.tsx.
+Główny układ aplikacji dla zalogowanych użytkowników zdefiniowano w pliku \url{src/routes/\_auth.tsx}.
 Plik ten pełni rolę strażnika (ang. Route Guard).
 Jeśli użytkownik nie posiada ważnej sesji, następuje przekierowanie do ścieżek publicznych: src/routes/login.tsx (obsługiwanej przez login-form.tsx) lub src/routes/setup-password.tsx. 
 \par
@@ -50,7 +50,7 @@ Dzięki temu mechanizmowi, po pomyślnym zalogowaniu, użytkownik jest płynnie 
 \end{figure}
 
 \par
-Zagnieżdżenie struktury katalogów (wszystkie widoki panelu znajdują się w src/routes/\_auth/) daje architektoniczną gwarancję, że żadna podstrona z danymi wrażliwymi nie zostanie wyrenderowana przed poprawną weryfikacją tożsamości.
+Zagnieżdżenie struktury katalogów (wszystkie widoki panelu znajdują się w \url{src/routes/\_auth/}) daje architektoniczną gwarancję, że żadna podstrona z danymi wrażliwymi nie zostanie wyrenderowana przed poprawną weryfikacją tożsamości.
 
 \begin{figure}[H]
     \centering
@@ -94,7 +94,7 @@ Odpowiada za budowanie treści żądań, pozwala na zaawansowane techniki buforo
 \par
 Każda domena biznesowa (np. inventory, machines, user) posiada własny podkatalog zawierający:
 \begin{itemize}
-    \item [domena].query.ts: Definicje hooków do pobierania danych z wykorzystaniem useQuery.
+    \item \text{[domena].query.ts:} Definicje hooków do pobierania danych z wykorzystaniem useQuery.
     Zapewniają one mechanizmy cachowania, deduplikacji żądań oraz automatycznego odświeżania w tle.
     \begin{figure}[H]
         \centering
@@ -102,14 +102,14 @@ Każda domena biznesowa (np. inventory, machines, user) posiada własny podkatal
         \caption{Obraz 7.}
         \label{img:wip_7}
     \end{figure}
-    \item [domena].mutation.ts: Definicje hooków do modyfikacji danych (useMutation), obsługujące m.in. optymistyczne aktualizacje interfejsu.
+    \item \text{[domena].mutation.ts:} Definicje hooków do modyfikacji danych (useMutation), obsługujące m.in. optymistyczne aktualizacje interfejsu.
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{images/WIP.png}
         \caption{Obraz 8.}
         \label{img:wip_8}
     \end{figure}
-    \item [domena].types.ts: Interfejsy TypeScript ściśle odzwierciedlające struktury danych z API.
+    \item \text{[domena].types.ts:} Interfejsy TypeScript ściśle odzwierciedlające struktury danych z API.
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{images/WIP.png}
@@ -129,7 +129,7 @@ Podzielono ją na trzy główne kategorie:
     \label{img:wip_10}
 \end{figure}
 \begin{enumerate}
-    \item Komponenty bazowe (UI): Zlokalizowane w src/components/ui/ (np. button.tsx, dialog.tsx, data-table.tsx). Stanowią one niezależne, generyczne klocki budulcowe,oparte o wzorzec biblioteki shadcn/ui. Zapewniają one spójność zachowań (np. dostępność a11y) w całej aplikacji. \url{https://ui.shadcn.com/docs/components}
+    \item Komponenty bazowe (UI): Zlokalizowane w \url{src/components/ui/} (np. button.tsx, dialog.tsx, data-table.tsx). Stanowią one niezależne, generyczne klocki budulcowe,oparte o wzorzec biblioteki shadcn/ui. Zapewniają one spójność zachowań (np. dostępność a11y) w całej aplikacji. \url{https://ui.shadcn.com/docs/components}
     \item Komponenty układu (Layout): Obejmują m.in. app-sidebar.tsx (główna nawigacja), page-header.tsx oraz szablony takie jak subpage-template.tsx, które gwarantują ujednoliconą strukturę wizualną podstron. Na przyklad:
     \begin{figure}[H]
         \centering
@@ -143,221 +143,147 @@ Podzielono ją na trzy główne kategorie:
         \caption{Obraz 12.}
         \label{img:wip_12}
     \end{figure}
-    \item Komponenty domenowe: Dedykowane konkretnym funkcjom, np. add-inventory-dialog.tsx, manage-rental-dialog.tsx, czy moduł importu/eksportu (src/components/import-export/).
+    \item Komponenty domenowe: Dedykowane konkretnym funkcjom, np. \text{add-inventory-dialog.tsx}, \text{manage-rental-dialog.tsx}, czy moduł importu/eksportu (\url{src/components/import-export/}).
 \end{enumerate}
 
 \section{Mapa przestrzenna}
-\par
-Jednym z najbardziej złożonych modułów aplikacji jest interaktywna mapa przestrzenna środowiska laboratoryjnego.
-Została ona zaprojektowana w celu wizualizacji oraz topologicznego zarządzania rozmieszczeniem sprzętu.
-
-\subsection{Implementacja}
-
-\subsection{Elementy interfejsu mapy}
-\par
-Przestrzeń ekranu nakładana na główny Canvas grupuje dedykowane narzędzia nawigacyjne i analityczne.
-\par
-Canvas
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{images/WIP.png}
-    \caption{Obraz 13.}
-    \label{img:wip_13}
-\end{figure}
-
-Selection menu
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{images/WIP.png}
-    \caption{Obraz 14.}
-    \label{img:wip_14}
-\end{figure}
-
-Narzędzia globalne: Komponent map-toolbar.tsx agregujący funkcje takie jak zmiana trybów pracy. 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{images/WIP.png}
-    \caption{Obraz 15.}
-    \label{img:wip_15}
-\end{figure}
-
-Controls overlay
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{images/WIP.png}
-    \caption{Obraz 16.}
-    \label{img:wip_16}
-\end{figure}
-
-Room/lab dropdown
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{images/WIP.png}
-    \caption{Obraz 17.}
-    \label{img:wip_17}
-\end{figure}
-
-Gizmo oraz aktualna pozycja kursora
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{images/WIP.png}
-    \caption{Obraz 18.}
-    \label{img:wip_18}
-\end{figure}
-
-Historia oraz save
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{images/WIP.png}
-    \caption{Obraz 19.}
-    \label{img:wip_19}
-\end{figure}
-
-Konfiguracja widoku: Narzędzia view-settings.tsx umożliwiające przełączanie między rzutem ortograficznym i perspektywicznym, a także renderowaniem płaskim (2D) i przestrzennym (3D).
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{images/WIP.png}
-    \caption{Obraz 20.}
-    \label{img:wip_20}
-\end{figure}
-
-Transform controls
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{images/WIP.png}
-    \caption{Obraz 21.}
-    \label{img:wip_21}
-\end{figure}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{images/WIP.png}
-    \caption{Obraz 22.}
-    \label{img:wip_22}
-\end{figure}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{images/WIP.png}
-    \caption{Obraz 23.}
-    \label{img:wip_23}
-\end{figure}
-
-Color picker
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{images/WIP.png}
-    \caption{Obraz 24.}
-    \label{img:wip_24}
-\end{figure}
-
-Menu wyboru racka do postawienia
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{images/WIP.png}
-    \caption{Obraz 25.}
-    \label{img:wip_25}
-\end{figure}
-
-Dodawanie etykiety
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{images/WIP.png}
-    \caption{Obraz 26.}
-    \label{img:wip_26}
-\end{figure}
-
-\par
-Interakcje kontekstowe: Wskazanie kursorem lub kliknięcie na konkretną szafę na mapie wywołuje komponent rack-info-panel.tsx, który bez opuszczania widoku przestrzennego dostarcza pełnych danych telemetrycznych i sprzętowych wybranego węzła.
-\par
-Integracja z tabelami: Wprowadzono komponent show-on-map-button.tsx, który pozwala użytkownikom z poziomu zwykłej tabeli danych błyskawicznie przenieść pozycję kamery na mapie do fizycznej lokalizacji szukanego przedmiotu.
-
-Grid
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{images/WIP.png}
-    \caption{Obraz 27.}
-    \label{img:wip_27}
-\end{figure}
-
-Rack
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{images/WIP.png}
-    \caption{Obraz 28.}
-    \label{img:wip_28}
-\end{figure}
-
-Ściany
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{images/WIP.png}
-    \caption{Obraz 29.}
-    \label{img:wip_29}
-\end{figure}
-
-\subsection{Optymalizacja i performance}
-\par
-Ze względu na środowisko uruchomieniowe przeglądarki internetowej, głównym ograniczeniem przy renderowaniu scen o dużej gęstości jest liczba zapytań renderowania.
-Silniki JavaScript w przeglądarkach posiadają jednowątkową pętlę zdarzeń.
-Posiadanie tysięcy pojedynczych obiektów i wysyłanie poleceń rysowania dla każdego z nich osobno drastycznie obciąża i blokuje główny wątek, prowadząc do zacinania się interfejsu.
-
-\par
-W celu optymalizacji tego procesu zastosowano technikę grupowania siatek geometrycznych.
-Obiekty o takiej samej geometrii i materiale są grupowane w pojedyncze zbiory danych, co pozwala na ograniczenie liczby żądań kierowanych do procesora graficznego do niezbędnego minimum.
-
-\par
-Tylko w momencie zarządzania tylko niektórymi elemenatami grupy np. przeniesienie dwóch szaf rackowych w inne miejsce następuje fragmentacja na pomniejsze grupy(do opisania technikalia na podstawie kodu)
-
-\subsection{Inspiracja UX}
-\par
-Nawigacja na mapach 3D w aplikacjach przeglądarkowych posiada wiele unikalnych wyzwań.
-W celu dostarczenia najlepszego ux nawigacji wewnątrz przestrzennie 3D, przed przystąpieniem do implementacji wykonano analizę popularnych gier komputerowych z gatunku City Builder oraz strategii czasu rzeczywistego, a także wiodących aplikacji użytkowych (np. Adobe Photoshop, eksploratory plików).
-Rozwiązania z gier, które zakładają spędzanie setek godzin na poruszaniu się po przestrzeniach izometrycznych i 3D, pozwoliły na wyeliminowanie powszechnych problemów nawigacyjnych.
-
-\par
-W rezultacie zaimplementowano hybrydowy system sterowania:
-\begin{itemize}
-    \item Klawiatura: Klasyczne sterowanie kierunkowe za pomocą klawiszy WSAD oraz strzałek. Klawisze Q i E wykorzystano do operacji w osi pionowej (wysokość/rotacja).
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=\textwidth]{images/WIP.png}
-        \caption{Obraz 30.}
-        \label{img:wip_30}
-    \end{figure}
-    \item Mysz: Nawigacja przestrzenna poprzez przesuwanie (drag) i skalowanie (scroll).
-    \item Zaznaczanie obszarowe (Marquee select): Możliwość obrysowania grupy elementów ramką zaznaczenia, znaną z systemowych eksploratorów plików.
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=\textwidth]{images/WIP.png}
-        \caption{Obraz 31.}
-        \label{img:wip_31}
-    \end{figure}
-    \item Modyfikatory: Rozszerzanie i redukowanie grup zaznaczonych obiektów przy pomocy klawiszy modyfikatorów Ctrl oraz Shift.
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=\textwidth]{images/WIP.png}
-        \caption{Obraz 32.}
-        \label{img:wip_32}
-    \end{figure}
-\end{itemize}
+\par WIP
 
 \section{Tożsamość graficzna}
 \par
-opis kolorów oraz prototypu logotypu
-ze wzgłędu na style zbudowane na zmiennych eksperymentowanie było możliwe. Biały i czarny motyw dla preferencji.
-Różowy ze względu na unikalność. Aplikacje zbudowane za pomocy biblotek komponentów  często wyglądają podobnie. Dlatego ciężko jest uzyskać uniikalny look
+Stylowanie aplikacji zostało oparte na zmiennych CSS.
+Taka architektura pozwoliła na szybkie wdrażanie eksperymentów wizualnych oraz wbudowanie pełnej obsługi dwóch motywów wyświetlania: jasnego i ciemnego, które użytkownik może łatwo dostosować do własnych preferencji widzenia i warunków oświetleniowych w laboratorium.
+Ze względu na charakter projektu gdzie użytkownikami końcowymi są w większości technicy używający aplikacji przez wiele godzin większy priorytet został nałożony na tryb ciemny.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/WIP.png}
-    \caption{Obraz 33.}
-    \label{img:wip_33}
+    \includegraphics[height=0.9\textheight,keepaspectratio]{images/frontend/zmienne_css_kod.png}
+    \caption{Zmienne pliku CSS aplikacji (opracowanie własne)}
+    \label{img:zmienne_css}
 \end{figure}
 
+\par
+Podczas opracowywania szaty graficznej został przygotowany prototyp logotypu projektu, natomiast nie został on dopracowany do finalnej wersji w ramach pracy inżynierskiej.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/frontend/prototypowanie_loga_systemu.png}
+    \caption{Proces prototypowania loga aplikacji (opracowanie własne)}
+    \label{img:prototypowanie_loga}
+\end{figure}
+
+
 \section{Główne elementy budujące UI}
+
+\subsection{Sidebar}
+Główne centrum nawigacyjne panelu umiejscowione na krawędzi ekranu.
+Służy do przełączania głównych modułów biznesowych i organizuje aplikację w spójny szkielet układu.
+Znajdują się w nim:
+\begin{itemize}
+    \item \textbf{Command Search:} Globalne narzędzie wywoływane skrótem klawiszowym, które oferuje zaawansowane wyszukiwanie zasobów oraz wywoływanie szybkich akcji kontekstowych. Poprawia ono ergonomię pracy, pozwalając na prostą i szybką nawigację.
+    \begin{figure}[H]
+        \centering
+        \includegraphics{images/frontend/search_bar.png}
+        \caption{Mechanizm wyszukiwania obiektów w systemie (opracowanie własne)}
+        \label{img:search_bar}
+    \end{figure}
+    \item \textbf{Zakładki:} Podstawowy element organizujący strukturę szczegółowych informacji. Na podstronach obiektów, zastosowanie zakładek minimalizuje konieczność przewijania długich stron i pozwala na ukrycie rzadziej wykorzystywanych paneli danych.
+    \begin{figure}[H]
+        \centering
+        \includegraphics{images/frontend/sidebar_tabs.png}
+        \caption{Zakładki dostępne z poziomu paska bocznego (opracowanie własne)}
+        \label{img:sidebar_tabs}
+    \end{figure}
+    \item \textbf{Quick actions:} Służy do szybkiego zarządzania zasobami i infrastrukturą. Pozwala na wykonanie najczęściej używanych w systemie akcji przy użyciu jednego panelu. Centralizacja tych czynności zwiększa intuicyjność systemu jednocześnie minimalizując czas potrzebny na znalezienie pożądanej funkcjonalności.
+    \begin{figure}[H]
+        \centering
+        \includegraphics{images/frontend/quick_actions.png}
+        \caption{Panel szybkich akcji (opracowanie własne)}
+        \label{img:quick_actions}
+    \end{figure}
+    \item \textbf{Menu Użytkownika:} Stanowi element odpowiedzialny za prezentację informacji o aktualnie uwierzytelnionym użytkowniku, w szczególności jego nazwy. Kliknięcie tego elementu powoduje wyświetlenie menu kontekstowego pozwalającego na wylogowanie czy zmianę trybu wyświetlania aplikacji.
+    \begin{figure}[H]
+        \centering
+        \includegraphics{images/frontend/user_menu.png}
+        \caption{Menu użytkownika na pasku bocznym (opracowanie własne)}
+        \label{img:user_menu}
+    \end{figure}
+\end{itemize}
+
+\subsection{User Dashboard}
 \par
-sidebar - omówienie
+Panel użytkownika pełni rolę podsumowania zasobów, do których aktualnie zalogowany użytkownik ma dostęp z tytułu przynależności do danych grup lub roli w systemie.
+Dodatkowo panel zapewnia możliwość personalizacji widoku poprzez wykorzystanie mechanizmu “Customize View”, który umożliwia użytkownikowi dostosowanie prezentowanych informacji do jego indywidualnych potrzeb i preferencji.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/frontend/user_dashboard.png}
+    \caption{Panel użytkownika (opracowanie własne)}
+    \label{img:user_dashboard}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics{images/frontend/user_dashboard_customize.png}
+    \caption{Konfiguracja panelu użytkownika (opracowanie własne)}
+    \label{img:user_dashboard_customize}
+\end{figure}
+
+\subsection{Labs}
 \par
-command search  - omówienie
+Panel laboratoriów zawiera informacje o dostępnych pomieszczeniach.
+Każdy obiekt posiada krótkie podsumowanie w postaci: nazwy, właściciela oraz liczby szaf rackowych dostępnych w pomieszczeniu.
+Posiada on także wyszukiwarkę pozwalającą na filtrowanie zwracanych wyników.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/frontend/labs_overview.png}
+    \caption{Panel "Labs" (opracowanie własne)}
+    \label{img:labs_overview}
+\end{figure}
 \par
-każda zakładka - omówienie
+Niżej znajduje się przycisk szczegółów pomieszczenia, po kliknięciu w który użytkownik przenoszony jest na panel z listą szaf rackowych przypisanych do niego z możliwością wyszukiwania, filtrowania, sortowania oraz kontroli ilości zwracanych wyników.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/frontend/labs_details.png}
+    \caption{Panel szczegółów pomieszczenia (opracowanie własne)}
+    \label{img:labs_details}
+\end{figure}
+\par
+Na dole obiektu widnieje przycisk “Show on Map”, który przekierowuje użytkownika do mapy przestrzennej wybranego pomieszczenia.
+
+\subsection{Inventory}
+
+\subsection{Machines}
+\par
+Moduł ten przeznaczony jest do zarządzania maszynami w systemie.
+Głównym elementem jest tabela prezentująca szczegółowe informacje o urządzeniach.
+Dla każdego obiektu wyświetlane są kluczowe atrybuty, takie jak: ID, nazwa, adres MAC, adres IP, przypisany zespół, numer seryjny czy notatka, których wyświetlanie można konfigurować przy pomocy przycisku “View”.
+Tabela wspiera sortowanie otrzymanych wyników na podstawie kolumn z atrybutami.
+W górnej części znajduje się pole wyszukiwania umożliwiające szybkie filtrowanie rekordów na podstawie wprowadzonych kryteriów.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/frontend/machines.png}
+    \caption{Panel "Machines" (opracowanie własne)}
+    \label{img:machines}
+\end{figure}
+\par
+Każdy obiekt posiada odnośnik do strony ze szczegółami wybranego urządzenia.
+Posiada on wszystkie informacje o maszynie dostępne w systemie: od szczegółów konfiguracji sprzętowej po lokalizację i dane telemetryczne pobierane z urządzenia w czasie rzeczywistym przy skonfigurowanym agencie Prometheus.
+W górnej części znajdują się przyciski:
+\begin{itemize}
+    \item \textbf{Refresh host information} - służący do pobrania aktualnej konfiguracji sprzętowej urządzenia przy pomocy narzędzia Ansible
+    \item \textbf{Manage monitoring agent} - pozwalające na instalację agenta Prometheus służącego do zbierania metryk
+    \item \textbf{Edit} - zmieniające tryb przeglądania w tryb edycji informacji o sprzęcie
+    \item \textbf{Delete} - pozwalający na usunięcie maszyny z systemu
+\end{itemize}
+
+\subsection{History}
+
+\subsection{Users}
+
+\subsection{Teams}
+
+\subsection{Documentation}
+
+\subsection{Import \& Export}
+
+
+
 
