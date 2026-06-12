@@ -54,7 +54,7 @@ Zagnieżdżenie struktury katalogów (wszystkie widoki panelu znajdują się w \
 
 \begin{figure}[H]
     \centering
-    \includegraphics[height=0.9\textwidth,keepaspectratio]{images/frontend/struktura_folderu_routes.png}
+    \includegraphics[height=0.9\textheight,keepaspectratio]{images/frontend/struktura_folderu_routes.png}
     \caption{Struktura folderu "routes" (opracowanie własne)}
     \label{img:struktura_folderu_routes}
 \end{figure}
@@ -154,7 +154,7 @@ Architektura warstwy wizualnej opiera się na podejściu modułowym, inspirowany
 Podzielono ją na trzy główne kategorie:
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/struktura_plików_komponentów.png}
+    \includegraphics[height=0.9\textheight,keepaspectratio]{images/frontend/struktura_plików_komponentów.png}
     \caption{Struktura plików komponentów (opracowanie własne)}
     \label{img:struktura_plików_komponentów}
 \end{figure}
@@ -318,21 +318,21 @@ Składają się na nią następujące moduły:
     \item Konfiguracja widoku (ViewSettings): Paleta kontrolna umożliwiająca natychmiastowe przestrojenie ujęcia wizualnego, od wymuszania perspektywy rzutowania ortograficznego lub izometrycznego w pseudo-2D do w pełni przestrzennego 3D, a także sterowanie asystentem przyciągania do siatki.
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{images/frontend/view_settings.png}
+        \includegraphics{images/frontend/view_settings.png}
         \caption{Ustawienia trybu wyświetlania mapy przestrzennej (opracowanie własne)}
         \label{img:view_settings}
     \end{figure}
     \item Selektor przestrzeni (Room Dropdown): Komponent nawigacyjny sprzężony z API, pozwalający na migrację pomiędzy odrębnymi pracowniami i laboratoriami serwerowymi dostępnych dla danego użytkownika bezpośrednio z poziomu wirtualnej sceny.
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{images/frontend/room_dropdown.png}
+        \includegraphics{images/frontend/room_dropdown.png}
         \caption{Wybór mapy pomieszczenia (opracowanie własne)}
         \label{img:room_dropdown}
     \end{figure}
     \item Nakładka nawigacyjna (Controls Overlay): Pływający u dołu lewej sekcji widżet edukacyjny, który adaptuje się do sytuacji, wyświetlając i przypominając użytkownikowi najskuteczniejsze w danym ujęciu skróty klawiszowe operowania kamerą.
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{images/frontend/controls_overlay.png}
+        \includegraphics{images/frontend/controls_overlay.png}
         \caption{Wybór mapy pomieszczenia (opracowanie własne)}
         \label{img:controls_overlay}
     \end{figure}
@@ -347,7 +347,7 @@ Składają się na nią następujące moduły:
     \item \gls{Gizmo} wpierające orientacje w przestrzeni. Zadaniem tego komponentu jest informowanie użytkownika o aktualnej pozycji kursora oraz w jakich płaszczyznach porusza się jego kamera aby uniknąć dezorientacji.
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{images/frontend/map_gizmo.png}
+        \includegraphics{images/frontend/map_gizmo.png}
         \caption{\gls{Gizmo} na mapie przestrzennej (opracowanie własne)}
         \label{img:map_gizmo}
     \end{figure}
@@ -630,7 +630,7 @@ W przypadku użytkowników z rangą administrator, posiadają oni osobny Admin P
 Dostępny formularz do tworzenia nowych użytkowników pozwala na wprowadzenie imienia, nazwiska, loginu, adresu e-mail, przynależności zespołowej, roli oraz hasła. Ostatnie pole nie jest wymagane, domyślnym sposobem jest autogenerowanie pierwszego hasła do zalogowania się i wymuszenie zmiany go na własne przez użytkownika.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/formularz_tworzenia_usera.png}
+    \includegraphics{images/frontend/formularz_tworzenia_usera.png}
     \caption{Formularz dodawania nowego użytkownika w systemie (opracowanie własne)}
     \label{img:formularz_tworzenia_usera}
 \end{figure}
@@ -638,7 +638,7 @@ Dostępny formularz do tworzenia nowych użytkowników pozwala na wprowadzenie i
 Panel edycji użytkownika umożliwia zmianę jego danych osobowych, loginu, adresu e-mail, zespołów oraz degradację/awans.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/formularz_modyfikacji_usera.png}
+    \includegraphics{images/frontend/formularz_modyfikacji_usera.png}
     \caption{Formularz edycji istniejącego użytkownika w systemie (opracowanie własne)}
     \label{img:formularz_modyfikacji_usera}
 \end{figure}
@@ -676,7 +676,7 @@ Dla użytkowników o randze administrator jest dostępna dodatkowa zakładka Tea
 W przypadku tworzenia nowego zespołu musimy podać jego nazwę, oraz jego pierwszego administratora.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/formularz_tworzenia_edycji_teams.png}
+    \includegraphics{images/frontend/formularz_tworzenia_edycji_teams.png}
     \caption{Formularz tworzenia oraz edycji zespołu (opracowanie własne)}
     \label{img:formularz_tworzenia_edycji_teams}
 \end{figure}
@@ -684,7 +684,7 @@ W przypadku tworzenia nowego zespołu musimy podać jego nazwę, oraz jego pierw
 W przypadku wypromowania użytkownika na administratora zespołu, wystarczy wybrać tę opcję na konkretnym zespole oraz podać użytkownika.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/promocja_na_group_admina.png}
+    \includegraphics{images/frontend/promocja_na_group_admina.png}
     \caption{Promocja użytkownika na administratora zespołu Server Administration (opracowanie własne)}
     \label{img:promocja_na_group_admina}
 \end{figure}
