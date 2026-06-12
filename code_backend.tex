@@ -481,6 +481,7 @@ Serwer \gls{Prometheus} jest odpowiedzialny za uzyskanie z maszyn statusu połą
 Sam przepływ danych jest zachowany w podobny sposób jak w integracji z \gls{Ansible} (szczegóły w rozdziale \ref{sec:ansible_integration}).
 Fragment klasy PrometheusExecutor widoczny jest na rysunku \ref{img:backend_prometheus_egzecutor}
 \subsubsection{Architektura zbierania danych}
+\label{sec:metrics_gathering}
 \par
 W celu zbierania statystyk z maszyn w czasie rzeczywistym, zastosowano mechanizm asynchronicznych procesów, które działają w tle uruchamiając się wraz ze startem aplikacji.
 W regularnych odstępach czasu metryki są pobierane przez procesy w tle (status maszyny, zużycie CPU, RAM oraz dysku).
