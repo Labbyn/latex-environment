@@ -110,14 +110,16 @@ W celu zwiększenia niezawodności systemu opracowano testy jednostkowe sprawdza
 Zostały one zintegrowane z procesem \gls{CI/CD} i skonfigurowane jako warunek wprowadzenia zmian w kodzie źródłowym.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/testing/example_unit_test_code.png}
-    \caption{Fragment kodu testów jednostkowych (opracowanie własne)}
+    \caption{Fragment kodu testów jednostkowych}
+    \includegraphics[width=\textwidth]{images/testing/example_unit_test_code.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:example_unit_test_code}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/testing/example_smoke_test_log.png}
-    \caption{Przykładowe logi z uruchomionego zadania wykonania testów dymnych (opracowanie własne)}
+    \caption{Przykładowe logi z uruchomionego zadania wykonania testów dymnych}
+    \includegraphics[width=\textwidth]{images/testing/example_smoke_test_log.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:example_smoke_test_log}
 \end{figure}
 
@@ -138,7 +140,7 @@ W procesie testowym użyte zostały 2 konfiguracje sprzętowe:
     \begin{itemize}
         \item System Operacyjny: Mac OS
         \item Procesor: Apple M1 3.2GHz
-        \item Karta Graficzna:
+        \item Karta Graficzna: zintegrowana
         \item Pamięć RAM: 8GB DDR4,
         \item Dysk Twardy: 256GB SSD,
         \item Wyświetlacz: Wbudowany o przekątnej 13.3", rozdzielczość 20560x1600px.
@@ -189,8 +191,9 @@ W jego ramach zespół ustandaryzował tworzenie raportów o błędach, który p
 Dzięki takiemu podejściu zespół był w stanie łatwiej określić zaafektowane obszary systemu oraz bardziej efektywnie planować ich naprawę.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/testing/bug_report_example.png}
-    \caption{Przykładowy raportu zgłoszonego defektu (opracowanie własne)}
+    \caption{Przykładowy raportu zgłoszonego defektu}
+    \includegraphics[width=\textwidth]{images/testing/bug_report_example.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:bug_report_example}
 \end{figure}
 \par
@@ -217,7 +220,7 @@ W celu analizy wyników testów zastosowano również wtyczkę \gls{pytest-html}
 Raporty te zawierały szczegółowe informacje dotyczące przebiegu testów i co najważniejsze zrzuty ekranu aplikacji.
 \subsection{POC testów automatycznych}
 \par
-W ramach prac nad auomatyzacją testów przygotowano prototypowe rozwiązanie \gls{POC} wykorzystujące framework \gls{Pytest} oraz bibliotekę \gls{Selenium WebDriver}.
+W ramach prac nad auomatyzacją testów przygotowano prototypowe rozwiązanie \gls{POC} wykorzystujące \gls{framework} \gls{Pytest} oraz bibliotekę \gls{Selenium WebDriver}.
 Celem implementacji było sprawdzenie możliwości automatycznej weryfikacji podstawowych funkcjonalności interfejsu użytkownika oraz ocena opłacalności wdrożenia pełnej automatyzacji procesu testowego.
 \par
 Przygotowany scenariusz testowy koncentrował się na automatycznej nawigacji po elementach menu bocznego aplikacji.
@@ -229,20 +232,23 @@ Wykorzystano do tego rozszerzenie \gls{pytest-html}, umożliwiające generowanie
 W ramach implementacji zastosowano również mechanizmy oczekiwania na dostępność elementów interfejsu użytkownika przy użyciu klasy \gls{WebDriverWait}, co pozwoliło ograniczyć ryzyko występowania błędów wynikających z asynchronicznego ładowania komponentów aplikacji.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/testing/e2e_test_init_fragment.png}
-    \caption{Fragment kodu implementacji scenariusza automatycznej nawigacji po elementach interfejsu użytkownika z wykorzystaniem \gls{Selenium WebDriver} (opracowanie własne)}
+    \caption{Fragment kodu implementacji scenariusza automatycznej nawigacji po elementach interfejsu użytkownika z wykorzystaniem \gls{Selenium WebDriver}}
+    \includegraphics[width=\textwidth]{images/testing/e2e_test_init_fragment.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:e2e_test_init_fragment}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/testing/conftest_e2e.png}
-    \caption{Konfiguracja rozszerzenie \gls{pytest-html} odopwiedzialnego za generowanie raportów testowych oraz dołączanie zrzutów ekranu (opracowanie własne)}
+    \caption{Konfiguracja rozszerzenie \gls{pytest-html} odopwiedzialnego za generowanie raportów testowych oraz dołączanie zrzutów ekranu}
+    \includegraphics[width=\textwidth]{images/testing/conftest_e2e.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:conftest_e2e}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/testing/poc_automatyzacji_testow.png}
-    \caption{\gls{POC} raportu z testów automatycznych (opracowanie własne)}
+    \caption{\gls{POC} raportu z testów automatycznych}
+    \includegraphics[width=\textwidth]{images/testing/poc_automatyzacji_testow.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:poc_automatyzacji_testow}
 \end{figure}
 \subsection{Problemy związane z automatyzacją testów}

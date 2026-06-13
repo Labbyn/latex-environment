@@ -30,6 +30,7 @@
 \usepackage{xurl}
 \usepackage{enumitem}
 \usepackage{pdfpages}
+\usepackage{caption}
 \geometry{top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm}
 \onehalfspacing
 \titleformat{\chapter}[block]{\normalfont\bfseries\fontsize{14}{17}\selectfont}{\thechapter}{1em}{} 
@@ -125,8 +126,8 @@
 	\begin{figure}[h!]
 		\label{#3}
 		\centering
-		\includegraphics[width={#4}]{#2}
 		\caption{#1}
+		\includegraphics[width={#4}]{#2} 
 	\end{figure}
 }
 
@@ -223,7 +224,6 @@
 		\fi
 	}%
 }%
-
 
 \renewcommand{\maketitle}{%
     \renewcommand{\baselinestretch}{1.0}
@@ -407,7 +407,6 @@ Płyta CD z następującą zawartością:
 	\end{itemize}
     \item {\em{\@authorattachment%
 praca pisemna}} -- katalog zawierający plik PDF z pracą inżynierską.
-    \item {Sprawozdanie z ankiety.docx} -- plik zawierający sprawozdanie z przeprowadzonego badania ankietowego.
 \end{itemize}
 
 \newpage

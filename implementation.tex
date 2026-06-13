@@ -1,18 +1,19 @@
-\chapter{Przebieg Sprintów}
+\chapter{Przebieg implementacji}
 \par
-W niniejszym rozdziale opisane zostały kluczowe funkcjonalności/akcje wykonane w każdym sprincie. Należy mieć na uwadze, że na każdy sprint przypadały też przynajmniej 2 spotkania zespołu będące jednocześnie przeglądem postępów prac jak i planowaniem kolejnych. Szczegółowy proces opisany został w rozdziale "Zarządzanie projektem".
+W niniejszym rozdziale opisane zostały kluczowe funkcjonalności/akcje wykonane w każdym sprincie. Należy mieć na uwadze, że na każdy \gls{sprint} przypadały też przynajmniej 2 spotkania zespołu będące jednocześnie przeglądem postępów prac jak i planowaniem kolejnych. Szczegółowy proces opisany został w rozdziale "Zarządzanie projektem".
 Na każdy \gls{sprint} przypada także aktualizacja lub poprawki do niniejszego dokumentu, które nie będą opisywane w każdym podrozdziale by nie powielać tych samych informacji. 
 \section{Sprint 0}
 \textbf{Czas trwania \gls{sprint}u: 29.10.2025 - 12.11.2025 (2 tygodnie)}
 \par
-Gls{sprint} ten był inicjalizacją prac nad projektem. Pierwszym zadaniem było  zrobienie listy kluczowych funkcjonalności jakie system powinien posiadać. Aby uzuepłnić potencjalne braki zespół stworzył ankietę, która została przekazana potencjalnym uzytkownikom systemu. Po upływie 1 tygodnia od rozesłania ankiety, zbieranie odpowiedzi zostało zakończone. W tym czasie zespół stworzył \gls{POC} systemu do monitorowania statystyk urządzeń tworząc pliki konfiguracyjne kompatybilne z systemem monitorowania Prometheus.
+Gls{sprint} ten był inicjalizacją prac nad projektem. Pierwszym zadaniem było  zrobienie listy kluczowych funkcjonalności jakie system powinien posiadać. Aby uzuepłnić potencjalne braki zespół stworzył ankietę, która została przekazana potencjalnym uzytkownikom systemu. Po upływie 1 tygodnia od rozesłania ankiety, zbieranie odpowiedzi zostało zakończone. W tym czasie zespół stworzył \gls{POC} systemu do monitorowania statystyk urządzeń tworząc pliki konfiguracyjne kompatybilne z systemem monitorowania \gls{Prometheus}.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{images/sprint_summary/monitoring_poc.png}
-    \caption{Zdjęcie przedstawiające panel monitorowania urządzeń systemu Prometheus (opracowanie własne)}
+    \caption{Zdjęcie przedstawiające panel monitorowania urządzeń systemu \gls{Prometheus}}
+    \includegraphics[width=1.0\textwidth]{images/sprint_summary/monitoring_poc.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:monitoring_poc}
 \end{figure}
-repozytoria dla kodu źródłowego: aplikacji oraz tego dokumentu. Repozytoria te zostały skonfigurowane w odpowiedni sposób, by zapobiec wprowadzaniu zmian bezpośrednio do głównej gałęzi, a każda zmiana musiała być poprzedzona \gls{Pull Request}'em, którego zaakceptować musi:
+Repozytoria dla kodu źródłowego: aplikacji oraz tego dokumentu. Repozytoria te zostały skonfigurowane w odpowiedni sposób, by zapobiec wprowadzaniu zmian bezpośrednio do głównej gałęzi, a każda zmiana musiała być poprzedzona \gls{Pull Request}'em, którego zaakceptować musi:
 \begin{itemize}
     \item w przypadku kodu źródłowego aplikacji - przynajmniej 1 członek zespołu projektowego,
     \item w przypadku kodu źródłowego dokumentu - cały zespół projektowy.
@@ -20,8 +21,9 @@ repozytoria dla kodu źródłowego: aplikacji oraz tego dokumentu. Repozytoria t
 Repozytorium zostało połączone z serwisem Jira w celu sprawniejszego wyszukiwania zmian w kodzie na podstawie zgłoszeń.
 \begin{figure}[H]
     \centering
-    \includegraphics{images/sprint_summary/jira_github_connection.png}
-    \caption{Zdjęcie przedstawiające integrację seriwsów GitHub oraz Jira (zrzut erkanu z serwisu Jira, opracowanie własne)}
+    \caption{Zdjęcie przedstawiające integrację seriwsów \gls{GitHub} oraz Jira}
+    \includegraphics{images/sprint_summary/jira_github_connection.png} 
+    \caption*{Źródło: Zrzut erkanu z serwisu Jira, Opracowanie własne}
     \label{img:jira_github_connection}
 \end{figure}
 Po uzyskaniu odpowiedzi w wyznaczonym czasie, utworzone zostało sprawozdanie z ankiety opisane szczegółowo w punkcie 3.3 . Na jego podstawie wyspecyfikowane zostały wymagania na system, które zostały sklasyfikowane według dwóch wymiarów:
@@ -38,8 +40,9 @@ Dzięki temu wytworzone zostały dokumenty takie jak: Karta Projektu, Dokument Z
 Początkiem \gls{sprint}u utworzony został wstępny model fizyczny bazy danych aplikacji, który wygląda następująco:
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{images/sprint_summary/model_fizyczny_labbyn.png}
-    \caption{Wstępny projekt modelu fizycznego bazy danych (opracowanie własne)}
+    \caption{Wstępny projekt modelu fizycznego bazy danych}
+    \includegraphics[width=1.0\textwidth]{images/sprint_summary/model_fizyczny_labbyn.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:model_fizyczny}
 \end{figure}
 Model ten posłużył do wstępnej konfiguracji środowiska produkcyjnego oraz umożliwił rozpoczęcie prac nad logiką aplikacji, w ramach której powstało wstępne \gls{API} dla systemu \gls{Prometheus}. Równolegle z jej powstaniem zaimplementowano testy dymne, umożliwiające bieżącą kontrolę poprawności podstawowych funkcjonalności. Ich zastosowanie pozwoliło na szybkie wykrywanie krytycznych błędów po wprowadzanych zmianach.
@@ -47,18 +50,20 @@ W celu ujednolicenia wytwarzanego kodu oraz poprawę jego czytelności i utrzymy
 Stworzony został \gls{POC} architektury systemu telemetrii urządzeń w postaci grafu:
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{images/sprint_summary/telemetry_poc.png}
-    \caption{POC systemu telemetrii urządzeń (opracowanie własne)}
+    \caption{POC systemu telemetrii urządzeń}
+    \includegraphics[width=1.0\textwidth]{images/sprint_summary/telemetry_poc.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:telemetry_poc}
 \end{figure}
 Powstała również wersja demonstracyjna aplikacji w celu przedstawienia zespołowi propnowanej wizji artystycznej projektu:
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{images/sprint_summary/labbyn_demo_ui.png}
-    \caption{Wstępna wersja interfejsu użytkownika (opracowanie własne)}
+    \caption{Wstępna wersja interfejsu użytkownika}
+    \includegraphics[width=1.0\textwidth]{images/sprint_summary/labbyn_demo_ui.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:demo_ui}
 \end{figure}
-Utworzono podstawowy proces CI/CD wspierający budowanie i testowanie aplikacji, w ramach którego dodano linter jako element workflow CI w GitHubie. Przygotowane zostało również środowisko dewepolerskie umożliwiające obserwowanie zmian w oprogramowaniu w czasie rzeczywistym co zmniejszyło ryzyko powstawania błędów i pozwoliło drastycznie zmniejszyć czas sprawdzania kompatybilności zmian - programista nie był zmuszony budować aplikacji od nowa co było czasochłonne. 
+Utworzono podstawowy proces \gls{CI/CD} wspierający budowanie i testowanie aplikacji, w ramach którego dodano linter jako element workflow CI w \gls{GitHub}ie. Przygotowane zostało również środowisko dewepolerskie umożliwiające obserwowanie zmian w oprogramowaniu w czasie rzeczywistym co zmniejszyło ryzyko powstawania błędów i pozwoliło drastycznie zmniejszyć czas sprawdzania kompatybilności zmian - programista nie był zmuszony budować aplikacji od nowa co było czasochłonne. 
 
 \section{Sprint 2}
 \textbf{Czas trwania \Gls{sprint}u: 26.11.2025 - 10.12.2025 (2 tygodnie)}
@@ -66,15 +71,17 @@ Utworzono podstawowy proces CI/CD wspierający budowanie i testowanie aplikacji,
 Podczas tego \gls{sprint}u powstał pierwszy prototyp mapy przestrzennej:
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{images/sprint_summary/map_prototype.png}
-    \caption{Prototyp mapy przestrzennej laboratorium (opracowanie własne)}
+    \caption{Prototyp mapy przestrzennej \gls{laboratorium}}
+    \includegraphics[width=1.0\textwidth]{images/sprint_summary/map_prototype.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:map_prototype}
 \end{figure}
 Ze względu na brak jednoznacznie zdefiniowanego konceptu wizualnego systemu, przygotowano \gls{mockup}y w celu ujednolicenia kierunku projeku.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{images/sprint_summary/labbyn_mockups.png}
-    \caption{Zdjęcie przedstawiające część \gls{mockup}ów stworzonych dla systemu Labbyn (opracowanie własne)}
+    \caption{Zdjęcie przedstawiające część \gls{mockup}ów stworzonych dla systemu \gls{Labbyn}}
+    \includegraphics[width=1.0\textwidth]{images/sprint_summary/labbyn_mockups.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:labbyn_mockups}
 \end{figure}
 W ramach implementacji logiki systemu od strony \gls{Backend}u dodano warstwę dostępu do bazy danych z wykrozystaniem \gls{SQL Alchemy} oraz mechanizmy przetwarzania danych jak i obsługi logiki aplikacji.
@@ -101,7 +108,7 @@ Na potrzeby \gls{MVP} dokonano integracji poszczególnych zakładek interfejsu z
 \textbf{Czas trwania \Gls{sprint}u: 28.01.2026 - 11.02.2026 (2 tygodnie)}
 \par
 W trakcie realizacji projektu zidentyfikowano niejednoznaczności oraz braki w wymaganiach dotyczących wybranych funkcjonalności (np. proces dodawania nowej maszyny), co utrudniało ich bezpośrednią implementację. Ze względu na ryzyko opóźnienia prac zdecydowano się na opracowanie opisowej logiki biznesowej, która doprecyzowała sposób działania systemu, umożliwiła kontynuację implementacji oraz stanowiła tymczasową specyfikację zachowania systemu. Równocześnie rozpoczęto proces specyfikacji brakujących wymagań w celu zwiększenia kompletności i pokrycia funkcjonalnego systemu.
-Podjęto próbę implementacji frameworka do testów \gls{E2E}. Po przeprowadzeniu analizy wartości dodanej, kosztów utrzymania oraz nakładu pracy związanego z integracją z istniejącym procesem CI/CD, zespół zdecydował o rezygnacji z tego rozwiązania.
+Podjęto próbę implementacji \gls{framework}a do testów \gls{E2E}. Po przeprowadzeniu analizy wartości dodanej, kosztów utrzymania oraz nakładu pracy związanego z integracją z istniejącym procesem \gls{CI/CD}, zespół zdecydował o rezygnacji z tego rozwiązania.
 
 
 \section{Sprint 6}
@@ -116,7 +123,7 @@ W ramach integracji, połączone z \gls{Backend}em zostały poniższe komponenty
 Dodano także kolejne \gls{Endpoint}y do pobierania danych dla obiektów:
 \begin{itemize}
     \item Historia,
-    \item Rack,
+    \item \gls{rack},
     \item Dokumentacja,
     \item Maszyna
 \end{itemize}

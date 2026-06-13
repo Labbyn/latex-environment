@@ -2,33 +2,34 @@
 
 \section{Stack Technologiczny}
 \par
-Warstwa wizualna aplikacji Labbyn została zrealizowana jako aplikacja typu \gls{SPA} przy użyciu biblioteki React oraz języka TypeScript.
-Głównym założeniem architektury było stworzenie wysoce interaktywnego u modularnego interfejsu użytkownika, zdolnego do płynnej obsługi złożonych struktur danych takich jak inwentarz, topologia laboratoriów czy mapa przestrzenna.
+Warstwa wizualna aplikacji \gls{Labbyn} została zrealizowana jako aplikacja typu \gls{SPA} przy użyciu biblioteki \gls{React} oraz języka TypeScript.
+Głównym założeniem architektury było stworzenie wysoce interaktywnego i modularnego interfejsu użytkownika, zdolnego do płynnej obsługi złożonych struktur danych takich jak inwentarz, topologia laboratoriów czy mapa przestrzenna.
 \par
-Wybór biblioteki React był dla zespołu optymalny z dwóch głównych powodów: obszernego doświadczenia programistów w pracy z tym narzędziem oraz jego ugruntowanej, dominującej pozycji na rynku frameworków webowych (co potwierdzają m.in. globalne badania społeczności, np. ankieta Stack Overflow z 2025 roku).
+Wybór biblioteki \gls{React} był dla zespołu optymalny z dwóch głównych powodów: obszernego doświadczenia programistów w pracy z tym narzędziem oraz jego ugruntowanej, dominującej pozycji na rynku \gls{framework}ów webowych (co potwierdzają m.in. globalne badania społeczności, np. ankieta Stack Overflow z 2025 roku).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/stackoverflow-dev-survey-2025-technology-most-popular-technologies.png}
     \caption{Wynik ankiety dotyczącej najczęściej używanych technologii aplikacji webowych \cite{stackoverflow2025webframeworks}}
+    \includegraphics[width=\textwidth]{images/frontend/stackoverflow-dev-survey-2025-technology-most-popular-technologies.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:stackoverflow}
 \end{figure}
 
 \subsection{Wybór stosu: TanStack vs Next.js}
 \par
-Drugą poważnie rozważaną opcją technologiczną był framework Next.js.
-W procesie projektowania zrezygnowano z popularnego frameworka Next.js na rzecz dedykowanego stosu opierającego się na ekosystemie TanStack.
-Decyzja ta podyktowana była charakterystyką aplikacji Labbyn:
+Drugą poważnie rozważaną opcją technologiczną był \gls{framework} Next.js.
+W procesie projektowania zrezygnowano z popularnego \gls{framework}a Next.js na rzecz dedykowanego stosu opierającego się na ekosystemie TanStack.
+Decyzja ta podyktowana była charakterystyką aplikacji \gls{Labbyn}:
 \begin{enumerate}
-    \item Brak wymogu SEO: Labbyn to aplikacja wewnętrzna/narzędziowa , gdzie indeksowanie przez wyszukiwarki nie jest potrzebne.
+    \item Brak wymogu \gls{SEO}: \gls{Labbyn} to aplikacja wewnętrzna/narzędziowa, gdzie indeksowanie przez wyszukiwarki nie jest potrzebne.
     \item Stan aplikacji i interaktywność: Aplikacja mocno polega na złożonym stanie klienckim. Modele \gls{SSR} i \gls{RSC} oferowane przez Next.js wprowadzają narzut architektoniczny, który w przypadku "ciężkich" klientów bywa zbędny.
     \item Szybkość przejść: Pełne \gls{SPA} obsługiwane przez TanStack Router pozwala na błyskawiczne przejścia między widokami bez konieczności odpytywania serwera o strukturę strony.
-    \item Niezależność infrastrukturalna (Self-hosting): Next.js posiada wiele wbudowanych integracji z platformą Vercel, co jest użyteczne przy komercyjnych wdrożeniach. Jednakże, ze względu nanaturę open-source projektu Labbyn oraz zamysł samodzielnego hostowania aplikacji, większość z tych funkcji pozostałaby niewykorzystana. Co więcej, mogłoby to narzucić potencjalnym odbiorcom korzystanie z płatnych narzędzi ekosystemu Vercel (zjawisko tzw. \gls{Vendor lock-in}).
+    \item Niezależność infrastrukturalna (Self-hosting): Next.js posiada wiele wbudowanych integracji z platformą Vercel, co jest użyteczne przy komercyjnych wdrożeniach. Jednakże, ze względu na naturę \gls{open-source} projektu \gls{Labbyn} oraz zamysł samodzielnego hostowania aplikacji, większość z tych funkcji pozostałaby niewykorzystana. Co więcej, mogłoby to narzucić potencjalnym odbiorcom korzystanie z płatnych narzędzi ekosystemu Vercel (zjawisko tzw. \gls{Vendor lock-in}).
 \end{enumerate}
 
 \section{Architektura}
 \par
-Architektura warstwy frontendowej została oparta na wzorcu programowania zorientowanego na komponenty, z wyraźnym podziałem odpowiedzialności między routing, pobieranie danych i warstwę prezentacji.
+Architektura warstwy \gls{Frontend}owej została oparta na wzorcu programowania zorientowanego na komponenty, z wyraźnym podziałem odpowiedzialności między routing, pobieranie danych i warstwę prezentacji.
 Takie podejście gwarantuje skalowalność kodu oraz ułatwia testowanie i rozbudowę systemu o nowe moduły.
 
 \subsection{Mechanizm Autoryzacji Użytkownika}
@@ -39,13 +40,14 @@ Główny układ aplikacji dla zalogowanych użytkowników zdefiniowano w pliku \
 Plik ten pełni rolę strażnika (ang. \gls{Route Guard}).
 Jeśli użytkownik nie posiada ważnej sesji, następuje przekierowanie do ścieżek publicznych: \url{src/routes/login.tsx} (obsługiwanej przez login-form.tsx) lub src/routes/setup-password.tsx. 
 \par
-W przypadku przekierowania na ekran logowania, w parametrach adresu URL przekazywana jest aktualna lokalizacja, do której próbował dostać się nieautoryzowany użytkownik.
+W przypadku przekierowania na ekran logowania, w parametrach adresu \gls{URL} przekazywana jest aktualna lokalizacja, do której próbował dostać się nieautoryzowany użytkownik.
 Dzięki temu mechanizmowi, po pomyślnym zalogowaniu, użytkownik jest płynnie kierowany na docelową podstronę, co znacząco poprawia ergonomię pracy.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/fragment_auth_route.png}
-    \caption{Fragment pliku \url{src/routes/\_auth.tsx} (opracowanie własne)}
+    \caption{Fragment pliku \url{src/routes/\_auth.tsx}}
+    \includegraphics[width=\textwidth]{images/frontend/fragment_auth_route.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:fragment_auth_route}
 \end{figure}
 
@@ -54,63 +56,70 @@ Zagnieżdżenie struktury katalogów (wszystkie widoki panelu znajdują się w \
 
 \begin{figure}[H]
     \centering
-    \includegraphics[height=0.9\textheight,keepaspectratio]{images/frontend/struktura_folderu_routes.png}
-    \caption{Struktura folderu "routes" (opracowanie własne)}
+    \caption{Struktura folderu ''routes''}
+    \includegraphics[height=0.9\textheight,keepaspectratio]{images/frontend/struktura_folderu_routes.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:struktura_folderu_routes}
 \end{figure}
 
-Na podstawie struktury plików oraz ich zawartości TanStack Router generuje plik \url{routeTree.gen.ts}, który definije wszystkie obsługiwane ścieżki w aplikacji.
+Na podstawie struktury plików oraz ich zawartości TanStack Router generuje plik \url{routeTree.gen.ts}, który definiuje wszystkie obsługiwane ścieżki w aplikacji.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/fragment_pliku_route_tree.png}
-    \caption{Fragment kodu pliku "routeTree" (opracowanie własne)}
+    \caption{Fragment kodu pliku ''routeTree''}
+    \includegraphics[width=\textwidth]{images/frontend/fragment_pliku_route_tree.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:fragment_pliku_route_tree}
 \end{figure}
 
 
 \subsection{Warstwa komunikacji frontend - backend}
 \par
-Aby zachować czystość kodu i separację obaw, komunikacja z warstwą backendową (REST API) opiera się na połączonym działaniu biblioteki Axios oraz TanStack Query, zlokalizowanych we wzorcu w katalogu src/integrations/.
+Aby zachować czystość kodu i separację obaw, komunikacja z warstwą \gls{Backend}ową (\gls{REST} \gls{API}) opiera się na połączonym działaniu biblioteki Axios oraz TanStack Query, zlokalizowanych we wzorcu w katalogu src/integrations/.
 \par
 Axios odpowiada za niskopoziomową budowę żądań HTTP.
 Wykorzystano mechanizm interceptorów do automatycznego wstrzykiwania nagłówków autoryzacyjnych oraz globalnej obsługi błędów.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/fragment_klienta_axios.png}
-    \caption{Fragment kodu klienta Axios (opracowanie własne)}
+    \caption{Fragment kodu klienta Axios}
+    \includegraphics[width=\textwidth]{images/frontend/fragment_klienta_axios.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:fragment_klienta_axios}
 \end{figure}
 
 \par
-TanStack Query zarządza cyklem życia samych danych (odpowiedzi z API) i stanem asynchronicznym.
+TanStack Query zarządza cyklem życia samych danych (odpowiedzi z \gls{API}) i stanem asynchronicznym.
 Odpowiada za budowanie treści żądań, pozwala na zaawansowane techniki buforowania/cacheowania przy użyciu unikalnych kluczy, a także dostarcza zintegrowane stany ładowania.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/machines_query.png}
-    \caption{Przykładowe Query (opracowanie własne)}
+    \caption{Przykładowe Query}
+    \includegraphics[width=\textwidth]{images/frontend/machines_query.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:machines_query}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/machine_response_type.png}
-    \caption{Przykładowy schemat odpowiedzi (opracowanie własne)}
+    \caption{Przykładowy schemat odpowiedzi}
+    \includegraphics[width=\textwidth]{images/frontend/machine_response_type.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:machine_response_type}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/przykład_integracji_machines.png}
-    \caption{Przykładowa integracja frontend-backend (opracowanie własne)}
+    \caption{Przykładowa integracja \gls{Frontend}-backend}
+    \includegraphics[width=\textwidth]{images/frontend/przykład_integracji_machines.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:przykład_integracji_machines}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/struktura_podkatalogu_integracji.png}
-    \caption{Struktura podkatalogu integracji (opracowanie własne)}
+    \caption{Struktura podkatalogu integracji}
+    \includegraphics[width=\textwidth]{images/frontend/struktura_podkatalogu_integracji.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:struktura_podkatalogu_integracji}
 \end{figure}
 
@@ -121,29 +130,33 @@ Każda domena biznesowa (np. inventory, machines, user) posiada własny podkatal
     Zapewniają one mechanizmy cachowania, deduplikacji żądań oraz automatycznego odświeżania w tle.
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{images/frontend/przykład_query_ts.png}
-        \caption{Przykład pliku query.ts (opracowanie własne)}
+        \caption{Przykład pliku query.ts}
+        \includegraphics[width=\textwidth]{images/frontend/przykład_query_ts.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:przykład_query_ts}
     \end{figure}
     \item \text{[domena].mutation.ts:} Definicje hooków do modyfikacji danych (useMutation), obsługujące m.in. optymistyczne aktualizacje interfejsu.
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{images/frontend/przykład_mutation_ts.png}
-        \caption{Przykład pliku mutation.ts (opracowanie własne)}
+        \caption{Przykład pliku mutation.ts}
+        \includegraphics[width=\textwidth]{images/frontend/przykład_mutation_ts.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:przykład_mutation_ts}
     \end{figure}
-    \item \text{[domena].types.ts:} Interfejsy TypeScript ściśle odzwierciedlające struktury danych z API.
+    \item \text{[domena].types.ts:} Interfejsy TypeScript ściśle odzwierciedlające struktury danych z \gls{API}.
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{images/frontend/przykład_types_ts.png}
-        \caption{Przykład pliku types.ts (opracowanie własne)}
+        \caption{Przykład pliku types.ts}
+        \includegraphics[width=\textwidth]{images/frontend/przykład_types_ts.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:przykład_types_ts}
     \end{figure}
-    \item \text{[domena].adapter.ts:} Opcjonalny adapter który pozwala na niestandardowe mapowanie danych na potrzeby frontendu.
+    \item \text{[domena].adapter.ts:} Opcjonalny adapter który pozwala na niestandardowe mapowanie danych na potrzeby \gls{Frontend}u.
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{images/frontend/przykład_adapter_ts.png}
-        \caption{Przykład pliku adapter.ts (opracowanie własne)}
+        \caption{Przykład pliku adapter.ts}
+        \includegraphics[width=\textwidth]{images/frontend/przykład_adapter_ts.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:przykład_adapter_ts}
     \end{figure}
 \end{itemize}
@@ -154,29 +167,33 @@ Architektura warstwy wizualnej opiera się na podejściu modułowym, inspirowany
 Podzielono ją na trzy główne kategorie:
 \begin{figure}[H]
     \centering
-    \includegraphics[height=0.9\textheight,keepaspectratio]{images/frontend/struktura_plików_komponentów.png}
-    \caption{Struktura plików komponentów (opracowanie własne)}
+    \caption{Struktura plików komponentów}
+    \includegraphics[height=0.9\textheight,keepaspectratio]{images/frontend/struktura_plików_komponentów.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:struktura_plików_komponentów}
 \end{figure}
 \begin{enumerate}
-    \item Komponenty bazowe (UI): Zlokalizowane w \url{src/components/ui/} (np. button.tsx, dialog.tsx, data-table.tsx). Stanowią one niezależne, generyczne klocki budulcowe,oparte o wzorzec biblioteki shadcn/ui. Zapewniają one spójność zachowań (np. dostępność a11y) w całej aplikacji. \url{https://ui.shadcn.com/docs/components}
-    \item Komponenty układu (Layout): Obejmują m.in. app-sidebar.tsx (główna nawigacja), page-header.tsx oraz szablony takie jak subpage-template.tsx, które gwarantują ujednoliconą strukturę wizualną podstron. Na przyklad:
+    \item Komponenty bazowe (\gls{UI}): Zlokalizowane w \url{src/components/ui/} (np. button.tsx, dialog.tsx, data-table.tsx). Stanowią one niezależne, generyczne klocki budulcowe, oparte o wzorzec biblioteki shadcn/ui. Zapewniają one spójność zachowań (np. dostępność a11y) w całej aplikacji. \url{https://ui.shadcn.com/docs/components}
+    \item Komponenty układu (Layout): Obejmują m.in. app-sidebar.tsx (główna nawigacja), page-header.tsx oraz szablony takie jak subpage-template.tsx, które gwarantują ujednoliconą strukturę wizualną podstron. Na przykład:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{images/frontend/page_header_komponent_kod.png}
-        \caption{Fragment kodu pliku \text{page-header.tsx} (opracowanie własne)}
+        \caption{Fragment kodu pliku \text{page-header.tsx}}
+        \includegraphics[width=\textwidth]{images/frontend/page_header_komponent_kod.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:page_header_komponent_kod}
     \end{figure}
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{images/frontend/użycie_page_header.png}
-        \caption{Przykład użycia page-header (opracowanie własne)}
+        \caption{Przykład użycia page-header}
+        \includegraphics[width=\textwidth]{images/frontend/użycie_page_header.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:użycie_page_header}
     \end{figure}
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{images/frontend/page_header_wyrenderowany.png}
-        \caption{Wyrenderowany page-header (opracowanie własne)}
+        \caption{Wyrenderowany page-header}
+        \includegraphics[width=\textwidth]{images/frontend/page_header_wyrenderowany.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:page_header_wyrenderowany}
     \end{figure}
     \item Komponenty domenowe: Dedykowane konkretnym funkcjom, np. \url{add-inventory-dialog.tsx}, \url{manage-rental-dialog.tsx}, czy moduł importu/eksportu (\url{src/components/import-export/}).
@@ -188,36 +205,38 @@ Jednym z najbardziej złożonych modułów aplikacji jest interaktywna mapa prze
 Została ona zaprojektowana w celu wizualizacji oraz topologicznego zarządzania rozmieszczeniem sprzętu. 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/mapa_całość.png}
-    \caption{Mapa przestrzenna w systemie \gls{Labbyn} (opracowanie własne)}
+    \caption{Mapa przestrzenna w systemie \gls{Labbyn}}
+    \includegraphics[width=\textwidth]{images/frontend/mapa_całość.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:mapa_całość}
 \end{figure}
 
 \subsection{Implementacja i architektura}
 \par
-Architektura modułu opiera się na separacji warstwy prezentacyjnej \gls{WebGL}/DOM od logiki biznesowej i zarządzania stanem.
+Architektura modułu opiera się na separacji warstwy prezentacyjnej \gls{WebGL}/\gls{DOM} od logiki biznesowej i zarządzania stanem.
 Punktem wejściowym jest komponent zdefiniowany w pliku map.tsx, który za pomocą biblioteki @tanstack/react-router zarządza parametrami trasy (m.in. roomId, redirectId) oraz inicjuje pobieranie danych z wykorzystaniem \text{@tanstack/react-query}.
 Główny widok renderowany jest przez komponent CanvasComponent3D (canvas.tsx), który integruje warstwę 3D z nakładkami interfejsu użytkownika.
 \par
 Rozwiązanie zostało zbudowane w oparciu o następujący stos technologii renderowania 3D:
 \begin{itemize}
-    \item \gls{WebGL} - niskopoziomowe API przeglądarkowe umożliwiające sprzętową akcelerację grafiki 3D.
-    \item \gls{Three.js} - zaawansowana biblioteka języka JavaScript, abstrahująca od złożoności czystego \gls{WebGL} i udostępniająca zorientowane obiektowo API do budowy scen, kamer oraz materiałów.
-    \item react-three-fiber - deklaratywny renderer (wrapper) biblioteki \gls{Three.js} dla ekosystemu React, umożliwiający zarządzanie cyklem życia obiektów 3D za pomocą standardowych komponentów i hooków.
+    \item \gls{WebGL} - niskopoziomowe \gls{API} przeglądarkowe umożliwiające sprzętową akcelerację grafiki 3D.
+    \item \gls{Three.js} - zaawansowana biblioteka języka JavaScript, abstrahująca od złożoności czystego \gls{WebGL} i udostępniająca zorientowane obiektowo \gls{API} do budowy scen, kamer oraz materiałów.
+    \item react-three-fiber - deklaratywny renderer (wrapper) biblioteki \gls{Three.js} dla ekosystemu \gls{React}, umożliwiający zarządzanie cyklem życia obiektów 3D za pomocą standardowych komponentów i hooków.
     \item Drei - oficjalna kolekcja wysoce użytecznych abstrakcji i gotowych rozwiązań dla react-three-fiber, znacznie przyspieszająca tworzenie interaktywnych elementów (m.in. kontrolek transformacji i środowiska sceny).
 \end{itemize}
 
 \subsection{Renderowanie i optymalizacja sceny 3D}
 \par
 Scena trójwymiarowa definiowana jest za pomocą bazowego komponentu <Canvas>, dostarczającego główny kontekst renderowania.
-W celu zapewnienia wysokiej wydajności, szczególnie przy dużej liczbie obiektów w laboratorium, zastosowano następujące techniki optymalizacyjne:
+W celu zapewnienia wysokiej wydajności, szczególnie przy dużej liczbie obiektów w \gls{laboratorium}, zastosowano następujące techniki optymalizacyjne:
 \begin{enumerate}
     \item \gls{Instancjonowanie} (Instanced Rendering): Zamiast renderować każdą szafę serwerową jako osobny obiekt typu Mesh (co wiązałoby się z dużą liczbą wywołań \gls{Draw calls}), wykorzystano komponent <Instances> z biblioteki @react-three/drei. Geometria szafy (rackGeometryBase) oraz jej bazowy materiał są współdzielone, a poszczególne obiekty różnią się jedynie transformacją (pozycją, rotacją) oraz kolorem.
-    \item \gls{Proceduralne generowanie tekstur}: Zamiast pobierać z serwera statyczne pliki graficzne dla tekstur szaf serwerowych i ścian, aplikacja generuje je w locie przy użyciu natywnego API Canvas HTML5 (funkcje generateServerTextures oraz generateWallBumpMap). Pozwala to na symulację detali (np. diod LED, portów, szczelin) bez obciążania łącza sieciowego oraz z zachowaniem możliwości dynamicznego mapowania właściwości emisyjnych (świecenie diod).
+    \item \gls{Proceduralne generowanie tekstur}: Zamiast pobierać z serwera statyczne pliki graficzne dla tekstur szaf serwerowych i ścian, aplikacja generuje je w locie przy użyciu natywnego \gls{API} Canvas HTML5 (funkcje generateServerTextures oraz generateWallBumpMap). Pozwala to na symulację detali (np. diod LED, portów, szczelin) bez obciążania łącza sieciowego oraz z zachowaniem możliwości dynamicznego mapowania właściwości emisyjnych (świecenie diod).
     \begin{figure}[H]
         \centering
-        \includegraphics{images/frontend/przykład_tekstury.png}
-        \caption{Przykładowa tekstura na obiekcie (opracowanie własne)}
+        \caption{Przykładowa tekstura na obiekcie}
+        \includegraphics{images/frontend/przykład_tekstury.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:przykład_tekstury}
     \end{figure}
     \item Zarządzanie kamerą: System wspiera dwa tryby rzutowania obsługiwane przez dedykowane kamery: PerspectiveCamera dla pełnego widoku 3D oraz OrthographicCamera dla rzutu izometrycznego/płaskiego (tryb 2D). Przełączanie między kamerami realizowane jest płynnie bez konieczności niszczenia i ponownego budowania sceny.
@@ -234,25 +253,27 @@ Efektywność energetyczna systemu opiera się na dwóch głównych filarach:
 \subsection{Zarządzanie stanem i mechanizm historii}
 \par
 Złożony stan mapy (pozycje szaf, ściany, etykiety) jest zarządzany przez globalny magazyn danych oparty na bibliotece zustand (useLabStore).
-Wykorzystanie tej biblioteki pozwala na aktualizację właściwości obiektów 3D z pominięciem standardowego cyklu renderowania komponentów Reacta, co jest kluczowe dla zachowania płynności animacji podczas przesuwania elementów.
+Wykorzystanie tej biblioteki pozwala na aktualizację właściwości obiektów 3D z pominięciem standardowego cyklu renderowania komponentów \gls{React}a, co jest kluczowe dla zachowania płynności animacji podczas przesuwania elementów.
 \par
 Moduł zawiera autorski mechanizm historii operacji (Undo/Redo) zaimplementowany za pomocą hooka useLabHistory.
 Mechanizm ten:
 \begin{itemize}
-    \item Zapisuje migawki  stanu obiektów w tablicy o zdefiniowanym limitowanym rozmiarze (maksymalnie 25 kroków wstecz).
+    \item Zapisuje migawki stanu obiektów w tablicy o zdefiniowanym limitowanym rozmiarze (maksymalnie 25 kroków wstecz).
     \item Reaguje na akcje użytkownika modyfikujące przestrzeń (dodawanie, usuwanie, przesuwanie).
     \item Zabezpiecza przed utratą danych poprzez integrację z mechanizmem useBlocker rutera, ostrzegając użytkownika przed opuszczeniem widoku w przypadku wykrycia niezapisanych zmian (hasUnsavedChanges).
 \end{itemize}
 \begin{figure}[H]
     \centering
-    \includegraphics{images/frontend/mapa_historia_oraz_save.png}
-    \caption{Przyciski: cofania akcji oraz zapisu stanu mapy (opracowanie własne)}
+    \caption{Przyciski: cofania akcji oraz zapisu stanu mapy}
+    \includegraphics{images/frontend/mapa_historia_oraz_save.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:mapa_historia_oraz_save}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics{images/frontend/unsaved_changes_dialog.png}
-    \caption{Ostrzeżenie o utracie niezapisanych danych (opracowanie własne)}
+    \caption{Ostrzeżenie o utracie niezapisanych danych}
+    \includegraphics{images/frontend/unsaved_changes_dialog.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:unsaved_changes_dialog}
 \end{figure}
 
@@ -260,43 +281,49 @@ Mechanizm ten:
 \par
 Rozwiązanie dostarcza rozbudowany system narzędzi, zarządzany przez zmienną stanu mode (typ EditMode), której wartość determinuje zachowanie systemu po kliknięciu na obiekty na scenie:
 \begin{itemize}
-    \item Manipulacja przestrzenna (Move/Rotate): Zrealizowano z wykorzystaniem komponentu TransformControls. Narzędzie to udostępnia interfejs graficzny  do translacji i rotacji obiektów. Aby umożliwić jednoczesną modyfikację wielu obiektów, wyznaczany jest ich wspólny środek geometryczny (groupCenter), wokół którego dokonywane są transformacje, a w momencie zakończenia akcji (event \url{dragging-changed}) wyliczane są i zapisywane nowe pozycje z użyciem funkcji trygonometrycznych i rotacji wokół osi Y.
+    \item Manipulacja przestrzenna (Move/Rotate): Zrealizowano z wykorzystaniem komponentu TransformControls. Narzędzie to udostępnia interfejs graficzny do translacji i rotacji obiektów. Aby umożliwić jednoczesną modyfikację wielu obiektów, wyznaczany jest ich wspólny środek geometryczny (groupCenter), wokół którego dokonywane są transformacje, a w momencie zakończenia akcji (event \url{dragging-changed}) wyliczane są i zapisywane nowe pozycje z użyciem funkcji trygonometrycznych i rotacji wokół osi Y.
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{images/frontend/transform_controls_kod.png}
-        \caption{Fragment kodu komponentu "TransformControls" (opracowanie własne)}
+        \caption{Fragment kodu komponentu ''TransformControls''}
+        \includegraphics[width=\textwidth]{images/frontend/transform_controls_kod.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:transform_controls_kod}
     \end{figure}
     \begin{figure}[H]
         \centering
-        \includegraphics{images/frontend/transform_controls_przykład.png}
-        \caption{Przykład zastosowania TransformControls - obracanie obkietu (opracowanie własne)}
+        \caption{Przykład zastosowania TransformControls - obracanie obkietu}
+        \includegraphics{images/frontend/transform_controls_przykład.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:transform_controls_przykład}
     \end{figure}
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{images/frontend/transform_controls_przykład2.png}
-        \caption{Przykład zastosowania TransformControls - zmiana pozycji obiektu względem osi x i z (opracowanie własne)}
+        \caption{Przykład zastosowania TransformControls - zmiana pozycji obiektu względem osi x i z}
+        \includegraphics[width=\textwidth]{images/frontend/transform_controls_przykład2.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:transform_controls_przykład2}
     \end{figure}
     \item Zaznaczanie obszarowe (\gls{Marquee select}): Implementacja opiera się na śledzeniu początkowego i końcowego punktu wciśnięcia kursora na płaszczyźnie bazowej mapy (handlePointerDown, handlePointerUp). Po zwolnieniu przycisku myszy, algorytm wyznacza obszar graniczny (Min/Max dla osi X i Z) i iteruje przez kolekcje elementów, wybierając te, które mieszczą się w danym prostokącie przestrzennym.
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{images/frontend/mapa_zaznaczenie_marquee.png}
-        \caption{Przykład zastosowania zaznaczenia obszarowego (opracowanie własne)}
+        \caption{Przykład zastosowania zaznaczenia obszarowego}
+        \includegraphics[width=\textwidth]{images/frontend/mapa_zaznaczenie_marquee.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:mapa_zaznaczenie_marquee}
     \end{figure}
     \item Przyciąganie do siatki (Snapping): System implementuje matematyczną funkcję zaokrąglającą współrzędne obiektów (funkcja snapToData), co ułatwia zachowanie rygoru przestrzennego podczas rozmieszczania szaf i rysowania ścian.
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{images/frontend/snapToData_kod.png}
-        \caption{Fragment kodu "snapToData" (opracowanie własne)}
+        \caption{Fragment kodu ''snapToData''}
+        \includegraphics[width=\textwidth]{images/frontend/snapToData_kod.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:snapToData_kod}
     \end{figure}
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{images/frontend/snapToData_kod_2.png}
-        \caption{Fragment kodu "snapToData" (opracowanie własne)}
+        \caption{Fragment kodu ''snapToData''}
+        \includegraphics[width=\textwidth]{images/frontend/snapToData_kod_2.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:snapToData_kod_2}
     \end{figure}
 \end{itemize}
@@ -305,69 +332,78 @@ Rozwiązanie dostarcza rozbudowany system narzędzi, zarządzany przez zmienną 
 \par
 Przestrzeń ekranu nakładana na główny Canvas grupuje dedykowane narzędzia nawigacyjne i analityczne.
 \par
-Warstwa HTML (DOM) nakładana ponad główną warstwą \gls{WebGL} implementuje zestaw dedykowanych kontrolek zarządzających operacjami narzędziowymi oraz widokiem w kontekście mapy.
+Warstwa HTML (\gls{DOM}) nakładana ponad główną warstwą \gls{WebGL} implementuje zestaw dedykowanych kontrolek zarządzających operacjami narzędziowymi oraz widokiem w kontekście mapy.
 Składają się na nią następujące moduły:
 \begin{itemize}
-    \item Główny pasek narzędziowy (MapToolbar): Komponent agregujący przełączniki wszystkich trybów pracy mapy (narzędzie wskaźnika, selekcja obszarowa, kontrolki manipulacji, próbnik kolorów w trybie malowania, a także wstawianie na scenę nowych modeli(szaf, ścian oraz etykiet)).
+    \item Główny pasek narzędziowy (MapToolbar): Komponent agregujący przełączniki wszystkich trybów pracy mapy (narzędzie wskaźnika, selekcja obszarowa, kontrolki manipulacji, próbnik kolorów w trybie malowania, a także wstawianie na scenę nowych modeli (szaf, ścian oraz etykiet)).
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{images/frontend/map_toolbar.png}
-        \caption{Pasek narzędziowy mapy przestrzennej (opracowanie własne)}
+        \caption{Pasek narzędziowy mapy przestrzennej}
+        \includegraphics[width=\textwidth]{images/frontend/map_toolbar.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:map_toolbar}
     \end{figure}
     \item Konfiguracja widoku (ViewSettings): Paleta kontrolna umożliwiająca natychmiastowe przestrojenie ujęcia wizualnego, od wymuszania perspektywy rzutowania ortograficznego lub izometrycznego w pseudo-2D do w pełni przestrzennego 3D, a także sterowanie asystentem przyciągania do siatki.
     \begin{figure}[H]
         \centering
-        \includegraphics{images/frontend/view_settings.png}
-        \caption{Ustawienia trybu wyświetlania mapy przestrzennej (opracowanie własne)}
+        \caption{Ustawienia trybu wyświetlania mapy przestrzennej}
+        \includegraphics{images/frontend/view_settings.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:view_settings}
     \end{figure}
-    \item Selektor przestrzeni (Room Dropdown): Komponent nawigacyjny sprzężony z API, pozwalający na migrację pomiędzy odrębnymi pracowniami i laboratoriami serwerowymi dostępnych dla danego użytkownika bezpośrednio z poziomu wirtualnej sceny.
+    \item Selektor przestrzeni (Room Dropdown): Komponent nawigacyjny sprzężony z \gls{API}, pozwalający na migrację pomiędzy odrębnymi pracowniami i laboratoriami serwerowymi dostępnych dla danego użytkownika bezpośrednio z poziomu wirtualnej sceny.
     \begin{figure}[H]
         \centering
-        \includegraphics{images/frontend/room_dropdown.png}
-        \caption{Wybór mapy pomieszczenia (opracowanie własne)}
+        \caption{Wybór mapy pomieszczenia}
+        \includegraphics{images/frontend/room_dropdown.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:room_dropdown}
     \end{figure}
     \item Nakładka nawigacyjna (Controls Overlay): Pływający u dołu lewej sekcji widżet edukacyjny, który adaptuje się do sytuacji, wyświetlając i przypominając użytkownikowi najskuteczniejsze w danym ujęciu skróty klawiszowe operowania kamerą.
     \begin{figure}[H]
         \centering
-        \includegraphics{images/frontend/controls_overlay.png}
-        \caption{Wybór mapy pomieszczenia (opracowanie własne)}
+        \caption{Wybór mapy pomieszczenia}
+        \includegraphics{images/frontend/controls_overlay.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:controls_overlay}
     \end{figure}
-    \item Panel informacyjny (RackInfoPanel) - interakcje kontekstowe: Wskazanie i kliknięcie konkretnej szafy serwerowej na wirtualnej mapie wywołuje komponent boczny. Pozwala on użytkownikowi, bez opuszczania kontekstu przestrzennego, na dogłębną inspekcję wybranego racka. Panel pokazuje liste półek, ich zawartość (maszyny) oraz moduł drag and drop do szybkiej reorganizacji kolejności półek. Kliknięcie na półkę przenosi do listy maszyn znajdujących się na danej półce wraz z metrykami na żywo, opisanymi szczegółowo w rozdziale \ref{sec:metrics_gathering}.
+    \item Panel informacyjny (RackInfoPanel) - interakcje kontekstowe: Wskazanie i kliknięcie konkretnej szafy serwerowej na wirtualnej mapie wywołuje komponent boczny. Pozwala on użytkownikowi, bez opuszczania kontekstu przestrzennego, na dogłębną inspekcję wybranego \gls{rack}a. Panel pokazuje listę półek, ich zawartość (maszyny) oraz moduł drag and drop do szybkiej reorganizacji kolejności półek. Kliknięcie na półkę przenosi do listy maszyn znajdujących się na danej półce wraz z metrykami na żywo, opisanymi szczegółowo w rozdziale \ref{sec:metrics_gathering}.
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{images/frontend/metryki lab mapa.png}
-        \caption{Rack info panel (opracowanie własne)}
+        \caption{Rack info panel}
+        \includegraphics[width=\textwidth]{images/frontend/metryki lab mapa.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:metryki_rack}
     \end{figure}
-    \item Integracja z resztą UI (Show On Map): Stworzony na zewnątrz modułu 3D komponent przycisku show-on-map-button.tsx łączy interfejs płaskich reszty aplikacji Labbyn z wizualizacją przestrzenną. Służy on jako kotwica, która z każdemu poziomu aplikacji umożliwia zmianę aktualnej ścieżki aplikacji i transportuje kamerę do dokładnych koordynatów obiektu na mapie laboratoryjnej.
-    \item \gls{Gizmo} wpierające orientacje w przestrzeni. Zadaniem tego komponentu jest informowanie użytkownika o aktualnej pozycji kursora oraz w jakich płaszczyznach porusza się jego kamera aby uniknąć dezorientacji.
+    \item Integracja z resztą \gls{UI} (Show On Map): Stworzony na zewnątrz modułu 3D komponent przycisku show-on-map-button.tsx łączy płaski interfejs reszty aplikacji \gls{Labbyn} z wizualizacją przestrzenną. Służy on jako kotwica, która z każdemu poziomu aplikacji umożliwia zmianę aktualnej ścieżki aplikacji i transportuje kamerę do dokładnych koordynatów obiektu na mapie laboratoryjnej.
+    \item \gls{Gizmo} wpierające orientację w przestrzeni. Zadaniem tego komponentu jest informowanie użytkownika o aktualnej pozycji kursora oraz w jakich płaszczyznach porusza się jego kamera aby uniknąć dezorientacji.
     \begin{figure}[H]
         \centering
-        \includegraphics{images/frontend/map_gizmo.png}
-        \caption{\gls{Gizmo} na mapie przestrzennej (opracowanie własne)}
+        \caption{\gls{Gizmo} na mapie przestrzennej}
+        \includegraphics{images/frontend/map_gizmo.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:map_gizmo}
     \end{figure}
     \item Oraz inne wspierające kontekst danej akcji:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{images/frontend/map_color_picker.png}
-        \caption{Wybór kolorów do oznaczania elementów (opracowanie własne)}
+        \caption{Wybór kolorów do oznaczania elementów}
+        \includegraphics[width=\textwidth]{images/frontend/map_color_picker.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:map_color_picker}
     \end{figure}
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{images/frontend/map_select_rack_to_place.png}
-        \caption{Panel wyboru dostępnych do umieszczenia szaf rackowych (opracowanie własne)}
+        \caption{Panel wyboru dostępnych do umieszczenia szaf \gls{rack}owych}
+        \includegraphics[width=\textwidth]{images/frontend/map_select_rack_to_place.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:map_select_rack_to_place}
     \end{figure}
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{images/frontend/map_edit_label.png}
-        \caption{Dodawanie etykiety na mapie przestrzennej (opracowanie własne)}
+        \caption{Dodawanie etykiety na mapie przestrzennej}
+        \includegraphics[width=\textwidth]{images/frontend/map_edit_label.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:map_edit_label}
     \end{figure}
 \end{itemize}
@@ -381,12 +417,12 @@ Posiadanie tysięcy pojedynczych obiektów i wysyłanie poleceń rysowania dla k
 W celu optymalizacji tego procesu zastosowano technikę grupowania siatek geometrycznych.
 Obiekty o takiej samej geometrii i materiale są grupowane w pojedyncze zbiory danych, co pozwala na ograniczenie liczby żądań kierowanych do procesora graficznego do niezbędnego minimum.
 \par
-Tylko w momencie zarządzania tylko niektórymi elemenatami grupy np. przeniesienie dwóch szaf rackowych w inne miejsce następuje fragmentacja na pomniejsze grupy.
+Tylko w momencie zarządzania  niektórymi elementami grupy np. przeniesienie dwóch szaf \gls{rack}owych w inne miejsce następuje fragmentacja na pomniejsze grupy.
 
 \subsection{Inspiracja UX}
 \par
 Nawigacja na mapach 3D w aplikacjach przeglądarkowych posiada wiele unikalnych wyzwań.
-W celu dostarczenia najlepszego ux nawigacji wewnątrz przestrzennie 3D, przed przystąpieniem do implementacji wykonano analizę popularnych gier komputerowych z gatunku City Builder oraz strategii czasu rzeczywistego, a także wiodących aplikacji użytkowych (np. Adobe Photoshop, eksploratory plików).
+W celu dostarczenia najlepszego \gls{UX} nawigacji wewnątrz przestrzeni 3D, przed przystąpieniem do implementacji wykonano analizę popularnych gier komputerowych z gatunku City Builder oraz strategii czasu rzeczywistego, a także wiodących aplikacji użytkowych (np. Adobe Photoshop, eksploratory plików).
 Rozwiązania z gier, które zakładają spędzanie setek godzin na poruszaniu się po przestrzeniach izometrycznych i 3D, pozwoliły na wyeliminowanie powszechnych problemów nawigacyjnych.
 \par
 W rezultacie zaimplementowano hybrydowy system sterowania:
@@ -398,15 +434,16 @@ W rezultacie zaimplementowano hybrydowy system sterowania:
 \end{itemize}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/map_custom_select.png}
-    \caption{Wybieranie poszczególnych szaf rackowych na mapie przestrzennej (opracowanie własne)}
+    \caption{Wybieranie poszczególnych szaf \gls{rack}owych na mapie przestrzennej}
+    \includegraphics[width=\textwidth]{images/frontend/map_custom_select.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:map_custom_select}
 \end{figure}
 
 \section{Tożsamość graficzna}
 \par
 Stylowanie aplikacji zostało oparte na zmiennych CSS.
-Taka architektura pozwoliła na szybkie wdrażanie eksperymentów wizualnych oraz wbudowanie pełnej obsługi dwóch motywów wyświetlania: jasnego i ciemnego, które użytkownik może łatwo dostosować do własnych preferencji widzenia i warunków oświetleniowych w laboratorium.
+Taka architektura pozwoliła na szybkie wdrażanie eksperymentów wizualnych oraz wbudowanie pełnej obsługi dwóch motywów wyświetlania: jasnego i ciemnego, które użytkownik może łatwo dostosować do własnych preferencji widzenia i warunków oświetleniowych w \gls{laboratorium}.
 Ze względu na charakter projektu gdzie użytkownikami końcowymi są w większości technicy używający aplikacji przez wiele godzin większy priorytet został nałożony na tryb ciemny.
 Jako kolor głównych akcentów został wybrany odważny, jaskrawy i żywy odcień różu, który znajduje się między czerwienią a fioletem na kole barw.
 Aplikacje zbudowane za pomocą bibliotek komponentów często wyglądają podobnie z powodu narzutu stylistycznego użytych elementów.
@@ -414,8 +451,9 @@ Dlatego ciężko jest uzyskać unikalny i łatwy do zidentyfikowania wygląd sza
 Ten nietuzinkowy kolor zdecydowanie w tym pomaga, dodaje unikalności, jednocześnie nie pogarszając czytelności oraz profesjonalnego i prostego wyglądu aplikacji.
 \begin{figure}[H]
     \centering
-    \includegraphics[height=0.9\textheight,keepaspectratio]{images/frontend/zmienne_css_kod.png}
-    \caption{Zmienne pliku CSS aplikacji (opracowanie własne)}
+    \caption{Zmienne pliku CSS aplikacji}
+    \includegraphics[height=0.9\textheight,keepaspectratio]{images/frontend/zmienne_css_kod.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:zmienne_css}
 \end{figure}
 
@@ -423,8 +461,9 @@ Ten nietuzinkowy kolor zdecydowanie w tym pomaga, dodaje unikalności, jednocze�
 Podczas opracowywania szaty graficznej został przygotowany prototyp logotypu projektu, natomiast nie został on dopracowany do finalnej wersji w ramach pracy inżynierskiej.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/prototypowanie_loga_systemu.png}
-    \caption{Proces prototypowania loga aplikacji (opracowanie własne)}
+    \caption{Proces prototypowania loga aplikacji}
+    \includegraphics[width=\textwidth]{images/frontend/prototypowanie_loga_systemu.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:prototypowanie_loga}
 \end{figure}
 
@@ -439,29 +478,33 @@ Znajdują się w nim:
     \item \textbf{Command Search:} Globalne narzędzie wywoływane skrótem klawiszowym, które oferuje zaawansowane wyszukiwanie zasobów oraz wywoływanie szybkich akcji kontekstowych. Poprawia ono ergonomię pracy, pozwalając na prostą i szybką nawigację.
     \begin{figure}[H]
         \centering
-        \includegraphics{images/frontend/search_bar.png}
-        \caption{Mechanizm wyszukiwania obiektów w systemie (opracowanie własne)}
+        \caption{Mechanizm wyszukiwania obiektów w systemie}
+        \includegraphics{images/frontend/search_bar.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:search_bar}
     \end{figure}
     \item \textbf{Zakładki:} Podstawowy element organizujący strukturę szczegółowych informacji. Na podstronach obiektów, zastosowanie zakładek minimalizuje konieczność przewijania długich stron i pozwala na ukrycie rzadziej wykorzystywanych paneli danych.
     \begin{figure}[H]
         \centering
-        \includegraphics{images/frontend/sidebar_tabs.png}
-        \caption{Zakładki dostępne z poziomu paska bocznego (opracowanie własne)}
+        \caption{Zakładki dostępne z poziomu paska bocznego}
+        \includegraphics{images/frontend/sidebar_tabs.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:sidebar_tabs}
     \end{figure}
     \item \textbf{Quick actions:} Służy do szybkiego zarządzania zasobami i infrastrukturą. Pozwala na wykonanie najczęściej używanych w systemie akcji przy użyciu jednego panelu. Centralizacja tych czynności zwiększa intuicyjność systemu jednocześnie minimalizując czas potrzebny na znalezienie pożądanej funkcjonalności.
     \begin{figure}[H]
         \centering
-        \includegraphics{images/frontend/quick_actions.png}
-        \caption{Panel szybkich akcji (opracowanie własne)}
+        \caption{Panel szybkich akcji}
+        \includegraphics{images/frontend/quick_actions.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:quick_actions}
     \end{figure}
     \item \textbf{Menu Użytkownika:} Stanowi element odpowiedzialny za prezentację informacji o aktualnie uwierzytelnionym użytkowniku, w szczególności jego nazwy. Kliknięcie tego elementu powoduje wyświetlenie menu kontekstowego pozwalającego na wylogowanie czy zmianę trybu wyświetlania aplikacji.
     \begin{figure}[H]
         \centering
-        \includegraphics{images/frontend/user_menu.png}
-        \caption{Menu użytkownika na pasku bocznym (opracowanie własne)}
+        \caption{Menu użytkownika na pasku bocznym}
+        \includegraphics{images/frontend/user_menu.png} 
+        \caption*{Źródło: Opracowanie własne}
         \label{img:user_menu}
     \end{figure}
 \end{itemize}
@@ -472,34 +515,38 @@ Panel użytkownika pełni rolę podsumowania zasobów, do których aktualnie zal
 Dodatkowo panel zapewnia możliwość personalizacji widoku poprzez wykorzystanie mechanizmu “Customize View”, który umożliwia użytkownikowi dostosowanie prezentowanych informacji do jego indywidualnych potrzeb i preferencji.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/user_dashboard.png}
-    \caption{Panel użytkownika (opracowanie własne)}
+    \caption{Panel użytkownika}
+    \includegraphics[width=\textwidth]{images/frontend/user_dashboard.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:user_dashboard}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics{images/frontend/user_dashboard_customize.png}
-    \caption{Konfiguracja panelu użytkownika (opracowanie własne)}
+    \caption{Konfiguracja panelu użytkownika}
+    \includegraphics{images/frontend/user_dashboard_customize.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:user_dashboard_customize}
 \end{figure}
 
 \subsection{Labs}
 \par
 Panel laboratoriów zawiera informacje o dostępnych pomieszczeniach.
-Każdy obiekt posiada krótkie podsumowanie w postaci: nazwy, właściciela oraz liczby szaf rackowych dostępnych w pomieszczeniu.
+Każdy obiekt posiada krótkie podsumowanie w postaci: nazwy, właściciela oraz liczby szaf \gls{rack}owych dostępnych w pomieszczeniu.
 Posiada on także wyszukiwarkę pozwalającą na filtrowanie zwracanych wyników.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/labs_overview.png}
-    \caption{Panel "Labs" (opracowanie własne)}
+    \caption{Panel ''Labs''}
+    \includegraphics[width=\textwidth]{images/frontend/labs_overview.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:labs_overview}
 \end{figure}
 \par
-Niżej znajduje się przycisk szczegółów pomieszczenia, po kliknięciu w który użytkownik przenoszony jest na panel z listą szaf rackowych przypisanych do niego z możliwością wyszukiwania, filtrowania, sortowania oraz kontroli ilości zwracanych wyników.
+Niżej znajduje się przycisk szczegółów pomieszczenia, po kliknięciu w który użytkownik przenoszony jest na panel z listą szaf \gls{rack}owych przypisanych do niego z możliwością wyszukiwania, filtrowania, sortowania oraz kontroli ilości zwracanych wyników.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/labs_details.png}
-    \caption{Panel szczegółów pomieszczenia (opracowanie własne)}
+    \caption{Panel szczegółów pomieszczenia}
+    \includegraphics[width=\textwidth]{images/frontend/labs_details.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:labs_details}
 \end{figure}
 \par
@@ -512,8 +559,9 @@ Przedmioty są pogrupowane przez kategorie, wyświetlona jest całkowita ilość
 Po rozwinięciu listy ukazują się poszczególne elementy wraz z ich ilością i lokalizacją.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/inventory-lista.png}
-    \caption{Rozwinięta lista kategorii w zakładce inventory (opracowanie własne)}
+    \caption{Rozwinięta lista kategorii w zakładce inventory}
+    \includegraphics[width=\textwidth]{images/frontend/inventory-lista.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:inventory-lista}
 \end{figure}
 \par
@@ -521,8 +569,9 @@ Po kliknięciu w kafelek wyświetlone zostaną szczegółowe informacje o przedm
 Możliwa jest edycja informacji i przypisanej kategorii.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/inventory-szczegoly.png}
-    \caption{Informacje szczegółowe o obiekcie w Inventory (opracowanie własne)}
+    \caption{Informacje szczegółowe o obiekcie w Inventory}
+    \includegraphics[width=\textwidth]{images/frontend/inventory-szczegoly.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:inventory-szczegoly}
 \end{figure}
 \par
@@ -530,11 +579,12 @@ Dodatkową funkcjonalnością jest możliwość wypożyczenia przedmiotów dla i
 W dialogu możemy zarządzać wypożyczonym sprzętem.
 Możemy zdefiniować nowe wypożyczenie określając ile sprzętu pożyczamy, dla jakiego zespołu i w jakich ramach czasowych.
 Stworzona rezerwacja odejmuje ilość sprzętu z dostępnej puli.
-Dodatkowo jeśli wypożyczenie kończy się przedterminowo wystarczy kliknąć opcje “delete” na konkretnym wypożyczeniu i materiały eksplatacjne automatycznie trafią do grupy dostępnego sprzętu.
+Dodatkowo jeśli wypożyczenie kończy się przedterminowo wystarczy kliknąć opcje “delete” na konkretnym wypożyczeniu i materiały eksploatacyjne automatycznie trafią do grupy dostępnego sprzętu.
 \begin{figure}[H]
     \centering
-    \includegraphics{images/frontend/rental-dialog.png}
-    \caption{Panel wypożyczenia w zakładce Inventory (opracowanie własne)}
+    \caption{Panel wypożyczenia w zakładce Inventory}
+    \includegraphics{images/frontend/rental-dialog.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:rental-dialog}
 \end{figure}
 
@@ -547,17 +597,18 @@ Tabela wspiera sortowanie otrzymanych wyników na podstawie kolumn z atrybutami.
 W górnej części znajduje się pole wyszukiwania umożliwiające szybkie filtrowanie rekordów na podstawie wprowadzonych kryteriów.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/machines.png}
-    \caption{Panel "Machines" (opracowanie własne)}
+    \caption{Panel ''Machines''}
+    \includegraphics[width=\textwidth]{images/frontend/machines.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:machines}
 \end{figure}
 \par
 Każdy obiekt posiada odnośnik do strony ze szczegółami wybranego urządzenia.
-Posiada on wszystkie informacje o maszynie dostępne w systemie: od szczegółów konfiguracji sprzętowej po lokalizację i dane telemetryczne pobierane z urządzenia w czasie rzeczywistym przy skonfigurowanym agencie Prometheus.
+Posiada on wszystkie informacje o maszynie dostępne w systemie: od szczegółów konfiguracji sprzętowej po lokalizację i dane telemetryczne pobierane z urządzenia w czasie rzeczywistym przy skonfigurowanym agencie \gls{Prometheus}.
 W górnej części znajdują się przyciski:
 \begin{itemize}
-    \item \textbf{Refresh host information} - służący do pobrania aktualnej konfiguracji sprzętowej urządzenia przy pomocy narzędzia Ansible
-    \item \textbf{Manage monitoring agent} - pozwalające na instalację agenta Prometheus służącego do zbierania metryk
+    \item \textbf{Refresh host information} - służący do pobrania aktualnej konfiguracji sprzętowej urządzenia przy pomocy narzędzia \gls{Ansible}
+    \item \textbf{Manage monitoring agent} - pozwalające na instalację agenta \gls{Prometheus} służącego do zbierania metryk
     \item \textbf{Edit} - zmieniające tryb przeglądania w tryb edycji informacji o sprzęcie
     \item \textbf{Delete} - pozwalający na usunięcie maszyny z systemu
 \end{itemize}
@@ -569,32 +620,35 @@ Znajdują się w nim wpisy dotyczące akcji wykonywanych w obrębie określonych
 Logi są formatowane i wyświetlane w postaci listy, posiadającej konkretną datę oraz czas wykonania akcji, na jakim zasobie, rodzaj akcji, oraz kto tej zmiany dokonał.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/history_lista.png}
-    \caption{Lista akcji wykonanych w systemie w module history (opracowanie własne)}
+    \caption{Lista akcji wykonanych w systemie w module history}
+    \includegraphics[width=\textwidth]{images/frontend/history_lista.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:history_lista}
 \end{figure}
 \par
 Moduł również jest dynamicznie dostosowywany w zależności od roli użytkownika.
-Administrator widzi akcje dotyczące użytkowników oraz zespołów, czego nie widzi zwykły.
+Administrator ma wgląd w akcje dotyczące użytkowników oraz zespołów, które są niewidoczne dla osób bez uprawnień administratora.
 Interfejs jest jednak niezmienny, niezależnie od roli obecnie zalogowanego użytkownika.
 \par
 Po wejściu w konkretny log, zostajemy przekierowani na jego podstronę, na której bardziej podstawowe informacje są poszerzone o dokładne różnice powstałe w wyniku przeprowadzania tej akcji.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/podstrona_logu.png}
-    \caption{Podstrona logu \#92, zawierająca informację o zmianie (opracowanie własne)}
+    \caption{Podstrona logu \#92, zawierająca informację o zmianie}
+    \includegraphics[width=\textwidth]{images/frontend/podstrona_logu.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:podstrona_logu}
 \end{figure}
 \par
 Podgląd możemy również uzyskać z poziomu strony głównej modułu, klikając opcję porównania w panelu, aby otrzymać skondensowaną dawkę informacji.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/popup_logu_rollback.png}
-    \caption{Popup ze zmianami dotyczącymi loga o id 117 (opracowanie własne)}
+    \caption{Popup ze zmianami dotyczącymi loga o id 117}
+    \includegraphics[width=\textwidth]{images/frontend/popup_logu_rollback.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:popup_logu_rollback}
 \end{figure}
 \par
-Część akcji może być odwracalna, a taką opcję może wykonać użytkownik conajmniej z uprawnieniami grupowego administratora, wyłącznie na operacji w zespole którym administruje.
+Część akcji może być odwracalna, a taką opcję może wykonać użytkownik co najmniej z uprawnieniami grupowego administratora, wyłącznie na operacji w zespole którym administruje.
 Umożliwia to przycisk rollback widoczny również na zrzucie ekranu powyżej.
 W przypadku braku wymaganych uprawnień do przeprowadzenia operacji, użytkownik otrzymuję odpowiedni komunikat, a akcja jest zablokowana.
 
@@ -602,44 +656,49 @@ W przypadku braku wymaganych uprawnień do przeprowadzenia operacji, użytkownik
 \par
 Lista wszystkich użytkowników zarejestrowanych w systemie.
 Dostęp do niej jest ogólnodostępny dla wszystkich użytkowników aplikacji.
-Znajdziemy w niej podstawowe informacje takie jak, imię, nazwisko, role oraz przypisane do użytkownika zespoły.
+Znajdziemy w niej podstawowe informacje takie jak imię, nazwisko, role oraz przypisane do użytkownika zespoły.
 Oprócz miejsca agregującego wszystkich w jeden przejrzysty interfejs, stanowi ona również punkt kontaktowy, gdzie każdy użytkownik może odnaleźć, np. kto jest odpowiedzialny za dany zespół i z taką osobą się skontaktować.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/lista_users.png}
-    \caption{Lista użytkowników w module Users (opracowanie własne)}
+    \caption{Lista użytkowników w module Users}
+    \includegraphics[width=\textwidth]{images/frontend/lista_users.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:lista_users}
 \end{figure}
 \par
 Każdy użytkownik posiada swoją podstronę, w której możemy automatycznie przejść na podstrony dedykowane dla zespołów do których należy, sprawdzić adres e-mail oraz avatar.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/podstrona_usera.png}
-    \caption{Podstrona użytkownika Jan Kowalski (opracowanie własne)}
+    \caption{Podstrona użytkownika Jan Kowalski}
+    \includegraphics[width=\textwidth]{images/frontend/podstrona_usera.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:podstrona_usera}
 \end{figure}
 \par
-W przypadku użytkowników z rangą administrator, posiadają oni osobny Admin Panel, w którym możliwości działania na użytkownikach są poszerzone, o tworzenie nowych, edycję istniejących, usunięcie jak i również możliwość wymuszenia resetu hasła.
+W przypadku użytkowników z rangą administratora, posiadają oni osobny Admin Panel, w którym możliwości działania na użytkownikach są poszerzone, o tworzenie nowych, edycję istniejących, usunięcie jak i również możliwość wymuszenia resetu hasła.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/users_admin_panel.png}
-    \caption{Moduł Users w panelu administratora (opracowanie własne)}
+    \caption{Moduł Users w panelu administratora}
+    \includegraphics[width=\textwidth]{images/frontend/users_admin_panel.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:users_admin_panel}
 \end{figure}
 \par
-Dostępny formularz do tworzenia nowych użytkowników pozwala na wprowadzenie imienia, nazwiska, loginu, adresu e-mail, przynależności zespołowej, roli oraz hasła. Ostatnie pole nie jest wymagane, domyślnym sposobem jest autogenerowanie pierwszego hasła do zalogowania się i wymuszenie zmiany go na własne przez użytkownika.
+Dostępny formularz do tworzenia nowych użytkowników pozwala na wprowadzenie imienia, nazwiska, loginu, adresu e-mail, przynależności zespołowej, roli oraz hasła. Ostatnie pole nie jest wymagane, domyślnym sposobem jest autogenerowanie pierwszego hasła do zalogowania się i wymuszenie jego zmiany na własne przez użytkownika.
 \begin{figure}[H]
     \centering
-    \includegraphics{images/frontend/formularz_tworzenia_usera.png}
-    \caption{Formularz dodawania nowego użytkownika w systemie (opracowanie własne)}
+    \caption{Formularz dodawania nowego użytkownika w systemie}
+    \includegraphics{images/frontend/formularz_tworzenia_usera.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:formularz_tworzenia_usera}
 \end{figure}
 \par
 Panel edycji użytkownika umożliwia zmianę jego danych osobowych, loginu, adresu e-mail, zespołów oraz degradację/awans.
 \begin{figure}[H]
     \centering
-    \includegraphics{images/frontend/formularz_modyfikacji_usera.png}
-    \caption{Formularz edycji istniejącego użytkownika w systemie (opracowanie własne)}
+    \caption{Formularz edycji istniejącego użytkownika w systemie}
+    \includegraphics{images/frontend/formularz_modyfikacji_usera.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:formularz_modyfikacji_usera}
 \end{figure}
 
@@ -650,78 +709,86 @@ Posiada możliwość filtrowania oraz wyszukiwania po kolumnach.
 Lista jest ogólnodostępna dla każdego użytkownika w systemie, niezależnie od jego zespołów lub roli, gdyż jej zadaniem oprócz logicznego ugrupowania dla administratorów, jest również swego rodzaju lista kontaktowa.
 Każdy może przejrzeć dany zespół, jacy członkowie do niego należą oraz jakie zasoby są w ich posiadaniu.
 Jest to przydatne, ponieważ w pracy technika często dochodzi do wymian sprzętu pomiędzy zespołami, pożyczaniem, jak i również współpracy oraz wzajemnej pomocy.
-Jednak jeśli nie użytkownik nie należy do danego zespołu, jego akcje są ograniczone do wyświetlania informacji, natomiast dostęp do konkretnych podstron dedykowanych dla maszyn, sprzętu lub szaf rackowych, jest zablokowany.
+Jednak jeśli użytkownik nie należy do danego zespołu, jego akcje są ograniczone do wyświetlania informacji, natomiast dostęp do konkretnych podstron dedykowanych dla maszyn, sprzętu lub szaf \gls{rack}owych, jest zablokowany.
 W przeciwnym przypadku, sekcja zespołu stanowi agregat wszystkich zasobów oraz linków do podstron.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/lista_teams_zwykla.png}
-    \caption{Lista zespołów w module Teams (opracowanie własne)}
+    \caption{Lista zespołów w module Teams}
+    \includegraphics[width=\textwidth]{images/frontend/lista_teams_zwykla.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:lista_teams_zwykla}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/podstrona_zespolu.png}
-    \caption{Początek podstrony dla zespołu Labbyn Team (opracowanie własne)}
+    \caption{Początek podstrony dla zespołu \gls{Labbyn} Team}
+    \includegraphics[width=\textwidth]{images/frontend/podstrona_zespolu.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:podstrona_zespolu}
 \end{figure}
 \par
 Dla użytkowników o randze administrator jest dostępna dodatkowa zakładka Teams w Admin Panel, która jest poszerzona o możliwość edycji zespołu, stworzenia nowego, usunięcia istniejącego jak i również promowanie nowego administratora zespołu.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/teams_admin_panel.png}
-    \caption{Moduł Teams w panelu administratora (opracowanie własne)}
+    \caption{Moduł Teams w panelu administratora}
+    \includegraphics[width=\textwidth]{images/frontend/teams_admin_panel.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:teams_admin_panel}
 \end{figure}
 \par
 W przypadku tworzenia nowego zespołu musimy podać jego nazwę, oraz jego pierwszego administratora.
 \begin{figure}[H]
     \centering
-    \includegraphics{images/frontend/formularz_tworzenia_edycji_teams.png}
-    \caption{Formularz tworzenia oraz edycji zespołu (opracowanie własne)}
+    \caption{Formularz tworzenia oraz edycji zespołu}
+    \includegraphics{images/frontend/formularz_tworzenia_edycji_teams.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:formularz_tworzenia_edycji_teams}
 \end{figure}
 \par
 W przypadku wypromowania użytkownika na administratora zespołu, wystarczy wybrać tę opcję na konkretnym zespole oraz podać użytkownika.
 \begin{figure}[H]
     \centering
-    \includegraphics{images/frontend/promocja_na_group_admina.png}
-    \caption{Promocja użytkownika na administratora zespołu Server Administration (opracowanie własne)}
+    \caption{Promocja użytkownika na administratora zespołu Server Administration}
+    \includegraphics{images/frontend/promocja_na_group_admina.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:promocja_na_group_admina}
 \end{figure}
 
 \subsection{Documentation}
 \par
 Moduł przeznaczony do przechowywania dokumentacji oraz poradników dla pracowników, dostępny dla każdego użytkownika aplikacji.
-System Labbyn stawia na mocną izolację zasobów w przypadku sprzętu, dbając o to by nikt spoza konkretnego zespołu nie mógł wprowadzić żadnych zmian, jak i również wyświetlać szczegółów, by nie zapychać interfejsu konkretnego użytkownika.
+System \gls{Labbyn} stawia na mocną izolację zasobów w przypadku sprzętu, dbając o to by nikt spoza konkretnego zespołu nie mógł wprowadzić żadnych zmian, jak i również wyświetlać szczegółów, by nie zapychać interfejsu konkretnego użytkownika.
 W przypadku zakładek Teams, Users jak i również Documentation, stawiamy na otwartość, integrację oraz walkę z tzw. “wiedzą plemienną”.
-W modułe znajduje się lista stworzonych przez użytkowników poradników oraz wskazówek.
+W module znajduje się lista stworzonych przez użytkowników poradników oraz wskazówek.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/lista_dokumentacji.png}
-    \caption{Lista dokumentacji w module Documentation (opracowanie własne)}
+    \caption{Lista dokumentacji w module Documentation}
+    \includegraphics[width=\textwidth]{images/frontend/lista_dokumentacji.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:lista_dokumentacji}
 \end{figure}
 \par
 Użytkownicy mogą tworzyć własne dokumentacje, pisząc je języku znaczników \gls{Markdown}, który jest najpopularniejszym i najpowszechniej stosowanym językiem zapisu tekstowego w IT.
-Jest on podstawą używaną w m.in repozytoriach Github, aplikacjach do notatek takich jak Obsidian jak i również w narzędziach prowadzących dokumentację techniczną.
+Jest on podstawą używaną w m.in repozytoriach \gls{GitHub}, aplikacjach do notatek takich jak Obsidian jak i również w narzędziach prowadzących dokumentację techniczną.
 Użytkownicy mają również możliwość edytowania innych poradników już utworzonych, w celu poszerzenia ich lub poprawek błędów.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/tworzenie_dokumentacji.png}
-    \caption{Tworzenie nowego poradnika w module Documentation (opracowanie własne)}
+    \caption{Tworzenie nowego poradnika w module Documentation}
+    \includegraphics[width=\textwidth]{images/frontend/tworzenie_dokumentacji.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:tworzenie_dokumentacji}
 \end{figure}
 
 
 \subsection{Import \& Export}
 \par
-Zakładka Import umożliwia nam na dodanie danych do systemu z pliku CSV.
+Zakładka Import umożliwia dodanie danych do systemu z pliku \gls{CSV}.
 Stworzona została z myślą o nowych użytkownikach, którzy dotychczas przechowywali informacje o sprzęcie w arkuszach kalkulacyjnych lub innych dokumentach.
 Mapowanie pól umożliwia prosty i szybki import.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/import-strona.png}
-    \caption{Panel Importu danych (opracowanie własne)}
+    \caption{Panel Importu danych}
+    \includegraphics[width=\textwidth]{images/frontend/import-strona.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:import-strona}
 \end{figure}
 \par
@@ -730,14 +797,16 @@ Jeśli nie jesteśmy do końca pewni czy nasze dane zostaną dobrze zaimportowan
 Reprezentuje to do jakich kolumn zostaną przypisane dane w tabeli w bazie danych.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/mapownaie-csv.png}
-    \caption{Wybór pól do mapowania (opracowanie własne)}
+    \caption{Wybór pól do mapowania}
+    \includegraphics[width=\textwidth]{images/frontend/mapownaie-csv.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:mapowanie-csv}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/import-tabela.png}
-    \caption{Mapowanie pól z pliku CSV i auto generowana tabela (opracowanie własne)}
+    \caption{Mapowanie pól z pliku \gls{CSV} i auto generowana tabela}
+    \includegraphics[width=\textwidth]{images/frontend/import-tabela.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:import-tabela}
 \end{figure}
 \par
@@ -750,7 +819,8 @@ Możliwe jest wyeksportowanie konkretnej tabeli albo całej bazy danych.
 Opcja stworzona z myślą o audytach, tworzeniu lokalnych backupów albo dalszego przetwarzania danych i generowania statystyk na temat sprzętu.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/frontend/export_page.png}
-    \caption{Panel Exportu danych (opracowanie własne)}
+    \caption{Panel Exportu danych}
+    \includegraphics[width=\textwidth]{images/frontend/export_page.png} 
+    \caption*{Źródło: Opracowanie własne}
     \label{img:export_page}
 \end{figure}

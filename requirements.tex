@@ -5,7 +5,7 @@
 \par Na podstawie wyników przeprowadzonej ankiety oraz wstępnych analiz, wyspecyfikowane zostały wymagania na system. Każdemu z wymagań przypisano priorytet, a w przypadku wymagań funkcjonalnych, podzielono je ze względu na odpowiedni moduł systemu.
 \par Podczas cyklu wytwarzania oprogramowania dodane zostały wymagania funkcjonalne o akronimach od LAB-F-22 do LAB-F-45 oraz zmodyfikowane zostały następujące wymagania:LAB-F-04, LAB-F-06, LAB-F-08, LAB-F-09, LAB-F-16, LAB-F-17, LAB-F-18, LAB-F-19, LAB-F-20, LAB-I-01, LAB-NF-02. Zmiany te na celu miały większenie zrozumienia architektury systemu z poziomu wymagań oraz doprecyzowanie szczegółów działania aplikacji. Wśród większych zmian wymienić można:
 \begin{itemize}
-    \item LAB-I-01: Pierwotnie wymaganie zakładało, że system importować będzie dane z arkuszy kalkulacyjnych. Zespół jednomyślnie podjął jednak decyzję, że lepszym rozwiązaniem, które pozwoli dowieźć projekt w wyznaczonych ramach czasowych będzie obługa tylko plików csv.
+    \item LAB-I-01: Pierwotnie wymaganie zakładało, że system importować będzie dane z arkuszy kalkulacyjnych. Zespół jednomyślnie podjął jednak decyzję, że lepszym rozwiązaniem, które pozwoli dowieźć projekt w wyznaczonych ramach czasowych będzie obługa tylko plików \gls{CSV}.
     \item LAB-NF-02: Wymaganie zakładało, że system będzie ograniczał ilość możliwych jednoczesnych połączeń używając parametru w konfiguracji aplikacji. Ze względów użytkowych parametr został usunięty a ilość jednoczesnych połączeń w systemie nie jest ograniczona żadnym mechanizmem.
     \item LAB-F-16: Pierwotnie wymaganie zakładało, że system będzie zapisywał zmiany w nim dokonane do dedykowanego pliku. Po przeprowadzonych wewnątrz zespołu dyskusjach, przeznaczeniem zmian stała się baza danych z dedykowaną tabelą.
     \item LAB-F-17: Na początku system zakładał 2 role użytkowników: użytkownik i administrator. Podczas procesu wytwarzania oprogramowania zespół napotkał problem związany z rolami użytkowników w systemie. Jako, że administrator grupy niekoniecznie powinien być administratorem systemu, zespół zdecydował się dodać dodatkową rolę w systemie - administrator grupy, który jest w stanie zarządzać grupą oraz jej zasobami jednocześnie nie mając uprawnień administratora systemu.
@@ -166,9 +166,9 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
     \name{System musi posiadać panel dostępnych laboratoriów}
     \descr{Jako użytkownik systemu, chcę mieć łatwy dostęp do informacji o wszystkich dostępnych laboratoriach w systemie.}
     \acceptcrit{Zaimplementowana zakładka “Labs” }
-    \inputdata{Użytkownik z dowolną przypisaną rolą z uprawnieniami do wybranego laboratorium}
+    \inputdata{Użytkownik z dowolną przypisaną rolą z uprawnieniami do wybranego \gls{laboratorium}}
     \preconditions{Użytkownik jest zalogowany do systemu.}
-    \postconditions{Użytkownik w zakładce “Labs” widzi przynajmniej 1 laboratorium}
+    \postconditions{Użytkownik w zakładce “Labs” widzi przynajmniej 1 \gls{laboratorium}}
     \exceptions{Brak utworzonych laboratoriów w systemie}
     \implementation{Implementacja zakładki “Labs”}
     \sholder{Zespół projektowy}
@@ -179,14 +179,14 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-F-22}
     \priority{M}
-    \name{System musi posiadać panel szczegółów laboratorium}
-    \descr{Jako użytkownik systemu, chcę widzieć szczegóły laboratorium w dedykowanym do tego panelu.}
-    \acceptcrit{Implementacja panelu szczegółów laboratorium}
-    \inputdata{Użytkownik z dowolną rolą oraz przynajmniej 1 dostępnym laboratorium w zakładce “Labs”}
-    \preconditions{Użytkownik jest zalogowany do systemu, jest w stanie kliknąć w wybrane laboratorium}
-    \postconditions{Użytkownik zostaje przeniesiony do panelu szczegółów wybranego laboratorium.}
+    \name{System musi posiadać panel szczegółów \gls{laboratorium}}
+    \descr{Jako użytkownik systemu, chcę widzieć szczegóły \gls{laboratorium} w dedykowanym do tego panelu.}
+    \acceptcrit{Implementacja panelu szczegółów \gls{laboratorium}}
+    \inputdata{Użytkownik z dowolną rolą oraz przynajmniej 1 dostępnym \gls{laboratorium} w zakładce “Labs”}
+    \preconditions{Użytkownik jest zalogowany do systemu, jest w stanie kliknąć w wybrane \gls{laboratorium}}
+    \postconditions{Użytkownik zostaje przeniesiony do panelu szczegółów wybranego \gls{laboratorium}.}
     \exceptions{Brak utworzonych laboratoriów w systemie}
-    \implementation{Implementacja widoku szczegółowego laboratorium}
+    \implementation{Implementacja widoku szczegółowego \gls{laboratorium}}
     \sholder{Zespół projektowy}
     \reqrelated{LAB-F-01, LAB-F-14, LAB-F-22, LAB-F-38}
 \end{requirementstab}
@@ -197,12 +197,12 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
     \priority{M}
     \name{System musi zezwalać na dodawanie nowych laboratoriów oraz edycję i usunięcie istniejących}
     \descr{Jako użytkownik systemu chcę mieć możliwość dodawania nowych laboratoriów  w systemie oraz edycję istniejących}
-    \acceptcrit{System z zaimplementowanym formularzem dodawania nowego laboratorium oraz mechanizmem edycji laboratorium z poziomu widoku szczegółowego.}
+    \acceptcrit{System z zaimplementowanym formularzem dodawania nowego \gls{laboratorium} oraz mechanizmem edycji \gls{laboratorium} z poziomu widoku szczegółowego.}
     \inputdata{Użytkownik systemu z dowolną rolą}
-    \preconditions{Użytkownik zalogowany, w panelu bocznym widzi zakładkę dodania laboratorium}
-    \postconditions{Po kliknięciu w zakładkę dodania maszyny użytkownik widzi formularz dodania laboratorium do systemu. Po wypełnieniu wszystkich pól i kliknięciu przycisku zatwierdzenia widzi dodane laboratorium w systemie. Po wejściu w panel szczegółów dodanego laboratorium użytkownik widzi przycisk edycji po kliknięciu w który panel zmienia tryb podglądu w tryb edycji.}
+    \preconditions{Użytkownik zalogowany, w panelu bocznym widzi zakładkę dodania \gls{laboratorium}}
+    \postconditions{Po kliknięciu w zakładkę dodania maszyny użytkownik widzi formularz dodania \gls{laboratorium} do systemu. Po wypełnieniu wszystkich pól i kliknięciu przycisku zatwierdzenia widzi dodane \gls{laboratorium} w systemie. Po wejściu w panel szczegółów dodanego \gls{laboratorium} użytkownik widzi przycisk edycji po kliknięciu w który panel zmienia tryb podglądu w tryb edycji.}
     \exceptions{Brak}
-    \implementation{Zaimplementowanie formularza dodawania laboratorium oraz trybu edycji w panelu szczegółów laboratorium. }
+    \implementation{Zaimplementowanie formularza dodawania \gls{laboratorium} oraz trybu edycji w panelu szczegółów \gls{laboratorium}. }
     \sholder{Zespół projektowy}
     \reqrelated{LAB-F-23}
 \end{requirementstab}
@@ -309,14 +309,14 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-F-24}
     \priority{M}
-    \name{System musi posiadać panel szczegółów szafy rackowej}
-    \descr{Jako użytkownik systemu, chcę mieć możliwość sprawdzenia szczegółów danej szafy rackowej z poziomu systemu.}
-    \acceptcrit{Zaimplementowany widok szczegółowy szafy rackowej}
-    \inputdata{Użytkownik z dowolną rolą, przynajmniej 1 szafa rackowa w systemie, do której użytkownik ma dostęp.}
+    \name{System musi posiadać panel szczegółów szafy \gls{rack}owej}
+    \descr{Jako użytkownik systemu, chcę mieć możliwość sprawdzenia szczegółów danej szafy \gls{rack}owej z poziomu systemu.}
+    \acceptcrit{Zaimplementowany widok szczegółowy szafy \gls{rack}owej}
+    \inputdata{Użytkownik z dowolną rolą, przynajmniej 1 szafa \gls{rack}owa w systemie, do której użytkownik ma dostęp.}
     \preconditions{Użytkownik zalogowany do systemu, na poziomie widoku szczegółów urządzenia widzi rubrykę “Rack”, jest w stanie kliknąć w odnośnik}
-    \postconditions{Użytkownik zostaje przeniesiony na panel szczegółów szafy rackowej}
-    \exceptions{Brak szaf rackowych przypisanych do użytkownika lub jego grupy.}
-    \implementation{Implementacja panelu szczegółów szafy rackowej}
+    \postconditions{Użytkownik zostaje przeniesiony na panel szczegółów szafy \gls{rack}owej}
+    \exceptions{Brak szaf \gls{rack}owych przypisanych do użytkownika lub jego grupy.}
+    \implementation{Implementacja panelu szczegółów szafy \gls{rack}owej}
     \sholder{Zespół projektowy}
     \reqrelated{LAB-F-37}
 \end{requirementstab}
@@ -341,14 +341,14 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-F-37}
     \priority{M}
-    \name{System musi zezwalać na dodawanie nowych szaf rackowych oraz edycję i usunięcie istniejących}
-    \descr{Jako użytkownik systemu chcę mieć możliwość dodawania nowych racków w systemie oraz edycję istniejących}
-    \acceptcrit{System z zaimplementowanym formularzem dodawania nowego racka oraz mechanizmem edycji racka z poziomu widoku szczegółowego racku.}
+    \name{System musi zezwalać na dodawanie nowych szaf \gls{rack}owych oraz edycję i usunięcie istniejących}
+    \descr{Jako użytkownik systemu chcę mieć możliwość dodawania nowych \gls{rack}ów w systemie oraz edycję istniejących}
+    \acceptcrit{System z zaimplementowanym formularzem dodawania nowego \gls{rack}a oraz mechanizmem edycji \gls{rack}a z poziomu widoku szczegółowego \gls{rack}u.}
     \inputdata{Użytkownik systemu z dowolną rolą}
-    \preconditions{Użytkownik zalogowany, w panelu bocznym widzi zakładkę dodania racku}
-    \postconditions{Po kliknięciu w zakładkę dodania racka użytkownik widzi formularz dodania racka do systemu. Po wypełnieniu wszystkich pól i kliknięciu przycisku zatwierdzenia widzi dodany rack w systemie. Po wejściu w panel szczegółów dodanego racka użytkownik widzi przycisk edycji po kliknięciu w który panel zmienia tryb podglądu w tryb edycji.}
+    \preconditions{Użytkownik zalogowany, w panelu bocznym widzi zakładkę dodania \gls{rack}u}
+    \postconditions{Po kliknięciu w zakładkę dodania \gls{rack}a użytkownik widzi formularz dodania \gls{rack}a do systemu. Po wypełnieniu wszystkich pól i kliknięciu przycisku zatwierdzenia widzi dodany \gls{rack} w systemie. Po wejściu w panel szczegółów dodanego \gls{rack}a użytkownik widzi przycisk edycji po kliknięciu w który panel zmienia tryb podglądu w tryb edycji.}
     \exceptions{Brak}
-    \implementation{Zaimplementowanie formularza dodawania racka oraz trybu edycji w panelu szczegółów racka. }
+    \implementation{Zaimplementowanie formularza dodawania \gls{rack}a oraz trybu edycji w panelu szczegółów \gls{rack}a. }
     \sholder{Zespół projektowy}
     \reqrelated{LAB-F-24}
 \end{requirementstab}
@@ -389,7 +389,7 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-F-41}
     \priority{M}
-    \name{System musi zezwalać na przypisanie szaf rackowych, maszyn oraz materiałów eksploatacyjnych do istniejącej grupy}
+    \name{System musi zezwalać na przypisanie szaf \gls{rack}owych, maszyn oraz materiałów eksploatacyjnych do istniejącej grupy}
     \descr{Jako użytkownik systemu chce mieć możliwość przypisywania elementów roboczych do konkretnych grup aby łatwo zidentyfikować zasoby każdego z zespołów}
     \acceptcrit{System z zaimplementowanym mechanizmem przypisywania elementów roboczych do grup}
     \inputdata{Przynajmniej 1 dostępna grupa użytkowników oraz przynajmniej 1 użytkownik przypisany do tej grupy w systemie}
@@ -455,12 +455,12 @@ sprawdzenia układu pomieszczenia w celu efektownego planowania przyszłych i bi
 \begin{requirementstab}
     \id{LAB-F-43}
     \priority{M}
-    \name{System musi zezwalać na przypisanie materiałów eksploatacyjnych do istniejącej maszyny, laboratorium i szafy rackowej}
-    \descr{Jako użytkownik systemu chce mieć możliwość przypisywania elementów inwentarzu technicznego do konkretnej maszyny, laboratorium lub szafy rackowej by ułatwić zarządzanie dostępnym sprzętem.}
+    \name{System musi zezwalać na przypisanie materiałów eksploatacyjnych do istniejącej maszyny, \gls{laboratorium} i szafy \gls{rack}owej}
+    \descr{Jako użytkownik systemu chce mieć możliwość przypisywania elementów inwentarzu technicznego do konkretnej maszyny, \gls{laboratorium} lub szafy \gls{rack}owej by ułatwić zarządzanie dostępnym sprzętem.}
     \acceptcrit{System z zaimplementowanym mechanizmem przypisywania elementów inwentarzu technicznego do elementów roboczych.}
-    \inputdata{Użytkownik systemu z dowolną przypisaną rolą, przynajmniej 1 element inwentarzu przypisany do użytkownika lub jego grupy, przynajmniej 1 laboratorium, maszyna lub rack w systemie}
+    \inputdata{Użytkownik systemu z dowolną przypisaną rolą, przynajmniej 1 element inwentarzu przypisany do użytkownika lub jego grupy, przynajmniej 1 \gls{laboratorium}, maszyna lub \gls{rack} w systemie}
     \preconditions{Użytkownik zalogowany do systemu, na poziomie inwentarzu technicznego}
-    \postconditions{Użytkownik może przypisać element do laboratorium, maszyny lub racka}
+    \postconditions{Użytkownik może przypisać element do \gls{laboratorium}, maszyny lub \gls{rack}a}
     \exceptions{Brak}
     \implementation{Implementacja systemu przypisywania elementów inwentarzu w systemie}
     \sholder{Zespół projektowy}
@@ -858,7 +858,7 @@ Zaimplementowanie przycisku tworzenia nowego dokumentu.}
 \begin{requirementstab}
     \id{LAB-F-45}
     \priority{M}
-    \name{System musi zezwalać na przypisanie 1 lub więcej etykiet do grupy użytkowników, maszyny, laboratorium oraz szafy rackowej}
+    \name{System musi zezwalać na przypisanie 1 lub więcej etykiet do grupy użytkowników, maszyny, \gls{laboratorium} oraz szafy \gls{rack}owej}
     \descr{Jako użytkownik systemu chcę mieć możliwość przypisywania etykiet do elementów roboczych w systemie by efektywnie zarządzać zasobami}
     \acceptcrit{Implementacja systemu przypisywania etykiet}
     \inputdata{Użytkownik systemu z dowolną przypisaną rolą, przynajmniej 1 element roboczy przypisany do użytkownika lub jego grupy w systemie}
@@ -880,14 +880,14 @@ Zaimplementowanie przycisku tworzenia nowego dokumentu.}
 \begin{requirementstab}
     \id{LAB-I-01}
     \priority{M}
-    \name{System musi zezwalać na import i eksport danych z plików csv}
-    \descr{Jako użytkownik systemu chcę mieć możliwość importu i eksportu danych do/z plików plików csv}
-    \acceptcrit{Zaimplementowana logika importu z plików csv}
+    \name{System musi zezwalać na import i eksport danych z plików \gls{CSV}}
+    \descr{Jako użytkownik systemu chcę mieć możliwość importu i eksportu danych do/z plików plików \gls{CSV}}
+    \acceptcrit{Zaimplementowana logika importu z plików \gls{CSV}}
     \inputdata{Użytkownik systemu z rolą administratora, zaimplementowana zakładka „Import \& Export”}
     \preconditions{Użytkownik zalogowany do systemu na ekranie formularza służącego do importu i exportu danych}
-    \postconditions{Użytkownik jest w stanie importować oraz eksportować dane do pliku csv}
+    \postconditions{Użytkownik jest w stanie importować oraz eksportować dane do pliku \gls{CSV}}
     \exceptions{Brak}
-    \implementation{Implementacja logiki importu i eksportu do plików csv}
+    \implementation{Implementacja logiki importu i eksportu do plików \gls{CSV}}
     \sholder{Zespół projektowy}
     \reqrelated{LAB-F-13}
 \end{requirementstab}
@@ -932,7 +932,7 @@ Zaimplementowanie przycisku tworzenia nowego dokumentu.}
     \descr{Jako użytkownik chcę mieć dostęp do danych z \gls{Ansible}}
     \acceptcrit{Zaimplementowana logika importu danych z \gls{Ansible}}
     \inputdata{Przynajmniej 1 urządzenie dostępne w sieci lokalnej i w systemie \gls{Labbyn}}
-    \preconditions{Wysłanie żądania używając API \gls{Ansible}}
+    \preconditions{Wysłanie żądania używając \gls{API} \gls{Ansible}}
     \postconditions{Żądanie przetworzone poprawnie, akcje zapisane w \gls{Playbook}’u \gls{Ansible} wykonane pomyślnie, dane zaimportowane do systemu}
     \exceptions{Zerwanie połączenia sieci lokalnej}
     \implementation{Zaimplementowanie obsługi przetwarzania żądań \gls{Ansible} i importu danych do systemu}
@@ -1006,8 +1006,8 @@ Zaimplementowanie przycisku tworzenia nowego dokumentu.}
     \id{LAB-NF-06}
     \priority{S}
     \name{Doświadczenia użytkownika}
-    \descr{System powinien zapewnić standardy i dobre praktyki UX}
-    \acceptcrit{Implementacja systemu zgodnie z przyjętymi standardami UX}
+    \descr{System powinien zapewnić standardy i dobre praktyki \gls{UX}}
+    \acceptcrit{Implementacja systemu zgodnie z przyjętymi standardami \gls{UX}}
     \sholder{Zespół projektowy}
     \reqrelated{Brak}
 \end{requirementstab}
@@ -1067,8 +1067,8 @@ Zaimplementowanie przycisku tworzenia nowego dokumentu.}
     \id{LAB-E-03}
     \priority{M}
     \name{Środowisko domyślne}
-    \descr{System musi działać w środowisku kontenerowym}
-    \acceptcrit{Implementacja systemu wspierającego środowisko kontenerowe}
+    \descr{System musi działać w środowisku \gls{kontener}owym}
+    \acceptcrit{Implementacja systemu wspierającego środowisko \gls{kontener}owe}
     \sholder{Zespół projektowy}
     \reqrelated{Brak}
 \end{requirementstab}
