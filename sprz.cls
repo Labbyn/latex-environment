@@ -326,6 +326,10 @@
 
 			\@title
 
+			\textbf{Temat projektu w języku angielskim:}
+
+			\@engtitle
+
 			} & \@mysmartparbox{0.3\linewidth}{\textbf{Akronim:}
 
 				\@acronym

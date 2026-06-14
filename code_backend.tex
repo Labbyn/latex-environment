@@ -162,7 +162,7 @@ Wzorzec ten wywodzi się z fundamentalnego działania \gls{framework}a \gls{Fast
 \section{Modele danych}
 \par W systemie \gls{Labbyn} warstwa danych została zrealizowana za pomocą mapowania obiektowo-relacyjnego, z wykorzystaniem biblioteki \gls{SQL Alchemy}. Pozwala to na definiowanie encji jako klas, zarządzanie typami oraz relacjami pomiędzy tabelami.
 \par Wszystkie klasy modeli dziedziczą po wspólnej klasie bazowej, dzięki temu system automatycznie rejestruje tabele i ich powiązania. Każda kolumna w tabelach jest ściśle opisana poprzez parametry określające typ, relacje, i dodatkowe punkty takie jak np. możliwość pozostania pustą lub reguły usunięcia.
-\par Do określenia relacji zastosowany został mechanizm relationship, który pozwala na dociąganie powiązanych ze sobą obiektów w całości, np. wyciągnięcie maszyn przypisanych do konkretnej szafy \gls{rack}owej, bez potrzeby budowania skomplikowanych zapytań.
+\par Do określenia relacji zastosowany został mechanizm, który pozwala na dociąganie powiązanych ze sobą obiektów w całości, np. wyciągnięcie maszyn przypisanych do konkretnej szafy \gls{rack}owej, bez potrzeby budowania skomplikowanych zapytań.
 \par Dodatkowo część modeli jest wyposażona w \gls{atrybuty obliczalne}, za pomocą dekoratora @property, który pozwala na tworzenie wirtualnych pól. Oznacza to że model nie musi posiadać konkretnego pola w swojej definicji, a my możemy je dynamicznie wyciągnąć jeśli wynika ono z jego relacji z innym modelem.
 \par Podstawowe encje, takie jak Machines, \gls{rack} lub Inventory, tworzące największą podstawę systemu, zostały wzbogacone o pole version\_id, służące do wprowadzenia blokady optymistycznej.
 \begin{figure}[H]
@@ -218,7 +218,7 @@ W przeciwieństwie do standardowego rozwiązania za pomocą tokenów JWT, ta str
 \label{sec:kontekst}
 \par
 W systemie \gls{Labbyn} za proces autoryzacji odpowiada autorski mechanizm \textbf{RequestContext}.
-Jest to klasa pełniąca rolę \gls{kontener}a danych i narzędzi kontroli dostępu, inicjowana na początku każdego otrzymanego żądania HTTP.
+Klasa ta pełni rolę \gls{kontener}a danych i narzędzi kontroli dostępu, inicjowana na początku każdego otrzymanego żądania HTTP.
 Odpowiada za gromadzenie danych rozprszonych takich jak ID, rola, przynależność do zespołu oraz określa dostęp do zasobów na ich podstawie.
 \begin{figure}[H]
     \centering

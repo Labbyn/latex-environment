@@ -22,7 +22,7 @@ W procesie projektowania zrezygnowano z popularnego \gls{framework}a Next.js na 
 Decyzja ta podyktowana była charakterystyką aplikacji \gls{Labbyn}:
 \begin{enumerate}
     \item Brak wymogu \gls{SEO}: \gls{Labbyn} to aplikacja wewnętrzna/narzędziowa, gdzie indeksowanie przez wyszukiwarki nie jest potrzebne.
-    \item Stan aplikacji i interaktywność: Aplikacja mocno polega na złożonym stanie klienckim. Modele \gls{SSR} i \gls{RSC} oferowane przez Next.js wprowadzają narzut architektoniczny, który w przypadku "ciężkich" klientów bywa zbędny.
+    \item Stan aplikacji i interaktywność: Aplikacja mocno polega na złożonym stanie klienckim. \gls{SSR} i \gls{RSC}, natywnie promowane przez rozwiązania takie jak Next.js, wprowadzają niepotrzebny narzut architektoniczny. Są one optymalizowane głównie pod kątem szybkiego dostarczania statycznych treści i \gls{SEO}, podczas gdy dla wysoce interaktywnych narzędzi kluczowa jest płynność działania po stronie klienta, bez konieczności kosztownej synchronizacji z serwerem renderującym.
     \item Szybkość przejść: Pełne \gls{SPA} obsługiwane przez TanStack Router pozwala na błyskawiczne przejścia między widokami bez konieczności odpytywania serwera o strukturę strony.
     \item Niezależność infrastrukturalna (Self-hosting): Next.js posiada wiele wbudowanych integracji z platformą Vercel, co jest użyteczne przy komercyjnych wdrożeniach. Jednakże, ze względu na naturę \gls{open-source} projektu \gls{Labbyn} oraz zamysł samodzielnego hostowania aplikacji, większość z tych funkcji pozostałaby niewykorzystana. Co więcej, mogłoby to narzucić potencjalnym odbiorcom korzystanie z płatnych narzędzi ekosystemu Vercel (zjawisko tzw. \gls{Vendor lock-in}).
 \end{enumerate}
@@ -291,14 +291,14 @@ Rozwiązanie dostarcza rozbudowany system narzędzi, zarządzany przez zmienną 
     \end{figure}
     \begin{figure}[H]
         \centering
-        \caption{Przykład zastosowania TransformControls - obracanie obkietu}
+        \caption{Przykład zastosowania TransformControls - zmiana pozycji obiektu względem osi x i z}
         \includegraphics{images/frontend/transform_controls_przykład.png} 
         \caption*{Źródło: Opracowanie własne}
         \label{img:transform_controls_przykład}
     \end{figure}
     \begin{figure}[H]
         \centering
-        \caption{Przykład zastosowania TransformControls - zmiana pozycji obiektu względem osi x i z}
+        \caption{Przykład zastosowania TransformControls - obracanie obkietu}
         \includegraphics[width=\textwidth]{images/frontend/transform_controls_przykład2.png} 
         \caption*{Źródło: Opracowanie własne}
         \label{img:transform_controls_przykład2}
@@ -362,7 +362,7 @@ Składają się na nią następujące moduły:
     \item Nakładka nawigacyjna (Controls Overlay): Pływający u dołu lewej sekcji widżet edukacyjny, który adaptuje się do sytuacji, wyświetlając i przypominając użytkownikowi najskuteczniejsze w danym ujęciu skróty klawiszowe operowania kamerą.
     \begin{figure}[H]
         \centering
-        \caption{Wybór mapy pomieszczenia}
+        \caption{Nakładka nawigacyjna}
         \includegraphics{images/frontend/controls_overlay.png} 
         \caption*{Źródło: Opracowanie własne}
         \label{img:controls_overlay}
@@ -407,17 +407,6 @@ Składają się na nią następujące moduły:
         \label{img:map_edit_label}
     \end{figure}
 \end{itemize}
-
-\subsection{Optymalizacja i wydajność}
-\par
-Ze względu na środowisko uruchomieniowe przeglądarki internetowej, głównym ograniczeniem przy renderowaniu scen o dużej gęstości jest liczba zapytań renderowania.
-Silniki JavaScript w przeglądarkach posiadają jednowątkową pętlę zdarzeń.
-Posiadanie tysięcy pojedynczych obiektów i wysyłanie poleceń rysowania dla każdego z nich osobno drastycznie obciąża i blokuje główny wątek, prowadząc do zacinania się interfejsu.
-\par
-W celu optymalizacji tego procesu zastosowano technikę grupowania siatek geometrycznych.
-Obiekty o takiej samej geometrii i materiale są grupowane w pojedyncze zbiory danych, co pozwala na ograniczenie liczby żądań kierowanych do procesora graficznego do niezbędnego minimum.
-\par
-Tylko w momencie zarządzania  niektórymi elementami grupy np. przeniesienie dwóch szaf \gls{rack}owych w inne miejsce następuje fragmentacja na pomniejsze grupy.
 
 \subsection{Inspiracja UX}
 \par
@@ -576,7 +565,7 @@ Możliwa jest edycja informacji i przypisanej kategorii.
 \end{figure}
 \par
 Dodatkową funkcjonalnością jest możliwość wypożyczenia przedmiotów dla innych zespołów za pomocą opcji “rental”.
-W dialogu możemy zarządzać wypożyczonym sprzętem.
+W dialogu zarządzamy wypożyczonym sprzętem.
 Możemy zdefiniować nowe wypożyczenie określając ile sprzętu pożyczamy, dla jakiego zespołu i w jakich ramach czasowych.
 Stworzona rezerwacja odejmuje ilość sprzętu z dostępnej puli.
 Dodatkowo jeśli wypożyczenie kończy się przedterminowo wystarczy kliknąć opcje “delete” na konkretnym wypożyczeniu i materiały eksploatacyjne automatycznie trafią do grupy dostępnego sprzętu.
@@ -693,7 +682,7 @@ Dostępny formularz do tworzenia nowych użytkowników pozwala na wprowadzenie i
     \label{img:formularz_tworzenia_usera}
 \end{figure}
 \par
-Panel edycji użytkownika umożliwia zmianę jego danych osobowych, loginu, adresu e-mail, zespołów oraz degradację/awans.
+Panel edycji użytkownika umożliwia aktualizację jego danych osobowych, loginu, adresu e-mail, zespołów oraz zmianę uprawnień.
 \begin{figure}[H]
     \centering
     \caption{Formularz edycji istniejącego użytkownika w systemie}
@@ -757,7 +746,7 @@ W przypadku wypromowania użytkownika na administratora zespołu, wystarczy wybr
 \par
 Moduł przeznaczony do przechowywania dokumentacji oraz poradników dla pracowników, dostępny dla każdego użytkownika aplikacji.
 System \gls{Labbyn} stawia na mocną izolację zasobów w przypadku sprzętu, dbając o to by nikt spoza konkretnego zespołu nie mógł wprowadzić żadnych zmian, jak i również wyświetlać szczegółów, by nie zapychać interfejsu konkretnego użytkownika.
-W przypadku zakładek Teams, Users jak i również Documentation, stawiamy na otwartość, integrację oraz walkę z tzw. “wiedzą plemienną”.
+W przypadku zakładek Teams, Users jak i również Documentation, stawiamy na otwartość, integrację oraz walkę z tzw. “wiedzą plemienną”, czyli dokumentami/notatkami opisującymi specyficzne problemy oraz zjawiska, które nie są udokumentowane.
 W module znajduje się lista stworzonych przez użytkowników poradników oraz wskazówek.
 \begin{figure}[H]
     \centering
@@ -793,8 +782,8 @@ Mapowanie pól umożliwia prosty i szybki import.
 \end{figure}
 \par
 Po dodaniu pliku, pokaże się opcja do mapowania kolumn z pliku \gls{CSV} do systemu.
-Jeśli nie jesteśmy do końca pewni czy nasze dane zostaną dobrze zaimportowane, na dole strony znajduje dynamicznie generowana tabela ze zmapowanymi polami.
-Reprezentuje to do jakich kolumn zostaną przypisane dane w tabeli w bazie danych.
+Jeśli nie jesteśmy do końca pewni czy nasze dane zostaną dobrze zaimportowane, na dole strony znajduje się dynamicznie generowana tabela ze zmapowanymi polami.
+Pełni ona reprezentację kolumn do jakich zostaną przypisane dane w tabelach bazy danych.
 \begin{figure}[H]
     \centering
     \caption{Wybór pól do mapowania}

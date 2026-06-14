@@ -212,7 +212,7 @@ Pozostałe to wykorzystane technologie \gls{open-source} opakowane w \gls{konten
 Do zbudowania \gls{kontener}a potrzebny jest plik Dockerfile, który służy do stworzenia obrazu \gls{kontener}a - on definiuje co znajdzie się w \gls{kontener}ze i jak będzie skonfigurowany.
 \par
 W budowie \gls{kontener}a najważniejsze jest odpowiednie ułożenie instrukcji.
-Spowodowane jest to tym, że przy budowie obrazu \gls{Docker}owego posiłkuje się już stworzonymi warstwami, jeśli któraś warstwa (każda instrukcja to jedna warstwa) jest inna to reszta musi zostać ponownie zbudowana co wydłuża całkowity czas budowania obrazu.
+Spowodowane jest to tym, że przy budowie obrazu \gls{Docker} posiłkuje się już stworzonymi warstwami, jeśli któraś warstwa (każda instrukcja to jedna warstwa) jest inna to reszta musi zostać ponownie zbudowana co wydłuża całkowity czas budowania obrazu.
 \par
 Dodatkowym zabiegiem, który warto wykonać jest Multi-Stage building.
 Umożliwia on stworzenie jednego \gls{kontener}a - buildera, na którym pobierane są wszystkie zależności wymagane do zbudowania aplikacji.

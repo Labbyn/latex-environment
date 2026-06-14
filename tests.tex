@@ -81,7 +81,7 @@ W ramach ujednolicenia czytelności kodu, przygotowany został dokument \gls{Cod
 "Testowanie jest naturalnym procesem i czy nazwiemy je uczeniem się, czy też eksperymentowaniem, nie ma to większego znaczenia dla samej czynności poznawania i podejmowania decyzji o testowanym obiekcie." ~\cite{smilgin2018tester}
 \end{quote}
 \par
-Proces testowania oprogramowania stanowi istotny elemnt cyklu życia aplikacji i pozwala na ocenę poprawności działania system, wykrycie potencjalnych defektów oraz weryfikację zgodności implementacji z założeniami projektowymi.
+Proces testowania oprogramowania stanowi istotny element cyklu życia aplikacji i pozwala na ocenę poprawności działania system, wykrycie potencjalnych defektów oraz weryfikację zgodności implementacji z założeniami projektowymi.
 Testowanie umożliwia również analizę zachowania aplikacji w różnych scenariuszach użytkowania oraz ocenę stabilności i bezpieczeństwa systemu.
 \par
 Jedna z zasad testowania mówi o tym, że testować powinno się jak najszybciej, co zespół wdrożył podczas procesu tworzenia aplikacji.
@@ -220,13 +220,13 @@ W celu analizy wyników testów zastosowano również wtyczkę \gls{pytest-html}
 Raporty te zawierały szczegółowe informacje dotyczące przebiegu testów i co najważniejsze zrzuty ekranu aplikacji.
 \subsection{POC testów automatycznych}
 \par
-W ramach prac nad auomatyzacją testów przygotowano prototypowe rozwiązanie \gls{POC} wykorzystujące \gls{framework} \gls{Pytest} oraz bibliotekę \gls{Selenium WebDriver}.
+W ramach prac nad automatyzacją testów przygotowano prototypowe rozwiązanie \gls{POC} wykorzystujące \gls{framework} \gls{Pytest} oraz bibliotekę \gls{Selenium WebDriver}.
 Celem implementacji było sprawdzenie możliwości automatycznej weryfikacji podstawowych funkcjonalności interfejsu użytkownika oraz ocena opłacalności wdrożenia pełnej automatyzacji procesu testowego.
 \par
 Przygotowany scenariusz testowy koncentrował się na automatycznej nawigacji po elementach menu bocznego aplikacji.
 Proces testowy obejmował uruchomienie przeglądarki internetowej, wykonanie procesu logowania do systemu, a następnie iteracyjne przechodzenie pomiędzy kolejnymi widokami aplikacji dostępnymi z poziomu panelu nawigacyjnego.
 \par
-W celu zwięszkenia czytelności oraz możliwości późniejszej analizy wyników zaimplementowano mechanizm automatycznego wykonywania zrzutów ekranu podczas przebiegu testów.
+W celu zwiększenia czytelności oraz możliwości późniejszej analizy wyników zaimplementowano mechanizm automatycznego wykonywania zrzutów ekranu podczas przebiegu testów.
 Wykorzystano do tego rozszerzenie \gls{pytest-html}, umożliwiające generowanie raportów w formacie HTML zawierających informacje o przebiegu testów oraz zapisane zrzuty ekranu przedstawiające stan aplikacji w momencie wykonywania poszczególnych kroków scenariusza testowego.
 \par
 W ramach implementacji zastosowano również mechanizmy oczekiwania na dostępność elementów interfejsu użytkownika przy użyciu klasy \gls{WebDriverWait}, co pozwoliło ograniczyć ryzyko występowania błędów wynikających z asynchronicznego ładowania komponentów aplikacji.
@@ -254,7 +254,7 @@ W ramach implementacji zastosowano również mechanizmy oczekiwania na dostępno
 \subsection{Problemy związane z automatyzacją testów}
 \label{sec:auotmation_problems}
 \par
-Przygotowane rozwiązanie pozwoliło zweryfikować możliwość automatyzacji wybranych scenariuszy testowych oraz ocenić potencjalne korzyści wynikające z integracji trestów automatycznych z porcesem rozwoju aplikacji.
+Przygotowane rozwiązanie pozwoliło zweryfikować możliwość automatyzacji wybranych scenariuszy testowych oraz ocenić potencjalne korzyści wynikające z integracji trestów automatycznych z procesem rozwoju aplikacji.
 Jednocześniej analiza przygotowanego rozwiązania jak i próba implementacji go do standardowego przepływu pracy w ramach obecnych rozwiązań \gls{CI/CD} wykazała, że wdrożenie jak i utrzymanie stabilności testów automatycznych w dynamicznie rozwijanej aplikacji wymagałoby znacznych zasobów czasowych i organizacyjnych w stosunku do możliwości zespołu projektowego.
 Główne trudności dotyczyły:
 \begin{itemize}
@@ -271,4 +271,4 @@ Podejście manualne umożliwiło na szybkie reagowanie na zmiany w systemie oraz
 W rezultacie pozwoliło to na efektywniejsze wykorzystanie czasu w procesie testowania oraz zwiększenie tempa iteracyjnego rozwoju aplikacji.
 Jednocześnie testy jednostkowe oraz testy dymne pozostały w formie niezmienionej.
 \par
-Pomimo rezygnacji z pełnej automatyzacji, wykorzystane narzędzia pozostają potencjlanym kierunkiem dalszego rozwoju projektu, szczególnie w przypadku ustabilizowania się architektury systemu oraz ograniczenia częstotliwościa zmian lub w przypadku poszerzenia zespołu o dodatkowych członków.
+Pomimo rezygnacji z pełnej automatyzacji, wykorzystane narzędzia pozostają potencjalanym kierunkiem dalszego rozwoju projektu, szczególnie w przypadku ustabilizowania się architektury systemu oraz ograniczenia częstotliwościa zmian lub w przypadku poszerzenia zespołu o dodatkowych członków.
