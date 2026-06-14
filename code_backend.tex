@@ -219,7 +219,7 @@ W przeciwieństwie do standardowego rozwiązania za pomocą tokenów JWT, ta str
 \par
 W systemie \gls{Labbyn} za proces autoryzacji odpowiada autorski mechanizm \textbf{RequestContext}.
 Klasa ta pełni rolę \gls{kontener}a danych i narzędzi kontroli dostępu, inicjowana na początku każdego otrzymanego żądania HTTP.
-Odpowiada za gromadzenie danych rozprszonych takich jak ID, rola, przynależność do zespołu oraz określa dostęp do zasobów na ich podstawie.
+Odpowiada za gromadzenie danych rozproszonych takich jak ID, rola, przynależność do zespołu oraz określa dostęp do zasobów na ich podstawie.
 \begin{figure}[H]
     \centering
     \caption{Inicjalizacja klasy RequestContext oraz metody budowania}
@@ -581,7 +581,7 @@ Serwer \gls{Prometheus} posiada również interfejs graficzny (dostępny na porc
 Główną funkcjonalnością stworzoną na podstawie wszystkich powyżej opisanych narzędzi jest \gls{Endpoint} \/ws\/metrics, który pozwala na transmisję danych w czasie rzeczywistym przy wykorzystaniu \gls{Websocket}.
 Dzięki metodzie stream\_metrics, przeglądarka ma otwarte połączenie z \gls{Backend}em, które w określonych interwałach ciągle transmituje na bieżąco statusy oraz metryki wszystkich maszyn śledzonych przez serwer \gls{Prometheus}.
 Dzięki temu użytkownik widzi zmiany bez konieczności odświeżenia strony, będąc w stanie ciągle śledzić zużycie maszyny lub to czy odzyskała połączenie sieciowe.
-Oczywiście system dba o to, aby użytkownik miał dostęp tylko do metryk maszyn, które należą do jego zespołów, by być utrzymać spójność z przyjętą polityką filtracji zespołowej.
+Oczywiście system dba o to, aby użytkownik miał dostęp tylko do metryk maszyn, które należą do jego zespołów, by utrzymać spójność z przyjętą polityką filtracji zespołowej.
 Metoda jest przygotowana na uzyskanie metryk z jednej konkretnej maszyny lub wielu jednocześnie, przygotowująć odpowiedni zestaw dancyh w zależności od sytuacji.
 Kolejnym z jej zadań jest \gls{Cachowanie} informacji w pamięci \gls{Redis} w celu ograniczenia liczby zapytań na minutę wysyłanych do serwera.
 \begin{figure}[H]
@@ -750,7 +750,7 @@ Każda operacja jest wykonywana w ramach transakcji, co oznacza że musi przejś
     \label{img:backend_rollback_update}
 \end{figure}
 \par
-Operacje które można cofnąć są oznaczone\/oflagowane.
+Operacje które można cofnąć są oznaczone flagą.
 Jest to mechanizm blokujący np. cofnięcie zmiany hasła przez użytkownika (nawet dla administratora).
 \begin{figure}[H]
     \centering
