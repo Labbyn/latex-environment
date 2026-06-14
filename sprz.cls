@@ -322,13 +322,13 @@
 	\begin{center}
 		\begin{tabular}{|c|c||c|}
 			\hline
-			\multicolumn{2}{|p{0.7\linewidth}|}{\textbf{Temat projektu:}}      & \@mysmartparbox{0.3\linewidth}{\textbf{Akronim:}} \\
-			\multicolumn{2}{|p{0.7\linewidth}|}{\@title}      & \@mysmartparbox{0.3\linewidth}{\@acronym} \\
-			\multicolumn{2}{|p{0.7\linewidth}|}{\textbf{Temat projektu w języku angielskim:}}      & \@mysmartparbox{0.3\linewidth}{\textbf{Data ustalenia tematu}} \\
-			\multicolumn{2}{|p{0.7\linewidth}|}{\@engtitle}      & \@mysmartparbox{0.3\linewidth}{\@titledate}                                                                                                 \\
+			\multicolumn{2}{|p{0.6\linewidth}|}{\textbf{Temat projektu:}}      & \@mysmartparbox{0.4\linewidth}{\textbf{Akronim:}} \\
+			\multicolumn{2}{|p{0.6\linewidth}|}{\@title}      & \@mysmartparbox{0.4\linewidth}{\@acronym} \\
+			\multicolumn{2}{|p{0.6\linewidth}|}{\textbf{Temat projektu w języku angielskim:}}      & \@mysmartparbox{0.4\linewidth}{\textbf{Data ustalenia tematu}} \\
+			\multicolumn{2}{|p{0.6\linewidth}|}{\@engtitle}      & \@mysmartparbox{0.4\linewidth}{\@titledate}                                                                                                 \\
 			\hline
-			\multicolumn{2}{|p{0.7\linewidth}|}{\textbf{Promotor:}}      & \@mysmartparbox{0.3\linewidth}{\textbf{Konsultanci:}} \\
-			\multicolumn{2}{|p{0.7\linewidth}|}{\@supervisor}      & \@mysmartparbox{0.3\linewidth}{\begin{enumerate}
+			\multicolumn{2}{|p{0.6\linewidth}|}{\textbf{Promotor:}}      & \@mysmartparbox{0.4\linewidth}{\textbf{Konsultanci:}} \\
+			\multicolumn{2}{|p{0.6\linewidth}|}{\@supervisor}      & \@mysmartparbox{0.4\linewidth}{\begin{enumerate}
 					\@consultants
 				\end{enumerate}}                                                                           \\
 			\hline
