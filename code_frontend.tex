@@ -9,9 +9,9 @@ Wybór biblioteki \gls{React} był dla zespołu optymalny z dwóch głównych po
 
 \begin{figure}[H]
     \centering
-    \caption{Wynik ankiety dotyczącej najczęściej używanych technologii aplikacji webowych \cite{stackoverflow2025webframeworks}}
+    \caption{Wynik ankiety dotyczącej najczęściej używanych technologii aplikacji webowych}
     \includegraphics[width=\textwidth]{images/frontend/stackoverflow-dev-survey-2025-technology-most-popular-technologies.png} 
-    \caption*{Źródło: Opracowanie własne}
+    \caption*{Źródło: survey.stackoverflow.co/2025 \cite{stackoverflow2025webframeworks}}
     \label{img:stackoverflow}
 \end{figure}
 
@@ -216,7 +216,6 @@ Została ona zaprojektowana w celu wizualizacji oraz topologicznego zarządzania
 Architektura modułu opiera się na separacji warstwy prezentacyjnej \gls{WebGL}/\gls{DOM} od logiki biznesowej i zarządzania stanem.
 Punktem wejściowym jest komponent zdefiniowany w pliku map.tsx, który za pomocą biblioteki @tanstack/react-router zarządza parametrami trasy (m.in. roomId, redirectId) oraz inicjuje pobieranie danych z wykorzystaniem \text{@tanstack/react-query}.
 Główny widok renderowany jest przez komponent CanvasComponent3D (canvas.tsx), który integruje warstwę 3D z nakładkami interfejsu użytkownika.
-\par
 Rozwiązanie zostało zbudowane w oparciu o następujący stos technologii renderowania 3D:
 \begin{itemize}
     \item \gls{WebGL} - niskopoziomowe \gls{API} przeglądarkowe umożliwiające sprzętową akcelerację grafiki 3D.

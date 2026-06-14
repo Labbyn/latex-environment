@@ -322,22 +322,10 @@
 	\begin{center}
 		\begin{tabular}{|c|c||c|}
 			\hline
-			\multicolumn{2}{|p{0.7\linewidth}|}{\textbf{Temat projektu:}
-
-			\@title
-
-			\textbf{Temat projektu w języku angielskim:}
-
-			\@engtitle
-
-			} & \@mysmartparbox{0.3\linewidth}{\textbf{Akronim:}
-
-				\@acronym
-
-				\textbf{Data ustalenia tematu}
-
-				\@titledate
-			}                                                                                                     \\
+			\multicolumn{2}{|p{0.7\linewidth}|}{\textbf{Temat projektu:}}      & \@mysmartparbox{0.3\linewidth}{\textbf{Akronim:}} \\
+			\multicolumn{2}{|p{0.7\linewidth}|}{\@title}      & \@mysmartparbox{0.3\linewidth}{\@acronym} \\
+			\multicolumn{2}{|p{0.7\linewidth}|}{\textbf{Temat projektu w języku angielskim:}}      & \@mysmartparbox{0.3\linewidth}{\textbf{Data ustalenia tematu}} \\
+			\multicolumn{2}{|p{0.7\linewidth}|}{\@engtitle}      & \@mysmartparbox{0.3\linewidth}{\@titledate}                                                                                                 \\
 			\hline
 			\multicolumn{2}{|p{0.7\linewidth}|}{\textbf{Promotor:}}      & \@mysmartparbox{0.3\linewidth}{\textbf{Konsultanci:}} \\
 			\multicolumn{2}{|p{0.7\linewidth}|}{\@supervisor}      & \@mysmartparbox{0.3\linewidth}{\begin{enumerate}
@@ -403,14 +391,12 @@
 
 Płyta CD z następującą zawartością:
 \begin{itemize}
-    \item {\em{pliki projektowe}} -- pliki składające się na całość projektu
+    \item {\em{pliki projektowe}} -- katalog zawierający pliki składające się na całość projektu
 	\begin{itemize}
 		\item repozytorium kodu źródłowego wraz z instrukcją zbudowania i uruchomienia projektu
-		\item źródło pracy inżynierskiej.
         \item dokumenty projektowe powstałe podczas prac
 	\end{itemize}
-    \item {\em{\@authorattachment%
-praca pisemna}} -- katalog zawierający plik PDF z pracą inżynierską.
+    \item {\em{kopczynski\_kosmider\_stankowski\_orlikowski\_praca pisemna}} -- katalog zawierający plik PDF z pracą inżynierską.
 \end{itemize}
 
 \newpage
