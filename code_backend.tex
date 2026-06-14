@@ -9,7 +9,7 @@
 \par Architekturę \gls{Backend}u wzbogacono o mechanizm \gls{Redis} służący do zarządzania rozproszonymi blokadami zasobów, co jest kluczowe w przypadku środowisk wielodostępnych, gdzie jednoczesna modyfikacja zasobów przez wiele użytkowników może prowadzić do niespójności lub błędów \gls{race condition}.
 
 \section{Architektura}
-\par Warstwa \gls{Backend}owa została oparta na architekturze wielowarstwowej, której celem jest odseparowanie odpowiedzialności pomiędzy osobnymi komponentami. Takie rodzaj architektury ułatwia potencjalnie skalowanie systemu w przyszłości.
+\par Warstwa \gls{Backend}owa została oparta na architekturze wielowarstwowej, której celem jest odseparowanie odpowiedzialności pomiędzy osobne komponenty. Takie rodzaj architektury ułatwia potencjalnie skalowanie systemu w przyszłości.
 
 \subsection{Warstwa interfejsu}
 \par Warstwa odpowiedzialna za obsługę protokołu HTTP, routing, walidację schematów, wstrzykiwanie zależności odpowiedzialnych za autoryzacją i inicjalizację kontekstu użytkownika. 
@@ -133,7 +133,7 @@ Wzorzec ten wywodzi się z fundamentalnego działania \gls{framework}a \gls{Fast
     \label{img:backend_api_env}
 \end{figure}
 \par W aplikacji również znajduję się mechanizm zarządzania cyklem życia, który również odpowiada za przygotowanie jej infrastruktury do pracy oraz zarządza zasobami, uruchamiany na samym starcie.
-\par Podczas startu, system automatycznie tworzy potrzebną podstawową strukturę, auto inicjalizacja domyślnego admina i auto inicjalizacja pierwszego \gls{laboratorium}. Serwer weryfikuje również istnienie katalogów na zasoby statyczne takie jak folder z avatarem użytkownika. Mechanizm również inicjuje procesy działające w tle służącę do monitorowania infrastruktury poprzez moduł \gls{Prometheus}, a jego prostota pozwala na rozbudowę o kolejne dodatkowe procesy.
+\par Podczas startu, system automatycznie tworzy potrzebną podstawową strukturę, automatycznie inicjalizuje domyślnego admina i pierwsze \gls{laboratorium}. Serwer weryfikuje również istnienie katalogów na zasoby statyczne takie jak folder z avatarem użytkownika. Mechanizm również inicjuje procesy działające w tle służącę do monitorowania infrastruktury poprzez moduł \gls{Prometheus}, a jego prostota pozwala na rozbudowę o kolejne dodatkowe procesy.
 \begin{figure}[H]
     \centering
     \caption{Menedżer kontekstu inicjalizujący życie aplikacji}
