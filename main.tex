@@ -8,14 +8,15 @@
 \engtitle{Hardware infrastructure management system}
 \acronym{\gls{Labbyn}}
 \titledate{2025-10-26}
-\supervisor{mgr inż. Paweł Pisarski}
-\reviewer{BRAK}
+\supervisor{mgr. inż. Paweł Pisarski}
+\reviewer{mgr. Aleksandr Polin}
 \author{Adrian Kopczyński}{s26990}{Cyberbezpieczeństwo}{Niestacjonarny}
 \author{Aleksander Stankowski}{s27549}{Cyberbezpieczeństwo}{Niestacjonarny}
 \author{Patryk Kośmider}{s26985}{Sztuczna Inteligencja}{Niestacjonarny}
 \author{Ziemowit Orlikowski}{s27081}{Sztuczna Inteligencja}{Niestacjonarny}
-\consultant{--- brak ---} % Koniecznie trzeba podać brak, albo wpisać konsultantów tak jak przy autorach
-\projectgoals{Stworzenie systemu zarządzania infrastrukturą sprzętową który umożliwia łatwy  dostęp do statystyk, lokalizacji i właściwości sprzętu}
+\consultant{mgr. inż. Adrian Baranowicz}
+\consultant{mgr. inż. Michał Wasilewicz}
+\projectgoals{Stworzenie systemu zarządzania infrastrukturą sprzętową, który umożliwia łatwy  dostęp do statystyk, lokalizacji i właściwości sprzętu}
 \productsandservices{W pełni funkcjonalny system zarządzania infrastrukturą sprzętową w \gls{laboratorium} sprzętowym lub serwerowni}
 \mainfunctionalities{}
 \successmeasure{
@@ -30,7 +31,7 @@
     \item Ograniczone zasoby sprzętowe: brak możliwości testowania systemu w warunkach rzeczywistych.
     \item Ograniczone środki finansowe: istotne w przypadku konieczności skorzystania z usług zewnętrznych, takich jak hosting serwera do przechowywania danych lub synchronizacji. Wymaga to uwzględnienia potencjalnych dodatkowych kosztów.
     \item Doświadczenie zespołu: Projekt realizowany przez grupę studencką.
-    \item Brak dostępu do informacji zwrotnych odnośnie systemu: ograniczona współpraca z podmiotami wykorzystującymi infrastrukturę sprzętową.
+    \item Brak możliwości przetestowania aplikacji w \gls{laboratorium} komputerowym: ograniczona współpraca z podmiotami wykorzystującymi infrastrukturę sprzętową.
     
 \end{enumerate}
 }
@@ -42,9 +43,19 @@
 
 \begin{document}
 
-\maketitle
+%\maketitle
+
+\include{title}
 
 \makeprojectcard
+
+\includepdf[pages=-]{documents/statements/ai-statement-adrian.pdf}
+
+\includepdf[pages=-]{documents/statements/ai-statement-aleksander.pdf}
+
+\includepdf[pages=-]{documents/statements/ai-statement-patryk.pdf}
+
+\includepdf[pages=-]{documents/statements/ai-statement-ziemowit.pdf}
 
 \tableofcontents
 
@@ -58,13 +69,17 @@
 
 \include{requirements}
 
-\include{code}
+\include{devops}
 
-\include{implementation}
+\include{code_frontend}
+
+\include{code_backend}
 
 \include{tests}
 
 \include{management}
+
+\include{implementation}
 
 \include{contribution}
 

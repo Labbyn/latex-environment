@@ -1,1 +1,34 @@
-\chapter{Wnioski końcowe}
+\chapter{Podsumowanie}
+\par
+Rozdział ten poświęcono na podsumowanie całości procesu cyklu życia oprogramowania podczas wytwarzania systemu \gls{Labbyn}.
+Poruszone zostają w nim uzyskane rezultaty, możliwości rozwoju, napotkane problemy oraz wnioski końcowe.
+
+\section{Rezultaty projektu względem założeń}
+\par
+Projekt udało dostarczyć się w zakładanym w stanie, w wyznaczonych ramach czasowych.
+Wszystkie wymagania oznaczone jako "must" zostały zaimplementowane, a system został zwalidowany względem nich.
+Ponadto udało się zrealizować funkcjonalności, które wstępnie nie były planowane, a decyzje o ich implementacji ze względu na wygodę lub użyteczność systemu, podejmowane były na bieżąco względem aktualnego nakładu prac. 
+
+\section{Możliwości rozwoju aplikacji}
+\par
+Z racji na modułowość systemu, dodanie kolejnych funkcjonalności jest proste, a ponieważ system jest \gls{open-source}, społeczność jest w stanie tworzyć modyfikacje lub dodatki do oprogramowania wedle własnych potrzeb.
+Z perspektywy niezrealizowanych funkcjonlaności, kolejnym krokiem w kierunku rozwoju apliakcji byłoby z pewnością dodanie odnośników do informacji o sprzęcie/layout'cie PCB wspomnianego w wymaganiu LAB-F-10, które na etapie specyfikacji wymagań zostało przez zespół odrzucone, z racji na ograniczenia projektowe.
+
+\section{Problemy i popełnione błędy}
+\par
+Podczas procesu wytwarzania systemu \gls{Labbyn}, zespół napotkał różnorodne problemy jak i popełnione zostały błędy.
+Najważniejsze z nich to:
+\begin{itemize}
+    \item \textbf{Problemy komunikacyjne} - na początku procesu tworzenia systemu, komunikacja w zespole nie była na najwyższym poziomie. Aby to zmienić zespół ujednolicił procesy komunikacji czy rozstrzegania sporów podczas przeprowadzonej pierwszej retrospektywy.
+    \item \textbf{Brak spójności wizualnej systemu} - z racji na brak zrozumienia potrzeb użytkownika po stronie interfejsu graficznego aplikacji przez osobę za niego odpowiedzialną, powstały projekty modułów systemu, które nie spełniały oczekiwań. W celu poprawy intuicyjności i przejrzystości interfejsu użytkownika, zespół utworzył \gls{mockup}y prezentujące domyślne założenia systemu.
+    \item \textbf{Zbyt mała granularność wymagań systemowych} - pierwsza wersja wymagań na system nie była do końca zrozumiała (z punktu logiki wykonywania akcji w systemie) z racji na zbyt ogólne sformułowania. Zostało to poprawione w kolejnych wersjach wymagań.
+    \item \textbf{Opóźnienia wynikające z braku przejrzystości logiki} - z racji na problemy ze zrozumieniem ciągu logicznego wykonywanych akcji w systemie, zespół napotkał opóźnienia podczas wytwarzania oprogramowania i tworzenia zależności między akcjami. Aby to zniwelować, utworzony został dokument opisowej logiki biznesowej, który wskazywał krok po kroku możliwe do wykonania akcje oraz ich zależności.
+\end{itemize}
+
+\section{Wnioski końcowe}
+\par
+System udało się wytworzyć w przewidywanych ramach czasowych oraz w zakładanym zakresie roboczogodzin (uwzględniając margines błędu).
+Udało się spełnić wszystkie cele i założenia projektu ustanowione na jego początku.
+Dzięki realizacji tego projektu, zdobyliśmy doświadczenie w nowych technologiach, a także nauczyliśmy się pracy nad systemem w małym zespole gdzie każdy z nas tworzył osobny dział organizacyjny przez co odpowiedzialny był za dany segment oprogramowania pełniąc rolę zarówno architekta jak i dewelopera.
+Nie obyło się jednak bez trudności i wiele rzeczy z perspektywy czasu mogliśmy zrobić lepiej lub bardziej efektywnie.
+Kluczowym w konteście całego projektu była komunikacja oraz standaryzacja procesów jak i zastępowanie niedziałających nowymi.

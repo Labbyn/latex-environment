@@ -28,6 +28,9 @@
 \usepackage{mathptmx}
 \usepackage{hyperref}
 \usepackage{xurl}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{caption}
 \geometry{top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm}
 \onehalfspacing
 \titleformat{\chapter}[block]{\normalfont\bfseries\fontsize{14}{17}\selectfont}{\thechapter}{1em}{} 
@@ -123,8 +126,8 @@
 	\begin{figure}[h!]
 		\label{#3}
 		\centering
-		\includegraphics[width={#4}]{#2}
 		\caption{#1}
+		\includegraphics[width={#4}]{#2} 
 	\end{figure}
 }
 
@@ -221,7 +224,6 @@
 		\fi
 	}%
 }%
-
 
 \renewcommand{\maketitle}{%
     \renewcommand{\baselinestretch}{1.0}
@@ -320,21 +322,13 @@
 	\begin{center}
 		\begin{tabular}{|c|c||c|}
 			\hline
-			\multicolumn{2}{|p{0.7\linewidth}|}{\textbf{Temat projektu:}
-
-			\@title
-
-			} & \@mysmartparbox{0.3\linewidth}{\textbf{Akronim:}
-
-				\@acronym
-
-				\textbf{Data ustalenia tematu}
-
-				\@titledate
-			}                                                                                                     \\
+			\multicolumn{2}{|p{0.6\linewidth}|}{\textbf{Temat projektu:}}      & \@mysmartparbox{0.4\linewidth}{\textbf{Akronim:}} \\
+			\multicolumn{2}{|p{0.6\linewidth}|}{\@title}      & \@mysmartparbox{0.4\linewidth}{\@acronym} \\
+			\multicolumn{2}{|p{0.6\linewidth}|}{\textbf{Temat projektu w języku angielskim:}}      & \@mysmartparbox{0.4\linewidth}{\textbf{Data ustalenia tematu}} \\
+			\multicolumn{2}{|p{0.6\linewidth}|}{\@engtitle}      & \@mysmartparbox{0.4\linewidth}{\@titledate}                                                                                                 \\
 			\hline
-			\multicolumn{2}{|p{0.7\linewidth}|}{\textbf{Promotor:}}      & \@mysmartparbox{0.3\linewidth}{\textbf{Konsultanci:}} \\
-			\multicolumn{2}{|p{0.7\linewidth}|}{\@supervisor}      & \@mysmartparbox{0.3\linewidth}{\begin{enumerate}
+			\multicolumn{2}{|p{0.6\linewidth}|}{\textbf{Promotor:}}      & \@mysmartparbox{0.4\linewidth}{\textbf{Konsultanci:}} \\
+			\multicolumn{2}{|p{0.6\linewidth}|}{\@supervisor}      & \@mysmartparbox{0.4\linewidth}{\begin{enumerate}
 					\@consultants
 				\end{enumerate}}                                                                           \\
 			\hline
@@ -397,15 +391,12 @@
 
 Płyta CD z następującą zawartością:
 \begin{itemize}
-    \item {\em{pliki projektowe}} -- pliki składające się na całość projektu
+    \item {\em{pliki projektowe}} -- katalog zawierający pliki składające się na całość projektu
 	\begin{itemize}
 		\item repozytorium kodu źródłowego wraz z instrukcją zbudowania i uruchomienia projektu
-		\item źródło pracy inżynierskiej.
         \item dokumenty projektowe powstałe podczas prac
 	\end{itemize}
-    \item {\em{\@authorattachment%
-praca pisemna}} -- katalog zawierający plik PDF z pracą inżynierską.
-    \item {Sprawozdanie z ankiety.docx} -- plik zawierający sprawozdanie z przeprowadzonego badania ankietowego.
+    \item {\em{kopczynski\_kosmider\_stankowski\_orlikowski\_praca pisemna}} -- katalog zawierający plik PDF z pracą inżynierską.
 \end{itemize}
 
 \newpage

@@ -1,6 +1,6 @@
 \newglossaryentry{Labbyn}{
     name=Labbyn,
-    description={System do zarządzania infrastrukturą sprzętową}
+    description={System do zarządzania infrastrukturą sprzętową tworzony w ramach niniejszej pracy}
 }
 \newglossaryentry{Prometheus}{
     name=Prometheus,
@@ -12,7 +12,7 @@
 }
 \newglossaryentry{rack}{
     name=rack,
-    description={Szafa rack, szafa teleinformatyczna, szafa serwerowa, szafa krosownicza}
+    description={Szafa \gls{rack}, szafa teleinformatyczna, szafa serwerowa, szafa krosownicza}
 }
 \newglossaryentry{platforma}{
     name=platforma,
@@ -100,7 +100,7 @@
 }
 \newglossaryentry{CORS}{
     name=CORS,
-    description={(z ang. Cross-Origin Resource Sharing), mechanizm bezpieczeństwa przeglądarek, który pozwala na określenie konkretnych reguł na podstawie których można odbierać żądania użytkownika}
+    description={(ang. Cross-Origin Resource Sharing), mechanizm bezpieczeństwa przeglądarek, który pozwala na określenie konkretnych reguł na podstawie których można odbierać żądania użytkownika}
 }
 \newglossaryentry{Router}{
     name=Router,
@@ -128,11 +128,11 @@
 }
 \newglossaryentry{MVP}{
     name=MVP,
-    description={(z ang. Minimum Viable Product) najprostsza wersja nowego produktu lub usługi, posiadająca tylko niezbędne funkcje}
+    description={(ang. Minimum Viable Product) najprostsza wersja nowego produktu lub usługi, posiadająca tylko niezbędne funkcje}
 }
 \newglossaryentry{RBAC}{
     name=RBAC,
-    description={(z ang. Role-Based Access Control) model zarządzania uprawnieniami, które są przyznawane na podstawie ról}
+    description={(ang. Role-Based Access Control) model zarządzania uprawnieniami, które są przyznawane na podstawie ról}
 }
 \newglossaryentry{Architektura wielotenantowa}{
     name=Architektura wielotenantowa,
@@ -144,38 +144,253 @@
 }
 \newglossaryentry{PromQL}{
     name=PromQL,
-    description={(z ang. Prometheus Quesry Language) język zapytań wykorzystywany przez serwer \gls{Prometheus}}
+    description={(ang. Prometheus Quesry Language) język zapytań wykorzystywany przez serwer \gls{Prometheus}}
 }
 \newglossaryentry{Cachowanie}{
     name=Cachowanie,
-    description={technika tymaczasowego przechowywania danych często używanych}
+    description={technika tymczasowego przechowywania danych często używanych}
 }
 \newglossaryentry{JSON}{
     name=JSON,
-    description={(z ang. JavaScript Object Notation) format danych używany jako standard komunikacji w \gls{API}}
+    description={(ang. JavaScript Object Notation) format danych używany jako standard komunikacji w \gls{API}}
 }
 \newglossaryentry{JSONB}{
     name=JSONB,
-    description={(z ang. \gls{JSON} Binary) typ danych w bazie \gls{PostgreSQL}, który przechowuje format \gls{JSON} w formie binarnej}
+    description={(ang. \gls{JSON} Binary) typ danych w bazie \gls{PostgreSQL}, który przechowuje format \gls{JSON} w formie binarnej}
 }
 \newglossaryentry{Websocket}{
     name=Websocket,
-    description={protokół komunikacyjny, zapweniający dwukierunkowy transfer danych, przez pojedyncze połączenie w czasie rzeczywistym}
+    description={protokół komunikacyjny, zapewniający dwukierunkowy transfer danych, przez pojedyncze połączenie w czasie rzeczywistym}
 }
 \newglossaryentry{CSV}{
     name=CSV,
-    description={(z ang. Comma Separated Values) format pliku tekstowego do przechowywania danych, w których wartości są kolejno rozdzielone separatorem}
+    description={(ang. Comma Separated Values) format pliku tekstowego do przechowywania danych, w których wartości są kolejno rozdzielone separatorem}
 }
 \newglossaryentry{URL}{
     name=URL,
-    description={(z ang. Uniform Resource Locator) ujednolicony format adresowania w Internecie, wskazujący dokładną lokalizację zasobu}
+    description={(ang. Uniform Resource Locator) ujednolicony format adresowania w Internecie, wskazujący dokładną lokalizację zasobu}
 }
 \newglossaryentry{Endpoint}{
     name=Endpoint,
-    description={adres \gls{URL} w \gls{API}, pod którym serwer wykonuje okreśnole funkcje}
+    description={adres \gls{URL} w \gls{API}, pod którym serwer wykonuje określone funkcje}
 }
 \newglossaryentry{SQL Injection}{
     name=SQL Injection,
     description={technika ataku polegająca na wstrzykiwaniu złośliwego kodu SQL}
 }
-
+\newglossaryentry{CI/CD}{
+    name=CI/CD,
+    description={metodologia automatycznego testowania kodu, sprawdzania spójności, generowania plików i/lub aktualizacji systemu automatycznie}
+}
+\newglossaryentry{pytest-html}{
+    name=pytest-html,
+    description={wtyczka (plugin) do frameworka pytest w języku Python, która umożliwia generowanie raportów z testów w formacie HTML}
+}
+\newglossaryentry{Selenium}{
+    name=Selenium,
+    description={framework służący do automatyzacji przeglądarek internetowych}
+}
+\newglossaryentry{Pytest}{
+    name=Pytest,
+    description={framework do testowania kodu w języku Python}
+}
+\newglossaryentry{Selenium WebDriver}{
+    name=Selenium WebDriver,
+    description={narzędzie i interfejs API służący do automatyzacji przeglądarek internetowych}
+}
+\newglossaryentry{WebDriverWait}{
+    name=WebDriverWait,
+    description={klasa framework'a Selenium służąca do implementacji jawnego czekania, pozwalająca na zatrzymanie wykonywania kodu i poczekaniu na spełnienie określonego warunku}
+}
+\newglossaryentry{E2E}{
+    name=E2E,
+    description={(ang. End-To-End) metoda testowania oprogramowania, która sprawdza działanie całej aplikacji od początku do końca, symulując rzeczywiste przypadki użycia}
+}
+\newglossaryentry{Coding Guidelines}{
+    name=Coding Guidelines,
+    description={zbiór zasad, konwencji oraz najlepszych praktyk, których programiści przestrzegają podczas pisania kodu źródłowego}
+}
+\newglossaryentry{docstring}{
+    name=docstring,
+    description={opis w kodzie źródłowym, który służy do dokumentowania konkretnego segmentu kodu}
+}
+\newglossaryentry{PEP 8}{
+    name=PEP 8,
+    description={oficjalny przewodnik po stylu w języku Python}
+}
+\newglossaryentry{Docker}{
+    name=Docker,
+    description={narzędzie do \gls{kontener}yzacji, pozwala na pakowanie aplikacji z jej zależnościami w lekkie przenośne \gls{kontener}y}
+}
+\newglossaryentry{kontener}{
+    name=kontener,
+    description={lekka i przenośnia instancja oprogramowania odizolowana od systemu}
+}
+\newglossaryentry{manifest}{
+    name=manifest,
+    description={plik konfiguracyjny zawierające kluczowe informacje o danym obiekcie lub aplikacji}
+}
+\newglossaryentry{skrypt}{
+    name=skrypt,
+    description={zbiór instrukcji stworzony do zautomatyzowania konkretnej czynności}
+}
+\newglossaryentry{repozytorium}{
+    name=repozytorium,
+    description={centralne miejsce do przechowywania, zarządzania i udostępniania danych, plików lub kodu}
+}
+\newglossaryentry{system kontroli wersji}{
+    name=system kontroli wersji,
+    description={system pozwolający na kontrolowanie pracy nad projektem oraz śledzenie historii zmian projektu}
+}
+\newglossaryentry{merge}{
+    name=merge,
+    description={dołączenie zmian kodu z jednej gałęzi do innej}
+}
+\newglossaryentry{Git}{
+    name=Git,
+    description={najpopularniejszy system kontroli wersji wykorzystywany na szeroką skalę zarówno przy małych, domowych projektach jak również w dużych organizacjach}
+}
+\newglossaryentry{GitHub}{
+    name=GitHub,
+    description={platforma pozwalająca przechowywać repozytorium w chmurze. Działa w oparciu o system Git. Umożliwia wspólną pracę zespołów z dowolnego miejsca}
+}
+\newglossaryentry{GitHub Actions}{
+    name=GitHub Actions,
+    description={wbudowana w platformę \gls{GitHub} obsługa \gls{CI/CD}, która umożliwia automatyzację przepływów pracy bezpośrednio w repozytorium}
+}
+\newglossaryentry{runner}{
+    name=runner,
+    description={maszyna wykorzystywana do wykonywania workflow'ów i przetwarzania wyników}
+}
+\newglossaryentry{workflow}{
+    name=workflow,
+    description={zbiór zadań wykonujących instrukcje krok po kroku w celu zautomatyzowania danej czynności}
+}
+\newglossaryentry{job}{
+    name=job,
+    description={zestaw kroków wykonywanych w ramach jednego workflow na jednym runnerze np. pobierz kod, zbuduj aplikację, przetestuj aplikację, wyślij raport}
+}
+\newglossaryentry{step}{
+    name=step,
+    description={najmniejsza jednostka wykonywalna w obrębie job'a, odpowiada za zrobienie jednej czynności np. pobierz kod albo uruchom skrypt}
+}
+\newglossaryentry{React}{
+    name=React,
+    description={biblioteka języka JavaScript służaca do tworzenia intefrejsów użytkownika}
+}
+\newglossaryentry{Vagrant}{
+    name=Vagrant,
+    description={narzędzie umożliwiające łatwe tworzenie i zarządzanie maszynami wirtualnymi}
+}
+\newglossaryentry{IaC}{
+    name=IaC,
+    description={(ang. Infrastructure as Code) praktyka polegająca na zarządzaniu i tworzeniu zasobów komputerowych w oparciu o pliki konfiguracyjne trzymane w czytelnych dla człowieka plikach (Manifest)}
+}
+\newglossaryentry{hot-reload}{
+    name=hot-reload,
+    description={natychmiastowe wprowadzenie i wyświetlanie zmian w programie bez konieczności zatrzymywania i ponownego budowania}
+}
+\newglossaryentry{framework}{
+    name=framework,
+    description={gotowy zestaw narzędzi, bibliotek i reguł, który służy do szybszego tworzenia aplikacji}
+}
+\newglossaryentry{N-Tier}{
+    name=N-Tier,
+    description={model projektowania oprogramowania typu klient-serwer, w którym aplikacja zostaje podzielona na niezależne warstwy}
+}
+\newglossaryentry{Docker Compose}{
+    name=Docker Compose,
+    description={narzędzie do definiowania i uruchamiana wielokontenerowych aplikacji Docker}
+}
+\newglossaryentry{mockup}{
+    name=mockup,
+    description={(ang. makieta/wizualizacja) model prezentujący jak projekt będzie wyglądał w rzeczywistości}
+}
+\newglossaryentry{Atomic Design}{
+    name=Atomic Design,
+    description={Metodologia projektowania interfejsów użytkownika polegająca na podziale struktury na najmniejsze, generyczne i niezależne elementy budulcowe, z których następnie konstruowane są bardziej złożone komponenty i całe widoki}
+}
+\newglossaryentry{Draw calls}{
+    name=Draw calls,
+    description={Zlecenie wydane przez procesor główny do układu graficznego, zawierające komendę wyrenderowania określonej siatki wielokątów wraz z przypisanymi materiałami}
+}
+\newglossaryentry{Frame tearing}{
+    name=Frame tearing,
+    description={Artefakt wizualny występujący w momencie, gdy układ graficzny wysyła klatki obrazu w tempie niezsynchronizowanym z częstotliwością odświeżania monitora, co skutkuje jednoczesnym wyświetlaniem fragmentów dwóch lub więcej różnych klatek}
+}
+\newglossaryentry{Gizmo}{
+    name=Gizmo,
+    description={Graficzny element interfejsu zaimplementowany bezpośrednio na wirtualnej scenie 3D. Pełni funkcję wskaźnika orientacji przestrzennej oraz narzędzia wizualnego do precyzyjnej manipulacji obiektami}
+}
+\newglossaryentry{Instancjonowanie}{
+    name=Instancjonowanie,
+    description={Zaawansowana technika optymalizacyjna w grafice 3D. Polega na jednorazowym załadowaniu bazowej geometrii i materiału do pamięci, a następnie wyrenderowaniu jej wielu kopii (instancji) o różnych właściwościach (np. pozycja, rotacja) w zaledwie jednym wywołaniu rysowania}
+}
+\newglossaryentry{Markdown}{
+    name=Markdown,
+    description={Język znacznikowy służący do formatowania tekstu. Ze względu na swoją prostotę i wysoką czytelność jest powszechnie stosowany w branży IT do tworzenia i utrzymywania dokumentacji technicznej}
+}
+\newglossaryentry{Marquee select}{
+    name=Marquee select,
+    description={Metoda interakcji interfejsu graficznego, pozwalająca użytkownikowi na jednoczesne zaznaczenie grupy elementów poprzez obrysowanie ich za pomocą wirtualnego prostokąta, rysowanego kursorem na płaszczyźnie ekranu}
+}
+\newglossaryentry{Proceduralne generowanie tekstur}{
+    name=Proceduralne generowanie tekstur,
+    description={Proces tworzenia tekstur przez logikę aplikacji w czasie rzeczywistym za pomocą funkcji i API, co eliminuje konieczność przesyłania i pobierania ciężkich, statycznych plików graficznych}
+}
+\newglossaryentry{Route Guard}{
+    name=Route Guard,
+    description={Wzorzec projektowy stosowany w aplikacjach klienckich SPA. Służy jako mechanizm strażniczy, który przechwytuje żądania nawigacyjne i uniemożliwia nieautoryzowanym użytkownikom dostęp do zastrzeżonych ścieżek (widoków)}
+}
+\newglossaryentry{RSC}{
+    name=RSC,
+    description={(ang. React Server Components) Architektura wprowadzona w ekosystemie React, umożliwiająca renderowanie określonych komponentów wyłącznie po stronie serwera. Skutkuje to mniejszym rozmiarem kodu przesyłanego do klienta, ale wymaga specyficznej architektury serwerowej}
+}
+\newglossaryentry{SPA}{
+    name=SPA,
+    description={(ang. Single Page Application) Jednostronicowa aplikacja internetowa. Pobiera ona pojedynczy dokument HTML na początku sesji, a następnie dynamicznie aktualizuje jego zawartość i renderuje nowe widoki w przeglądarce, bez konieczności przeładowywania całej strony}
+}
+\newglossaryentry{SSR}{
+    name=SSR,
+    description={(ang. Server-Side Rendering) Technika renderowania, w której pełny i gotowy do wyświetlenia kod HTML strony internetowej jest generowany i przygotowywany przez serwer na żądanie użytkownika, zanim trafi do przeglądarki}
+}
+\newglossaryentry{Three.js}{
+    name=Three.js,
+    description={Zaawansowana, zorientowana obiektowo biblioteka w języku JavaScript do tworzenia grafiki 3D. Stanowi wygodną warstwę abstrakcji, która ukrywa przed programistą złożoność niskopoziomowego API WebGL}
+}
+\newglossaryentry{Vendor lock-in}{
+    name=Vendor lock-in,
+    description={Zjawisko uzależnienia projektu architektonicznego, firmy lub produktu od zamkniętego ekosystemu usług konkretnego dostawcy technologii (np. chmurowego). Znacznie utrudnia i podraża to ewentualną migrację na rozwiązania konkurencyjne lub samodzielny hosting}
+}
+\newglossaryentry{WebGL}{
+    name=WebGL,
+    description={(ang. Web Graphics Library) Niskopoziomowe, wbudowane API przeglądarkowe umożliwiające sprzętową akcelerację grafiki 2D i 3D na elemencie Canvas bez konieczności instalowania dodatkowych wtyczek}
+}
+\newglossaryentry{UI}{
+    name=UI,
+    description={(ang. User Interface) Interfejs użytkownika, zbiór elementów wizualnych (m.in. przyciski, menu, układy stron) umożliwiających interakcję człowieka z oprogramowaniem}
+}
+\newglossaryentry{UX}{
+    name=UX,
+    description={(ang. User Experience) Doświadczenie użytkownika, ogół wrażeń związanych z korzystaniem z systemu informatycznego, ze szczególnym uwzględnieniem jego ergonomii, użyteczności oraz intuicyjności}
+}
+\newglossaryentry{SEO}{
+    name=SEO,
+    description={(ang. Search Engine Optimization) Optymalizacja dla wyszukiwarek internetowych, zbiór technik mających na celu poprawę widoczności aplikacji lub strony w organicznych wynikach wyszukiwania}
+}
+\newglossaryentry{Frontend}{
+    name=Frontend,
+    description={Kliencka warstwa prezentacji aplikacji, odpowiadająca za interfejs graficzny i bezpośrednią interakcję z użytkownikiem końcowym}
+}
+\newglossaryentry{REST}{
+    name=REST,
+    description={(ang. Representational State Transfer) Styl architektoniczny oprogramowania oparty na bezstanowej komunikacji, standardowo wykorzystywany do projektowania sieciowych interfejsów API}
+}
+\newglossaryentry{DOM}{
+    name=DOM,
+    description={(ang. Document Object Model) Obiektowy model dokumentu, określający sposób reprezentacji struktury dokumentu HTML w postaci drzewa obiektów}
+}
+\newglossaryentry{YAML}{
+    name=YAML,
+    description={Format serializacji danych zaprojektowany pod kątem wysokiej czytelności dla człowieka, powszechnie stosowany w plikach konfiguracyjnych}
+}
