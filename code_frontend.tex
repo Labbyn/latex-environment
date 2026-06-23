@@ -2,7 +2,7 @@
 
 \section{Stack Technologiczny}
 \par
-Warstwa wizualna aplikacji \gls{Labbyn} została zrealizowana jako aplikacja typu \gls{SPA} przy użyciu biblioteki \gls{React} oraz języka TypeScript.
+Warstwa wizualna aplikacji \gls{Labbyn} została zrealizowana jako aplikacja typu \gls{SPA} przy użyciu biblioteki \gls{React} \cite{react} oraz języka TypeScript.
 Głównym założeniem architektury było stworzenie wysoce interaktywnego i modularnego interfejsu użytkownika, zdolnego do płynnej obsługi złożonych struktur danych takich jak inwentarz, topologia laboratoriów czy mapa przestrzenna.
 \par
 Wybór biblioteki \gls{React} był dla zespołu optymalny z dwóch głównych powodów: obszernego doświadczenia programistów w pracy z tym narzędziem oraz jego ugruntowanej, dominującej pozycji na rynku \gls{framework}ów webowych (co potwierdzają m.in. globalne badania społeczności, np. ankieta Stack Overflow z 2025 roku).
@@ -18,7 +18,7 @@ Wybór biblioteki \gls{React} był dla zespołu optymalny z dwóch głównych po
 \subsection{Wybór stosu: TanStack vs Next.js}
 \par
 Drugą poważnie rozważaną opcją technologiczną był \gls{framework} Next.js.
-W procesie projektowania zrezygnowano z popularnego \gls{framework}a Next.js na rzecz dedykowanego stosu opierającego się na ekosystemie TanStack.
+W procesie projektowania zrezygnowano z popularnego \gls{framework}a Next.js na rzecz dedykowanego stosu opierającego się na ekosystemie TanStack. \cite{tanstack}
 Decyzja ta podyktowana była charakterystyką aplikacji \gls{Labbyn}:
 \begin{enumerate}
     \item Brak wymogu \gls{SEO}: \gls{Labbyn} to aplikacja wewnętrzna/narzędziowa, gdzie indeksowanie przez wyszukiwarki nie jest potrzebne.
@@ -173,7 +173,7 @@ Podzielono ją na trzy główne kategorie:
     \label{img:struktura_plików_komponentów}
 \end{figure}
 \begin{enumerate}
-    \item Komponenty bazowe (\gls{UI}): Zlokalizowane w \url{src/components/ui/} (np. button.tsx, dialog.tsx, data-table.tsx). Stanowią one niezależne, generyczne klocki budulcowe, oparte o wzorzec biblioteki shadcn/ui. Zapewniają one spójność zachowań (np. dostępność a11y) w całej aplikacji. \url{https://ui.shadcn.com/docs/components}
+    \item Komponenty bazowe (\gls{UI}): Zlokalizowane w \url{src/components/ui/} (np. button.tsx, dialog.tsx, data-table.tsx). Stanowią one niezależne, generyczne klocki budulcowe, oparte o wzorzec biblioteki shadcn/ui. Zapewniają one spójność zachowań (np. dostępność a11y) w całej aplikacji. \cite{shadcn_ui}
     \item Komponenty układu (Layout): Obejmują m.in. app-sidebar.tsx (główna nawigacja), page-header.tsx oraz szablony takie jak subpage-template.tsx, które gwarantują ujednoliconą strukturę wizualną podstron. Na przykład:
     \begin{figure}[H]
         \centering
@@ -219,9 +219,9 @@ Główny widok renderowany jest przez komponent CanvasComponent3D (canvas.tsx), 
 Rozwiązanie zostało zbudowane w oparciu o następujący stos technologii renderowania 3D:
 \begin{itemize}
     \item \gls{WebGL} - niskopoziomowe \gls{API} przeglądarkowe umożliwiające sprzętową akcelerację grafiki 3D.
-    \item \gls{Three.js} - zaawansowana biblioteka języka JavaScript, abstrahująca od złożoności czystego \gls{WebGL} i udostępniająca zorientowane obiektowo \gls{API} do budowy scen, kamer oraz materiałów.
+    \item \gls{Three.js} - zaawansowana biblioteka języka JavaScript, abstrahująca od złożoności czystego \gls{WebGL} i udostępniająca zorientowane obiektowo \gls{API} do budowy scen, kamer oraz materiałów. \cite{threejs_docs}
     \item react-three-fiber - deklaratywny renderer (wrapper) biblioteki \gls{Three.js} dla ekosystemu \gls{React}, umożliwiający zarządzanie cyklem życia obiektów 3D za pomocą standardowych komponentów i hooków.
-    \item Drei - oficjalna kolekcja wysoce użytecznych abstrakcji i gotowych rozwiązań dla react-three-fiber, znacznie przyspieszająca tworzenie interaktywnych elementów (m.in. kontrolek transformacji i środowiska sceny).
+    \item Drei - oficjalna kolekcja wysoce użytecznych abstrakcji i gotowych rozwiązań dla react-three-fiber, znacznie przyspieszająca tworzenie interaktywnych elementów (m.in. kontrolek transformacji i środowiska sceny). \cite{drei}
 \end{itemize}
 
 \subsection{Renderowanie i optymalizacja sceny 3D}
