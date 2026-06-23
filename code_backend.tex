@@ -1,15 +1,15 @@
 \chapter{Architektura systemu (Backend)}
 
 \section{Stack technologiczny}
-\par Warstwa \gls{Backend}owa systemu, została zaimplementowana w języku Python w połączeniu z \gls{framework}iem \gls{FastAPI}. 
+\par Warstwa \gls{Backend}owa systemu, została zaimplementowana w języku Python \cite{python_docs} w połączeniu z \gls{framework}iem \gls{FastAPI}. \cite{fastapi} 
 \par Wybór takiego rozwiązania został podyktowany przede wszystkim: wysoką wydajnością oraz natywnym wsparciem dla operacji asynchronicznych, co jest kluczowe w systemach zarządzania dużymi zasobami. 
-\par \Gls{framework} \gls{FastAPI} zapewnia również automatyczną walidację danych wejściowych we współpracy z biblioteką \gls{Pydantic}, co pozwala na minimalizację błędów w czasie działania aplikacji oraz na automatyczną generację dokumentacji \gls{API} w standardzie \gls{OpenAPI}.
-\par Istotnym aspektem wyboru była także łatwa integracja z systemami bazodanowymi poprzez użycie systemu mapowania obiektowo-relacyjnego (\gls{ORM}), dostarczonego przez bibliotekę \gls{SQL Alchemy} 2.0. W połączeniu z bazą \gls{PostgreSQL} co umożliwiło bezpieczne i transakcyjne zarządzanie zasobami zapewniając integralność danych.
-\par Kolejnym istotnym czynnikiem była łatwość integracji z zewnętrznymi narzędziami i bibliotekami. Wykorzystany stack technologiczny pozwolił na sprawną implementację komunikacji z systemami monitoringu (\gls{Prometheus}, \gls{Grafana}) oraz narzędziami do automatyzacji konfiguracji (\gls{Ansible}) służącymi do orkiestracji zasobów.
-\par Architekturę \gls{Backend}u wzbogacono o mechanizm \gls{Redis} służący do zarządzania rozproszonymi blokadami zasobów, co jest kluczowe w przypadku środowisk wielodostępnych, gdzie jednoczesna modyfikacja zasobów przez wiele użytkowników może prowadzić do niespójności lub błędów \gls{race condition}.
+\par \Gls{framework} \gls{FastAPI} zapewnia również automatyczną walidację danych wejściowych we współpracy z biblioteką \gls{Pydantic} \cite{pydantic}, co pozwala na minimalizację błędów w czasie działania aplikacji oraz na automatyczną generację dokumentacji \gls{API} w standardzie \gls{OpenAPI}.
+\par Istotnym aspektem wyboru była także łatwa integracja z systemami bazodanowymi poprzez użycie systemu mapowania obiektowo-relacyjnego (\gls{ORM}), dostarczonego przez bibliotekę \gls{SQL Alchemy} 2.0 \cite{sqlalchemy}. W połączeniu z bazą \gls{PostgreSQL} co umożliwiło bezpieczne i transakcyjne zarządzanie zasobami zapewniając integralność danych.
+\par Kolejnym istotnym czynnikiem była łatwość integracji z zewnętrznymi narzędziami i bibliotekami. Wykorzystany stack technologiczny pozwolił na sprawną implementację komunikacji z systemami monitoringu (\gls{Prometheus} \cite{prometheus}, \gls{Grafana}) oraz narzędziami do automatyzacji konfiguracji (\gls{Ansible} \cite{ansible}) służącymi do orkiestracji zasobów.
+\par Architekturę \gls{Backend}u wzbogacono o mechanizm \gls{Redis} \cite{redis} służący do zarządzania rozproszonymi blokadami zasobów, co jest kluczowe w przypadku środowisk wielodostępnych, gdzie jednoczesna modyfikacja zasobów przez wiele użytkowników może prowadzić do niespójności lub błędów \gls{race condition}.
 
 \section{Architektura}
-\par Warstwa \gls{Backend}owa została oparta na architekturze wielowarstwowej, której celem jest odseparowanie odpowiedzialności pomiędzy osobne komponenty. Takie rodzaj architektury ułatwia potencjalnie skalowanie systemu w przyszłości.
+\par Warstwa \gls{Backend}owa została oparta na architekturze wielowarstwowej \cite{deviq_layered_architecture}, której celem jest odseparowanie odpowiedzialności pomiędzy osobne komponenty. Takie rodzaj architektury ułatwia potencjalnie skalowanie systemu w przyszłości.
 
 \subsection{Warstwa interfejsu}
 \par Warstwa odpowiedzialna za obsługę protokołu HTTP, routing, walidację schematów, wstrzykiwanie zależności odpowiedzialnych za autoryzacją i inicjalizację kontekstu użytkownika. 
@@ -172,7 +172,7 @@ Wzorzec ten wywodzi się z fundamentalnego działania \gls{framework}a \gls{Fast
     \caption*{Źródło: Opracowanie własne}
     \label{img:backend_machine}
 \end{figure}
-\par W celu wprowadzania zmian w strukturze bazy danych, zastosowano narzędzie \gls{Alembic}. Każda zmiana w modelach jest rejestrowana jako osobny skrypt migracyjny. Dzięki takiemu rozwiązaniu jesteśmy w stanie odtworzyć strukturę bazy danych na dowolnym etapie. 
+\par W celu wprowadzania zmian w strukturze bazy danych, zastosowano narzędzie \gls{Alembic} \cite{alembic}. Każda zmiana w modelach jest rejestrowana jako osobny skrypt migracyjny. Dzięki takiemu rozwiązaniu jesteśmy w stanie odtworzyć strukturę bazy danych na dowolnym etapie. 
 \par Narzędzie \gls{Alembic} potrafi również automatycznie wykrywać różnice pomiędzy modelami w kodzie a bazą danych, generując gotowe skrypty SQL i wprowadzać je na bieżąco, by stan modeli zgadzał się z faktycznym stanem znajdującym się w bazie danych.
 \par Dostarczany przez nie mechanizm migracji, pozwala na łatwe cofnięcie zmian w przypadku wykrycia błędów, by nie powodować przestojów w działaniu systemu. Każda zmiana struktury modeli, jest automatycznie rejestrowana jako rewizja, nowsza od poprzedniej, tworząc również łańcuch historii zmian.
 \begin{figure}[H]
